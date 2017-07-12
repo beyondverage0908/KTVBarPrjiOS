@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="b6w-Ho-lTb">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Tab Bar Controller-->
+        <scene sceneID="4Nd-0U-h2v">
+            <objects>
+                <tabBarController id="b6w-Ho-lTb" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" backgroundImage="app_navigation_bar" id="wxx-vR-lrD">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="JpM-Ta-nn5" kind="relationship" relationship="viewControllers" id="RGH-QJ-f4r"/>
+                        <segue destination="z1Z-H6-XaJ" kind="relationship" relationship="viewControllers" id="ezo-zO-DGg"/>
+                        <segue destination="8e5-DA-uTi" kind="relationship" relationship="viewControllers" id="O2p-my-U7m"/>
+                        <segue destination="B6n-dt-CVu" kind="relationship" relationship="viewControllers" id="bQX-SD-pmS"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aIG-H2-Occ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1900" y="-951"/>
+        </scene>
+        <!--KTVMePageSBId-->
+        <scene sceneID="usc-uc-QJg">
+            <objects>
+                <viewControllerPlaceholder storyboardName="MePage" referencedIdentifier="KTVMePageSBId" id="B6n-dt-CVu" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="我" id="9Me-BZ-gbx"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Wab-pb-qRR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1195" y="-1113"/>
+        </scene>
+        <!--KTVDiscoverSBId-->
+        <scene sceneID="Mcq-Wa-V6K">
+            <objects>
+                <viewControllerPlaceholder storyboardName="DiscoverPage" referencedIdentifier="KTVDiscoverSBId" id="8e5-DA-uTi" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="发现" id="6aY-iF-WpX"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lsu-xG-fz2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1185" y="-1018"/>
+        </scene>
+        <!--KTVNearbyPageSBId-->
+        <scene sceneID="0Xc-aS-8zE">
+            <objects>
+                <viewControllerPlaceholder storyboardName="NearPage" referencedIdentifier="KTVNearbyPageSBId" id="z1Z-H6-XaJ" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="附近" id="HgD-It-xSt"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rmI-Wb-QpA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1175" y="-914"/>
+        </scene>
+        <!--KTVMainPageSBId-->
+        <scene sceneID="JXe-gm-aTV">
+            <objects>
+                <viewControllerPlaceholder storyboardName="MainPage" referencedIdentifier="KTVMainPageSBId" id="JpM-Ta-nn5" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="首页" id="3FN-kQ-rcB"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QsY-np-Fse" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1174" y="-807"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="app_navigation_bar" width="375" height="44"/>
+    </resources>
+</document>

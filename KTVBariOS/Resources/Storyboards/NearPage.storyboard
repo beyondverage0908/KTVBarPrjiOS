@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BcD-co-utR">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="6kb-i1-eTm">
+            <objects>
+                <viewController id="wXW-B1-il6" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="xZa-uU-MGz"/>
+                        <viewControllerLayoutGuide type="bottom" id="5b7-kR-fJZ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="mWU-fa-fet">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="sEZ-Jd-gZZ"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rtX-ue-qaK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="122" y="-1293"/>
+        </scene>
+        <!--附近-->
+        <scene sceneID="mwP-gm-Tjc">
+            <objects>
+                <navigationController storyboardIdentifier="KTVNearbyPageSBId" id="BcD-co-utR" customClass="KTVBaseNavigationViewController" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="附近" id="Yrj-SM-7Ao"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="qZi-Lm-OhO">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="wXW-B1-il6" kind="relationship" relationship="rootViewController" id="DSe-sA-X2F"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IJo-k5-z5A" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-647" y="-1293"/>
+        </scene>
+    </scenes>
+</document>

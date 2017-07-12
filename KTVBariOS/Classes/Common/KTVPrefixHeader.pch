@@ -1,0 +1,16 @@
+//
+//  KTVPrefixHeader.pch
+//  KTVBariOS
+//
+//  Created by pingjun lin on 2017/7/9.
+//  Copyright © 2017年 Lin. All rights reserved.
+//
+
+#ifndef KTVPrefixHeader_pch
+#define KTVPrefixHeader_pch
+
+#import "KTVCommonDefine.h"
+#import "UIColor+KTVExtension.h"
+
+
+#endif /* KTVPrefixHeader_pch */

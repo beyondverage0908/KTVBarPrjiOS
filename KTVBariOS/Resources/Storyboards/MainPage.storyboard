@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="cur-YZ-FOk">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--首页-->
+        <scene sceneID="NsB-ie-DjU">
+            <objects>
+                <navigationController storyboardIdentifier="KTVMainPageSBId" id="cur-YZ-FOk" customClass="KTVBaseNavigationViewController" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="首页" id="wMT-TZ-RJK"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="p2s-xz-4sB">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="ADD-km-sRW" kind="relationship" relationship="rootViewController" id="mXL-Me-e5q"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lss-s5-8w1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1926" y="154"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="1j7-7x-cDr">
+            <objects>
+                <viewController id="ADD-km-sRW" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="cAq-kE-qPj"/>
+                        <viewControllerLayoutGuide type="bottom" id="wdB-vB-0Rj"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="06B-On-Heq">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="imG-ov-gba">
+                                <rect key="frame" x="172" y="318.5" width="31" height="30"/>
+                                <state key="normal" title="首页"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="imG-ov-gba" firstAttribute="centerX" secondItem="06B-On-Heq" secondAttribute="centerX" id="lYY-AI-Ius"/>
+                            <constraint firstItem="imG-ov-gba" firstAttribute="centerY" secondItem="06B-On-Heq" secondAttribute="centerY" id="uRv-i1-poN"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="680-eU-ZQa"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0yP-34-wda" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1135" y="154"/>
+        </scene>
+    </scenes>
+</document>

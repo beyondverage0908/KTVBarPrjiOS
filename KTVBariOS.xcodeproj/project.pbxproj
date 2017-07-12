@@ -1,0 +1,766 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 47;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		330A93871F03ED2A001B320A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 330A93831F03ED2A001B320A /* AppDelegate.m */; };
+		330A938C1F03ED7E001B320A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 330A938B1F03ED7E001B320A /* main.m */; };
+		330A938F1F03EE47001B320A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 330A938E1F03EE47001B320A /* Main.storyboard */; };
+		3325D2441F1268260022AE9A /* KTVLoginOrRegisterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3325D2431F1268260022AE9A /* KTVLoginOrRegisterController.m */; };
+		3325D2481F1268EF0022AE9A /* KTVBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3325D2471F1268EF0022AE9A /* KTVBaseViewController.m */; };
+		3325D2501F1273350022AE9A /* UIColor+KTVExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3325D24F1F1273350022AE9A /* UIColor+KTVExtension.m */; };
+		3325D2531F12753B0022AE9A /* KTVLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3325D2521F12753B0022AE9A /* KTVLoginController.m */; };
+		3325D2561F12755D0022AE9A /* KTVRegisterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3325D2551F12755D0022AE9A /* KTVRegisterController.m */; };
+		332A63D51F03B14D007EF65F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 332A63D41F03B14D007EF65F /* Assets.xcassets */; };
+		332A63E31F03B14D007EF65F /* KTVBariOSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 332A63E21F03B14D007EF65F /* KTVBariOSTests.m */; };
+		332A63EE1F03B14D007EF65F /* KTVBariOSUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 332A63ED1F03B14D007EF65F /* KTVBariOSUITests.m */; };
+		334E53301F15FA9800D83901 /* MainPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 334E532F1F15FA9800D83901 /* MainPage.storyboard */; };
+		334E53321F15FAB000D83901 /* NearPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 334E53311F15FAB000D83901 /* NearPage.storyboard */; };
+		334E53341F15FACF00D83901 /* DiscoverPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 334E53331F15FACF00D83901 /* DiscoverPage.storyboard */; };
+		334E53361F15FADF00D83901 /* MePage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 334E53351F15FADF00D83901 /* MePage.storyboard */; };
+		334E53391F162DD200D83901 /* KTVLoginBaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 334E53381F162DD200D83901 /* KTVLoginBaseController.m */; };
+		334E533D1F162E1D00D83901 /* KTVLaunchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 334E533C1F162E1D00D83901 /* KTVLaunchController.m */; };
+		335705411F1392BB00AAAFEA /* KTVBaseNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 335705401F1392BB00AAAFEA /* KTVBaseNavigationViewController.m */; };
+		335705441F1392F000AAAFEA /* KTVBaseTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 335705431F1392F000AAAFEA /* KTVBaseTabBarViewController.m */; };
+		5AF3C095AA9B925E58BECDE4 /* libPods-KTVBariOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D62951016CC4DAC9857479E1 /* libPods-KTVBariOS.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		332A63DF1F03B14D007EF65F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 332A63BD1F03B14D007EF65F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 332A63C41F03B14D007EF65F;
+			remoteInfo = KTVBariOS;
+		};
+		332A63EA1F03B14D007EF65F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 332A63BD1F03B14D007EF65F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 332A63C41F03B14D007EF65F;
+			remoteInfo = KTVBariOS;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		330A93821F03ED2A001B320A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		330A93831F03ED2A001B320A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		330A938B1F03ED7E001B320A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		330A938E1F03EE47001B320A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		3325D2421F1268260022AE9A /* KTVLoginOrRegisterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVLoginOrRegisterController.h; sourceTree = "<group>"; };
+		3325D2431F1268260022AE9A /* KTVLoginOrRegisterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVLoginOrRegisterController.m; sourceTree = "<group>"; };
+		3325D2461F1268EF0022AE9A /* KTVBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVBaseViewController.h; sourceTree = "<group>"; };
+		3325D2471F1268EF0022AE9A /* KTVBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVBaseViewController.m; sourceTree = "<group>"; };
+		3325D2491F1270310022AE9A /* KTVCommonDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVCommonDefine.h; sourceTree = "<group>"; };
+		3325D24A1F12708A0022AE9A /* KTVPrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVPrefixHeader.pch; sourceTree = "<group>"; };
+		3325D24E1F1273350022AE9A /* UIColor+KTVExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+KTVExtension.h"; sourceTree = "<group>"; };
+		3325D24F1F1273350022AE9A /* UIColor+KTVExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+KTVExtension.m"; sourceTree = "<group>"; };
+		3325D2511F12753B0022AE9A /* KTVLoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVLoginController.h; sourceTree = "<group>"; };
+		3325D2521F12753B0022AE9A /* KTVLoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVLoginController.m; sourceTree = "<group>"; };
+		3325D2541F12755D0022AE9A /* KTVRegisterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVRegisterController.h; sourceTree = "<group>"; };
+		3325D2551F12755D0022AE9A /* KTVRegisterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVRegisterController.m; sourceTree = "<group>"; };
+		332A63C51F03B14D007EF65F /* KTVBariOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KTVBariOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		332A63D41F03B14D007EF65F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		332A63DE1F03B14D007EF65F /* KTVBariOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KTVBariOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		332A63E21F03B14D007EF65F /* KTVBariOSTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KTVBariOSTests.m; sourceTree = "<group>"; };
+		332A63E41F03B14D007EF65F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		332A63E91F03B14D007EF65F /* KTVBariOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KTVBariOSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		332A63ED1F03B14D007EF65F /* KTVBariOSUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KTVBariOSUITests.m; sourceTree = "<group>"; };
+		332A63EF1F03B14D007EF65F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		334E532F1F15FA9800D83901 /* MainPage.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainPage.storyboard; sourceTree = "<group>"; };
+		334E53311F15FAB000D83901 /* NearPage.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = NearPage.storyboard; sourceTree = "<group>"; };
+		334E53331F15FACF00D83901 /* DiscoverPage.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DiscoverPage.storyboard; sourceTree = "<group>"; };
+		334E53351F15FADF00D83901 /* MePage.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MePage.storyboard; sourceTree = "<group>"; };
+		334E53371F162DD200D83901 /* KTVLoginBaseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVLoginBaseController.h; sourceTree = "<group>"; };
+		334E53381F162DD200D83901 /* KTVLoginBaseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVLoginBaseController.m; sourceTree = "<group>"; };
+		334E533B1F162E1D00D83901 /* KTVLaunchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVLaunchController.h; sourceTree = "<group>"; };
+		334E533C1F162E1D00D83901 /* KTVLaunchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVLaunchController.m; sourceTree = "<group>"; };
+		3357053F1F1392BB00AAAFEA /* KTVBaseNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVBaseNavigationViewController.h; sourceTree = "<group>"; };
+		335705401F1392BB00AAAFEA /* KTVBaseNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVBaseNavigationViewController.m; sourceTree = "<group>"; };
+		335705421F1392F000AAAFEA /* KTVBaseTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVBaseTabBarViewController.h; sourceTree = "<group>"; };
+		335705431F1392F000AAAFEA /* KTVBaseTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVBaseTabBarViewController.m; sourceTree = "<group>"; };
+		D62951016CC4DAC9857479E1 /* libPods-KTVBariOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-KTVBariOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D87AF57E102945EE24953FF1 /* Pods-KTVBariOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KTVBariOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KTVBariOS/Pods-KTVBariOS.debug.xcconfig"; sourceTree = "<group>"; };
+		E315085E6F16DA9EAEEB71DE /* Pods-KTVBariOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KTVBariOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-KTVBariOS/Pods-KTVBariOS.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		332A63C21F03B14D007EF65F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5AF3C095AA9B925E58BECDE4 /* libPods-KTVBariOS.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		332A63DB1F03B14D007EF65F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		332A63E61F03B14D007EF65F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		330A937B1F03EC70001B320A /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				3325D24E1F1273350022AE9A /* UIColor+KTVExtension.h */,
+				3325D24F1F1273350022AE9A /* UIColor+KTVExtension.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		330A937C1F03EC70001B320A /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				3325D2491F1270310022AE9A /* KTVCommonDefine.h */,
+				3325D24A1F12708A0022AE9A /* KTVPrefixHeader.pch */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		330A937D1F03EC70001B320A /* Network */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		330A937E1F03EC70001B320A /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				3325D2451F1268DB0022AE9A /* Base */,
+				334E533A1F162E0100D83901 /* Launch */,
+				330A937F1F03EC70001B320A /* Login */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		330A937F1F03EC70001B320A /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				334E53371F162DD200D83901 /* KTVLoginBaseController.h */,
+				334E53381F162DD200D83901 /* KTVLoginBaseController.m */,
+				3325D2421F1268260022AE9A /* KTVLoginOrRegisterController.h */,
+				3325D2431F1268260022AE9A /* KTVLoginOrRegisterController.m */,
+				3325D2511F12753B0022AE9A /* KTVLoginController.h */,
+				3325D2521F12753B0022AE9A /* KTVLoginController.m */,
+				3325D2541F12755D0022AE9A /* KTVRegisterController.h */,
+				3325D2551F12755D0022AE9A /* KTVRegisterController.m */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		330A93801F03EC70001B320A /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Tool;
+			sourceTree = "<group>";
+		};
+		330A93811F03ECAA001B320A /* App */ = {
+			isa = PBXGroup;
+			children = (
+				330A93821F03ED2A001B320A /* AppDelegate.h */,
+				330A93831F03ED2A001B320A /* AppDelegate.m */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		330A938A1F03ED7E001B320A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				330A938B1F03ED7E001B320A /* main.m */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		330A938D1F03EDF1001B320A /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				330A938E1F03EE47001B320A /* Main.storyboard */,
+				334E532F1F15FA9800D83901 /* MainPage.storyboard */,
+				334E53311F15FAB000D83901 /* NearPage.storyboard */,
+				334E53331F15FACF00D83901 /* DiscoverPage.storyboard */,
+				334E53351F15FADF00D83901 /* MePage.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		3325D2451F1268DB0022AE9A /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				3325D2461F1268EF0022AE9A /* KTVBaseViewController.h */,
+				3325D2471F1268EF0022AE9A /* KTVBaseViewController.m */,
+				3357053F1F1392BB00AAAFEA /* KTVBaseNavigationViewController.h */,
+				335705401F1392BB00AAAFEA /* KTVBaseNavigationViewController.m */,
+				335705421F1392F000AAAFEA /* KTVBaseTabBarViewController.h */,
+				335705431F1392F000AAAFEA /* KTVBaseTabBarViewController.m */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		332A63BC1F03B14D007EF65F = {
+			isa = PBXGroup;
+			children = (
+				332A63C71F03B14D007EF65F /* KTVBariOS */,
+				332A63E11F03B14D007EF65F /* KTVBariOSTests */,
+				332A63EC1F03B14D007EF65F /* KTVBariOSUITests */,
+				332A63C61F03B14D007EF65F /* Products */,
+				CA8F11D4FF0C40FF89BD4AAA /* Pods */,
+				822C2BB60FE2ABFFD523A5A1 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		332A63C61F03B14D007EF65F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				332A63C51F03B14D007EF65F /* KTVBariOS.app */,
+				332A63DE1F03B14D007EF65F /* KTVBariOSTests.xctest */,
+				332A63E91F03B14D007EF65F /* KTVBariOSUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		332A63C71F03B14D007EF65F /* KTVBariOS */ = {
+			isa = PBXGroup;
+			children = (
+				330A93811F03ECAA001B320A /* App */,
+				332A63FB1F03B290007EF65F /* Resources */,
+				332A63FC1F03B297007EF65F /* Classes */,
+				330A938A1F03ED7E001B320A /* Supporting Files */,
+				332A63D41F03B14D007EF65F /* Assets.xcassets */,
+			);
+			path = KTVBariOS;
+			sourceTree = "<group>";
+		};
+		332A63E11F03B14D007EF65F /* KTVBariOSTests */ = {
+			isa = PBXGroup;
+			children = (
+				332A63E21F03B14D007EF65F /* KTVBariOSTests.m */,
+				332A63E41F03B14D007EF65F /* Info.plist */,
+			);
+			path = KTVBariOSTests;
+			sourceTree = "<group>";
+		};
+		332A63EC1F03B14D007EF65F /* KTVBariOSUITests */ = {
+			isa = PBXGroup;
+			children = (
+				332A63ED1F03B14D007EF65F /* KTVBariOSUITests.m */,
+				332A63EF1F03B14D007EF65F /* Info.plist */,
+			);
+			path = KTVBariOSUITests;
+			sourceTree = "<group>";
+		};
+		332A63FB1F03B290007EF65F /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				330A938D1F03EDF1001B320A /* Storyboards */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		332A63FC1F03B297007EF65F /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				330A937B1F03EC70001B320A /* Category */,
+				330A937C1F03EC70001B320A /* Common */,
+				330A937D1F03EC70001B320A /* Network */,
+				330A937E1F03EC70001B320A /* Scenes */,
+				330A93801F03EC70001B320A /* Tool */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		334E533A1F162E0100D83901 /* Launch */ = {
+			isa = PBXGroup;
+			children = (
+				334E533B1F162E1D00D83901 /* KTVLaunchController.h */,
+				334E533C1F162E1D00D83901 /* KTVLaunchController.m */,
+			);
+			path = Launch;
+			sourceTree = "<group>";
+		};
+		822C2BB60FE2ABFFD523A5A1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D62951016CC4DAC9857479E1 /* libPods-KTVBariOS.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CA8F11D4FF0C40FF89BD4AAA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D87AF57E102945EE24953FF1 /* Pods-KTVBariOS.debug.xcconfig */,
+				E315085E6F16DA9EAEEB71DE /* Pods-KTVBariOS.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		332A63C41F03B14D007EF65F /* KTVBariOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 332A63F21F03B14D007EF65F /* Build configuration list for PBXNativeTarget "KTVBariOS" */;
+			buildPhases = (
+				1E9ED661BD98FD65894CEF33 /* [CP] Check Pods Manifest.lock */,
+				332A63C11F03B14D007EF65F /* Sources */,
+				332A63C21F03B14D007EF65F /* Frameworks */,
+				332A63C31F03B14D007EF65F /* Resources */,
+				BD49B56B942362CE69F6A89B /* [CP] Embed Pods Frameworks */,
+				79862F7E8D152FD9A5756633 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KTVBariOS;
+			productName = KTVBariOS;
+			productReference = 332A63C51F03B14D007EF65F /* KTVBariOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		332A63DD1F03B14D007EF65F /* KTVBariOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 332A63F51F03B14D007EF65F /* Build configuration list for PBXNativeTarget "KTVBariOSTests" */;
+			buildPhases = (
+				332A63DA1F03B14D007EF65F /* Sources */,
+				332A63DB1F03B14D007EF65F /* Frameworks */,
+				332A63DC1F03B14D007EF65F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				332A63E01F03B14D007EF65F /* PBXTargetDependency */,
+			);
+			name = KTVBariOSTests;
+			productName = KTVBariOSTests;
+			productReference = 332A63DE1F03B14D007EF65F /* KTVBariOSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		332A63E81F03B14D007EF65F /* KTVBariOSUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 332A63F81F03B14D007EF65F /* Build configuration list for PBXNativeTarget "KTVBariOSUITests" */;
+			buildPhases = (
+				332A63E51F03B14D007EF65F /* Sources */,
+				332A63E61F03B14D007EF65F /* Frameworks */,
+				332A63E71F03B14D007EF65F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				332A63EB1F03B14D007EF65F /* PBXTargetDependency */,
+			);
+			name = KTVBariOSUITests;
+			productName = KTVBariOSUITests;
+			productReference = 332A63E91F03B14D007EF65F /* KTVBariOSUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		332A63BD1F03B14D007EF65F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = Lin;
+				TargetAttributes = {
+					332A63C41F03B14D007EF65F = {
+						CreatedOnToolsVersion = 8.3.1;
+						DevelopmentTeam = P4Q3S6FX46;
+						ProvisioningStyle = Automatic;
+					};
+					332A63DD1F03B14D007EF65F = {
+						CreatedOnToolsVersion = 8.3.1;
+						DevelopmentTeam = P4Q3S6FX46;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 332A63C41F03B14D007EF65F;
+					};
+					332A63E81F03B14D007EF65F = {
+						CreatedOnToolsVersion = 8.3.1;
+						DevelopmentTeam = P4Q3S6FX46;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 332A63C41F03B14D007EF65F;
+					};
+				};
+			};
+			buildConfigurationList = 332A63C01F03B14D007EF65F /* Build configuration list for PBXProject "KTVBariOS" */;
+			compatibilityVersion = "Xcode 6.3";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 332A63BC1F03B14D007EF65F;
+			productRefGroup = 332A63C61F03B14D007EF65F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				332A63C41F03B14D007EF65F /* KTVBariOS */,
+				332A63DD1F03B14D007EF65F /* KTVBariOSTests */,
+				332A63E81F03B14D007EF65F /* KTVBariOSUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		332A63C31F03B14D007EF65F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				334E53301F15FA9800D83901 /* MainPage.storyboard in Resources */,
+				334E53321F15FAB000D83901 /* NearPage.storyboard in Resources */,
+				332A63D51F03B14D007EF65F /* Assets.xcassets in Resources */,
+				330A938F1F03EE47001B320A /* Main.storyboard in Resources */,
+				334E53341F15FACF00D83901 /* DiscoverPage.storyboard in Resources */,
+				334E53361F15FADF00D83901 /* MePage.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		332A63DC1F03B14D007EF65F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		332A63E71F03B14D007EF65F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1E9ED661BD98FD65894CEF33 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		79862F7E8D152FD9A5756633 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KTVBariOS/Pods-KTVBariOS-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BD49B56B942362CE69F6A89B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KTVBariOS/Pods-KTVBariOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		332A63C11F03B14D007EF65F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				334E533D1F162E1D00D83901 /* KTVLaunchController.m in Sources */,
+				3325D2561F12755D0022AE9A /* KTVRegisterController.m in Sources */,
+				3325D2531F12753B0022AE9A /* KTVLoginController.m in Sources */,
+				3325D2441F1268260022AE9A /* KTVLoginOrRegisterController.m in Sources */,
+				330A938C1F03ED7E001B320A /* main.m in Sources */,
+				335705441F1392F000AAAFEA /* KTVBaseTabBarViewController.m in Sources */,
+				335705411F1392BB00AAAFEA /* KTVBaseNavigationViewController.m in Sources */,
+				330A93871F03ED2A001B320A /* AppDelegate.m in Sources */,
+				3325D2481F1268EF0022AE9A /* KTVBaseViewController.m in Sources */,
+				3325D2501F1273350022AE9A /* UIColor+KTVExtension.m in Sources */,
+				334E53391F162DD200D83901 /* KTVLoginBaseController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		332A63DA1F03B14D007EF65F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				332A63E31F03B14D007EF65F /* KTVBariOSTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		332A63E51F03B14D007EF65F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				332A63EE1F03B14D007EF65F /* KTVBariOSUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		332A63E01F03B14D007EF65F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 332A63C41F03B14D007EF65F /* KTVBariOS */;
+			targetProxy = 332A63DF1F03B14D007EF65F /* PBXContainerItemProxy */;
+		};
+		332A63EB1F03B14D007EF65F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 332A63C41F03B14D007EF65F /* KTVBariOS */;
+			targetProxy = 332A63EA1F03B14D007EF65F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		332A63F01F03B14D007EF65F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		332A63F11F03B14D007EF65F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		332A63F31F03B14D007EF65F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D87AF57E102945EE24953FF1 /* Pods-KTVBariOS.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				DEVELOPMENT_TEAM = P4Q3S6FX46;
+				GCC_PREFIX_HEADER = /Users/pingjunlin/Documents/KTVBariOS/KTVBariOS/Classes/Common/KTVPrefixHeader.pch;
+				INFOPLIST_FILE = "KTVBariOS/Supporting Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.nanchang.ktv.wb;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		332A63F41F03B14D007EF65F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E315085E6F16DA9EAEEB71DE /* Pods-KTVBariOS.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				DEVELOPMENT_TEAM = P4Q3S6FX46;
+				GCC_PREFIX_HEADER = /Users/pingjunlin/Documents/KTVBariOS/KTVBariOS/Classes/Common/KTVPrefixHeader.pch;
+				INFOPLIST_FILE = "KTVBariOS/Supporting Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.nanchang.ktv.wb;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		332A63F61F03B14D007EF65F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = P4Q3S6FX46;
+				INFOPLIST_FILE = KTVBariOSTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = YiRunYuan.KTVBariOSTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KTVBariOS.app/KTVBariOS";
+			};
+			name = Debug;
+		};
+		332A63F71F03B14D007EF65F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = P4Q3S6FX46;
+				INFOPLIST_FILE = KTVBariOSTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = YiRunYuan.KTVBariOSTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KTVBariOS.app/KTVBariOS";
+			};
+			name = Release;
+		};
+		332A63F91F03B14D007EF65F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = P4Q3S6FX46;
+				INFOPLIST_FILE = KTVBariOSUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = YiRunYuan.KTVBariOSUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = KTVBariOS;
+			};
+			name = Debug;
+		};
+		332A63FA1F03B14D007EF65F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = P4Q3S6FX46;
+				INFOPLIST_FILE = KTVBariOSUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = YiRunYuan.KTVBariOSUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = KTVBariOS;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		332A63C01F03B14D007EF65F /* Build configuration list for PBXProject "KTVBariOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				332A63F01F03B14D007EF65F /* Debug */,
+				332A63F11F03B14D007EF65F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		332A63F21F03B14D007EF65F /* Build configuration list for PBXNativeTarget "KTVBariOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				332A63F31F03B14D007EF65F /* Debug */,
+				332A63F41F03B14D007EF65F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		332A63F51F03B14D007EF65F /* Build configuration list for PBXNativeTarget "KTVBariOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				332A63F61F03B14D007EF65F /* Debug */,
+				332A63F71F03B14D007EF65F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		332A63F81F03B14D007EF65F /* Build configuration list for PBXNativeTarget "KTVBariOSUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				332A63F91F03B14D007EF65F /* Debug */,
+				332A63FA1F03B14D007EF65F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 332A63BD1F03B14D007EF65F /* Project object */;
+}
