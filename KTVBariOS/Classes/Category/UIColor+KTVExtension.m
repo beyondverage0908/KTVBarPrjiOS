@@ -21,6 +21,7 @@
                            alpha:1.0f];
 }
 
+
 + (UIColor *)colorHex:(NSString *)hexString {
     
     NSString *cString = [[hexString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] uppercaseString];
