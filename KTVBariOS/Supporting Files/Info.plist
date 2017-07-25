@@ -35,6 +35,12 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>MOBAppKey</key>
+	<string>1eed2d08caa85</string>
+	<key>MOBAppSecret</key>
+	<string>7ae24351ad3a61d0502260c9ec5c37b6</string>
 </dict>
 </plist>

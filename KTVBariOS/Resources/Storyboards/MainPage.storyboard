@@ -25,10 +25,10 @@
             </objects>
             <point key="canvasLocation" x="-1926" y="154"/>
         </scene>
-        <!--View Controller-->
+        <!--Main Controller-->
         <scene sceneID="1j7-7x-cDr">
             <objects>
-                <viewController id="ADD-km-sRW" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="KTVMainController" id="ADD-km-sRW" customClass="KTVMainController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cAq-kE-qPj"/>
                         <viewControllerLayoutGuide type="bottom" id="wdB-vB-0Rj"/>
@@ -39,7 +39,10 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="imG-ov-gba">
                                 <rect key="frame" x="172" y="318.5" width="31" height="30"/>
-                                <state key="normal" title="首页"/>
+                                <state key="normal" title="登陆"/>
+                                <connections>
+                                    <action selector="loginAction:" destination="ADD-km-sRW" eventType="touchUpInside" id="7Pg-Vp-psR"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

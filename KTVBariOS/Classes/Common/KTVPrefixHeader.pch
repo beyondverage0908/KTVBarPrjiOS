@@ -10,7 +10,7 @@
 #define KTVPrefixHeader_pch
 
 #import "KTVCommonDefine.h"
-#import "UIColor+KTVExtension.h"
+#import "KTVImportHeader.h"
 
 
 #endif /* KTVPrefixHeader_pch */

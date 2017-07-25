@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--找回密码-->
+        <scene sceneID="XfZ-GA-AAw">
+            <objects>
+                <viewController storyboardIdentifier="SB_KTVForgetPasswordController" title="找回密码" id="sVO-RS-nQm" customClass="KTVForgetPasswordController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="hWr-gY-QKT"/>
+                        <viewControllerLayoutGuide type="bottom" id="fGP-FP-92n"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="fuN-eS-A9L">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="app_input" translatesAutoresizingMaskIntoConstraints="NO" id="lU8-LM-pZ6">
+                                <rect key="frame" x="30" y="176.5" width="315" height="45"/>
+                            </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入验证码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vL2-Vx-JDC">
+                                <rect key="frame" x="72" y="176.5" width="263" height="45"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="app_login_verfiy" translatesAutoresizingMaskIntoConstraints="NO" id="9IX-k2-tIZ">
+                                <rect key="frame" x="40" y="188" width="22" height="22"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="app_input" translatesAutoresizingMaskIntoConstraints="NO" id="bGB-aw-9Qx">
+                                <rect key="frame" x="30" y="239.5" width="315" height="45"/>
+                            </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入密码，长度不小于6位" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Uzs-oK-mLs">
+                                <rect key="frame" x="70" y="239.5" width="265" height="45"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="app_password_lock" translatesAutoresizingMaskIntoConstraints="NO" id="FF8-5c-6ff">
+                                <rect key="frame" x="40" y="249.5" width="20" height="25"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Oo-oR-h9b">
+                                <rect key="frame" x="30" y="319.5" width="315" height="40"/>
+                                <state key="normal" title="下一步" backgroundImage="app_anniu_red">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="nextStepAction:" destination="sVO-RS-nQm" eventType="touchUpInside" id="EBr-Hg-P3f"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="app_input" translatesAutoresizingMaskIntoConstraints="NO" id="imN-T8-80b">
+                                <rect key="frame" x="30" y="113.5" width="315" height="45"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="app_login_account" translatesAutoresizingMaskIntoConstraints="NO" id="aTR-9O-QbB">
+                                <rect key="frame" x="40" y="125" width="23" height="22"/>
+                            </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入手机号" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8D2-1s-4pc">
+                                <rect key="frame" x="73" y="113.5" width="175" height="45"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tCG-si-ltf">
+                                <rect key="frame" x="258" y="120.5" width="77" height="31"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <state key="normal" title="获取验证码" backgroundImage="app_get_verfiy_code_anniu">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="getVerfitAction:" destination="sVO-RS-nQm" eventType="touchUpInside" id="11s-FQ-9pX"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Uzs-oK-mLs" firstAttribute="leading" secondItem="FF8-5c-6ff" secondAttribute="trailing" constant="10" id="2u8-mn-yll"/>
+                            <constraint firstItem="vL2-Vx-JDC" firstAttribute="trailing" secondItem="lU8-LM-pZ6" secondAttribute="trailing" constant="-10" id="3PW-0D-KLE"/>
+                            <constraint firstAttribute="trailing" secondItem="4Oo-oR-h9b" secondAttribute="trailing" constant="30" id="4dU-kd-YOp"/>
+                            <constraint firstItem="Uzs-oK-mLs" firstAttribute="top" secondItem="bGB-aw-9Qx" secondAttribute="top" id="9ZJ-AR-AAc"/>
+                            <constraint firstAttribute="trailing" secondItem="lU8-LM-pZ6" secondAttribute="trailing" constant="30" id="Ba2-sx-wFv"/>
+                            <constraint firstItem="aTR-9O-QbB" firstAttribute="centerY" secondItem="imN-T8-80b" secondAttribute="centerY" id="Etr-it-TMf"/>
+                            <constraint firstItem="bGB-aw-9Qx" firstAttribute="leading" secondItem="fuN-eS-A9L" secondAttribute="leading" constant="30" id="FDB-zA-rUL"/>
+                            <constraint firstItem="8D2-1s-4pc" firstAttribute="top" secondItem="imN-T8-80b" secondAttribute="top" id="Fab-Wf-IB4"/>
+                            <constraint firstItem="9IX-k2-tIZ" firstAttribute="centerY" secondItem="lU8-LM-pZ6" secondAttribute="centerY" id="FeW-2J-LeI"/>
+                            <constraint firstItem="FF8-5c-6ff" firstAttribute="leading" secondItem="bGB-aw-9Qx" secondAttribute="leading" constant="10" id="G5s-HU-10d"/>
+                            <constraint firstItem="lU8-LM-pZ6" firstAttribute="top" secondItem="imN-T8-80b" secondAttribute="bottom" constant="18" id="GEl-TM-FB1"/>
+                            <constraint firstItem="FF8-5c-6ff" firstAttribute="centerY" secondItem="bGB-aw-9Qx" secondAttribute="centerY" id="GuP-j1-mEi"/>
+                            <constraint firstItem="8D2-1s-4pc" firstAttribute="centerY" secondItem="imN-T8-80b" secondAttribute="centerY" id="JeE-NB-4kl"/>
+                            <constraint firstItem="aTR-9O-QbB" firstAttribute="leading" secondItem="imN-T8-80b" secondAttribute="leading" constant="10" id="KcI-KO-NVG"/>
+                            <constraint firstItem="imN-T8-80b" firstAttribute="leading" secondItem="fuN-eS-A9L" secondAttribute="leading" constant="30" id="MRp-oT-cKf"/>
+                            <constraint firstItem="vL2-Vx-JDC" firstAttribute="leading" secondItem="9IX-k2-tIZ" secondAttribute="trailing" constant="10" id="OwH-ok-8cG"/>
+                            <constraint firstAttribute="trailing" secondItem="imN-T8-80b" secondAttribute="trailing" constant="30" id="VfP-bC-QL5"/>
+                            <constraint firstItem="vL2-Vx-JDC" firstAttribute="centerY" secondItem="lU8-LM-pZ6" secondAttribute="centerY" id="W8X-jy-CjX"/>
+                            <constraint firstItem="bGB-aw-9Qx" firstAttribute="top" secondItem="lU8-LM-pZ6" secondAttribute="bottom" constant="18" id="Wlt-m6-adH"/>
+                            <constraint firstAttribute="trailing" secondItem="bGB-aw-9Qx" secondAttribute="trailing" constant="30" id="YXU-K2-0el"/>
+                            <constraint firstItem="9IX-k2-tIZ" firstAttribute="leading" secondItem="lU8-LM-pZ6" secondAttribute="leading" constant="10" id="Z2C-GG-bD7"/>
+                            <constraint firstItem="tCG-si-ltf" firstAttribute="leading" secondItem="8D2-1s-4pc" secondAttribute="trailing" priority="999" constant="10" id="a6e-al-dRK"/>
+                            <constraint firstItem="imN-T8-80b" firstAttribute="top" secondItem="hWr-gY-QKT" secondAttribute="bottom" constant="49.600000000000001" id="atr-7D-GAF"/>
+                            <constraint firstItem="lU8-LM-pZ6" firstAttribute="leading" secondItem="fuN-eS-A9L" secondAttribute="leading" constant="30" id="bdT-bt-hCU"/>
+                            <constraint firstItem="tCG-si-ltf" firstAttribute="centerY" secondItem="imN-T8-80b" secondAttribute="centerY" id="c8z-7z-Qq8"/>
+                            <constraint firstItem="4Oo-oR-h9b" firstAttribute="top" secondItem="bGB-aw-9Qx" secondAttribute="bottom" constant="35" id="cQQ-V9-LP4"/>
+                            <constraint firstItem="8D2-1s-4pc" firstAttribute="leading" secondItem="aTR-9O-QbB" secondAttribute="trailing" constant="10" id="gK9-qa-yDt"/>
+                            <constraint firstItem="Uzs-oK-mLs" firstAttribute="centerY" secondItem="bGB-aw-9Qx" secondAttribute="centerY" id="hje-jE-j2h"/>
+                            <constraint firstItem="4Oo-oR-h9b" firstAttribute="leading" secondItem="fuN-eS-A9L" secondAttribute="leading" constant="30" id="laf-Oj-73G"/>
+                            <constraint firstItem="8D2-1s-4pc" firstAttribute="centerY" secondItem="imN-T8-80b" secondAttribute="centerY" id="okU-ia-YZU"/>
+                            <constraint firstItem="vL2-Vx-JDC" firstAttribute="top" secondItem="lU8-LM-pZ6" secondAttribute="top" id="tdO-ZX-7iX"/>
+                            <constraint firstItem="tCG-si-ltf" firstAttribute="trailing" secondItem="imN-T8-80b" secondAttribute="trailing" constant="-10" id="wGL-l9-J8H"/>
+                            <constraint firstItem="Uzs-oK-mLs" firstAttribute="trailing" secondItem="bGB-aw-9Qx" secondAttribute="trailing" constant="-10" id="zYG-bf-TDm"/>
+                        </constraints>
+                    </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="accountTF" destination="8D2-1s-4pc" id="VZz-oW-ikl"/>
+                        <outlet property="passwordTF" destination="Uzs-oK-mLs" id="9AS-Ls-aw5"/>
+                        <outlet property="verfitBtn" destination="tCG-si-ltf" id="9qb-Ri-baD"/>
+                        <outlet property="veryfitTF" destination="vL2-Vx-JDC" id="TL7-c6-Zwy"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mNL-rb-v76" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1655" y="-82"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="app_anniu_red" width="315" height="40"/>
+        <image name="app_get_verfiy_code_anniu" width="77" height="31"/>
+        <image name="app_input" width="315" height="45"/>
+        <image name="app_login_account" width="23" height="22"/>
+        <image name="app_login_verfiy" width="22" height="22"/>
+        <image name="app_password_lock" width="20" height="25"/>
+    </resources>
+</document>
