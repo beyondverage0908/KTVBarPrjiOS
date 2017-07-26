@@ -7,6 +7,7 @@
 //
 
 #import "KTVLoginBaseController.h"
+#import "KTVShareSDKManager.h"
 
 @interface KTVLoginBaseController ()
 
@@ -38,6 +39,8 @@
     
     for (NSInteger i = 0; i < 3; i++) {
         UIButton *otherLoginBtn = [[UIButton alloc] init];
+        otherLoginBtn.tag = 1000 + i;
+        [otherLoginBtn addTarget:self action:@selector(thirdLoginAction:) forControlEvents:UIControlEventTouchUpInside];
         switch (i) {
             case 0:
                 [otherLoginBtn setBackgroundImage:[UIImage imageNamed:@"app_login_wechat"] forState:UIControlStateNormal];
@@ -81,6 +84,25 @@
         make.centerX.equalTo(loginIconBgView);
         make.top.equalTo(loginIconBgView);
     }];
+}
+
+- (void)thirdLoginAction:(UIButton *)btn {
+    if (btn.tag == 1000) {
+        CLog(@"-->>微信 login");
+        [KTVShareSDKManager thirdpartyLogin:KTVShareSDKWeChatLoginType];
+    }
+    else if (btn.tag == 1001) {
+        CLog(@"-->>qq login");
+        [KTVShareSDKManager thirdpartyLogin:KTVShareSDKQQLoginType];
+    }
+    else if (btn.tag == 1002) {
+        CLog(@"-->>sina login");
+        [KTVShareSDKManager thirdpartyShareTitle:@"今天上海又高温了"
+                                            text:@"以新发展理念为指导、以供给侧结构性改革为主线的政策体系，为中国经济“干什么”勾勒了前行路径。今年上半年，中国经济交出GDP增长6．9％的满意答卷。下半年，中国如何延续稳中向好态势"
+                                          images:@[@"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1501079289&di=dda2b5b4a13497ee5340f2f4d3bba027&src=http://www.zhlzw.com/UploadFiles/Article_UploadFiles/201204/20120412123914329.jpg"]
+                                       targetUrl:[NSURL URLWithString:@"http://cpc.people.com.cn/xuexi/n1/2017/0725/c385474-29427420.html"]];
+        
+    }
 }
 
 @end
