@@ -10,7 +10,8 @@ target 'KTVBariOS' do
 
 pod 'AFNetworking'
 pod 'Masonry'
-
+pod 'SDWebImage'
+pod 'YYKit'
 
 
 # ShareSDK 微信 微博 QQ第三方登陆 以及分享

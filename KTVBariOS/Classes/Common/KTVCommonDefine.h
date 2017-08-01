@@ -31,9 +31,13 @@
 #define RGBACOLOR(r,g,b,a) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a]
 #define COLORHex(x) [UIColor colorHex:x]
 
-// 系统对象
-#define KTV_UserDefaults            [NSUserDefaults standardUserDefaults]     // NSUsetDefault
-#define KTV_NotificationCenter      [NSNotificationCenter defaultCenter]      // NSNotificationCenter
+// 系统方法
+// NSUsetDefault
+#define KTV_UserDefaults            [NSUserDefaults standardUserDefaults]
+// NSNotificationCenter
+#define KTV_NotificationCenter      [NSNotificationCenter defaultCenter]      
+// 从类获取字符串
+#define KTVStringClass(cls)         NSStringFromClass([cls class])
 
 
 #endif /* KTVCommonDefine_h */

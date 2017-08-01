@@ -10,8 +10,13 @@
 
 @interface UIColor (KTVSkin)
 
+/// 主题粉红色
 + (UIColor *)ktvRed;
 
+/// 输入框占位符字体颜色
 + (UIColor *)ktvPlaceHolder;
+
+/// 主要背景色
++ (UIColor *)ktvBG;
 
 @end

@@ -15,7 +15,6 @@
 		332A63D51F03B14D007EF65F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 332A63D41F03B14D007EF65F /* Assets.xcassets */; };
 		332A63E31F03B14D007EF65F /* KTVBariOSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 332A63E21F03B14D007EF65F /* KTVBariOSTests.m */; };
 		332A63EE1F03B14D007EF65F /* KTVBariOSUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 332A63ED1F03B14D007EF65F /* KTVBariOSUITests.m */; };
-		3342B2E81F17B30A00E47483 /* KTVMainController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3342B2E71F17B30A00E47483 /* KTVMainController.m */; };
 		3342B2EB1F1862B400E47483 /* UIColor+KTVSkin.m in Sources */ = {isa = PBXBuildFile; fileRef = 3342B2EA1F1862B400E47483 /* UIColor+KTVSkin.m */; };
 		3343E4FB1F28DAC800752AC5 /* MOBFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3343E4D91F28DAC800752AC5 /* MOBFoundation.framework */; };
 		3343E4FC1F28DAC800752AC5 /* ShareSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3343E4DB1F28DAC800752AC5 /* ShareSDK.framework */; };
@@ -37,11 +36,14 @@
 		3343E50C1F28DAC800752AC5 /* ShareSDKConnector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3343E4FA1F28DAC800752AC5 /* ShareSDKConnector.framework */; };
 		334E53301F15FA9800D83901 /* MainPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 334E532F1F15FA9800D83901 /* MainPage.storyboard */; };
 		334E53321F15FAB000D83901 /* NearPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 334E53311F15FAB000D83901 /* NearPage.storyboard */; };
-		334E53341F15FACF00D83901 /* DiscoverPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 334E53331F15FACF00D83901 /* DiscoverPage.storyboard */; };
+		334E53341F15FACF00D83901 /* DatingFriend.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 334E53331F15FACF00D83901 /* DatingFriend.storyboard */; };
 		334E53361F15FADF00D83901 /* MePage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 334E53351F15FADF00D83901 /* MePage.storyboard */; };
 		334E533D1F162E1D00D83901 /* KTVLaunchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 334E533C1F162E1D00D83901 /* KTVLaunchController.m */; };
 		335705411F1392BB00AAAFEA /* KTVBaseNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 335705401F1392BB00AAAFEA /* KTVBaseNavigationViewController.m */; };
 		335705441F1392F000AAAFEA /* KTVBaseTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 335705431F1392F000AAAFEA /* KTVBaseTabBarViewController.m */; };
+		337DA0661F2F747A000EF331 /* KTVNearbyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 337DA0651F2F747A000EF331 /* KTVNearbyController.m */; };
+		337DA0691F2F749C000EF331 /* KTVMineController.m in Sources */ = {isa = PBXBuildFile; fileRef = 337DA0681F2F749C000EF331 /* KTVMineController.m */; };
+		337DA06C1F2F74AF000EF331 /* KTVDateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 337DA06B1F2F74AF000EF331 /* KTVDateViewController.m */; };
 		339D8AA51F1A048F00D41152 /* KTVLoginBaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 339D8A9C1F1A048F00D41152 /* KTVLoginBaseController.m */; };
 		339D8AA61F1A048F00D41152 /* KTVLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 339D8A9E1F1A048F00D41152 /* KTVLoginController.m */; };
 		339D8AA71F1A048F00D41152 /* KTVLoginGuideController.m in Sources */ = {isa = PBXBuildFile; fileRef = 339D8AA01F1A048F00D41152 /* KTVLoginGuideController.m */; };
@@ -51,6 +53,16 @@
 		33D0E5A41F1F6CE2009A45B3 /* KTVForgetPasswordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D0E5A31F1F6CE2009A45B3 /* KTVForgetPasswordController.m */; };
 		33D0E5A71F1F99A6009A45B3 /* UIViewController+StoryboardHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D0E5A61F1F99A6009A45B3 /* UIViewController+StoryboardHelper.m */; };
 		33D0E5AA1F1F9E8F009A45B3 /* UIButton+KTVExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D0E5A91F1F9E8F009A45B3 /* UIButton+KTVExtension.m */; };
+		33D776DB1F30109400077BE5 /* placeholder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 33D776D41F30109400077BE5 /* placeholder@2x.png */; };
+		33D776DC1F30109400077BE5 /* SDCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D776D61F30109400077BE5 /* SDCollectionViewCell.m */; };
+		33D776DD1F30109400077BE5 /* SDCycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D776D81F30109400077BE5 /* SDCycleScrollView.m */; };
+		33D776DE1F30109400077BE5 /* UIView+SDExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D776DA1F30109400077BE5 /* UIView+SDExtension.m */; };
+		33D776E61F3011AD00077BE5 /* KTVMainController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D776E11F3011AD00077BE5 /* KTVMainController.m */; };
+		33D776E91F3011FA00077BE5 /* KTVBannerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D776E81F3011FA00077BE5 /* KTVBannerCell.m */; };
+		33D776F31F301D9600077BE5 /* TAAbstractDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D776EC1F301D9600077BE5 /* TAAbstractDotView.m */; };
+		33D776F41F301D9600077BE5 /* TAAnimatedDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D776EE1F301D9600077BE5 /* TAAnimatedDotView.m */; };
+		33D776F51F301D9600077BE5 /* TADotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D776F01F301D9600077BE5 /* TADotView.m */; };
+		33D776F61F301D9600077BE5 /* TAPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D776F21F301D9600077BE5 /* TAPageControl.m */; };
 		33DC057B1F26E06D00AEB5C4 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 33DC057A1F26E06D00AEB5C4 /* libicucore.tbd */; };
 		33DC057D1F26E07700AEB5C4 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 33DC057C1F26E07700AEB5C4 /* libz.tbd */; };
 		33DC057F1F26E08400AEB5C4 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 33DC057E1F26E08400AEB5C4 /* libstdc++.tbd */; };
@@ -98,8 +110,6 @@
 		332A63E91F03B14D007EF65F /* KTVBariOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KTVBariOSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		332A63ED1F03B14D007EF65F /* KTVBariOSUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KTVBariOSUITests.m; sourceTree = "<group>"; };
 		332A63EF1F03B14D007EF65F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3342B2E61F17B30A00E47483 /* KTVMainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVMainController.h; sourceTree = "<group>"; };
-		3342B2E71F17B30A00E47483 /* KTVMainController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVMainController.m; sourceTree = "<group>"; };
 		3342B2E91F1862B400E47483 /* UIColor+KTVSkin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+KTVSkin.h"; sourceTree = "<group>"; };
 		3342B2EA1F1862B400E47483 /* UIColor+KTVSkin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+KTVSkin.m"; sourceTree = "<group>"; };
 		3343E4D91F28DAC800752AC5 /* MOBFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MOBFoundation.framework; sourceTree = "<group>"; };
@@ -129,7 +139,7 @@
 		3343E4FA1F28DAC800752AC5 /* ShareSDKConnector.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDKConnector.framework; sourceTree = "<group>"; };
 		334E532F1F15FA9800D83901 /* MainPage.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainPage.storyboard; sourceTree = "<group>"; };
 		334E53311F15FAB000D83901 /* NearPage.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = NearPage.storyboard; sourceTree = "<group>"; };
-		334E53331F15FACF00D83901 /* DiscoverPage.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DiscoverPage.storyboard; sourceTree = "<group>"; };
+		334E53331F15FACF00D83901 /* DatingFriend.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DatingFriend.storyboard; sourceTree = "<group>"; };
 		334E53351F15FADF00D83901 /* MePage.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MePage.storyboard; sourceTree = "<group>"; };
 		334E533B1F162E1D00D83901 /* KTVLaunchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVLaunchController.h; sourceTree = "<group>"; };
 		334E533C1F162E1D00D83901 /* KTVLaunchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVLaunchController.m; sourceTree = "<group>"; };
@@ -138,6 +148,12 @@
 		335705401F1392BB00AAAFEA /* KTVBaseNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVBaseNavigationViewController.m; sourceTree = "<group>"; };
 		335705421F1392F000AAAFEA /* KTVBaseTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVBaseTabBarViewController.h; sourceTree = "<group>"; };
 		335705431F1392F000AAAFEA /* KTVBaseTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVBaseTabBarViewController.m; sourceTree = "<group>"; };
+		337DA0641F2F747A000EF331 /* KTVNearbyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVNearbyController.h; sourceTree = "<group>"; };
+		337DA0651F2F747A000EF331 /* KTVNearbyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVNearbyController.m; sourceTree = "<group>"; };
+		337DA0671F2F749C000EF331 /* KTVMineController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVMineController.h; sourceTree = "<group>"; };
+		337DA0681F2F749C000EF331 /* KTVMineController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVMineController.m; sourceTree = "<group>"; };
+		337DA06A1F2F74AF000EF331 /* KTVDateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVDateViewController.h; sourceTree = "<group>"; };
+		337DA06B1F2F74AF000EF331 /* KTVDateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVDateViewController.m; sourceTree = "<group>"; };
 		339D8A9B1F1A048F00D41152 /* KTVLoginBaseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVLoginBaseController.h; sourceTree = "<group>"; };
 		339D8A9C1F1A048F00D41152 /* KTVLoginBaseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVLoginBaseController.m; sourceTree = "<group>"; };
 		339D8A9D1F1A048F00D41152 /* KTVLoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVLoginController.h; sourceTree = "<group>"; };
@@ -155,6 +171,25 @@
 		33D0E5A61F1F99A6009A45B3 /* UIViewController+StoryboardHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+StoryboardHelper.m"; sourceTree = "<group>"; };
 		33D0E5A81F1F9E8F009A45B3 /* UIButton+KTVExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+KTVExtension.h"; sourceTree = "<group>"; };
 		33D0E5A91F1F9E8F009A45B3 /* UIButton+KTVExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+KTVExtension.m"; sourceTree = "<group>"; };
+		33D776D41F30109400077BE5 /* placeholder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "placeholder@2x.png"; sourceTree = "<group>"; };
+		33D776D51F30109400077BE5 /* SDCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCollectionViewCell.h; sourceTree = "<group>"; };
+		33D776D61F30109400077BE5 /* SDCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCollectionViewCell.m; sourceTree = "<group>"; };
+		33D776D71F30109400077BE5 /* SDCycleScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCycleScrollView.h; sourceTree = "<group>"; };
+		33D776D81F30109400077BE5 /* SDCycleScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCycleScrollView.m; sourceTree = "<group>"; };
+		33D776D91F30109400077BE5 /* UIView+SDExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SDExtension.h"; sourceTree = "<group>"; };
+		33D776DA1F30109400077BE5 /* UIView+SDExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SDExtension.m"; sourceTree = "<group>"; };
+		33D776E01F3011AD00077BE5 /* KTVMainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVMainController.h; sourceTree = "<group>"; };
+		33D776E11F3011AD00077BE5 /* KTVMainController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVMainController.m; sourceTree = "<group>"; };
+		33D776E71F3011FA00077BE5 /* KTVBannerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVBannerCell.h; sourceTree = "<group>"; };
+		33D776E81F3011FA00077BE5 /* KTVBannerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVBannerCell.m; sourceTree = "<group>"; };
+		33D776EB1F301D9600077BE5 /* TAAbstractDotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAAbstractDotView.h; sourceTree = "<group>"; };
+		33D776EC1F301D9600077BE5 /* TAAbstractDotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAAbstractDotView.m; sourceTree = "<group>"; };
+		33D776ED1F301D9600077BE5 /* TAAnimatedDotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAAnimatedDotView.h; sourceTree = "<group>"; };
+		33D776EE1F301D9600077BE5 /* TAAnimatedDotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAAnimatedDotView.m; sourceTree = "<group>"; };
+		33D776EF1F301D9600077BE5 /* TADotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TADotView.h; sourceTree = "<group>"; };
+		33D776F01F301D9600077BE5 /* TADotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TADotView.m; sourceTree = "<group>"; };
+		33D776F11F301D9600077BE5 /* TAPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAPageControl.h; sourceTree = "<group>"; };
+		33D776F21F301D9600077BE5 /* TAPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAPageControl.m; sourceTree = "<group>"; };
 		33DC05411F26DF3200AEB5C4 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		33DC057A1F26E06D00AEB5C4 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
 		33DC057C1F26E07700AEB5C4 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
@@ -250,8 +285,11 @@
 		330A937E1F03EC70001B320A /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				3325D2451F1268DB0022AE9A /* Base */,
 				3342B2E51F17B2E300E47483 /* MainPage */,
+				337DA0631F2F744F000EF331 /* Nearby */,
+				337DA0611F2F744F000EF331 /* DatingFriend */,
+				337DA0621F2F744F000EF331 /* Mine */,
+				3325D2451F1268DB0022AE9A /* Base */,
 				334E533A1F162E0100D83901 /* Launch */,
 				330A937F1F03EC70001B320A /* Login */,
 			);
@@ -301,7 +339,7 @@
 				330A938E1F03EE47001B320A /* Main.storyboard */,
 				334E532F1F15FA9800D83901 /* MainPage.storyboard */,
 				334E53311F15FAB000D83901 /* NearPage.storyboard */,
-				334E53331F15FACF00D83901 /* DiscoverPage.storyboard */,
+				334E53331F15FACF00D83901 /* DatingFriend.storyboard */,
 				334E53351F15FADF00D83901 /* MePage.storyboard */,
 				33D0E5A01F1F6C8C009A45B3 /* Login.storyboard */,
 			);
@@ -398,8 +436,11 @@
 		3342B2E51F17B2E300E47483 /* MainPage */ = {
 			isa = PBXGroup;
 			children = (
-				3342B2E61F17B30A00E47483 /* KTVMainController.h */,
-				3342B2E71F17B30A00E47483 /* KTVMainController.m */,
+				33D776DF1F3011AD00077BE5 /* Controller */,
+				33D776E21F3011AD00077BE5 /* Logic */,
+				33D776E31F3011AD00077BE5 /* Model */,
+				33D776E41F3011AD00077BE5 /* Service */,
+				33D776E51F3011AD00077BE5 /* View */,
 			);
 			path = MainPage;
 			sourceTree = "<group>";
@@ -525,6 +566,33 @@
 			path = Launch;
 			sourceTree = "<group>";
 		};
+		337DA0611F2F744F000EF331 /* DatingFriend */ = {
+			isa = PBXGroup;
+			children = (
+				337DA06A1F2F74AF000EF331 /* KTVDateViewController.h */,
+				337DA06B1F2F74AF000EF331 /* KTVDateViewController.m */,
+			);
+			path = DatingFriend;
+			sourceTree = "<group>";
+		};
+		337DA0621F2F744F000EF331 /* Mine */ = {
+			isa = PBXGroup;
+			children = (
+				337DA0671F2F749C000EF331 /* KTVMineController.h */,
+				337DA0681F2F749C000EF331 /* KTVMineController.m */,
+			);
+			path = Mine;
+			sourceTree = "<group>";
+		};
+		337DA0631F2F744F000EF331 /* Nearby */ = {
+			isa = PBXGroup;
+			children = (
+				337DA0641F2F747A000EF331 /* KTVNearbyController.h */,
+				337DA0651F2F747A000EF331 /* KTVNearbyController.m */,
+			);
+			path = Nearby;
+			sourceTree = "<group>";
+		};
 		339D8A9A1F1A048F00D41152 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -574,9 +642,79 @@
 			path = Logic;
 			sourceTree = "<group>";
 		};
+		33D776D31F30109400077BE5 /* SDCycleScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				33D776D41F30109400077BE5 /* placeholder@2x.png */,
+				33D776D51F30109400077BE5 /* SDCollectionViewCell.h */,
+				33D776D61F30109400077BE5 /* SDCollectionViewCell.m */,
+				33D776D71F30109400077BE5 /* SDCycleScrollView.h */,
+				33D776D81F30109400077BE5 /* SDCycleScrollView.m */,
+				33D776D91F30109400077BE5 /* UIView+SDExtension.h */,
+				33D776DA1F30109400077BE5 /* UIView+SDExtension.m */,
+			);
+			path = SDCycleScrollView;
+			sourceTree = "<group>";
+		};
+		33D776DF1F3011AD00077BE5 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				33D776E01F3011AD00077BE5 /* KTVMainController.h */,
+				33D776E11F3011AD00077BE5 /* KTVMainController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		33D776E21F3011AD00077BE5 /* Logic */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Logic;
+			sourceTree = "<group>";
+		};
+		33D776E31F3011AD00077BE5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		33D776E41F3011AD00077BE5 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		33D776E51F3011AD00077BE5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				33D776E71F3011FA00077BE5 /* KTVBannerCell.h */,
+				33D776E81F3011FA00077BE5 /* KTVBannerCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		33D776EA1F301D9600077BE5 /* PageControl */ = {
+			isa = PBXGroup;
+			children = (
+				33D776EB1F301D9600077BE5 /* TAAbstractDotView.h */,
+				33D776EC1F301D9600077BE5 /* TAAbstractDotView.m */,
+				33D776ED1F301D9600077BE5 /* TAAnimatedDotView.h */,
+				33D776EE1F301D9600077BE5 /* TAAnimatedDotView.m */,
+				33D776EF1F301D9600077BE5 /* TADotView.h */,
+				33D776F01F301D9600077BE5 /* TADotView.m */,
+				33D776F11F301D9600077BE5 /* TAPageControl.h */,
+				33D776F21F301D9600077BE5 /* TAPageControl.m */,
+			);
+			path = PageControl;
+			sourceTree = "<group>";
+		};
 		33DC05431F26DFC400AEB5C4 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				33D776EA1F301D9600077BE5 /* PageControl */,
+				33D776D31F30109400077BE5 /* SDCycleScrollView */,
 				3343E4D71F28DAC800752AC5 /* ShareSDK */,
 			);
 			path = ThirdParty;
@@ -734,9 +872,10 @@
 				332A63D51F03B14D007EF65F /* Assets.xcassets in Resources */,
 				3343E4FD1F28DAC800752AC5 /* ShareSDKConfigFile.bundle in Resources */,
 				3343E5061F28DAC800752AC5 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
+				33D776DB1F30109400077BE5 /* placeholder@2x.png in Resources */,
 				330A938F1F03EE47001B320A /* Main.storyboard in Resources */,
 				3343E50B1F28DAC800752AC5 /* ShareSDK.bundle in Resources */,
-				334E53341F15FACF00D83901 /* DiscoverPage.storyboard in Resources */,
+				334E53341F15FACF00D83901 /* DatingFriend.storyboard in Resources */,
 				334E53361F15FADF00D83901 /* MePage.storyboard in Resources */,
 				3343E5081F28DAC800752AC5 /* WeiboSDK.bundle in Resources */,
 			);
@@ -813,23 +952,34 @@
 			files = (
 				33F0E2131F1C51EC009AA2DC /* KTVUnderlineButton.m in Sources */,
 				33D0E5AA1F1F9E8F009A45B3 /* UIButton+KTVExtension.m in Sources */,
+				337DA0661F2F747A000EF331 /* KTVNearbyController.m in Sources */,
 				339D8AA81F1A048F00D41152 /* KTVRegisterController.m in Sources */,
 				33D0E5A71F1F99A6009A45B3 /* UIViewController+StoryboardHelper.m in Sources */,
 				339D8AA71F1A048F00D41152 /* KTVLoginGuideController.m in Sources */,
 				3342B2EB1F1862B400E47483 /* UIColor+KTVSkin.m in Sources */,
+				33D776DD1F30109400077BE5 /* SDCycleScrollView.m in Sources */,
+				33D776F41F301D9600077BE5 /* TAAnimatedDotView.m in Sources */,
+				337DA0691F2F749C000EF331 /* KTVMineController.m in Sources */,
 				334E533D1F162E1D00D83901 /* KTVLaunchController.m in Sources */,
 				330A938C1F03ED7E001B320A /* main.m in Sources */,
 				339D8AAB1F1A04D100D41152 /* KTVLoginInputView.m in Sources */,
 				335705441F1392F000AAAFEA /* KTVBaseTabBarViewController.m in Sources */,
+				33D776F31F301D9600077BE5 /* TAAbstractDotView.m in Sources */,
 				339D8AA61F1A048F00D41152 /* KTVLoginController.m in Sources */,
 				33DC05891F26E19400AEB5C4 /* KTVShareSDKManager.m in Sources */,
+				33D776F61F301D9600077BE5 /* TAPageControl.m in Sources */,
 				339D8AA51F1A048F00D41152 /* KTVLoginBaseController.m in Sources */,
 				335705411F1392BB00AAAFEA /* KTVBaseNavigationViewController.m in Sources */,
 				33D0E5A41F1F6CE2009A45B3 /* KTVForgetPasswordController.m in Sources */,
 				330A93871F03ED2A001B320A /* AppDelegate.m in Sources */,
-				3342B2E81F17B30A00E47483 /* KTVMainController.m in Sources */,
+				33D776F51F301D9600077BE5 /* TADotView.m in Sources */,
+				33D776DC1F30109400077BE5 /* SDCollectionViewCell.m in Sources */,
 				3325D2481F1268EF0022AE9A /* KTVBaseViewController.m in Sources */,
+				337DA06C1F2F74AF000EF331 /* KTVDateViewController.m in Sources */,
+				33D776DE1F30109400077BE5 /* UIView+SDExtension.m in Sources */,
 				3325D2501F1273350022AE9A /* UIColor+KTVExtension.m in Sources */,
+				33D776E61F3011AD00077BE5 /* KTVMainController.m in Sources */,
+				33D776E91F3011FA00077BE5 /* KTVBannerCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
