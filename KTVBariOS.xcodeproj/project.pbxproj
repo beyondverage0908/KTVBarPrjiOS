@@ -63,6 +63,10 @@
 		33D776F41F301D9600077BE5 /* TAAnimatedDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D776EE1F301D9600077BE5 /* TAAnimatedDotView.m */; };
 		33D776F51F301D9600077BE5 /* TADotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D776F01F301D9600077BE5 /* TADotView.m */; };
 		33D776F61F301D9600077BE5 /* TAPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D776F21F301D9600077BE5 /* TAPageControl.m */; };
+		33D776F91F302F8300077BE5 /* KTVRequestMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D776F81F302F8300077BE5 /* KTVRequestMessage.m */; };
+		33D776FC1F302FBA00077BE5 /* KTVNetworkHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D776FB1F302FBA00077BE5 /* KTVNetworkHelper.m */; };
+		33D776FF1F30498600077BE5 /* KTVUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D776FE1F30498600077BE5 /* KTVUtil.m */; };
+		33D777031F305CD100077BE5 /* KTVToast.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D777021F305CD100077BE5 /* KTVToast.m */; };
 		33DC057B1F26E06D00AEB5C4 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 33DC057A1F26E06D00AEB5C4 /* libicucore.tbd */; };
 		33DC057D1F26E07700AEB5C4 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 33DC057C1F26E07700AEB5C4 /* libz.tbd */; };
 		33DC057F1F26E08400AEB5C4 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 33DC057E1F26E08400AEB5C4 /* libstdc++.tbd */; };
@@ -190,6 +194,16 @@
 		33D776F01F301D9600077BE5 /* TADotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TADotView.m; sourceTree = "<group>"; };
 		33D776F11F301D9600077BE5 /* TAPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAPageControl.h; sourceTree = "<group>"; };
 		33D776F21F301D9600077BE5 /* TAPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAPageControl.m; sourceTree = "<group>"; };
+		33D776F71F302F8300077BE5 /* KTVRequestMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVRequestMessage.h; sourceTree = "<group>"; };
+		33D776F81F302F8300077BE5 /* KTVRequestMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVRequestMessage.m; sourceTree = "<group>"; };
+		33D776FA1F302FBA00077BE5 /* KTVNetworkHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVNetworkHelper.h; sourceTree = "<group>"; };
+		33D776FB1F302FBA00077BE5 /* KTVNetworkHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVNetworkHelper.m; sourceTree = "<group>"; };
+		33D776FD1F30498600077BE5 /* KTVUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVUtil.h; sourceTree = "<group>"; };
+		33D776FE1F30498600077BE5 /* KTVUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVUtil.m; sourceTree = "<group>"; };
+		33D777011F305CD100077BE5 /* KTVToast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVToast.h; sourceTree = "<group>"; };
+		33D777021F305CD100077BE5 /* KTVToast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVToast.m; sourceTree = "<group>"; };
+		33D777041F305D5800077BE5 /* KTVUrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVUrl.h; sourceTree = "<group>"; };
+		33D777051F305D8D00077BE5 /* KTVToastDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVToastDefine.h; sourceTree = "<group>"; };
 		33DC05411F26DF3200AEB5C4 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		33DC057A1F26E06D00AEB5C4 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
 		33DC057C1F26E07700AEB5C4 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
@@ -271,6 +285,8 @@
 				3325D2491F1270310022AE9A /* KTVCommonDefine.h */,
 				3325D24A1F12708A0022AE9A /* KTVPrefixHeader.pch */,
 				334E533E1F16350700D83901 /* KTVImportHeader.h */,
+				33D777041F305D5800077BE5 /* KTVUrl.h */,
+				33D777051F305D8D00077BE5 /* KTVToastDefine.h */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -278,6 +294,10 @@
 		330A937D1F03EC70001B320A /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				33D776F71F302F8300077BE5 /* KTVRequestMessage.h */,
+				33D776F81F302F8300077BE5 /* KTVRequestMessage.m */,
+				33D776FA1F302FBA00077BE5 /* KTVNetworkHelper.h */,
+				33D776FB1F302FBA00077BE5 /* KTVNetworkHelper.m */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -311,6 +331,10 @@
 		330A93801F03EC70001B320A /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				33D777011F305CD100077BE5 /* KTVToast.h */,
+				33D777021F305CD100077BE5 /* KTVToast.m */,
+				33D776FD1F30498600077BE5 /* KTVUtil.h */,
+				33D776FE1F30498600077BE5 /* KTVUtil.m */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -955,6 +979,7 @@
 				337DA0661F2F747A000EF331 /* KTVNearbyController.m in Sources */,
 				339D8AA81F1A048F00D41152 /* KTVRegisterController.m in Sources */,
 				33D0E5A71F1F99A6009A45B3 /* UIViewController+StoryboardHelper.m in Sources */,
+				33D777031F305CD100077BE5 /* KTVToast.m in Sources */,
 				339D8AA71F1A048F00D41152 /* KTVLoginGuideController.m in Sources */,
 				3342B2EB1F1862B400E47483 /* UIColor+KTVSkin.m in Sources */,
 				33D776DD1F30109400077BE5 /* SDCycleScrollView.m in Sources */,
@@ -962,8 +987,10 @@
 				337DA0691F2F749C000EF331 /* KTVMineController.m in Sources */,
 				334E533D1F162E1D00D83901 /* KTVLaunchController.m in Sources */,
 				330A938C1F03ED7E001B320A /* main.m in Sources */,
+				33D776FC1F302FBA00077BE5 /* KTVNetworkHelper.m in Sources */,
 				339D8AAB1F1A04D100D41152 /* KTVLoginInputView.m in Sources */,
 				335705441F1392F000AAAFEA /* KTVBaseTabBarViewController.m in Sources */,
+				33D776FF1F30498600077BE5 /* KTVUtil.m in Sources */,
 				33D776F31F301D9600077BE5 /* TAAbstractDotView.m in Sources */,
 				339D8AA61F1A048F00D41152 /* KTVLoginController.m in Sources */,
 				33DC05891F26E19400AEB5C4 /* KTVShareSDKManager.m in Sources */,
@@ -974,6 +1001,7 @@
 				330A93871F03ED2A001B320A /* AppDelegate.m in Sources */,
 				33D776F51F301D9600077BE5 /* TADotView.m in Sources */,
 				33D776DC1F30109400077BE5 /* SDCollectionViewCell.m in Sources */,
+				33D776F91F302F8300077BE5 /* KTVRequestMessage.m in Sources */,
 				3325D2481F1268EF0022AE9A /* KTVBaseViewController.m in Sources */,
 				337DA06C1F2F74AF000EF331 /* KTVDateViewController.m in Sources */,
 				33D776DE1F30109400077BE5 /* UIView+SDExtension.m in Sources */,

@@ -31,12 +31,6 @@
     self.tableView.tableFooterView = [[UIView alloc] init];
 }
 
-- (IBAction)loginAction:(UIButton *)sender {
-    KTVLoginGuideController *guideVC = [[KTVLoginGuideController alloc] init];
-    guideVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:guideVC animated:YES];
-}
-
 #pragma mark - UITableViewDelegate 
 
 
@@ -91,6 +85,11 @@
 
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index {
     CLog(@"--%@--main page banner click", @(index));
+    
+    KTVLoginGuideController *guideVC = [[KTVLoginGuideController alloc] init];
+    KTVBaseNavigationViewController *nav = [[KTVBaseNavigationViewController alloc] initWithRootViewController:guideVC];
+    [self presentViewController:nav animated:YES completion:nil];
+    
 }
 
 @end

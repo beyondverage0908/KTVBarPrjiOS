@@ -6,7 +6,7 @@
 //  Copyright © 2017年 Lin. All rights reserved.
 //
 
-#import "KTVBaseViewController.h"
+#import "KTVLoginBaseController.h"
 
 @interface KTVForgetPasswordController : KTVBaseViewController
 

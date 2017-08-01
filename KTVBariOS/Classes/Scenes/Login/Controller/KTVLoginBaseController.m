@@ -24,8 +24,8 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     UIImageView *allBgImage = [[UIImageView alloc] init];
+    allBgImage.image = [UIImage imageNamed:@"app_login_all_bg"];
     [self.view addSubview:allBgImage];
-    allBgImage.backgroundColor = [UIColor redColor];
     [allBgImage mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.right.bottom.and.left.equalTo(self.view);
     }];
