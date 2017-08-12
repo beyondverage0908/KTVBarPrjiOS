@@ -53,4 +53,17 @@
     return NO;
 }
 
++ (void)setObject:(id)obj forKey:(NSString *)key {
+    if (!obj || !key || ![obj isKindOfClass:[NSObject class]] || ![key isKindOfClass:[NSString class]]) return;
+    
+    [[NSUserDefaults standardUserDefaults] setObject:obj forKey:key];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (id)objectForKey:(NSString *)key {
+    if (!key || ![key isKindOfClass:[NSString class]]) return nil;
+    
+    return [[NSUserDefaults standardUserDefaults] objectForKey:key];
+}
+
 @end

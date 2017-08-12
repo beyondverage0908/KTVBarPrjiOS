@@ -33,9 +33,9 @@
 
 // 系统方法
 // NSUsetDefault
-#define KTV_UserDefaults            [NSUserDefaults standardUserDefaults]
+#define KUserDefaults            [NSUserDefaults standardUserDefaults]
 // NSNotificationCenter
-#define KTV_NotificationCenter      [NSNotificationCenter defaultCenter]      
+#define KNotificationCenter      [NSNotificationCenter defaultCenter]
 // 从类获取字符串
 #define KTVStringClass(cls)         NSStringFromClass([cls class])
 

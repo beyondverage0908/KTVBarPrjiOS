@@ -19,4 +19,7 @@
 /// 主要背景色
 + (UIColor *)ktvBG;
 
+/// 表格分割 宽条背景色
++ (UIColor *)ktvSeparateBG;
+
 @end

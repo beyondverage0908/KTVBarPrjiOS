@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "KTVShareSDKManager.h"
+#import "KTVGaodeManager.h"
 
 @interface AppDelegate ()
 
@@ -20,6 +21,8 @@
 
     // 初始ShareSDK
     [KTVShareSDKManager shareSDKInitial];
+    // 启动app就定位
+    [[[KTVGaodeManager alloc] init] startAMapLocation];
     
     return YES;
 }

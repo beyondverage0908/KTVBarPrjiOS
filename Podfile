@@ -8,10 +8,10 @@ target 'KTVBariOS' do
 
 #   Pods for KTVBariOS
 
-pod 'AFNetworking'
-pod 'Masonry'
-pod 'SDWebImage'
-pod 'YYKit'
+    pod 'AFNetworking'
+    pod 'Masonry'
+    pod 'SDWebImage'
+    pod 'YYKit'
 
 
 # ShareSDK 微信 微博 QQ第三方登陆 以及分享
@@ -28,5 +28,11 @@ pod 'YYKit'
 #pod 'ShareSDK3/ShareSDKPlatforms/QQ'
 #pod 'ShareSDK3/ShareSDKPlatforms/SinaWeibo'
 #pod 'ShareSDK3/ShareSDKPlatforms/WeChat'
+
+
+# 高德地图
+    pod 'AMapLocation-NO-IDFA'  #定位功能
+    pod 'AMapSearch-NO-IDFA'    #搜索功能 - 地理位置解析(经纬度->地理位置)
+    pod 'AMap2DMap-NO-IDFA'
 
 end

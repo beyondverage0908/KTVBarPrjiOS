@@ -22,7 +22,13 @@
 
 + (UIColor *)ktvBG {
     /// #222222
-    return [UIColor colorWithRed:34.0f / 255.0f green:34.0f / 255.0f blue:34.0f / 255.0f alpha:1.0f];
+    return [UIColor colorWithRed:34.0f / 255.0f green:31.0f / 255.0f blue:41.0f / 255.0f alpha:1.0f];
+}
+
+// 26 26 35
++ (UIColor *)ktvSeparateBG {
+    /// #222222
+    return [UIColor colorWithRed:26.0f / 255.0f green:26.0f / 255.0f blue:35.0f / 255.0f alpha:1.0f];
 }
 
 @end
