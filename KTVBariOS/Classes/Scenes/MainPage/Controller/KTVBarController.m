@@ -11,6 +11,7 @@
 #import "KTVGuessLikeCell.h"
 #import "KTVPackageCell.h"
 #import "KTVFilterView.h"
+#import "KTVBarKtvDetailController.h"
 
 @interface KTVBarController ()<UITableViewDelegate, UITableViewDataSource, SDCycleScrollViewDelegate>
 
@@ -113,6 +114,15 @@
         return 40;
     }
     return 35;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section != 0) {
+        if (indexPath.row == 0) {
+            KTVBarKtvDetailController *vc = (KTVBarKtvDetailController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVBarKtvDetailController"];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+    }
 }
 
 #pragma mark - UITableViewDataSource

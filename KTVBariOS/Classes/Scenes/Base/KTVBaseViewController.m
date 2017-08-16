@@ -46,7 +46,7 @@
 - (void)setNavigationBackButtonItem {
     // reference: http://www.jianshu.com/p/c229dc1aa325
     //方法2:通过父视图NaviController来设置
-    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:self action:@selector(navigationBackAction:)];
     self.navigationController.navigationBar.tintColor = COLORHex(@"#F63A82");
     //主要是以下两个图片设置
     self.navigationController.navigationBar.backIndicatorImage = [UIImage imageNamed:@"app_navi_back_arrow.png"];
@@ -67,6 +67,10 @@
     }
     
     self.navigationController.navigationItem.leftBarButtonItems = items;
+}
+
+- (void)navigationBackAction:(id)action {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

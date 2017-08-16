@@ -31,4 +31,12 @@
     return [UIColor colorWithRed:26.0f / 255.0f green:26.0f / 255.0f blue:35.0f / 255.0f alpha:1.0f];
 }
 
++ (UIColor *)ktvFilterColor {
+    return [UIColor colorWithRed:75.0f / 255.0f green:85.0f / 255.0f blue:158.0f / 255.0f alpha:1.0f];
+}
+
++ (UIColor *)ktvGray {
+    return [UIColor colorWithRed:96.0f / 255.0f green:96.0f / 255.0f blue:106.0f / 255.0f alpha:1.0f];
+}
+
 @end

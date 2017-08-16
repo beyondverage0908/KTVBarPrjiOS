@@ -22,4 +22,10 @@
 /// 表格分割 宽条背景色
 + (UIColor *)ktvSeparateBG;
 
+/// 过滤器 - 时间 选中的颜色
++ (UIColor *)ktvFilterColor;
+
+/// 项目中主题灰色
++ (UIColor *)ktvGray;
+
 @end
