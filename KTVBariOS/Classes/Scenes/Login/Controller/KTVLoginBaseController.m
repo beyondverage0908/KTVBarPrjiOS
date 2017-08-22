@@ -18,6 +18,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initbaseUI];
+    
+    [self tapViewKeyboard];
 }
 
 - (void)initbaseUI {
@@ -26,6 +28,7 @@
     UIImageView *allBgImage = [[UIImageView alloc] init];
     allBgImage.image = [UIImage imageNamed:@"app_login_all_bg"];
     [self.view addSubview:allBgImage];
+    allBgImage.userInteractionEnabled = YES;
     [allBgImage mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.right.bottom.and.left.equalTo(self.view);
     }];
@@ -103,6 +106,15 @@
                                        targetUrl:[NSURL URLWithString:@"http://cpc.people.com.cn/xuexi/n1/2017/0725/c385474-29427420.html"]];
         
     }
+}
+
+- (void)tapViewKeyboard {
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(fulldownKeyboard)];
+    [self.view addGestureRecognizer:tap];
+}
+
+- (void)fulldownKeyboard {
+    [self.view endEditing:YES];
 }
 
 @end

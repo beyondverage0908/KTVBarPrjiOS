@@ -39,4 +39,13 @@
     return [UIColor colorWithRed:96.0f / 255.0f green:96.0f / 255.0f blue:106.0f / 255.0f alpha:1.0f];
 }
 
+// 黄金颜色
++ (UIColor *)ktvGold {
+    return [UIColor colorWithRed:255.0f / 255.0f green:127.0f / 255.0f blue:0.0f / 255.0f alpha:1.0f];
+}
+
++ (UIColor *)ktvPurple {
+    return [UIColor colorWithRed:136.0f / 255.0f green:59.0f / 255.0f blue:176.0f / 255.0f alpha:1.0f];
+}
+
 @end

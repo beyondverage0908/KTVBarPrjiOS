@@ -28,4 +28,10 @@
 /// 项目中主题灰色
 + (UIColor *)ktvGray;
 
+/// 金色
++ (UIColor *)ktvGold;
+
+/// 紫色
++ (UIColor *)ktvPurple;
+
 @end

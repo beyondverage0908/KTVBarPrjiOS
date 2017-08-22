@@ -9,6 +9,16 @@
 
 #import "KTVPackageCell.h"
 
+@interface KTVPackageCell ()
+
+@property (weak, nonatomic) IBOutlet UIButton *orderBtn;
+@property (weak, nonatomic) IBOutlet UILabel *packageNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *oldMoneyLabel;
+@property (weak, nonatomic) IBOutlet UILabel *alreadySoldNumLabel;
+@property (weak, nonatomic) IBOutlet UILabel *moneyLabel;
+
+@end
+
 @implementation KTVPackageCell
 
 - (void)awakeFromNib {

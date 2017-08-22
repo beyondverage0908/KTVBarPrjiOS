@@ -8,6 +8,16 @@
 
 #import "KTVBarKtvReserveCell.h"
 
+@interface KTVBarKtvReserveCell ()
+
+@property (weak, nonatomic) IBOutlet UILabel *moneyOldLabel;
+@property (weak, nonatomic) IBOutlet UIButton *orderBtn;
+@property (weak, nonatomic) IBOutlet UILabel *orderTimeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *moneyLabel;
+
+
+@end
+
 @implementation KTVBarKtvReserveCell
 
 - (void)awakeFromNib {

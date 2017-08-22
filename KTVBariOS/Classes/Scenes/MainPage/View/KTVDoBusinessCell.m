@@ -8,6 +8,12 @@
 
 #import "KTVDoBusinessCell.h"
 
+@interface KTVDoBusinessCell ()
+
+@property (weak, nonatomic) IBOutlet UILabel *doBusinessTimeLabel;
+
+@end
+
 @implementation KTVDoBusinessCell
 
 - (void)awakeFromNib {

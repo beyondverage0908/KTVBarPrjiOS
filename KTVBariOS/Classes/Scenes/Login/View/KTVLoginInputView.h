@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+@class KTVLoginInputView;
+
 typedef NS_ENUM(NSUInteger, KTVInputType) {
     KTVInputAccountType,
     KTVInputMobileType,
@@ -15,10 +17,20 @@ typedef NS_ENUM(NSUInteger, KTVInputType) {
     KTVInputVerfiyType
 };
 
+@protocol KTVLoginInputViewDelegate <NSObject>
+
+- (void)inputView:(KTVLoginInputView *)inputView inputType:(KTVInputType)type inputValue:(NSString *)inputValue;
+
+@end
+
 @interface KTVLoginInputView : UIView
 
 - (instancetype)init;
 
 @property (assign, nonatomic)KTVInputType inputType;
+
+@property (weak, nonatomic)id<KTVLoginInputViewDelegate> delegate;
+
+@property (strong, nonatomic)NSString *inputValue;
 
 @end

@@ -8,6 +8,20 @@
 
 #import "KTVYuePaoUserCell.h"
 
+@interface KTVYuePaoUserCell ()
+
+@property (weak, nonatomic) IBOutlet UILabel *nicknameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *userLoveLabel;
+@property (weak, nonatomic) IBOutlet UILabel *ageLabel;
+@property (weak, nonatomic) IBOutlet UILabel *yuetaLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *genderImage;
+@property (weak, nonatomic) IBOutlet UIButton *selectBtn;
+@property (weak, nonatomic) IBOutlet UILabel *moneyLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *userHeaderImageView;
+
+
+@end
+
 @implementation KTVYuePaoUserCell
 
 - (void)awakeFromNib {
@@ -19,6 +33,10 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+- (IBAction)yuetaAction:(UIButton *)sender {
+    
+    CLog(@"--->>>约她");
 }
 
 @end

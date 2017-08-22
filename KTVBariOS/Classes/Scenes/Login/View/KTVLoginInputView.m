@@ -7,8 +7,9 @@
 //
 
 #import "KTVLoginInputView.h"
+#import "KTVLoginService.h"
 
-@interface KTVLoginInputView ()
+@interface KTVLoginInputView ()<UITextFieldDelegate>
 
 @property (strong, nonatomic) UIImageView *logoImgView;
 @property (strong, nonatomic) UITextField *inputTextField;
@@ -32,9 +33,18 @@
         self.inputTextField = [[UITextField alloc] init];
         [self addSubview:self.inputTextField];
         self.inputTextField.textColor = [UIColor whiteColor];
+        self.inputTextField.delegate = self;
         
     }
     return self;
+}
+
+- (void)setInputValue:(NSString *)inputValue {
+    _inputValue = inputValue;
+    if ([KTVUtil isNullString:inputValue]) {
+        _inputValue = @"";
+    }
+    self.inputTextField.text = _inputValue;
 }
 
 - (void)setInputType:(KTVInputType)inputType {
@@ -94,7 +104,8 @@
         [self addSubview:self.verfiyBtn];
         [self.verfiyBtn setBackgroundImage:[UIImage imageNamed:@"app_get_verfiy_code_anniu"] forState:UIControlStateNormal];
         [self.verfiyBtn setTitle:@"获取验证码" forState:UIControlStateNormal];
-        self.verfiyBtn.titleLabel.font = [UIFont boldSystemFontOfSize:14];
+        self.verfiyBtn.titleLabel.font = [UIFont bold14];
+        [self.verfiyBtn addTarget:self action:@selector(getVerfiyAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.verfiyBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.inputTextField.mas_right).mas_offset(1);
             make.right.equalTo(self).mas_offset(-5);
@@ -103,7 +114,46 @@
         }];
     } else {
         [self.verfiyBtn removeFromSuperview];
+        self.verfiyBtn = nil;
     }
+}
+
+- (void)getVerfiyAction:(UIButton *)btn {
+    CLog(@"--->>>获取验证码");
+    [self getIdentifyingCode];
+    [btn countDownWithSeconds:120];
+}
+
+#pragma mark - UITextFieldDelegate
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    
+    NSString *value = textField.text;
+    
+    if ([KTVUtil isNullString:value]) {
+        value = @"";
+    }
+    if ([self.delegate respondsToSelector:@selector(inputView:inputType:inputValue:)]) {
+        [self.delegate inputView:self inputType:self.inputType inputValue:value];
+    }
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    return [textField resignFirstResponder];
+}
+
+#pragma mark - 获取验证码请求
+
+- (void)getIdentifyingCode {
+    NSString *phone = self.inputTextField.text;
+    if ([KTVUtil isNullString:phone]) {
+        [KTVToast toast:TOAST_MOBILE_CANT_NULL];
+        return;
+    }
+    NSDictionary *param = @{@"phone" : phone};
+    [KTVLoginService getIdentifyingCodeParams:param result:^(NSDictionary *result) {
+        [KTVToast toast:result[@"detail"]];
+    }];
 }
 
 @end

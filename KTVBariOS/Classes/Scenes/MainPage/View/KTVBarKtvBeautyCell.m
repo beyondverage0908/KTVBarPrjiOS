@@ -8,6 +8,12 @@
 
 #import "KTVBarKtvBeautyCell.h"
 
+@interface KTVBarKtvBeautyCell ()
+
+@property (weak, nonatomic) IBOutlet UIImageView *beautyImageView;
+
+@end
+
 @implementation KTVBarKtvBeautyCell
 
 - (void)awakeFromNib {

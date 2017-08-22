@@ -9,8 +9,9 @@
 #import "KTVLoginController.h"
 #import "KTVLoginInputView.h"
 #import "KTVForgetPasswordController.h"
+#import "KTVLoginService.h"
 
-@interface KTVLoginController ()
+@interface KTVLoginController ()<KTVLoginInputViewDelegate>
 
 @property (strong, nonatomic) UIButton *accountLoginBtn;
 @property (strong, nonatomic) UIView *accountLine;
@@ -24,6 +25,9 @@
 
 @property (strong, nonatomic) KTVLoginInputView *accountInputView;
 @property (strong, nonatomic) KTVLoginInputView *passwordInputView;
+
+@property (strong, nonatomic) NSMutableDictionary *loginAccountParams;
+@property (strong, nonatomic) NSMutableDictionary *loginMobileParams;
 
 @end
 
@@ -59,7 +63,9 @@
         
         // 确定文本输入框类型
         self.accountInputView.inputType = KTVInputAccountType;
+        self.accountInputView.inputValue = self.loginAccountParams[@"phone"];
         self.passwordInputView.inputType = KTVInputLockType;
+        self.passwordInputView.inputValue = self.loginAccountParams[@"password"];
     } else {
         self.getVerfiyBtn = [[UIButton alloc] init];
         [self.view addSubview:self.getVerfiyBtn];
@@ -74,7 +80,9 @@
         
         // 确定文本输入框类型
         self.accountInputView.inputType = KTVInputMobileType;
+        self.accountInputView.inputValue = self.loginMobileParams[@"phone"];
         self.passwordInputView.inputType = KTVInputVerfiyType;
+        self.passwordInputView.inputValue = self.loginMobileParams[@"password"];
     }
 }
 
@@ -83,6 +91,7 @@
     self.title = @"登录";
     
     [self initLoginUI];
+    [self initParam];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -91,6 +100,11 @@
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleLightContent;
+}
+
+- (void)initParam {
+    self.loginAccountParams = [NSMutableDictionary dictionaryWithCapacity:2];
+    self.loginMobileParams = [NSMutableDictionary dictionaryWithCapacity:2];
 }
 
 - (void)initLoginUI {
@@ -150,6 +164,7 @@
     self.accountInputView = [[KTVLoginInputView alloc] init];
     [self.view addSubview:self.accountInputView];
     self.accountInputView.inputType = KTVInputAccountType;
+    self.accountInputView.delegate = self;
     [self.accountInputView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view).offset(30);
         make.right.equalTo(self.view).offset(-30);
@@ -160,6 +175,7 @@
     self.passwordInputView = [[KTVLoginInputView alloc] init];
     [self.view addSubview:self.passwordInputView];
     self.passwordInputView.inputType = KTVInputVerfiyType;
+    self.passwordInputView.delegate = self;
     [self.passwordInputView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.and.right.equalTo(self.accountInputView);
         make.height.equalTo(self.accountInputView);
@@ -221,6 +237,9 @@
 
 - (void)loginAction:(UIButton *)btn {
     NSLog(@"--->>>loginAction");
+    [self.view endEditing:YES];
+    
+    [self accountLoginService];
 }
 
 - (void)fastRegisterAction:(UIButton *)btn {
@@ -243,6 +262,65 @@
     [self.fastRegisterBtn removeFromSuperview];
     [self.forgetBtn removeFromSuperview];
     [self.getVerfiyBtn removeFromSuperview];
+}
+
+#pragma mark - KTVLoginInputViewDelegate
+
+- (void)inputView:(KTVLoginInputView *)inputView inputType:(KTVInputType)type inputValue:(NSString *)inputValue {
+    switch (type) {
+        case KTVInputAccountType:
+        {
+            CLog(@"---1>>>%@", inputValue);
+            if (self.loginType == KTVLoginAccountType) {
+                [self.loginAccountParams setObject:inputValue forKey:@"phone"];
+            }
+        }
+            break;
+        case KTVInputVerfiyType:
+        {
+            CLog(@"---2>>>%@", inputValue);
+            if (self.loginType == KTVLoginMobileType) {
+                [self.loginMobileParams setObject:inputValue forKey:@"password"];
+            }
+        }
+            break;
+        case KTVInputLockType:
+        {
+            CLog(@"---3>>>%@", inputValue);
+            if (self.loginType == KTVLoginAccountType) {
+                [self.loginAccountParams setObject:inputValue forKey:@"password"];
+            }
+        }
+            break;
+        case KTVInputMobileType:
+        {
+            CLog(@"---4>>>%@", inputValue);
+            if (self.loginType == KTVLoginMobileType) {
+                [self.loginMobileParams setObject:inputValue forKey:@"phone"];
+            }
+        }
+            break;
+        default:
+            break;
+    }
+}
+
+#pragma mark - 网络请求
+
+- (void)accountLoginService {
+    NSDictionary *params = nil;
+    if (self.loginType == KTVLoginAccountType) {
+        params = self.loginAccountParams;
+    } else {
+        params = self.loginMobileParams;
+    }
+    [KTVLoginService getCommonLoginParams:params result:^(NSDictionary *result) {
+        if ([result[@"code"] integerValue] == 10000) {
+            
+        } else {
+            [KTVToast toast:result[@"detail"]];
+        }
+    }];
 }
 
 @end

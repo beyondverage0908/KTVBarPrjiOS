@@ -10,11 +10,17 @@
 #import "KTVUnderlineButton.h"
 #import "KTVLoginInputView.h"
 
-@interface KTVRegisterController ()<UIScrollViewDelegate>
+@interface KTVRegisterController ()<KTVLoginInputViewDelegate>
 
 @property (strong, nonatomic) UIImageView *tabBgView;
 @property (strong, nonatomic) NSArray *titleArray;
 @property (strong, nonatomic) UIScrollView *pageView;
+
+@property (strong, nonatomic) UIView *datePickerBgView;
+@property (strong, nonatomic) UIDatePicker *datePickerView;
+
+@property (assign, nonatomic) NSInteger currentPage;            // scrollView当前第几页
+@property (strong, nonatomic) NSMutableDictionary *registerParams;
 
 @end
 
@@ -23,8 +29,70 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"注册";
+    self.view.backgroundColor = [UIColor whiteColor];
+    self.currentPage = 0;
     
     [self initRegisterUI];
+    [self initDatePickerUI];
+    [self initData];
+}
+
+- (void)initData {
+    self.registerParams = [NSMutableDictionary dictionaryWithCapacity:6];
+}
+
+- (void)initDatePickerUI {
+    self.datePickerBgView = [[UIView alloc] init];
+    self.datePickerBgView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:self.datePickerBgView];
+    [self.datePickerBgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.and.bottom.equalTo(self.view);
+        make.height.equalTo(self.view).multipliedBy(.4f);
+    }];
+    
+    UIView *headerView = [[UIView alloc] init];
+    [self.datePickerBgView addSubview:headerView];
+    [headerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.and.right.equalTo(self.datePickerBgView);
+        make.height.mas_equalTo(@50);
+    }];
+    
+    UIButton *cancelBtn = [[UIButton alloc] init];
+    [headerView addSubview:cancelBtn];
+    [cancelBtn setTitle:@"取消" forState:UIControlStateNormal];
+    cancelBtn.titleLabel.font = [UIFont bold15];
+    [cancelBtn setTitleColor:[UIColor ktvBG] forState:UIControlStateNormal];
+    [cancelBtn addTarget:self action:@selector(pickerDateCancelAction:) forControlEvents:UIControlEventTouchUpInside];
+    [cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(headerView).offset(15);
+        make.centerY.equalTo(headerView);
+    }];
+    
+    UIButton *confirmBtn = [[UIButton alloc] init];
+    [headerView addSubview:confirmBtn];
+    [confirmBtn setTitle:@"确定" forState:UIControlStateNormal];
+    confirmBtn.titleLabel.font = [UIFont bold15];
+    [confirmBtn setTitleColor:[UIColor ktvRed] forState:UIControlStateNormal];
+    [confirmBtn addTarget:self action:@selector(pickerDateConfirmAction:) forControlEvents:UIControlEventTouchUpInside];
+    [confirmBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(headerView).offset(-15);
+        make.centerY.equalTo(headerView);
+    }];
+    
+    self.datePickerView = [[UIDatePicker alloc] init];
+    [self.datePickerBgView addSubview:self.datePickerView];
+    [self.datePickerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(headerView.mas_bottom);
+        make.left.right.and.bottom.equalTo(self.datePickerBgView);
+    }];
+    
+    self.datePickerView.datePickerMode = UIDatePickerModeDate;
+    self.datePickerView.minimumDate = [NSDate dateWithDateString:@"1960-01-01 12:12:12" andFormatString:@"yyyy-MM-dd HH:mm:ss"];
+    self.datePickerView.maximumDate = [NSDate date];
+    [self.datePickerView setDate:[NSDate dateWithDateString:@"1990-01-01 00:00:00" andFormatString:@"yyyy-MM-dd HH:mm:ss"] animated:YES];
+    
+    self.datePickerBgView.alpha = 0;
+    self.datePickerBgView.hidden = YES;
 }
 
 - (void)initRegisterUI {
@@ -44,7 +112,7 @@
         [btn setTitle:self.titleArray[i] forState:UIControlStateNormal];
         btn.titleLabel.font = [UIFont systemFontOfSize:14];
         btn.tag = 1000 + i;
-        [btn addTarget:self action:@selector(registerTabAction:) forControlEvents:UIControlEventTouchUpInside];
+//        [btn addTarget:self action:@selector(registerTabAction:) forControlEvents:UIControlEventTouchUpInside];
         CGFloat centerXOffset = itemW * (i + 0.5f);
         [btn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.and.bottom.equalTo(self.tabBgView);
@@ -58,10 +126,8 @@
     
     self.pageView = [[UIScrollView alloc] init];
     [self.view addSubview:self.pageView];
-    self.pageView.alwaysBounceHorizontal = YES;
-    self.pageView.showsHorizontalScrollIndicator = NO;
     self.pageView.scrollEnabled = NO;
-    self.pageView.delegate = self;
+    self.pageView.userInteractionEnabled = YES;
     [self.pageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.tabBgView.mas_bottom);
         make.left.and.right.equalTo(self.view);
@@ -70,14 +136,16 @@
     
     UIView *containerView = [[UIView alloc] init];
     [self.pageView addSubview:containerView];
+    containerView.userInteractionEnabled = YES;
     [containerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.pageView);
+        make.height.equalTo(self.pageView);
     }];
     
     //  第一个
     UIView *firstPageView = [[UIView alloc] init];
     [containerView addSubview:firstPageView];
-    firstPageView.backgroundColor = [UIColor cyanColor];
+    firstPageView.userInteractionEnabled = YES;
     [firstPageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(containerView);
         make.width.equalTo(self.pageView);
@@ -85,22 +153,22 @@
         make.left.equalTo(containerView);
     }];
     [self generateFirstPage:firstPageView];
-    
+
     // 第二个
     UIView *secondPageView = [[UIView alloc] init];
     [containerView addSubview:secondPageView];
-    secondPageView.backgroundColor = [UIColor cyanColor];
+    secondPageView.userInteractionEnabled = YES;
     [secondPageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(containerView);
         make.size.equalTo(firstPageView);
         make.left.equalTo(firstPageView.mas_right);
     }];
     [self generateSecondPage:secondPageView];
-    
+
     // 第三个
     UIView *thirdPageView = [[UIView alloc] init];
     [containerView addSubview:thirdPageView];
-    thirdPageView.backgroundColor = [UIColor grayColor];
+    thirdPageView.userInteractionEnabled = YES;
     [thirdPageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(containerView);
         make.size.equalTo(firstPageView);
@@ -110,68 +178,78 @@
     [self generateThirdPage:thirdPageView];
 }
 
+- (void)diyiyaAction:(UIButton *)btn {
+    CLog(@"--->>>diyiya");
+}
+
 - (void)generateFirstPage:(UIView *)superView {
-    UIImageView *firstBgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"app_input"]];
-    [superView addSubview:firstBgView];
-    [firstBgView mas_makeConstraints:^(MASConstraintMaker *make) {
+    UIButton *firstBgViewBtn = [[UIButton alloc] init];
+    [superView addSubview:firstBgViewBtn];
+    [firstBgViewBtn setBackgroundImage:[UIImage imageNamed:@"app_input"] forState:UIControlStateNormal];
+    [firstBgViewBtn addTarget:self action:@selector(getBirthdayAction:) forControlEvents:UIControlEventTouchUpInside];
+    [firstBgViewBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(superView).offset(67.5);
         make.left.equalTo(superView).offset(30);
         make.right.equalTo(superView).offset(-30);
     }];
     
     UILabel *titleLabel = [[UILabel alloc] init];
-    [firstBgView addSubview:titleLabel];
+    [firstBgViewBtn addSubview:titleLabel];
     titleLabel.text = @"生日";
     titleLabel.font = [UIFont boldSystemFontOfSize:17];
     titleLabel.textColor = [UIColor whiteColor];
     [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(firstBgView).offset(10);
-        make.top.and.bottom.equalTo(firstBgView);
+        make.left.equalTo(firstBgViewBtn).offset(10);
+        make.top.and.bottom.equalTo(firstBgViewBtn);
     }];
     
     UILabel *borthdayLabel = [[UILabel alloc] init];
-    [firstBgView addSubview:borthdayLabel];
+    [firstBgViewBtn addSubview:borthdayLabel];
     borthdayLabel.text = @"1990-08-21";
     borthdayLabel.font = [UIFont boldSystemFontOfSize:17];
     borthdayLabel.textColor = [UIColor whiteColor];
+    borthdayLabel.tag = 10000;
     [borthdayLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(titleLabel.mas_right).mas_offset(35);
-        make.top.and.bottom.equalTo(firstBgView);
+        make.top.and.bottom.equalTo(firstBgViewBtn);
     }];
     
     UIImageView *arrowRightImgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"app_arrow_right"]];
-    [firstBgView addSubview:arrowRightImgView];
+    [firstBgViewBtn addSubview:arrowRightImgView];
     [arrowRightImgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(firstBgView);
-        make.right.equalTo(firstBgView).offset(-13.5);
+        make.centerY.equalTo(firstBgViewBtn);
+        make.right.equalTo(firstBgViewBtn).offset(-13.5);
     }];
     
-    UIImageView *secondBgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"app_input"]];
-    [superView addSubview:secondBgView];
-    [secondBgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(firstBgView.mas_bottom).offset(17.5);
+    UIButton *secondBgViewBtn = [[UIButton alloc] init];
+    [secondBgViewBtn setBackgroundImage:[UIImage imageNamed:@"app_input"] forState:UIControlStateNormal];
+    [secondBgViewBtn addTarget:self action:@selector(getGenderAction:) forControlEvents:UIControlEventTouchUpInside];
+    [superView addSubview:secondBgViewBtn];
+    [secondBgViewBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(firstBgViewBtn.mas_bottom).offset(17.5);
         make.left.equalTo(superView).offset(30);
         make.right.equalTo(superView).offset(-30);
     }];
     
     UILabel *stitleLabel = [[UILabel alloc] init];
-    [secondBgView addSubview:stitleLabel];
+    [secondBgViewBtn addSubview:stitleLabel];
     stitleLabel.text = @"性别";
     stitleLabel.font = [UIFont boldSystemFontOfSize:17];
     stitleLabel.textColor = [UIColor whiteColor];
     [stitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(secondBgView).offset(10);
-        make.top.and.bottom.equalTo(secondBgView);
+        make.left.equalTo(secondBgViewBtn).offset(10);
+        make.top.and.bottom.equalTo(secondBgViewBtn);
     }];
     
     UILabel *genderLabel = [[UILabel alloc] init];
-    [secondBgView addSubview:genderLabel];
+    [secondBgViewBtn addSubview:genderLabel];
     genderLabel.text = @"男";
     genderLabel.font = [UIFont boldSystemFontOfSize:17];
     genderLabel.textColor = [UIColor whiteColor];
+    genderLabel.tag = 20000;
     [genderLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(stitleLabel.mas_right).mas_offset(35);
-        make.top.and.bottom.equalTo(secondBgView);
+        make.top.and.bottom.equalTo(secondBgViewBtn);
     }];
     
     UILabel *declareLabel = [[UILabel alloc] init];
@@ -181,13 +259,14 @@
     declareLabel.textColor = [UIColor whiteColor];
     [declareLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(superView);
-        make.top.equalTo(secondBgView.mas_bottom).mas_offset(15);
+        make.top.equalTo(secondBgViewBtn.mas_bottom).mas_offset(15);
     }];
 
     UIButton *nextBtn = [[UIButton alloc] init];
     [superView addSubview:nextBtn];
     [nextBtn setTitle:@"下一步" forState:UIControlStateNormal];
     [nextBtn setBackgroundImage:[UIImage imageNamed:@"app_anniu_red"] forState:UIControlStateNormal];
+    [nextBtn addTarget:self action:@selector(nextStepAction:) forControlEvents:UIControlEventTouchUpInside];
     [nextBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(superView);
         make.top.equalTo(declareLabel.mas_bottom).offset(15);
@@ -216,6 +295,7 @@
     KTVLoginInputView *mobileInputView = [[KTVLoginInputView alloc] init];
     [superView addSubview:mobileInputView];
     mobileInputView.inputType = KTVInputMobileType;
+    mobileInputView.delegate = self;
     [mobileInputView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(superView.mas_top).mas_offset(67.5);
         make.left.equalTo(superView).offset(30);
@@ -225,6 +305,7 @@
     KTVLoginInputView *psdInputView = [[KTVLoginInputView alloc] init];
     [superView addSubview:psdInputView];
     psdInputView.inputType = KTVInputLockType;
+    psdInputView.delegate = self;
     [psdInputView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(mobileInputView.mas_bottom).mas_offset(22.5);
         make.left.equalTo(superView).offset(30);
@@ -235,6 +316,7 @@
     [superView addSubview:secondNextBtn];
     [secondNextBtn setBackgroundImage:[UIImage imageNamed:@"app_anniu_red"] forState:UIControlStateNormal];
     [secondNextBtn setTitle:@"下一步" forState:UIControlStateNormal];
+    [secondNextBtn addTarget:self action:@selector(nextStepAction:) forControlEvents:UIControlEventTouchUpInside];
     [secondNextBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(psdInputView.mas_bottom).offset(30);
         make.centerX.equalTo(superView);
@@ -274,6 +356,7 @@
     KTVLoginInputView *inputView = [[KTVLoginInputView alloc] init];
     [superView addSubview:inputView];
     inputView.inputType = KTVInputVerfiyType;
+    inputView.delegate = self;
     [inputView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(verfiyTipLabel.mas_bottom).mas_offset(30);
         make.left.equalTo(superView).offset(30);
@@ -294,6 +377,7 @@
     [superView addSubview:completeBtn];
     [completeBtn setTitle:@"注册完成" forState:UIControlStateNormal];
     [completeBtn setBackgroundImage:[UIImage imageNamed:@"app_anniu_red"] forState:UIControlStateNormal];
+    [completeBtn addTarget:self action:@selector(completeRegisterAction:) forControlEvents:UIControlEventTouchUpInside];
     [completeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(superView).offset(30);
         make.right.equalTo(superView).offset(-30);
@@ -309,7 +393,13 @@
     self.pageView.contentOffset = CGPointMake(tab * CGRectGetWidth(self.pageView.frame), 0);
 }
 
-- (void)changeButtonStatusBy:(NSInteger)tag {
+- (void)switchPage:(NSInteger)page {
+    [self changeButtonStatusBy:page];
+    self.pageView.contentOffset = CGPointMake(page * CGRectGetWidth(self.pageView.frame), 0);
+}
+
+- (void)changeButtonStatusBy:(NSInteger)page {
+    NSInteger tag = page + 1000;
     KTVUnderlineButton *btn = [self.tabBgView viewWithTag:tag];
     [btn setSelected:YES];
     [btn setTitleColor:[UIColor ktvRed] forState:UIControlStateNormal];
@@ -324,8 +414,104 @@
     }
 }
 
-#pragma mark - UIScrollViewDelegate
+#pragma mark - KTVLoginInputViewDelegate 
 
+- (void)inputView:(KTVLoginInputView *)inputView inputType:(KTVInputType)type inputValue:(NSString *)inputValue {
+    switch (type) {
+        case KTVInputMobileType:
+        {
+            [self.registerParams setObject:inputValue forKey:@"phone"]; // 用户的电话号码
+        }
+            break;
+        case KTVInputLockType:
+        {
+            [self.registerParams setObject:inputValue forKey:@"password"]; // 用户密码
+        }
+            break;
+        case KTVInputVerfiyType:
+        {
+            [self.registerParams setObject:inputValue forKey:@"verfiyCode"]; // 验证码
+        }
+            break;
+        default:
+            break;
+    }
+    CLog(@"--->>>input--->>> %@", inputValue);
+}
 
+#pragma mark - 点击事件
+
+- (void)getBirthdayAction:(UIButton *)btn {
+    CLog(@"--->>> 获取出生年月");
+    [UIView animateWithDuration:0.5f animations:^{
+        self.datePickerBgView.alpha = 1;
+        self.datePickerBgView.hidden = NO;
+    }];
+}
+
+- (void)getGenderAction:(UIButton *)btn {
+    CLog(@"--->>> 获取性别");
+    UILabel *genderLabel = (UILabel *)[self.pageView viewWithTag:20000];
+    
+    __block NSString *gender = @"1";
+    UIAlertController *alertvc = [UIAlertController alertControllerWithTitle:@"请选择" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *manAction = [UIAlertAction actionWithTitle:@"男" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        CLog(@"--->>> 男");
+        gender = @"1";
+        genderLabel.text = @"男";
+        [self.registerParams setObject:gender forKey:@"gender"];
+    }];
+    [alertvc addAction:manAction];
+    UIAlertAction *womanAction = [UIAlertAction actionWithTitle:@"女" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        CLog(@"--->>> 女");
+        gender = @"0";
+        genderLabel.text = @"女";
+        [self.registerParams setObject:gender forKey:@"gender"];
+    }];
+    [alertvc addAction:womanAction];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        CLog(@"--->>> 取消");
+    }];
+    [alertvc addAction:cancelAction];
+    [self presentViewController:alertvc animated:YES completion:nil];
+}
+
+- (void)nextStepAction:(UIButton *)btn {
+    [self.view endEditing:YES];
+    CLog(@"--->>> 下一步");
+    self.currentPage++;
+    [self switchPage:self.currentPage];
+}
+
+- (void)completeRegisterAction:(UIButton *)btn {
+    CLog(@"--->>> 完成注册");
+    // 接口请求放这里
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)pickerDateCancelAction:(UIButton *)btn {
+    CLog(@"--->>> 日期选择器 取消");
+    [UIView animateWithDuration:0.5f animations:^{
+        self.datePickerBgView.alpha = 0;
+    } completion:^(BOOL finished) {
+        self.datePickerBgView.hidden = YES;
+    }];
+}
+
+- (void)pickerDateConfirmAction:(UIButton *)btn {
+    CLog(@"--->>> 日期选择器 确定");
+    [UIView animateWithDuration:0.5f animations:^{
+        self.datePickerBgView.alpha = 0;
+    } completion:^(BOOL finished) {
+        self.datePickerBgView.hidden = YES;
+    }];
+    
+    CLog(@"--->>> %@", self.datePickerView.date);
+    NSString *borthday = [NSDate dateStringWithDate:self.datePickerView.date andFormatString:@"yyyy-MM-dd"];
+    UILabel *borthdaylabel = (UILabel *)[self.pageView viewWithTag:10000];
+    borthdaylabel.text = borthday;
+    
+    [self.registerParams setObject:borthday forKey:@"borthday"];
+}
 
 @end

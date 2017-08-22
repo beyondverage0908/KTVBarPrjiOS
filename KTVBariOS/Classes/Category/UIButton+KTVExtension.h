@@ -10,6 +10,10 @@
 
 @interface UIButton (KTVExtension)
 
-- (void)countdownWithSeconds:(NSInteger)seconds;
+- (void)countDownWithSeconds:(NSInteger)seconds;
+
+- (void)countDownWithSeconds:(NSInteger)seconds description:(NSString *)des;
+
+- (void)countDownWithSeconds:(NSInteger)seconds description:(NSString *)des countEndBlock:(void (^)())downBlock;
 
 @end

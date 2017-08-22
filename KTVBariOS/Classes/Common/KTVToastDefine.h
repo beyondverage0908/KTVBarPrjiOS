@@ -10,5 +10,6 @@
 #define KTVToastDefine_h
 
 static NSString * const TOAST_NO_NETWORK                            = @"网络未连接";
+static NSString * const TOAST_MOBILE_CANT_NULL                      = @"电话号码不能为空";
 
 #endif /* KTVToastDefine_h */

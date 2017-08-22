@@ -11,7 +11,9 @@
 
 @interface KTVNetworkHelper ()
 
-@property(nonatomic, strong) AFHTTPSessionManager *manager;
+@property (nonatomic, strong) AFHTTPSessionManager *manager;
+
+@property (nonatomic, copy) NSString *domainUrl;
 
 @end
 
@@ -35,23 +37,27 @@ static KTVNetworkHelper *_instance = nil;
     @synchronized (self) {
         if (self = [super init]) {
             _manager = [AFHTTPSessionManager manager];
-            _manager.requestSerializer = [AFHTTPRequestSerializer serializer];
-            _manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", @"text/html", @"text/plain", nil];
-            _manager.securityPolicy.allowInvalidCertificates = YES;
+//            _manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+            // 设置请求以JSON格式
+            _manager.requestSerializer = [AFJSONRequestSerializer serializer];
+            // 设置请求以JSON格式接收
+            _manager.responseSerializer = [AFJSONResponseSerializer serializer];
+
+            _manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/html", @"text/json", @"text/javascript", @"text/plain", nil];
             [_manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
             _manager.requestSerializer.timeoutInterval = CONNECT_TIMEOUT;
             [_manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
-            
+          
             // 安全验证 - reference : http://www.jianshu.com/p/f732749ce786
-            AFSecurityPolicy *securityPolicy = [AFSecurityPolicy policyWithPinningMode: AFSSLPinningModeCertificate];
-            NSString *certificatePath = [[NSBundle mainBundle] pathForResource:@"vplus_https" ofType:@"cer"];
-            NSData *certificateData = [NSData dataWithContentsOfFile:certificatePath];
-            
-            NSSet *certificateSet  = [[NSSet alloc] initWithObjects:certificateData, nil];
-            [securityPolicy setPinnedCertificates:certificateSet];
-            securityPolicy.allowInvalidCertificates = YES;
-            securityPolicy.validatesDomainName = NO;
-            _manager.securityPolicy = securityPolicy;
+//            AFSecurityPolicy *securityPolicy = [AFSecurityPolicy policyWithPinningMode: AFSSLPinningModeNone];
+//            NSString *certificatePath = [[NSBundle mainBundle] pathForResource:@"vplus_https" ofType:@"cer"];
+//            NSData *certificateData = [NSData dataWithContentsOfFile:certificatePath];
+//            
+//            NSSet *certificateSet  = [[NSSet alloc] initWithObjects:certificateData, nil];
+//            [securityPolicy setPinnedCertificates:certificateSet];
+//            securityPolicy.allowInvalidCertificates = YES;
+//            securityPolicy.validatesDomainName = NO;
+//            _manager.securityPolicy = securityPolicy;
         }
     }
     return self;
@@ -64,7 +70,7 @@ static KTVNetworkHelper *_instance = nil;
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:message.params];
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-    NSString *urlString = [NSString stringWithFormat:@"%@%@", KTV_BASE_URL, message.path];
+    NSString *urlString = [NSString stringWithFormat:@"%@%@", [KTVUrl getDomainUrl], message.path];
     CLog(@"URL %@", urlString);
     
     [_manager GET:urlString parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -91,7 +97,7 @@ static KTVNetworkHelper *_instance = nil;
 
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:message.params];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-    NSString *urlString = [NSString stringWithFormat:@"%@%@", KTV_BASE_URL, message.path];
+    NSString *urlString = [NSString stringWithFormat:@"%@%@", [KTVUrl getDomainUrl], message.path];
     CLog(@"URL %@", urlString);
     
     [_manager POST:urlString parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -117,7 +123,7 @@ static KTVNetworkHelper *_instance = nil;
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
-    NSString *urlString = [NSString stringWithFormat:@"%@%@", KTV_BASE_URL, message.path];
+    NSString *urlString = [NSString stringWithFormat:@"%@%@", [KTVUrl getDomainUrl], message.path];
     
     //2.上传文字时用到的拼接请求参数(如果只传图片，可不要此段）
     //NSMutableDictionary *params = [NSMutableDictionary dictionary];//创建一个名为params的可变字典
@@ -165,7 +171,7 @@ static KTVNetworkHelper *_instance = nil;
     }];
 }
 
-- (void)sendMessage:(KTVRequestMessage*)message success:(RequestSuccess)successBlock fail:(RequestFailure)failBlock {
+- (void)send:(KTVRequestMessage*)message success:(RequestSuccess)successBlock fail:(RequestFailure)failBlock {
     
     if (![KTVUtil isNetworkAvailable]) {
         [KTVToast toast:TOAST_NO_NETWORK];

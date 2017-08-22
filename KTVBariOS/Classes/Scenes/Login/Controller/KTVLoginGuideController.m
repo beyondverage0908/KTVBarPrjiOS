@@ -33,6 +33,15 @@
 }
 
 - (void)initGuideUI {
+    UIButton *closeLoginBtn = [[UIButton alloc] init];
+    [closeLoginBtn setImage:[UIImage imageNamed:@"app_close_login"] forState:UIControlStateNormal];
+    [self.view addSubview:closeLoginBtn];
+    [closeLoginBtn addTarget:self action:@selector(closeLoginAction) forControlEvents:UIControlEventTouchUpInside];
+    [closeLoginBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view).offset(30);
+        make.left.equalTo(self.view).offset(18);
+    }];
+    
     UIImageView *logoImageView = [[UIImageView alloc] init];
     [self.view addSubview:logoImageView];
     logoImageView.image = [UIImage imageNamed:@"app_logo"];
@@ -70,6 +79,25 @@
 - (void)registerAction:(UIButton *)btn {
     KTVRegisterController *registerVC = [[KTVRegisterController alloc] init];
     [self.navigationController pushViewController:registerVC animated:YES];
+}
+
+- (void)closeLoginAction {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - 网络请求
+
+- (void)getIdentifyingCode {
+    KTVRequestMessage *msg = [[KTVRequestMessage alloc] init];
+    msg.httpType = KtvPOST;
+    msg.path = [KTVUrl getIdentifyingCodeUrl];
+    msg.params = @{@"phone" : @"18516133629"};
+    
+    [[KTVNetworkHelper sharedInstance] send:msg success:^(NSDictionary *result) {
+        CLog(@"--->>>%@", result);
+    } fail:^(NSError *error) {
+        CLog(@"--->>>%@", error);
+    }];
 }
 
 @end

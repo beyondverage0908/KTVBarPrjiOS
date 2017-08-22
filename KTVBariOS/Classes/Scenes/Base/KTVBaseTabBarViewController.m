@@ -18,10 +18,29 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self addChildViewControllerWithStoryboard:@"MainPage" storyboardIdentifier:@"KTVMainController" tabBarItemTitle:@"主页" image:@"icon_dongtai" andSelectImage:@"icon_dongtai"];
-    [self addChildViewControllerWithStoryboard:@"NearPage" storyboardIdentifier:@"KTVNearbyController" tabBarItemTitle:@"主页" image:@"icon_dongtai" andSelectImage:@"icon_dongtai"];
-    [self addChildViewControllerWithStoryboard:@"DatingFriend" storyboardIdentifier:@"KTVDateViewController" tabBarItemTitle:@"主页" image:@"icon_dongtai" andSelectImage:@"icon_dongtai"];
-    [self addChildViewControllerWithStoryboard:@"MePage" storyboardIdentifier:@"KTVMineController" tabBarItemTitle:@"主页" image:@"icon_dongtai" andSelectImage:@"icon_dongtai"];
+    [self addChildViewControllerWithStoryboard:@"MainPage"
+                          storyboardIdentifier:@"KTVMainController"
+                               tabBarItemTitle:@"首页"
+                                         image:@"app_mainpage_icon_unselect"
+                                andSelectImage:@"app_mainpage_icon_select"];
+    
+    [self addChildViewControllerWithStoryboard:@"NearPage"
+                          storyboardIdentifier:@"KTVNearbyController"
+                               tabBarItemTitle:@"附近"
+                                         image:@"app_nearby_icon_unselect"
+                                andSelectImage:@"app_nearby_icon_select"];
+    
+    [self addChildViewControllerWithStoryboard:@"DatingFriend"
+                          storyboardIdentifier:@"KTVDateViewController"
+                               tabBarItemTitle:@"邀约"
+                                         image:@"app_tab_yuepao_unselect"
+                                andSelectImage:@"app_tab_yuepao_select"];
+    
+    [self addChildViewControllerWithStoryboard:@"MePage"
+                          storyboardIdentifier:@"KTVMineController"
+                               tabBarItemTitle:@"我的"
+                                         image:@"app_tab_mine_unselect"
+                                andSelectImage:@"app_tab_mine_select"];
 }
 
 
@@ -48,8 +67,8 @@
                                                 selectedImage:[[UIImage imageNamed:selectName]
                                                          imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     //设置字体
-    [targetvc.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor lightGrayColor]} forState:UIControlStateNormal];
-    [targetvc.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor redColor]} forState:UIControlStateSelected];
+    [targetvc.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor ktvGray]} forState:UIControlStateNormal];
+    [targetvc.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor ktvRed]} forState:UIControlStateSelected];
     
     KTVBaseNavigationViewController *nav = [[KTVBaseNavigationViewController alloc] initWithRootViewController:targetvc];
     [self addChildViewController:nav];

@@ -10,21 +10,19 @@
 
 @implementation UIButton (KTVExtension)
 
-- (void)countdownWithSeconds:(NSInteger)seconds {
+- (void)countDownWithSeconds:(NSInteger)seconds {
+    [self countDownWithSeconds:seconds description:nil];
+}
+
+- (void)countDownWithSeconds:(NSInteger)seconds description:(NSString *)des {
+    [self countDownWithSeconds:seconds description:des countEndBlock:nil];
+}
+
+- (void)countDownWithSeconds:(NSInteger)seconds description:(NSString *)des countEndBlock:(void (^)())downBlock {
     
     __block NSInteger timeout = seconds;
     
-    UILabel *countdownLabel = [[UILabel alloc] initWithFrame:self.bounds];
-    countdownLabel.textColor = [UIColor whiteColor];
-    countdownLabel.backgroundColor = [UIColor clearColor];
-    countdownLabel.textAlignment = NSTextAlignmentCenter;
-    countdownLabel.font = self.titleLabel.font;
-    [self addSubview:countdownLabel];
-    self.enabled = NO;
-    
-    // 当前的button title值为空
-    NSString *currentTitle = self.currentTitle;
-    [self setTitle:@"" forState:UIControlStateNormal];
+    NSString *oldTitle = self.currentTitle;
     
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
@@ -35,14 +33,21 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 //设置界面的按钮显示 根据自己需求设置
                 self.enabled = YES;
-                [countdownLabel removeFromSuperview];
-                [self setTitle:currentTitle forState:UIControlStateNormal];
+                [self setTitle:oldTitle forState:UIControlStateNormal];
+                if (downBlock) {
+                    downBlock();
+                }
             });
-        }else{
-            NSString *strTime = [NSString stringWithFormat:@"%ld秒",(long)timeout];
+        } else {
+            NSString *strTime = nil;
+            if (des) {
+                strTime = [NSString stringWithFormat:@"%ld秒 %@", (long)timeout, des];
+            } else {
+                strTime = [NSString stringWithFormat:@"%ld秒",(long)timeout];
+            }
             dispatch_async(dispatch_get_main_queue(), ^{
                 //设置界面的按钮显示 根据自己需求设置
-                countdownLabel.text = strTime;
+                [self setTitle:strTime forState:UIControlStateNormal];
             });
             timeout--;
         }

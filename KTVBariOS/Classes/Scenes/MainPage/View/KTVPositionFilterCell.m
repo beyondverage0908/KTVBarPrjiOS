@@ -72,12 +72,13 @@
 }
 
 - (void)changeBtnStyleFilterColor:(UIButton *)btn {
-    btn.layer.borderColor = [UIColor ktvFilterColor].CGColor;
+    btn.layer.borderColor = [UIColor ktvGray].CGColor;
     btn.layer.borderWidth = 0.8f;
     btn.layer.cornerRadius = 2;
-    [btn setTitleColor:[UIColor ktvFilterColor] forState:UIControlStateNormal];
+    [btn setTitleColor:[UIColor ktvGray] forState:UIControlStateNormal];
     btn.titleLabel.font = [UIFont boldSystemFontOfSize:14];
     btn.contentEdgeInsets = UIEdgeInsetsMake(5, 7, 5, 7);
+    [btn setBackgroundImage:nil forState:UIControlStateNormal];
 }
 
 - (void)positionFilterAction:(UIButton *)timeBtn {
@@ -89,8 +90,9 @@
     }
     
     // 选中颜色->白色
-    [timeBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    timeBtn.layer.borderColor = [UIColor whiteColor].CGColor;
+    [timeBtn setTitleColor:[UIColor ktvFilterColor] forState:UIControlStateNormal];
+    timeBtn.layer.borderColor = [UIColor ktvFilterColor].CGColor;
+    [timeBtn setBackgroundImage:[UIImage imageNamed:@"app_filter_gou"] forState:UIControlStateNormal];
 
     NSInteger idx = timeBtn.tag - 1000;
     CLog(@"---->> 位置过滤%@", self.filterItems[idx]);

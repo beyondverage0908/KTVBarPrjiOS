@@ -12,6 +12,7 @@
 #import "KTVPackageCell.h"
 #import "KTVFilterView.h"
 #import "KTVBarKtvDetailController.h"
+#import "KTVGroupBuyDetailController.h"
 
 @interface KTVBarController ()<UITableViewDelegate, UITableViewDataSource, SDCycleScrollViewDelegate>
 
@@ -78,6 +79,10 @@
 
 - (void)loadMoreInfoAction:(UIButton *)btn {
     CLog(@"--->>> 查看其他2个团购");
+    
+    // 进入团购详情页面
+    KTVGroupBuyDetailController *vc = (KTVGroupBuyDetailController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVGroupBuyDetailController"];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - UITableViewDelegate

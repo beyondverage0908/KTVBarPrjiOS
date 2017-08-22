@@ -8,6 +8,15 @@
 
 #import "KTVCommentCell.h"
 
+@interface KTVCommentCell ()
+
+@property (weak, nonatomic) IBOutlet UIView *starView;
+@property (weak, nonatomic) IBOutlet UIImageView *userHeaderImageView;
+@property (weak, nonatomic) IBOutlet UILabel *nicknameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *commentTime;
+
+@end
+
 @implementation KTVCommentCell
 
 - (void)awakeFromNib {

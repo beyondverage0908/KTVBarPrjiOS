@@ -18,6 +18,6 @@ typedef void(^RequestFailure)(NSError *error);
 
 + (instancetype)sharedInstance;
 // 发送请求
-- (void)sendMessage:(KTVRequestMessage *)message success:(RequestSuccess)successBlock fail:(RequestFailure)failBlock;
+- (void)send:(KTVRequestMessage *)message success:(RequestSuccess)successBlock fail:(RequestFailure)failBlock;
 
 @end

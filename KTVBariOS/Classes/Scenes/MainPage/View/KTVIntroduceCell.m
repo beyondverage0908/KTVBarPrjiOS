@@ -8,6 +8,15 @@
 
 #import "KTVIntroduceCell.h"
 
+@interface KTVIntroduceCell ()
+
+@property (weak, nonatomic) IBOutlet UILabel *seatLabel;
+@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *storeMesageLabel;
+
+
+@end
+
 @implementation KTVIntroduceCell
 
 - (void)awakeFromNib {

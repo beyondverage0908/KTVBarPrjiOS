@@ -25,7 +25,7 @@
 }
 
 - (IBAction)getVerfitAction:(UIButton *)sender {
-    [sender countdownWithSeconds:60];
+    [sender countDownWithSeconds:60];
 }
 
 - (IBAction)nextStepAction:(UIButton *)sender {

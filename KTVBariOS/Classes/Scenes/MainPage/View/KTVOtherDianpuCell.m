@@ -8,6 +8,12 @@
 
 #import "KTVOtherDianpuCell.h"
 
+@interface KTVOtherDianpuCell ()
+
+@property (weak, nonatomic) IBOutlet UILabel *otherDianpuNumLabel;
+
+@end
+
 @implementation KTVOtherDianpuCell
 
 - (void)awakeFromNib {
