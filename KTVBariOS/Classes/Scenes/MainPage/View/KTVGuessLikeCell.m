@@ -7,12 +7,13 @@
 //
 
 #import "KTVGuessLikeCell.h"
+#import "KTVStarView.h"
 
 @interface KTVGuessLikeCell ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *likeImageView;
 @property (weak, nonatomic) IBOutlet UILabel *store;
-@property (weak, nonatomic) IBOutlet UIButton *star;
+@property (weak, nonatomic) IBOutlet KTVStarView *starView;
 @property (weak, nonatomic) IBOutlet UILabel *appointment;
 @property (weak, nonatomic) IBOutlet UILabel *location;
 @property (weak, nonatomic) IBOutlet UIButton *placeOrderBtn;
@@ -24,8 +25,8 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    
     [self setupView];
+    self.starView.stars = 4;
 }
 
 - (void)setupView {

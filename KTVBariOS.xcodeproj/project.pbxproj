@@ -11,6 +11,8 @@
 		330A938C1F03ED7E001B320A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 330A938B1F03ED7E001B320A /* main.m */; };
 		330A938F1F03EE47001B320A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 330A938E1F03EE47001B320A /* Main.storyboard */; };
 		3315A4A01F3A00F400F8C5F7 /* KTVRecommendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3315A49F1F3A00F400F8C5F7 /* KTVRecommendCell.m */; };
+		33216CFC1F4EB84500ECA24E /* KTVGroupBuyDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33216CFB1F4EB84500ECA24E /* KTVGroupBuyDetailController.m */; };
+		33216CFF1F4EBC1600ECA24E /* KTVStarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33216CFE1F4EBC1600ECA24E /* KTVStarView.m */; };
 		3325D2481F1268EF0022AE9A /* KTVBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3325D2471F1268EF0022AE9A /* KTVBaseViewController.m */; };
 		3325D2501F1273350022AE9A /* UIColor+KTVExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3325D24F1F1273350022AE9A /* UIColor+KTVExtension.m */; };
 		3329B74D1F400C9400729FB6 /* KTVBarKtvReserveCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3329B74C1F400C9400729FB6 /* KTVBarKtvReserveCell.m */; };
@@ -43,6 +45,7 @@
 		3343E50A1F28DAC800752AC5 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3343E4F41F28DAC800752AC5 /* README.txt */; };
 		3343E50B1F28DAC800752AC5 /* ShareSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3343E4F91F28DAC800752AC5 /* ShareSDK.bundle */; };
 		3343E50C1F28DAC800752AC5 /* ShareSDKConnector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3343E4FA1F28DAC800752AC5 /* ShareSDKConnector.framework */; };
+		334474B21F4D8B6C00A86A80 /* UINavigationBar+background.m in Sources */ = {isa = PBXBuildFile; fileRef = 334474B11F4D8B6C00A86A80 /* UINavigationBar+background.m */; };
 		3345F9D61F3F392000164D9C /* KTVBarKtvDetailHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3345F9D51F3F392000164D9C /* KTVBarKtvDetailHeaderCell.m */; };
 		334E53301F15FA9800D83901 /* MainPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 334E532F1F15FA9800D83901 /* MainPage.storyboard */; };
 		334E53321F15FAB000D83901 /* NearPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 334E53311F15FAB000D83901 /* NearPage.storyboard */; };
@@ -53,9 +56,9 @@
 		335705441F1392F000AAAFEA /* KTVBaseTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 335705431F1392F000AAAFEA /* KTVBaseTabBarViewController.m */; };
 		336A8AE01F472D730064E068 /* UIFont+Ktv.m in Sources */ = {isa = PBXBuildFile; fileRef = 336A8ADF1F472D730064E068 /* UIFont+Ktv.m */; };
 		337779E91F3CA28400743B90 /* KTVPackageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 337779E81F3CA28400743B90 /* KTVPackageCell.m */; };
-		3377B6E01F4B14B900B76B2C /* KTVGroupBuyDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3377B6DF1F4B14B900B76B2C /* KTVGroupBuyDetailController.m */; };
 		3377B6E31F4B1D9700B76B2C /* KTVGroupBuyHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3377B6E21F4B1D9700B76B2C /* KTVGroupBuyHeaderCell.m */; };
 		3377B6E61F4C1CF700B76B2C /* NSDate+Processing.m in Sources */ = {isa = PBXBuildFile; fileRef = 3377B6E51F4C1CF700B76B2C /* NSDate+Processing.m */; };
+		3377B6E91F4C769100B76B2C /* KTVBuyNotesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3377B6E81F4C769100B76B2C /* KTVBuyNotesCell.m */; };
 		337DA0661F2F747A000EF331 /* KTVNearbyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 337DA0651F2F747A000EF331 /* KTVNearbyController.m */; };
 		337DA06C1F2F74AF000EF331 /* KTVDateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 337DA06B1F2F74AF000EF331 /* KTVDateViewController.m */; };
 		338D23761F41E194000608B1 /* KTVPackageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 338D23751F41E194000608B1 /* KTVPackageController.m */; };
@@ -131,6 +134,10 @@
 		330A938E1F03EE47001B320A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		3315A49E1F3A00F400F8C5F7 /* KTVRecommendCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVRecommendCell.h; sourceTree = "<group>"; };
 		3315A49F1F3A00F400F8C5F7 /* KTVRecommendCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVRecommendCell.m; sourceTree = "<group>"; };
+		33216CFA1F4EB84500ECA24E /* KTVGroupBuyDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVGroupBuyDetailController.h; sourceTree = "<group>"; };
+		33216CFB1F4EB84500ECA24E /* KTVGroupBuyDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVGroupBuyDetailController.m; sourceTree = "<group>"; };
+		33216CFD1F4EBC1600ECA24E /* KTVStarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KTVStarView.h; path = KTVBariOS/Classes/Scenes/Global/KTVStarView.h; sourceTree = SOURCE_ROOT; };
+		33216CFE1F4EBC1600ECA24E /* KTVStarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KTVStarView.m; path = KTVBariOS/Classes/Scenes/Global/KTVStarView.m; sourceTree = SOURCE_ROOT; };
 		3325D2461F1268EF0022AE9A /* KTVBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVBaseViewController.h; sourceTree = "<group>"; };
 		3325D2471F1268EF0022AE9A /* KTVBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVBaseViewController.m; sourceTree = "<group>"; };
 		3325D2491F1270310022AE9A /* KTVCommonDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVCommonDefine.h; sourceTree = "<group>"; };
@@ -188,6 +195,8 @@
 		3343E4F71F28DAC800752AC5 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		3343E4F91F28DAC800752AC5 /* ShareSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ShareSDK.bundle; sourceTree = "<group>"; };
 		3343E4FA1F28DAC800752AC5 /* ShareSDKConnector.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDKConnector.framework; sourceTree = "<group>"; };
+		334474B01F4D8B6C00A86A80 /* UINavigationBar+background.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+background.h"; sourceTree = "<group>"; };
+		334474B11F4D8B6C00A86A80 /* UINavigationBar+background.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+background.m"; sourceTree = "<group>"; };
 		3345F9D41F3F392000164D9C /* KTVBarKtvDetailHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVBarKtvDetailHeaderCell.h; sourceTree = "<group>"; };
 		3345F9D51F3F392000164D9C /* KTVBarKtvDetailHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVBarKtvDetailHeaderCell.m; sourceTree = "<group>"; };
 		334E532F1F15FA9800D83901 /* MainPage.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainPage.storyboard; sourceTree = "<group>"; };
@@ -205,12 +214,12 @@
 		336A8ADF1F472D730064E068 /* UIFont+Ktv.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+Ktv.m"; sourceTree = "<group>"; };
 		337779E71F3CA28400743B90 /* KTVPackageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVPackageCell.h; sourceTree = "<group>"; };
 		337779E81F3CA28400743B90 /* KTVPackageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVPackageCell.m; sourceTree = "<group>"; };
-		3377B6DE1F4B14B900B76B2C /* KTVGroupBuyDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVGroupBuyDetailController.h; sourceTree = "<group>"; };
-		3377B6DF1F4B14B900B76B2C /* KTVGroupBuyDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVGroupBuyDetailController.m; sourceTree = "<group>"; };
 		3377B6E11F4B1D9700B76B2C /* KTVGroupBuyHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVGroupBuyHeaderCell.h; sourceTree = "<group>"; };
 		3377B6E21F4B1D9700B76B2C /* KTVGroupBuyHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVGroupBuyHeaderCell.m; sourceTree = "<group>"; };
 		3377B6E41F4C1CF700B76B2C /* NSDate+Processing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Processing.h"; sourceTree = "<group>"; };
 		3377B6E51F4C1CF700B76B2C /* NSDate+Processing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Processing.m"; sourceTree = "<group>"; };
+		3377B6E71F4C769100B76B2C /* KTVBuyNotesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVBuyNotesCell.h; sourceTree = "<group>"; };
+		3377B6E81F4C769100B76B2C /* KTVBuyNotesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVBuyNotesCell.m; sourceTree = "<group>"; };
 		337DA0641F2F747A000EF331 /* KTVNearbyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVNearbyController.h; sourceTree = "<group>"; };
 		337DA0651F2F747A000EF331 /* KTVNearbyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVNearbyController.m; sourceTree = "<group>"; };
 		337DA06A1F2F74AF000EF331 /* KTVDateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVDateViewController.h; sourceTree = "<group>"; };
@@ -365,6 +374,8 @@
 				336A8ADF1F472D730064E068 /* UIFont+Ktv.m */,
 				3377B6E41F4C1CF700B76B2C /* NSDate+Processing.h */,
 				3377B6E51F4C1CF700B76B2C /* NSDate+Processing.m */,
+				334474B01F4D8B6C00A86A80 /* UINavigationBar+background.h */,
+				334474B11F4D8B6C00A86A80 /* UINavigationBar+background.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -691,8 +702,6 @@
 				3377B6DB1F4B148900B76B2C /* Service */,
 				3377B6DC1F4B148900B76B2C /* View */,
 				3377B6DD1F4B148900B76B2C /* ViewController */,
-				3377B6DE1F4B14B900B76B2C /* KTVGroupBuyDetailController.h */,
-				3377B6DF1F4B14B900B76B2C /* KTVGroupBuyDetailController.m */,
 			);
 			path = GroupBuy;
 			sourceTree = "<group>";
@@ -723,6 +732,8 @@
 			children = (
 				3377B6E11F4B1D9700B76B2C /* KTVGroupBuyHeaderCell.h */,
 				3377B6E21F4B1D9700B76B2C /* KTVGroupBuyHeaderCell.m */,
+				3377B6E71F4C769100B76B2C /* KTVBuyNotesCell.h */,
+				3377B6E81F4C769100B76B2C /* KTVBuyNotesCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -730,6 +741,8 @@
 		3377B6DD1F4B148900B76B2C /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				33216CFA1F4EB84500ECA24E /* KTVGroupBuyDetailController.h */,
+				33216CFB1F4EB84500ECA24E /* KTVGroupBuyDetailController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -779,6 +792,8 @@
 				3398565A1F3EE6560085BD1A /* KTVFilterView.m */,
 				3329B7541F4023D000729FB6 /* KTVTableHeaderView.h */,
 				3329B7551F4023D000729FB6 /* KTVTableHeaderView.m */,
+				33216CFD1F4EBC1600ECA24E /* KTVStarView.h */,
+				33216CFE1F4EBC1600ECA24E /* KTVStarView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1259,10 +1274,12 @@
 				33C4B74E1F3B46190080F54D /* KTVBarController.m in Sources */,
 				3329B7561F4023D000729FB6 /* KTVTableHeaderView.m in Sources */,
 				3377B6E31F4B1D9700B76B2C /* KTVGroupBuyHeaderCell.m in Sources */,
+				33216CFF1F4EBC1600ECA24E /* KTVStarView.m in Sources */,
 				334E533D1F162E1D00D83901 /* KTVLaunchController.m in Sources */,
 				330A938C1F03ED7E001B320A /* main.m in Sources */,
 				33D776FC1F302FBA00077BE5 /* KTVNetworkHelper.m in Sources */,
 				339D8AAB1F1A04D100D41152 /* KTVLoginInputView.m in Sources */,
+				3377B6E91F4C769100B76B2C /* KTVBuyNotesCell.m in Sources */,
 				335705441F1392F000AAAFEA /* KTVBaseTabBarViewController.m in Sources */,
 				33CB83521F3F5E6C002E6F3B /* KTTimeFilterCell.m in Sources */,
 				33C305471F486BCE0064ECF8 /* KTVMineController.m in Sources */,
@@ -1271,17 +1288,18 @@
 				337779E91F3CA28400743B90 /* KTVPackageCell.m in Sources */,
 				33CB83551F3F7319002E6F3B /* KTVPositionFilterCell.m in Sources */,
 				33D776F31F301D9600077BE5 /* TAAbstractDotView.m in Sources */,
+				33216CFC1F4EB84500ECA24E /* KTVGroupBuyDetailController.m in Sources */,
 				339D8AA61F1A048F00D41152 /* KTVLoginController.m in Sources */,
 				33D776F61F301D9600077BE5 /* TAPageControl.m in Sources */,
 				336A8AE01F472D730064E068 /* UIFont+Ktv.m in Sources */,
 				339D8AA51F1A048F00D41152 /* KTVLoginBaseController.m in Sources */,
+				334474B21F4D8B6C00A86A80 /* UINavigationBar+background.m in Sources */,
 				335705411F1392BB00AAAFEA /* KTVBaseNavigationViewController.m in Sources */,
 				33D0E5A41F1F6CE2009A45B3 /* KTVForgetPasswordController.m in Sources */,
 				3329B7591F40825800729FB6 /* KTVDoBusinessCell.m in Sources */,
 				33C850BC1F4488F500F947B8 /* KTVYuePaoUserCell.m in Sources */,
 				3345F9D61F3F392000164D9C /* KTVBarKtvDetailHeaderCell.m in Sources */,
 				33C850B91F4488AF00F947B8 /* KTVPackageDetailCell.m in Sources */,
-				3377B6E01F4B14B900B76B2C /* KTVGroupBuyDetailController.m in Sources */,
 				330A93871F03ED2A001B320A /* AppDelegate.m in Sources */,
 				33D776F51F301D9600077BE5 /* TADotView.m in Sources */,
 				339856611F3F10AB0085BD1A /* KTVBarKtvDetailController.m in Sources */,

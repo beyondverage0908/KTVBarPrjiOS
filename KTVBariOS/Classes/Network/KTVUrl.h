@@ -14,6 +14,8 @@
 + (NSString *)getDomainUrl;
 /// 获取验证码
 + (NSString *)getIdentifyingCodeUrl;
+/// 核对验证码url
++ (NSString *)getCheckIndentifyCodeUrl;
 /// 一般登录（手机号+密码）
 + (NSString *)getCommonLoginUrl;
 /// QQ登录
@@ -21,5 +23,5 @@
 /// 微信登录
 + (NSString *)getWeChatLoginUrl;
 /// 用户注册
-
++ (NSString *)getRegisterUrl;
 @end

@@ -18,6 +18,10 @@
     return @"/api/login/user/getIdentifyingCode";
 }
 
++ (NSString *)getCheckIndentifyCodeUrl {
+    return @"/api/login/user/checkIdentifyingCode";
+}
+
 + (NSString *)getCommonLoginUrl {
     return @"/api/login/user/commonLogin";
 }

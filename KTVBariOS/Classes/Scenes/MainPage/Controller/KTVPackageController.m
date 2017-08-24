@@ -38,6 +38,12 @@
     [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0];
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:1];
+}
+
 #pragma mark - UITableView Header Footer
 
 - (UIView *)tableViewFooter {

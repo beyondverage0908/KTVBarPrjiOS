@@ -10,6 +10,10 @@
 
 @interface KTVTableHeaderView : UIView
 
-- (instancetype)initWithImageUrl:(NSString *)headerImageUrl title:(NSString *)headerTitle remark:(NSString *)headerRemark;
+@property (nonatomic, copy)void (^headerActionBlock)(UIButton *headerImgBtn);
+
+- (instancetype)initWithImageUrl:(NSString *)leadingImgUrl title:(NSString *)headerTitle headerImgUrl:(NSString *)headerUrl remark:(NSString *)headerRemark;
+
+- (instancetype)initWithImageUrl:(NSString *)leadingImgUrl title:(NSString *)headerTitle remark:(NSString *)headerRemark;
 
 @end

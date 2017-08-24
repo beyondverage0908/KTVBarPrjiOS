@@ -7,6 +7,7 @@
 //
 
 #import "KTVGroupBuyHeaderCell.h"
+#import "KTVStarView.h"
 
 @interface KTVGroupBuyHeaderCell ()
 
@@ -18,7 +19,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *locationLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *storeImageView;
 @property (weak, nonatomic) IBOutlet UIButton *buyBtn;
-
+@property (weak, nonatomic) IBOutlet KTVStarView *starView;
 
 @end
 
@@ -26,6 +27,7 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    self.starView.stars = 1;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

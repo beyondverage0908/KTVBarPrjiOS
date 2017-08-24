@@ -49,6 +49,8 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [self hideNavigationBar:YES];
+
+    [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:1];
 }
 
 - (void)navigationBackAction:(id)action {

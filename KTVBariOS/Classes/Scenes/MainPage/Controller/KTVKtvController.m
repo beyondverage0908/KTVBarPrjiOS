@@ -25,10 +25,12 @@
     [super viewDidLoad];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    [self hideNavigationBar:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self hideNavigationBar:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

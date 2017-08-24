@@ -26,17 +26,20 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
+
 - (IBAction)yuetaAction:(UIButton *)sender {
-    
     CLog(@"--->>>约她");
+    if (!sender.isSelected) {
+        [sender setImage:[UIImage imageNamed:@"app_gou_red"] forState:UIControlStateNormal];
+    } else {
+        [sender setImage:[UIImage imageNamed:@"app_selected_kuang"] forState:UIControlStateNormal];
+    }
+    [sender setSelected:!sender.isSelected];
 }
 
 @end

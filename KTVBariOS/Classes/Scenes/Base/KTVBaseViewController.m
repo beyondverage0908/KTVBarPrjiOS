@@ -7,6 +7,7 @@
 //
 
 #import "KTVBaseViewController.h"
+#import "UINavigationBar+background.h"
 
 @interface KTVBaseViewController ()
 
@@ -17,7 +18,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setNavigationBarColor:RGBCOLOR(33, 33, 42)];
+    [self hideNavigationBar:NO];
+    
+    [self setNavigationBarColor:[UIColor ktvBG]];
     [self setNavigationTitleColor:[UIColor whiteColor]];
     [self setNavigationBackButtonItem];
 }
@@ -36,22 +39,26 @@
 
 // 设置导航栏和状态栏的背景色
 - (void)setNavigationBarColor:(UIColor *)color {
-    self.navigationController.navigationBar.barTintColor = color;
+//    [self.navigationController.navigationBar ktv_setBackgroundColor:color];
+//    self.navigationController.navigationBar.barTintColor = color;
+    [self.navigationController.navigationBar setColor:color];
 }
+
 // 设置导航栏title的颜色
 - (void)setNavigationTitleColor:(UIColor *)color {
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:color}];
 }
+
 // 设置返回按钮图片和颜色
 - (void)setNavigationBackButtonItem {
     // reference: http://www.jianshu.com/p/c229dc1aa325
-    //方法2:通过父视图NaviController来设置
-    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:self action:@selector(navigationBackAction:)];
-    self.navigationController.navigationBar.tintColor = COLORHex(@"#F63A82");
+    // 方法2:通过父视图NaviController来设置
+    UIBarButtonItem *bcItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:self action:@selector(navigationBackAction:)];
+    self.navigationController.navigationBar.tintColor = [UIColor ktvRed];
     //主要是以下两个图片设置
-    self.navigationController.navigationBar.backIndicatorImage = [UIImage imageNamed:@"app_navi_back_arrow.png"];
-    self.navigationController.navigationBar.backIndicatorTransitionMaskImage = [UIImage imageNamed:@"app_navi_back_arrow.png"];
-    self.navigationItem.backBarButtonItem = backItem;
+    [self.navigationController.navigationBar setBackIndicatorImage:[UIImage imageNamed:@"app_navi_back_arrow.png"]];
+    [self.navigationController.navigationBar setBackIndicatorTransitionMaskImage:[UIImage imageNamed:@"app_navi_back_arrow.png"]];
+    self.navigationItem.backBarButtonItem = bcItem;
 }
 
 - (void)addBarButtonItems:(NSArray *)itemTitles {

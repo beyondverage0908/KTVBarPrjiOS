@@ -27,13 +27,21 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self hideNavigationBar:YES];
     
     [self setupView];
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.tableFooterView = [[UIView alloc] init];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self hideNavigationBar:YES];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
 }
 
 // 初始化试图

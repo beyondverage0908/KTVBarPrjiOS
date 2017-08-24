@@ -7,12 +7,13 @@
 //
 
 #import "KTVBarKtvDetailHeaderCell.h"
+#import "KTVStarView.h"
 
 @interface KTVBarKtvDetailHeaderCell ()
 @property (weak, nonatomic) IBOutlet UIButton *purikuraBtn;
 @property (weak, nonatomic) IBOutlet UILabel *numberSheetLabel;
 @property (weak, nonatomic) IBOutlet UILabel *storeNameLabel;
-@property (weak, nonatomic) IBOutlet UIView *starView;
+@property (weak, nonatomic) IBOutlet KTVStarView *starView;
 @property (weak, nonatomic) IBOutlet UILabel *locationName;
 @property (weak, nonatomic) IBOutlet UILabel *yuepaoNumber;
 @property (weak, nonatomic) IBOutlet UIView *yuepaoHeaderView;
@@ -24,6 +25,8 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    
+    self.starView.stars = 2;
 }
 - (IBAction)yudingNumberAction:(UIButton *)sender {
     // 订座，指的是拨打酒店的电话

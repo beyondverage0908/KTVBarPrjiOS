@@ -7,10 +7,11 @@
 //
 
 #import "KTVCommentCell.h"
+#import "KTVStarView.h"
 
 @interface KTVCommentCell ()
 
-@property (weak, nonatomic) IBOutlet UIView *starView;
+@property (weak, nonatomic) IBOutlet KTVStarView *starView;
 @property (weak, nonatomic) IBOutlet UIImageView *userHeaderImageView;
 @property (weak, nonatomic) IBOutlet UILabel *nicknameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *commentTime;
@@ -21,6 +22,10 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    
+    CLog(@"--->>> star number --->>> %@", @(self.starView.subviews.count));
+
+    self.starView.stars = 2;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

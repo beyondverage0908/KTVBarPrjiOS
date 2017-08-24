@@ -9,6 +9,7 @@
 #import "KTVRegisterController.h"
 #import "KTVUnderlineButton.h"
 #import "KTVLoginInputView.h"
+#import "KTVLoginService.h"
 
 @interface KTVRegisterController ()<KTVLoginInputViewDelegate>
 
@@ -487,6 +488,10 @@
     CLog(@"--->>> 完成注册");
     // 接口请求放这里
     [self dismissViewControllerAnimated:YES completion:nil];
+    
+    [KTVLoginService postRegisterParams:self.registerParams result:^(NSDictionary *result) {
+        
+    }];
 }
 
 - (void)pickerDateCancelAction:(UIButton *)btn {

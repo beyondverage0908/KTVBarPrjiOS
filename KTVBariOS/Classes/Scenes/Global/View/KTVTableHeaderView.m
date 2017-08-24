@@ -10,7 +10,7 @@
 
 @implementation KTVTableHeaderView
 
-- (instancetype)initWithImageUrl:(NSString *)headerImageUrl title:(NSString *)headerTitle remark:(NSString *)headerRemark {
+- (instancetype)initWithImageUrl:(NSString *)leadingImgUrl title:(NSString *)headerTitle headerImgUrl:(NSString *)headerUrl remark:(NSString *)headerRemark {
     self = [super init];
     if (self) {
         UIImageView *bgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"mainpage_all_bg_line"]];
@@ -21,8 +21,8 @@
         
         
         UIView *lastView = nil;
-        if (headerImageUrl) {
-            UIImageView *headerImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:headerImageUrl]];
+        if (leadingImgUrl) {
+            UIImageView *headerImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:leadingImgUrl]];
             [self addSubview:headerImageView];
             [headerImageView mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.centerY.equalTo(self);
@@ -54,6 +54,19 @@
                 make.centerY.equalTo(self);
                 make.left.equalTo(lastView.mas_right).offset(10);
             }];
+            lastView = titleLabel;
+        }
+        
+        if (headerUrl) {
+            UIButton *headerBtn = [[UIButton alloc] init];
+            [headerBtn setImage:[UIImage imageNamed:headerUrl] forState:UIControlStateNormal];
+            [headerBtn addTarget:self action:@selector(headerBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+            [self addSubview:headerBtn];
+            [headerBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.centerY.equalTo(self);
+                make.left.equalTo(lastView.mas_right).offset(10);
+            }];
+            lastView = headerBtn;
         }
         
         if (headerRemark) {
@@ -71,5 +84,17 @@
     return self;
 }
 
+- (instancetype)initWithImageUrl:(NSString *)leadingImgUrl title:(NSString *)headerTitle remark:(NSString *)headerRemark {
+    return [self initWithImageUrl:leadingImgUrl title:headerTitle headerImgUrl:nil remark:headerRemark];
+}
+
+
+#pragma mark - 事件
+
+- (void)headerBtnAction:(UIButton *)btn {
+    if (_headerActionBlock) {
+        self.headerActionBlock(btn);
+    }
+}
 
 @end
