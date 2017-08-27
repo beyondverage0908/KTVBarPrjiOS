@@ -10,6 +10,6 @@
 
 @interface KTVFilterView : UIView
 
-- (instancetype)initWithFilter:(NSArray *)filters;
+- (instancetype)initWithFilter:(NSArray<NSString *> *)filters;
 
 @end

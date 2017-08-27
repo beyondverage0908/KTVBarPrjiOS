@@ -14,6 +14,8 @@
 
 #import "KTVTableHeaderView.h"
 
+#import "KTVPackageDetailController.h"
+
 @interface KTVPackageController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -166,6 +168,14 @@
         return 28;
     }
     return 0;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 2) {
+        // 套餐详情
+        KTVPackageDetailController *vc = (KTVPackageDetailController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVPackageDetailController"];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 #pragma mark - UITableViewDataSource

@@ -56,9 +56,16 @@
     UIBarButtonItem *bcItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:self action:@selector(navigationBackAction:)];
     self.navigationController.navigationBar.tintColor = [UIColor ktvRed];
     //主要是以下两个图片设置
-    [self.navigationController.navigationBar setBackIndicatorImage:[UIImage imageNamed:@"app_navi_back_arrow.png"]];
-    [self.navigationController.navigationBar setBackIndicatorTransitionMaskImage:[UIImage imageNamed:@"app_navi_back_arrow.png"]];
+    [self.navigationController.navigationBar setBackIndicatorImage:[UIImage imageNamed:@"app_navi_back_arrow"]];
+    [self.navigationController.navigationBar setBackIndicatorTransitionMaskImage:[UIImage imageNamed:@"app_navi_back_arrow"]];
     self.navigationItem.backBarButtonItem = bcItem;
+    
+//    UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    backBtn.frame = CGRectMake(-20, 0, 40, 40);
+//    [backBtn setImage:[UIImage imageNamed:@"app_navi_back_arrow"] forState:UIControlStateNormal];
+//    [backBtn addTarget:self action:@selector(navigationBackAction:) forControlEvents:UIControlEventTouchUpInside];
+//    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
+//    self.navigationItem.leftBarButtonItem = backItem;
 }
 
 - (void)addBarButtonItems:(NSArray *)itemTitles {

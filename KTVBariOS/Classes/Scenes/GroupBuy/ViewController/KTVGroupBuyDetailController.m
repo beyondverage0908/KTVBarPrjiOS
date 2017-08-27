@@ -18,6 +18,8 @@
 #import "KTVOtherDianpuCell.h"
 #import "KTVTableHeaderView.h"
 
+#import "KTVDandianController.h"
+
 
 @interface KTVGroupBuyDetailController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -91,6 +93,13 @@
         return headerView;
     } else {
         return nil;
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 2) {
+        KTVDandianController *vc = (KTVDandianController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVDandianController"];
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 
