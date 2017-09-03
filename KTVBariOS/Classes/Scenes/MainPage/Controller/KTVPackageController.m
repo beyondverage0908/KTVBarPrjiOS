@@ -15,6 +15,7 @@
 #import "KTVTableHeaderView.h"
 
 #import "KTVPackageDetailController.h"
+#import "KTVOrderConfirmController.h"
 
 @interface KTVPackageController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -131,7 +132,10 @@
 #pragma mark - UIControl Event
 
 - (void)payAction:(UIButton *)btn {
-    CLog(@"--->>>支付");
+    CLog(@"--->>>套餐-立即支付");
+    // 跳转到订单确认
+    KTVOrderConfirmController *vc = (KTVOrderConfirmController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVOrderConfirmController"];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - UITableViewDelegate

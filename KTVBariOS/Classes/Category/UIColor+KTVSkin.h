@@ -28,10 +28,13 @@
 /// 项目中主题灰色
 + (UIColor *)ktvGray;
 
-/// 金色
+/// 主题金色
 + (UIColor *)ktvGold;
 
-/// 紫色
+/// 主题紫色
 + (UIColor *)ktvPurple;
+
+/// 主题textField的色
++ (UIColor *)ktvTextFieldBg;
 
 @end

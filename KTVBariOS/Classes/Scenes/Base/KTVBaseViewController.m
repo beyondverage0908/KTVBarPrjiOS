@@ -33,6 +33,10 @@
     [super viewWillAppear:animated];
 }
 
+- (void)didReceiveMemoryWarning {
+    CLog(@"--->>> 内存不够了");
+}
+
 - (void)hideNavigationBar:(BOOL)isHidden {
     [self.navigationController setNavigationBarHidden:isHidden animated:YES];
 }

@@ -81,8 +81,10 @@
         return headerView;
     } else if (section == 3) {
         KTVTableHeaderView *headerView = [[KTVTableHeaderView alloc] initWithImageUrl:nil title:@"邀约TA暖场" headerImgUrl:@"app_change_batch" remark:nil];
-        headerView.headerActionBlock = ^(UIButton *btn) {
-            CLog(@"--->>> 邀约TA暖床");
+        headerView.headerActionBlock = ^(KTVHeaderType type) {
+            if (type == HeaderType) {
+                CLog(@"--->>> 邀约TA暖床");
+            }
         };
         return headerView;
     } else if (section == 4) {

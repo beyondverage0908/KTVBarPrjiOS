@@ -37,7 +37,7 @@ static NSString * HeaderID = @"KTVCollectionFilterView";
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
     
-    self.collectionView.collectionViewLayout = [self setupFlowLayout];;
+    self.collectionView.collectionViewLayout = [self setupFlowLayout];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -108,6 +108,6 @@ static NSString * HeaderID = @"KTVCollectionFilterView";
 }
 
 - (IBAction)payAction:(UIButton *)sender {
-    CLog(@"--->>> 立即支付");
+    CLog(@"--->>> 购物车-立即支付");
 }
 @end

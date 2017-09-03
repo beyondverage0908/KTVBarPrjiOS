@@ -48,4 +48,8 @@
     return [UIColor colorWithRed:136.0f / 255.0f green:59.0f / 255.0f blue:176.0f / 255.0f alpha:1.0f];
 }
 
++ (UIColor *)ktvTextFieldBg {
+    return [UIColor colorWithRed:26.0f / 255.0f green:26.0f / 255.0f blue:35.0f / 255.0f alpha:1.0f];
+}
+
 @end

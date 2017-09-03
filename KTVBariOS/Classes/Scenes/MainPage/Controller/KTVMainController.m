@@ -13,6 +13,8 @@
 #import "KTVGuessLikeCell.h"
 #import "KTVRecommendCell.h"
 
+#import "KTVBarKtvDetailController.h"
+
 @interface KTVMainController ()<UITableViewDelegate, UITableViewDataSource, SDCycleScrollViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -126,6 +128,14 @@
     }];
     
     return bgView;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 2) {
+        CLog(@"-- 酒吧详情");
+        KTVBarKtvDetailController *vc = (KTVBarKtvDetailController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVBarKtvDetailController"];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 #pragma mark - UITableViewDataSource

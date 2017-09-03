@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "idiom" : "universal",
+      "filename" : "app_cell_split.jpeg",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "filename" : "app_cell_split@2x.jpeg",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "filename" : "app_cell_split@3x.jpeg",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "version" : 1,
+    "author" : "xcode"
+  }
+}
