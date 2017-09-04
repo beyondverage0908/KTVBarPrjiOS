@@ -28,13 +28,28 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.starView.stars = 1;
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(gotoYueAction:)];
+    [self.yuepaoNumberLabel addGestureRecognizer:tap];
+    
+    [self setupUI];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 }
 
+- (void)setupUI {
+    [self.yuepaoNumberLabel addUnderlineStyle];
+}
+
+#pragma mark - 事件
+
 - (IBAction)buyAction:(UIButton *)sender {
     CLog(@"--->>>团购详情-立即购买");
+}
+
+- (void)gotoYueAction:(UILabel *)sender {
+    CLog(@"-- 在约的小伙伴有100人");
 }
 @end

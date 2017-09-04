@@ -10,6 +10,8 @@
 #import "KTVGuessLikeCell.h"
 #import "KTVSimpleFilter.h"
 
+#import "KTVBarKtvDetailController.h"
+
 @interface KTVNearbyController ()<UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -24,8 +26,6 @@
     //115
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    
-//    self.tableView.tableFooterView = [UIView new];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -46,6 +46,11 @@
     KTVSimpleFilter *filterView = [[KTVSimpleFilter alloc] init];
     filterView.filters = @[@"酒吧", @"KTV"];
     return filterView;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    KTVBarKtvDetailController *vc = (KTVBarKtvDetailController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVBarKtvDetailController"];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - UITableViewDataSource

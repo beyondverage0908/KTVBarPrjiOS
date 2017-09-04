@@ -22,13 +22,18 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 
+- (IBAction)selectAction:(UIButton *)sender {
+    [sender setSelected:!sender.isSelected];
+    if (sender.isSelected) {
+        [sender setImage:[UIImage imageNamed:@"app_gou_red"] forState:UIControlStateNormal];
+    } else {
+        [sender setImage:[UIImage imageNamed:@"app_selected_kuang"] forState:UIControlStateNormal];
+    }
+}
 @end

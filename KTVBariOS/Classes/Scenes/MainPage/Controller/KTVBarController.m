@@ -80,10 +80,6 @@
 
 - (void)loadMoreInfoAction:(UIButton *)btn {
     CLog(@"--->>> 查看其他2个团购");
-    
-    // 进入团购详情页面
-    KTVGroupBuyDetailController *vc = (KTVGroupBuyDetailController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVGroupBuyDetailController"];
-    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - UITableViewDelegate
@@ -126,6 +122,10 @@
     if (indexPath.section != 0) {
         if (indexPath.row == 0) {
             KTVBarKtvDetailController *vc = (KTVBarKtvDetailController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVBarKtvDetailController"];
+            [self.navigationController pushViewController:vc animated:YES];
+        } else {
+            // 进入团购详情页面
+            KTVGroupBuyDetailController *vc = (KTVGroupBuyDetailController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVGroupBuyDetailController"];
             [self.navigationController pushViewController:vc animated:YES];
         }
     }

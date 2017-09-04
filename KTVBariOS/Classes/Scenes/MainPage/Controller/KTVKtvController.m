@@ -12,6 +12,9 @@
 #import "KTVPackageCell.h"
 #import "KTVFilterView.h"
 
+#import "KTVBarKtvDetailController.h"
+#import "KTVPackageController.h"
+
 @interface KTVKtvController ()<UITableViewDelegate, UITableViewDataSource, SDCycleScrollViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
@@ -25,7 +28,6 @@
     [super viewDidLoad];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    [self hideNavigationBar:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -115,6 +117,20 @@
         return 40;
     }
     return 35;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section != 0) {
+        if (indexPath.row == 0) {
+            CLog(@"-- 酒吧KTV店铺详情");
+            KTVBarKtvDetailController *vc = (KTVBarKtvDetailController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVBarKtvDetailController"];
+            [self.navigationController pushViewController:vc animated:YES];
+        } else {
+            CLog(@"-- 套餐页面");
+            KTVPackageController *vc = (KTVPackageController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVPackageController"];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+    }
 }
 
 #pragma mark - UITableViewDataSource

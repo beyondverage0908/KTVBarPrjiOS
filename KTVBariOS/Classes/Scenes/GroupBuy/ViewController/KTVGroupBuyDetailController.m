@@ -34,6 +34,8 @@
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    
+    self.tableView.backgroundColor = [UIColor ktvBG];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

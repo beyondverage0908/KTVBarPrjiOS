@@ -19,6 +19,7 @@
 #import "UIButton+KTVExtension.h"
 #import "UIFont+Ktv.h"
 #import "NSDate+Processing.h"
+#import "UILabel+Ktv.h"
 
 // Common
 #import "KTVCommonDefine.h"

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		33038AC81F5CF05D0045A818 /* UILabel+Ktv.m in Sources */ = {isa = PBXBuildFile; fileRef = 33038AC71F5CF05D0045A818 /* UILabel+Ktv.m */; };
 		330A93871F03ED2A001B320A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 330A93831F03ED2A001B320A /* AppDelegate.m */; };
 		330A938C1F03ED7E001B320A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 330A938B1F03ED7E001B320A /* main.m */; };
 		330A938F1F03EE47001B320A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 330A938E1F03EE47001B320A /* Main.storyboard */; };
@@ -158,6 +159,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		33038AC61F5CF05D0045A818 /* UILabel+Ktv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+Ktv.h"; sourceTree = "<group>"; };
+		33038AC71F5CF05D0045A818 /* UILabel+Ktv.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+Ktv.m"; sourceTree = "<group>"; };
 		330A93821F03ED2A001B320A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		330A93831F03ED2A001B320A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		330A938B1F03ED7E001B320A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -465,6 +468,8 @@
 				3377B6E51F4C1CF700B76B2C /* NSDate+Processing.m */,
 				334474B01F4D8B6C00A86A80 /* UINavigationBar+background.h */,
 				334474B11F4D8B6C00A86A80 /* UINavigationBar+background.m */,
+				33038AC61F5CF05D0045A818 /* UILabel+Ktv.h */,
+				33038AC71F5CF05D0045A818 /* UILabel+Ktv.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -1511,6 +1516,7 @@
 				339AED641F52CF4A00473C29 /* KTVSimpleFilter.m in Sources */,
 				3329B7591F40825800729FB6 /* KTVDoBusinessCell.m in Sources */,
 				33C850BC1F4488F500F947B8 /* KTVYuePaoUserCell.m in Sources */,
+				33038AC81F5CF05D0045A818 /* UILabel+Ktv.m in Sources */,
 				3345F9D61F3F392000164D9C /* KTVBarKtvDetailHeaderCell.m in Sources */,
 				33C850B91F4488AF00F947B8 /* KTVPackageDetailCell.m in Sources */,
 				330A93871F03ED2A001B320A /* AppDelegate.m in Sources */,
