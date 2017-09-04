@@ -37,6 +37,14 @@
     CLog(@"--->>> 内存不够了");
 }
 
+- (void)clearNavigationbar:(BOOL)isClear {
+    if (isClear) {
+        [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0];
+    } else {
+        [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:1];
+    }
+}
+
 - (void)hideNavigationBar:(BOOL)isHidden {
     [self.navigationController setNavigationBarHidden:isHidden animated:YES];
 }

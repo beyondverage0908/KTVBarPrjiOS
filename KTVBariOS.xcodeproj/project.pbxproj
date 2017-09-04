@@ -71,7 +71,10 @@
 		3377B6E31F4B1D9700B76B2C /* KTVGroupBuyHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3377B6E21F4B1D9700B76B2C /* KTVGroupBuyHeaderCell.m */; };
 		3377B6E61F4C1CF700B76B2C /* NSDate+Processing.m in Sources */ = {isa = PBXBuildFile; fileRef = 3377B6E51F4C1CF700B76B2C /* NSDate+Processing.m */; };
 		3377B6E91F4C769100B76B2C /* KTVBuyNotesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3377B6E81F4C769100B76B2C /* KTVBuyNotesCell.m */; };
-		337DA06C1F2F74AF000EF331 /* KTVDateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 337DA06B1F2F74AF000EF331 /* KTVDateViewController.m */; };
+		3382712C1F5D917400D4E366 /* KTVUserInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3382712B1F5D917400D4E366 /* KTVUserInfoCell.m */; };
+		3382712F1F5D992000D4E366 /* KTVUserInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3382712E1F5D992000D4E366 /* KTVUserInfoController.m */; };
+		338872C21F5D41C700DAB247 /* KTVDateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 338872BC1F5D41C700DAB247 /* KTVDateViewController.m */; };
+		338872C51F5D41EC00DAB247 /* KTVYaoYueUserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 338872C41F5D41EC00DAB247 /* KTVYaoYueUserCell.m */; };
 		338D23761F41E194000608B1 /* KTVPackageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 338D23751F41E194000608B1 /* KTVPackageController.m */; };
 		3398266D1F55750F00EAB238 /* KTVOrderConfirmController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3398266C1F55750F00EAB238 /* KTVOrderConfirmController.m */; };
 		339826701F557AB900EAB238 /* KTVOrderConfirmCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3398266F1F557AB900EAB238 /* KTVOrderConfirmCell.m */; };
@@ -138,6 +141,8 @@
 		33DC05831F26E09B00AEB5C4 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33DC05821F26E09B00AEB5C4 /* ImageIO.framework */; };
 		33DC05851F26E0A500AEB5C4 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 33DC05841F26E0A500AEB5C4 /* libsqlite3.tbd */; };
 		33F0E2131F1C51EC009AA2DC /* KTVUnderlineButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 33F0E2121F1C51EC009AA2DC /* KTVUnderlineButton.m */; };
+		33F3744B1F5D8189000A5EAC /* KTVAddYaoYueView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33F3744A1F5D8189000A5EAC /* KTVAddYaoYueView.xib */; };
+		33F3744E1F5D84E7000A5EAC /* KTVAddYaoYueView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33F3744D1F5D84E7000A5EAC /* KTVAddYaoYueView.m */; };
 		5AF3C095AA9B925E58BECDE4 /* libPods-KTVBariOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D62951016CC4DAC9857479E1 /* libPods-KTVBariOS.a */; };
 /* End PBXBuildFile section */
 
@@ -275,8 +280,14 @@
 		3377B6E51F4C1CF700B76B2C /* NSDate+Processing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Processing.m"; sourceTree = "<group>"; };
 		3377B6E71F4C769100B76B2C /* KTVBuyNotesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVBuyNotesCell.h; sourceTree = "<group>"; };
 		3377B6E81F4C769100B76B2C /* KTVBuyNotesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVBuyNotesCell.m; sourceTree = "<group>"; };
-		337DA06A1F2F74AF000EF331 /* KTVDateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVDateViewController.h; sourceTree = "<group>"; };
-		337DA06B1F2F74AF000EF331 /* KTVDateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVDateViewController.m; sourceTree = "<group>"; };
+		3382712A1F5D917400D4E366 /* KTVUserInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVUserInfoCell.h; sourceTree = "<group>"; };
+		3382712B1F5D917400D4E366 /* KTVUserInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVUserInfoCell.m; sourceTree = "<group>"; };
+		3382712D1F5D992000D4E366 /* KTVUserInfoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVUserInfoController.h; sourceTree = "<group>"; };
+		3382712E1F5D992000D4E366 /* KTVUserInfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVUserInfoController.m; sourceTree = "<group>"; };
+		338872BB1F5D41C700DAB247 /* KTVDateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVDateViewController.h; sourceTree = "<group>"; };
+		338872BC1F5D41C700DAB247 /* KTVDateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVDateViewController.m; sourceTree = "<group>"; };
+		338872C31F5D41EC00DAB247 /* KTVYaoYueUserCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVYaoYueUserCell.h; sourceTree = "<group>"; };
+		338872C41F5D41EC00DAB247 /* KTVYaoYueUserCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVYaoYueUserCell.m; sourceTree = "<group>"; };
 		338D23741F41E194000608B1 /* KTVPackageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVPackageController.h; sourceTree = "<group>"; };
 		338D23751F41E194000608B1 /* KTVPackageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVPackageController.m; sourceTree = "<group>"; };
 		3398266B1F55750F00EAB238 /* KTVOrderConfirmController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVOrderConfirmController.h; sourceTree = "<group>"; };
@@ -402,6 +413,9 @@
 		33DC05841F26E0A500AEB5C4 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		33F0E2111F1C51EC009AA2DC /* KTVUnderlineButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVUnderlineButton.h; sourceTree = "<group>"; };
 		33F0E2121F1C51EC009AA2DC /* KTVUnderlineButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVUnderlineButton.m; sourceTree = "<group>"; };
+		33F3744A1F5D8189000A5EAC /* KTVAddYaoYueView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KTVAddYaoYueView.xib; sourceTree = "<group>"; };
+		33F3744C1F5D84E7000A5EAC /* KTVAddYaoYueView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVAddYaoYueView.h; sourceTree = "<group>"; };
+		33F3744D1F5D84E7000A5EAC /* KTVAddYaoYueView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVAddYaoYueView.m; sourceTree = "<group>"; };
 		D62951016CC4DAC9857479E1 /* libPods-KTVBariOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-KTVBariOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D87AF57E102945EE24953FF1 /* Pods-KTVBariOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KTVBariOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KTVBariOS/Pods-KTVBariOS.debug.xcconfig"; sourceTree = "<group>"; };
 		E315085E6F16DA9EAEEB71DE /* Pods-KTVBariOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KTVBariOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-KTVBariOS/Pods-KTVBariOS.release.xcconfig"; sourceTree = "<group>"; };
@@ -897,8 +911,11 @@
 		337DA0611F2F744F000EF331 /* DatingFriend */ = {
 			isa = PBXGroup;
 			children = (
-				337DA06A1F2F74AF000EF331 /* KTVDateViewController.h */,
-				337DA06B1F2F74AF000EF331 /* KTVDateViewController.m */,
+				338872BA1F5D41C700DAB247 /* Controller */,
+				338872BE1F5D41C700DAB247 /* Logic */,
+				338872BF1F5D41C700DAB247 /* Model */,
+				338872C01F5D41C700DAB247 /* Service */,
+				338872C11F5D41C700DAB247 /* View */,
 			);
 			path = DatingFriend;
 			sourceTree = "<group>";
@@ -925,6 +942,48 @@
 				339AED5E1F52C98900473C29 /* ViewController */,
 			);
 			path = Nearby;
+			sourceTree = "<group>";
+		};
+		338872BA1F5D41C700DAB247 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				338872BB1F5D41C700DAB247 /* KTVDateViewController.h */,
+				338872BC1F5D41C700DAB247 /* KTVDateViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		338872BE1F5D41C700DAB247 /* Logic */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Logic;
+			sourceTree = "<group>";
+		};
+		338872BF1F5D41C700DAB247 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		338872C01F5D41C700DAB247 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		338872C11F5D41C700DAB247 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				338872C31F5D41EC00DAB247 /* KTVYaoYueUserCell.h */,
+				338872C41F5D41EC00DAB247 /* KTVYaoYueUserCell.m */,
+				33F3744A1F5D8189000A5EAC /* KTVAddYaoYueView.xib */,
+				33F3744C1F5D84E7000A5EAC /* KTVAddYaoYueView.h */,
+				33F3744D1F5D84E7000A5EAC /* KTVAddYaoYueView.m */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		339856571F3EE5360085BD1A /* Global */ = {
@@ -1065,6 +1124,8 @@
 			children = (
 				33C305411F486BCE0064ECF8 /* KTVMineController.h */,
 				33C305421F486BCE0064ECF8 /* KTVMineController.m */,
+				3382712D1F5D992000D4E366 /* KTVUserInfoController.h */,
+				3382712E1F5D992000D4E366 /* KTVUserInfoController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1095,6 +1156,8 @@
 			children = (
 				33C305481F486F7C0064ECF8 /* KTVUserHeaderCell.h */,
 				33C305491F486F7C0064ECF8 /* KTVUserHeaderCell.m */,
+				3382712A1F5D917400D4E366 /* KTVUserInfoCell.h */,
+				3382712B1F5D917400D4E366 /* KTVUserInfoCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1369,6 +1432,7 @@
 				3343E5061F28DAC800752AC5 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				33D776DB1F30109400077BE5 /* placeholder@2x.png in Resources */,
 				330A938F1F03EE47001B320A /* Main.storyboard in Resources */,
+				33F3744B1F5D8189000A5EAC /* KTVAddYaoYueView.xib in Resources */,
 				3343E50B1F28DAC800752AC5 /* ShareSDK.bundle in Resources */,
 				334E53341F15FACF00D83901 /* DatingFriend.storyboard in Resources */,
 				339AED501F52A92600473C29 /* KTVBuycarPickerView.xib in Resources */,
@@ -1472,6 +1536,8 @@
 				3342B2EB1F1862B400E47483 /* UIColor+KTVSkin.m in Sources */,
 				339AED4E1F52A19200473C29 /* KTVCollectionFilterView.m in Sources */,
 				33C138F31F56FBFA000F8C37 /* KTVOrderUploadController.m in Sources */,
+				33F3744E1F5D84E7000A5EAC /* KTVAddYaoYueView.m in Sources */,
+				3382712C1F5D917400D4E366 /* KTVUserInfoCell.m in Sources */,
 				33D776DD1F30109400077BE5 /* SDCycleScrollView.m in Sources */,
 				331F916D1F581FD00065AE8D /* KTVPaySuccessController.m in Sources */,
 				339AED561F52B57D00473C29 /* KTVBuycarController.m in Sources */,
@@ -1521,6 +1587,7 @@
 				33C850B91F4488AF00F947B8 /* KTVPackageDetailCell.m in Sources */,
 				330A93871F03ED2A001B320A /* AppDelegate.m in Sources */,
 				33D776F51F301D9600077BE5 /* TADotView.m in Sources */,
+				338872C21F5D41C700DAB247 /* KTVDateViewController.m in Sources */,
 				339856611F3F10AB0085BD1A /* KTVBarKtvDetailController.m in Sources */,
 				33D776DC1F30109400077BE5 /* SDCollectionViewCell.m in Sources */,
 				3377B6E61F4C1CF700B76B2C /* NSDate+Processing.m in Sources */,
@@ -1533,13 +1600,14 @@
 				33982EC61F32FD6A005FD363 /* KTVGuessLikeCell.m in Sources */,
 				3316848C1F5C2CE2002C2AD2 /* KTVStoreViewController.m in Sources */,
 				331F91641F5808590065AE8D /* KTVUserShareCell.m in Sources */,
+				3382712F1F5D992000D4E366 /* KTVUserInfoController.m in Sources */,
 				3329B7501F401DE800729FB6 /* KTVBarKtvBeautyCell.m in Sources */,
 				33A168611F59082E009788DC /* KTVPickerView.m in Sources */,
-				337DA06C1F2F74AF000EF331 /* KTVDateViewController.m in Sources */,
 				33D776DE1F30109400077BE5 /* UIView+SDExtension.m in Sources */,
 				3325D2501F1273350022AE9A /* UIColor+KTVExtension.m in Sources */,
 				33A74CB11F331EEE00D32F14 /* KTVGaodeManager.m in Sources */,
 				33D776E61F3011AD00077BE5 /* KTVMainController.m in Sources */,
+				338872C51F5D41EC00DAB247 /* KTVYaoYueUserCell.m in Sources */,
 				33D776E91F3011FA00077BE5 /* KTVBannerCell.m in Sources */,
 				33C3054A1F486F7C0064ECF8 /* KTVUserHeaderCell.m in Sources */,
 			);

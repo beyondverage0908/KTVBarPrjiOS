@@ -10,7 +10,11 @@
 
 @protocol KTVUserHeaderCellDelegate <NSObject>
 
+// 登陆
 - (void)gotoLogin;
+
+// 查看个人信息
+- (void)toseeMineInfo:(NSDictionary *)info;
 
 @end
 

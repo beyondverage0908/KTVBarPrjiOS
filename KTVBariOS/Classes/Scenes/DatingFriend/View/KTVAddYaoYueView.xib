@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="KTVAddYaoYueView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QOw-Bf-zt8">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ShC-us-Zxv">
+                            <rect key="frame" x="41" y="238" width="293" height="190"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="yaoyue_start" translatesAutoresizingMaskIntoConstraints="NO" id="zc5-S7-3h6">
+                                    <rect key="frame" x="0.0" y="0.0" width="293" height="190"/>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="发起邀约" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CiF-2j-oFZ">
+                                    <rect key="frame" x="111.5" y="15" width="69.5" height="21"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" red="0.96470588239999999" green="0.2274509804" blue="0.50980392159999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yOp-Vn-AA3">
+                                    <rect key="frame" x="45" y="46" width="50" height="50"/>
+                                    <state key="normal" image="mainpage_bar"/>
+                                    <connections>
+                                        <action selector="barYueAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="hxi-p4-M4O"/>
+                                    </connections>
+                                </button>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="酒吧" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0cr-x1-44q">
+                                    <rect key="frame" x="54.5" y="106" width="31" height="18"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <color key="textColor" red="0.96470588239999999" green="0.2274509804" blue="0.50980392159999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="KTV" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9N2-BH-9Wb">
+                                    <rect key="frame" x="208.5" y="106" width="29" height="18"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <color key="textColor" red="0.53333333329999999" green="0.23137254900000001" blue="0.69019607839999997" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hnh-Mm-IXf">
+                                    <rect key="frame" x="198" y="46" width="50" height="50"/>
+                                    <state key="normal" image="mainpage_ktv"/>
+                                    <connections>
+                                        <action selector="ktvYueAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="ZcN-MW-Wtb"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="CiF-2j-oFZ" firstAttribute="centerX" secondItem="ShC-us-Zxv" secondAttribute="centerX" id="3OH-t2-dar"/>
+                                <constraint firstAttribute="trailing" secondItem="zc5-S7-3h6" secondAttribute="trailing" id="704-Si-brL"/>
+                                <constraint firstItem="0cr-x1-44q" firstAttribute="top" secondItem="yOp-Vn-AA3" secondAttribute="bottom" constant="10" id="F84-r5-qcU"/>
+                                <constraint firstAttribute="trailing" secondItem="Hnh-Mm-IXf" secondAttribute="trailing" constant="45" id="I7i-3b-0Wa"/>
+                                <constraint firstItem="9N2-BH-9Wb" firstAttribute="centerX" secondItem="Hnh-Mm-IXf" secondAttribute="centerX" id="Kd8-D9-r7U"/>
+                                <constraint firstItem="yOp-Vn-AA3" firstAttribute="top" secondItem="CiF-2j-oFZ" secondAttribute="bottom" constant="10" id="LN4-bZ-34K"/>
+                                <constraint firstItem="0cr-x1-44q" firstAttribute="centerX" secondItem="yOp-Vn-AA3" secondAttribute="centerX" id="MmU-88-msC"/>
+                                <constraint firstItem="9N2-BH-9Wb" firstAttribute="top" secondItem="Hnh-Mm-IXf" secondAttribute="bottom" constant="10" id="QzI-We-ARp"/>
+                                <constraint firstItem="Hnh-Mm-IXf" firstAttribute="top" secondItem="CiF-2j-oFZ" secondAttribute="bottom" constant="10" id="RmT-NK-oOO"/>
+                                <constraint firstItem="zc5-S7-3h6" firstAttribute="top" secondItem="ShC-us-Zxv" secondAttribute="top" id="Zf7-OK-7Jq"/>
+                                <constraint firstItem="yOp-Vn-AA3" firstAttribute="leading" secondItem="ShC-us-Zxv" secondAttribute="leading" constant="45" id="d1p-j6-fuh"/>
+                                <constraint firstItem="CiF-2j-oFZ" firstAttribute="top" secondItem="ShC-us-Zxv" secondAttribute="top" constant="15" id="fDU-5F-3pD"/>
+                                <constraint firstItem="zc5-S7-3h6" firstAttribute="leading" secondItem="ShC-us-Zxv" secondAttribute="leading" id="pes-6V-ou6"/>
+                                <constraint firstAttribute="bottom" secondItem="zc5-S7-3h6" secondAttribute="bottom" id="tE3-JB-ECH"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.32874036815068491" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="ShC-us-Zxv" firstAttribute="centerX" secondItem="QOw-Bf-zt8" secondAttribute="centerX" id="HM3-ia-VH8"/>
+                        <constraint firstItem="ShC-us-Zxv" firstAttribute="centerY" secondItem="QOw-Bf-zt8" secondAttribute="centerY" id="idj-fI-eFE"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="QOw-Bf-zt8" secondAttribute="trailing" id="5Qd-DU-LvR"/>
+                <constraint firstItem="QOw-Bf-zt8" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Lhv-4h-D4s"/>
+                <constraint firstAttribute="bottom" secondItem="QOw-Bf-zt8" secondAttribute="bottom" id="ScV-wY-ji2"/>
+                <constraint firstItem="QOw-Bf-zt8" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="sbm-us-PCo"/>
+            </constraints>
+            <connections>
+                <outlet property="barYueAction" destination="yOp-Vn-AA3" id="OKH-Lr-LkF"/>
+                <outlet property="maskView" destination="QOw-Bf-zt8" id="Qtl-jv-Dmi"/>
+            </connections>
+            <point key="canvasLocation" x="-1" y="52"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="mainpage_bar" width="50" height="50"/>
+        <image name="mainpage_ktv" width="50" height="50"/>
+        <image name="yaoyue_start" width="293" height="190"/>
+    </resources>
+</document>

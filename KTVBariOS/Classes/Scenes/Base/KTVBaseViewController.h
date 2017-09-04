@@ -16,6 +16,8 @@
 - (void)addBarButtonItems:(NSArray *)itemTitles;
 // 设置导航栏和状态栏的背景色
 - (void)setNavigationBarColor:(UIColor *)color;
+/// 导航条透明色
+- (void)clearNavigationbar:(BOOL)isClear;
 
 // 系统返回按钮触发方法
 - (void)navigationBackAction:(id)action;
