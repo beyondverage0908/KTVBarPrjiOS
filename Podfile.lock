@@ -16,15 +16,18 @@ PODS:
     - AFNetworking/NSURLSession
   - AMap2DMap-NO-IDFA (4.6.0):
     - AMapFoundation-NO-IDFA (~> 1.3)
-  - AMapFoundation-NO-IDFA (1.4.0)
+  - AMapFoundation-NO-IDFA (1.4.2)
   - AMapLocation-NO-IDFA (2.4.0):
     - AMapFoundation-NO-IDFA (~> 1.4)
-  - AMapSearch-NO-IDFA (5.2.1):
+  - AMapSearch-NO-IDFA (5.3.0):
     - AMapFoundation-NO-IDFA (~> 1.2)
   - Masonry (1.0.2)
-  - SDWebImage (4.0.0):
-    - SDWebImage/Core (= 4.0.0)
-  - SDWebImage/Core (4.0.0)
+  - Pingpp/Alipay (2.2.17):
+    - Pingpp/Core
+  - Pingpp/Core (2.2.17)
+  - SDWebImage (4.1.0):
+    - SDWebImage/Core (= 4.1.0)
+  - SDWebImage/Core (4.1.0)
   - YYModel (1.0.4)
 
 DEPENDENCIES:
@@ -33,19 +36,21 @@ DEPENDENCIES:
   - AMapLocation-NO-IDFA
   - AMapSearch-NO-IDFA
   - Masonry
+  - Pingpp/Alipay (~> 2.2.17)
   - SDWebImage
   - YYModel
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   AMap2DMap-NO-IDFA: 01c80e7e93568617b1b1b452cfec71f974f5bc8a
-  AMapFoundation-NO-IDFA: d1ba541a56737c2048115a745b1dfcbe9901c248
+  AMapFoundation-NO-IDFA: 3b9ce87abc6a37c718cc320687469d0b74d5c953
   AMapLocation-NO-IDFA: 9493012d3241a7d551942c7c1e1069b51f295083
-  AMapSearch-NO-IDFA: ec04c2c15ef278803234d959328acda14c2c3c5d
+  AMapSearch-NO-IDFA: eb0f9b424e6c3cdcb0e8c656e9622e8d0ee54238
   Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
-  SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
+  Pingpp: 166fc31888e8639c8a9a287330ba49dd5c5a250d
+  SDWebImage: 0e435c14e402a6730315a0fb79f95e68654d55a4
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
-PODFILE CHECKSUM: c61e112cbd8392b9cd51c3caf445bee4cb4086fa
+PODFILE CHECKSUM: 2370b6830c83e8fdf1e3affb0c1ba8bd752d5304
 
 COCOAPODS: 1.2.1

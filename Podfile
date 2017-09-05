@@ -14,6 +14,10 @@ target 'KTVBariOS' do
     pod 'YYModel'
 
 
+# Ping++
+#    pod 'Pingpp', '~> 2.2.17'
+    pod 'Pingpp/Alipay', '~> 2.2.17'
+
 # ShareSDK 微信 微博 QQ第三方登陆 以及分享
 
 # 主模块(必须)
