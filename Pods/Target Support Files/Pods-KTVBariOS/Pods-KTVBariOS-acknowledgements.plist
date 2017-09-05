@@ -171,7 +171,7 @@ SOFTWARE.
 			<key>License</key>
 			<string>MIT</string>
 			<key>Title</key>
-			<string>YYKit</string>
+			<string>YYModel</string>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 		</dict>

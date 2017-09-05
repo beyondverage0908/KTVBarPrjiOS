@@ -23,6 +23,8 @@
 @property (assign, nonatomic) NSInteger currentPage;            // scrollView当前第几页
 @property (strong, nonatomic) NSMutableDictionary *registerParams;
 
+@property (nonatomic, assign) BOOL agreeProtocol;                // 是否同意协议
+
 @end
 
 @implementation KTVRegisterController
@@ -40,6 +42,11 @@
 
 - (void)initData {
     self.registerParams = [NSMutableDictionary dictionaryWithCapacity:6];
+    // 默认出生年月1990-08-21
+    [self.registerParams setObject:@"1990-08-21" forKey:@"borthday"];
+    // 默认男
+    [self.registerParams setObject:@"1" forKey:@"gender"];
+    
 }
 
 - (void)initDatePickerUI {
@@ -283,10 +290,12 @@
         make.top.equalTo(nextBtn.mas_bottom).mas_offset(45);
     }];
     
-    UIImageView *selectedImageView = [[UIImageView alloc] init];
-    [superView addSubview:selectedImageView];
-    selectedImageView.image = [UIImage imageNamed:@"app_gou_red"];
-    [selectedImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+    // app_selected_kuang app_gou_red
+    UIButton *selectedBtn = [[UIButton alloc] init];
+    [superView addSubview:selectedBtn];
+    [selectedBtn addTarget:self action:@selector(agreeProtolAction:) forControlEvents:UIControlEventTouchUpInside];
+    [selectedBtn setImage:[UIImage imageNamed:@"app_selected_kuang"] forState:UIControlStateNormal];
+    [selectedBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(protocolLabel.mas_right).offset(5);
         make.centerY.equalTo(protocolLabel);
     }];
@@ -333,10 +342,12 @@
         make.top.equalTo(secondNextBtn.mas_bottom).mas_offset(45);
     }];
     
-    UIImageView *selectedImageView = [[UIImageView alloc] init];
-    [superView addSubview:selectedImageView];
-    selectedImageView.image = [UIImage imageNamed:@"app_gou_red"];
-    [selectedImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+    // app_selected_kuang app_gou_red
+    UIButton *selectedBtn = [[UIButton alloc] init];
+    [superView addSubview:selectedBtn];
+    [selectedBtn addTarget:self action:@selector(secondAgreeProtolAction:) forControlEvents:UIControlEventTouchUpInside];
+    [selectedBtn setImage:[UIImage imageNamed:@"app_selected_kuang"] forState:UIControlStateNormal];
+    [selectedBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(protocolLabel.mas_right).offset(5);
         make.centerY.equalTo(protocolLabel);
     }];
@@ -415,6 +426,32 @@
     }
 }
 
+#pragma mark - 事件
+
+// app_selected_kuang app_gou_red
+- (void)agreeProtolAction:(UIButton *)btn {
+    [btn setSelected:!btn.isSelected];
+    
+    self.agreeProtocol = btn.isSelected;
+    
+    if (btn.isSelected) {
+        [btn setImage:[UIImage imageNamed:@"app_gou_red"] forState:UIControlStateNormal];
+    } else {
+        [btn setImage:[UIImage imageNamed:@"app_selected_kuang"] forState:UIControlStateNormal];
+    }
+}
+
+- (void)secondAgreeProtolAction:(UIButton *)btn {
+    [btn setSelected:!btn.isSelected];
+    
+    self.agreeProtocol = btn.isSelected;
+    if (btn.isSelected) {
+        [btn setImage:[UIImage imageNamed:@"app_gou_red"] forState:UIControlStateNormal];
+    } else {
+        [btn setImage:[UIImage imageNamed:@"app_selected_kuang"] forState:UIControlStateNormal];
+    }
+}
+
 #pragma mark - KTVLoginInputViewDelegate 
 
 - (void)inputView:(KTVLoginInputView *)inputView inputType:(KTVInputType)type inputValue:(NSString *)inputValue {
@@ -427,6 +464,7 @@
         case KTVInputLockType:
         {
             [self.registerParams setObject:inputValue forKey:@"password"]; // 用户密码
+            [self.registerParams setObject:inputValue forKey:@"confirmPassword"];
         }
             break;
         case KTVInputVerfiyType:
@@ -479,18 +517,28 @@
 
 - (void)nextStepAction:(UIButton *)btn {
     [self.view endEditing:YES];
+    
+    if (!self.agreeProtocol) {
+        [KTVToast toast:TOAST_CONFIRM_PROTOCOL];
+        return;
+    }
+    self.agreeProtocol = NO;
+    
     CLog(@"--->>> 下一步");
     self.currentPage++;
     [self switchPage:self.currentPage];
 }
 
 - (void)completeRegisterAction:(UIButton *)btn {
+    [self.view endEditing:YES];
     CLog(@"--->>> 完成注册");
     // 接口请求放这里
-    [self dismissViewControllerAnimated:YES completion:nil];
-    
     [KTVLoginService postRegisterParams:self.registerParams result:^(NSDictionary *result) {
-        
+        if ([result[@"msg"] isEqualToString:@"Success"]) {
+            [self dismissViewControllerAnimated:YES completion:nil];
+        } else {
+            [KTVToast toast:result[@"detail"]];
+        }
     }];
 }
 

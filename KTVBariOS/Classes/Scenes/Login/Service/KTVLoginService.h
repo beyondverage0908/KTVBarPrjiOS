@@ -15,15 +15,23 @@ typedef void(^ResponseSuccess)(NSDictionary *result);
 
 /// 获取验证码
 + (void)getIdentifyingCodeParams:(NSDictionary *)params result:(ResponseSuccess)result;
+
 /// 校验验证是否正确
 + (void)postCheckIndentifyCodeParams:(NSDictionary *)params result:(ResponseSuccess)responseResult;
+
 /// 普通登陆
 + (void)getCommonLoginParams:(NSDictionary *)params result:(ResponseSuccess)responseResult;
+
 /// 注册
 + (void)postRegisterParams:(NSDictionary *)params result:(ResponseSuccess)responseResult;
+
 /// 微信登陆
 + (void)postWechatLoginParams:(NSDictionary *)params result:(ResponseSuccess)responseResult;
+
 /// QQ登陆
 + (void)postQQLoginParams:(NSDictionary *)params result:(ResponseSuccess)responseResult;
+
+/// 更改密码
++ (void)postChangePassword:(NSDictionary *)params result:(ResponseSuccess)responseResult;
 
 @end

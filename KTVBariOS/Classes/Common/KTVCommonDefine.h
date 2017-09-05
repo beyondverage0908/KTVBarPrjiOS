@@ -33,11 +33,15 @@
 
 // 系统方法
 // NSUsetDefault
-#define KUserDefaults            [NSUserDefaults standardUserDefaults]
+#define KtvDefaults                 [NSUserDefaults standardUserDefaults]
 // NSNotificationCenter
-#define KNotificationCenter      [NSNotificationCenter defaultCenter]
+#define KtvNotiCenter               [NSNotificationCenter defaultCenter]
 // 从类获取字符串
 #define KTVStringClass(cls)         NSStringFromClass([cls class])
 
+
+
+// 对服务端状态定义
+#define ktvSuccess       @"Success"
 
 #endif /* KTVCommonDefine_h */

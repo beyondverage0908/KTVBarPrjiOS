@@ -13,8 +13,6 @@
 
 @property (nonatomic, strong) AFHTTPSessionManager *manager;
 
-@property (nonatomic, copy) NSString *domainUrl;
-
 @end
 
 // 加密开关

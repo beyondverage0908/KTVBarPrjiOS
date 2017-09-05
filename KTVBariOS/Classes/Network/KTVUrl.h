@@ -12,16 +12,25 @@
 
 /// 获取项目的域名
 + (NSString *)getDomainUrl;
+
 /// 获取验证码
 + (NSString *)getIdentifyingCodeUrl;
+
 /// 核对验证码url
 + (NSString *)getCheckIndentifyCodeUrl;
+
 /// 一般登录（手机号+密码）
 + (NSString *)getCommonLoginUrl;
+
 /// QQ登录
 + (NSString *)getQQLoginUrl;
+
 /// 微信登录
 + (NSString *)getWeChatLoginUrl;
+
 /// 用户注册
 + (NSString *)getRegisterUrl;
+
+/// 更改密码
++ (NSString *)getChangePasswordUrl;
 @end

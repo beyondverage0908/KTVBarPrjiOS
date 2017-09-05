@@ -315,8 +315,13 @@
         params = self.loginMobileParams;
     }
     [KTVLoginService getCommonLoginParams:params result:^(NSDictionary *result) {
-        if ([result[@"code"] integerValue] == 10000) {
+        if ([result[@"msg"] isEqualToString:ktvSuccess]) {
+            NSString *ktvToken = result[@"data"][@"token"];
+            // 保存token
+            [KTVUtil setObject:ktvToken forKey:@"ktvToken"];
+            [KTVCommon setUserInfoKey:@"phone" infoValue:self.loginAccountParams[@"phone"]];
             
+            [self dismissViewControllerAnimated:YES completion:nil];
         } else {
             [KTVToast toast:result[@"detail"]];
         }
