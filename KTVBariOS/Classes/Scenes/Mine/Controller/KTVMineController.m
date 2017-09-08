@@ -9,6 +9,7 @@
 #import "KTVMineController.h"
 #import "KTVLoginGuideController.h"
 #import "KTVUserInfoController.h"
+#import "KTVMineFriendController.h"
 
 #import "KTVUserHeaderCell.h"
 #import "KTVUserInfoCell.h"
@@ -54,6 +55,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 1) {
         CLog(@"-- 查看个人信息 下一页");
+        if (indexPath.row == 3) {
+            KTVMineFriendController *vc = (KTVMineFriendController *)[UIViewController storyboardName:@"MePage" storyboardId:@"KTVMineFriendController"];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
     }
 }
 

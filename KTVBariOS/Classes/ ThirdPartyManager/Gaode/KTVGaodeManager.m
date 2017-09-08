@@ -16,6 +16,16 @@
 
 @implementation KTVGaodeManager
 
+static KTVGaodeManager *_instance = nil;
+
++ (instancetype)defaultGaode {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _instance = [[KTVGaodeManager alloc] init];
+    });
+    return _instance;
+}
+
 - (void)startAMapLocation {
     [AMapServices sharedServices].apiKey =@"您的key";
 

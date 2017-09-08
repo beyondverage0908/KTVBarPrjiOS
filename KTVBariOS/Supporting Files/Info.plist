@@ -2,8 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>CFBundleDevelopmentRegion</key>
-    <string>zh_CN</string>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>zh_CN</string>
 	<key>CFBundleDisplayName</key>
 	<string>我的KTV</string>
 	<key>CFBundleExecutable</key>
@@ -36,15 +36,66 @@
 				<string>wx4a1101d07f5b4ba6</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>ktvalipay</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>ktvalipayurlschemes</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>ktvwechat</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>wxktvpayurlsechemes</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>ktvunion</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>ktvunionpaytype</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>weibosdk</string>
+		<string>weibosdk2.5</string>
+		<string>wechat</string>
+		<string>weixin</string>
+		<string>mqqOpensdkSSoLogin</string>
+		<string>mqqopensdkapiV2</string>
+		<string>mqqopensdkapiV3</string>
+		<string>wtloginmqq2</string>
+		<string>mqq</string>
+		<string>mqqapi</string>
+		<string>timapi</string>
+		<string>alipay</string>
+		<string>alipays</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>MOBAppKey</key>
 	<string>1eed2d08caa85</string>
 	<key>MOBAppSecret</key>
 	<string>7ae24351ad3a61d0502260c9ec5c37b6</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -60,20 +111,6 @@
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
-	</array>
-	<key>LSApplicationQueriesSchemes</key>
-	<array>
-		<string>weibosdk</string>
-		<string>weibosdk2.5</string>
-		<string>wechat</string>
-		<string>weixin</string>
-		<string>mqqOpensdkSSoLogin</string>
-		<string>mqqopensdkapiV2</string>
-		<string>mqqopensdkapiV3</string>
-		<string>wtloginmqq2</string>
-		<string>mqq</string>
-		<string>mqqapi</string>
-		<string>timapi</string>
 	</array>
 </dict>
 </plist>

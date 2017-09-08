@@ -19,13 +19,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "KTVBariOS/Classes/Scenes/Login/Controller/KTVLoginController.m"
-            timestampString = "526296466.685169"
+            filePath = "KTVBariOSTests/KTVBariOSTests.m"
+            timestampString = "526461334.430808"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "311"
-            endingLineNumber = "311"
-            landmarkName = "-accountLoginService"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
+            landmarkName = "-getStoreActivitors"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -35,13 +35,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "KTVBariOS/Classes/Scenes/Login/Controller/KTVLoginController.m"
-            timestampString = "526296514.73035"
+            filePath = "KTVBariOSTests/KTVBariOSTests.m"
+            timestampString = "526461349.551752"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "318"
-            endingLineNumber = "318"
-            landmarkName = "-accountLoginService"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
+            landmarkName = "-getStoreActivitors"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

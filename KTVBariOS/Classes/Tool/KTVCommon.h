@@ -15,5 +15,7 @@
 + (KTVUser *)userInfo;
 /// 设置用户信息
 + (void)setUserInfoKey:(NSString *)infoKey infoValue:(NSString *)infoValue;
+/// 获取token
++ (NSString *)ktvToken;
 
 @end

@@ -15,6 +15,8 @@
 
 #import "KTVBarKtvDetailController.h"
 
+#import "KTVMainService.h"
+
 @interface KTVMainController ()<UITableViewDelegate, UITableViewDataSource, SDCycleScrollViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -22,6 +24,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *locationImageView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UIButton *scanQRbtn;
+
+@property (strong, nonatomic) NSMutableDictionary *mainParams;
 
 @end
 
@@ -31,10 +35,18 @@
     [super viewDidLoad];
     
     [self setupView];
+    [self initData];
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.backgroundColor = [UIColor ktvBG];
     self.tableView.tableFooterView = [[UIView alloc] init];
+    
+    [self loadMainData];
+    [self loadStoreActivitors];
+    [self loadStoreGoods];
+    [self loadStore];
+    [self loadStoreInvitators];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -49,6 +61,51 @@
 // 初始化试图
 - (void)setupView {
     self.searchBar.backgroundImage = [UIImage new];
+}
+
+// 初始化
+- (void)initData {
+    self.mainParams = [NSMutableDictionary dictionary];
+}
+
+#pragma mark - 网络
+
+- (void)loadMainData {
+
+    [self.mainParams setObject:@"0" forKey:@"storeType"];
+    [self.mainParams setObject:@"500.0" forKey:@"distance"];
+    [self.mainParams setObject:@"121.48789949" forKey:@"latitude"];
+    [self.mainParams setObject:@"31.24916171" forKey:@"longitude"];
+    [self.mainParams setObject:[NSNumber numberWithBool:YES] forKey:@"sortByDistance"];
+    [self.mainParams setObject:[NSNumber numberWithBool:NO] forKey:@"sortByStar"];
+    
+    [KTVMainService postMainPage:self.mainParams result:^(NSDictionary *result) {
+        CLog(@"--  main page data -- %@", result);
+    }];
+}
+
+- (void)loadStoreActivitors {
+    [KTVMainService getStoreActivitors:@"4" result:^(NSDictionary *result) {
+        CLog(@"-->> %@", result);
+    }];
+}
+
+- (void)loadStoreGoods {
+    [KTVMainService getStoreGoods:@"4" result:^(NSDictionary *result) {
+        CLog(@"-->> %@", result);
+    }];
+}
+
+- (void)loadStore {
+    [KTVMainService getStore:@"4" result:^(NSDictionary *result) {
+        CLog(@"-->> %@", result);
+    }];
+}
+
+- (void)loadStoreInvitators {
+    [KTVMainService getStoreInvitators:@"4" result:^(NSDictionary *result) {
+        CLog(@"-->> %@", result);
+    }];
 }
 
 #pragma mark - UITableViewDelegate 

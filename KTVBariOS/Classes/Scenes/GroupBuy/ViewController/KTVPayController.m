@@ -12,11 +12,19 @@
 #import "KTVPayCell.h"
 #import "KTVTableHeaderView.h"
 
+#import "KTVBuyService.h"
+#import "KTVPayManager.h"
+
 @interface KTVPayController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIButton *bankPayBtn;
+@property (weak, nonatomic) IBOutlet UIButton *alipayBtn;
+@property (weak, nonatomic) IBOutlet UIButton *wechatPayBtn;
 @property (weak, nonatomic) IBOutlet UILabel *hideActivityAnsLabel; // 隐藏本次活动说明
+
+@property (strong, nonatomic) NSMutableDictionary *payChannelDict; // 支付渠道
+@property (assign, nonatomic) BOOL isHiddenActivity;
 
 @end
 
@@ -29,6 +37,15 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.backgroundColor = [UIColor ktvBG];
+    
+    [self initData];
+}
+
+- (void)initData {
+    self.payChannelDict = [NSMutableDictionary dictionaryWithCapacity:3];
+    [self.payChannelDict setObject:[NSNumber numberWithBool:NO] forKey:@"unionpay"];
+    [self.payChannelDict setObject:[NSNumber numberWithBool:NO] forKey:@"alipay"];
+    [self.payChannelDict setObject:[NSNumber numberWithBool:NO] forKey:@"wechatpay"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -38,41 +55,80 @@
 #pragma mark - 事件
 
 - (IBAction)bankPayAction:(UIButton *)sender {
+    [self toggle:sender channel:@"unionpay"];
     CLog(@"-->> 银联支付");
-    [sender setSelected:!sender.isSelected];
-    if (sender.isSelected) {
-        [sender setImage:[UIImage imageNamed:@"app_radius_gou"] forState:UIControlStateNormal];
-    } else {
-        [sender setImage:[UIImage imageNamed:@"app_radius_unselect"] forState:UIControlStateNormal];
-    }
 }
 
 - (IBAction)alipayAction:(UIButton *)sender {
-    
-    [sender setSelected:!sender.isSelected];
-    if (sender.isSelected) {
-        [sender setImage:[UIImage imageNamed:@"app_radius_gou"] forState:UIControlStateNormal];
-    } else {
-        [sender setImage:[UIImage imageNamed:@"app_radius_unselect"] forState:UIControlStateNormal];
-    }
+    [self toggle:sender channel:@"alipay"];
     CLog(@"-->> 支付宝支付");
 }
 
 - (IBAction)wechatPayAction:(UIButton *)sender {
+    [self toggle:sender channel:@"wechatpay"];
     CLog(@"-->> 微信支付");
+}
+
+- (void)toggle:(UIButton *)sender channel:(NSString *)channel {
     [sender setSelected:!sender.isSelected];
-    if (sender.isSelected) {
-        [sender setImage:[UIImage imageNamed:@"app_radius_gou"] forState:UIControlStateNormal];
-    } else {
-        [sender setImage:[UIImage imageNamed:@"app_radius_unselect"] forState:UIControlStateNormal];
+    
+    for (NSString *cl in self.payChannelDict.allKeys) {
+        if (![cl isEqualToString:channel]) {
+            [self.payChannelDict setObject:[NSNumber numberWithBool:NO] forKey:cl];
+            
+            if ([cl isEqualToString:@"unionpay"]) {
+                [self.bankPayBtn setImage:[UIImage imageNamed:@"app_radius_unselect"] forState:UIControlStateNormal];
+            } else if ([cl isEqualToString:@"alipay"]) {
+                [self.alipayBtn setImage:[UIImage imageNamed:@"app_radius_unselect"] forState:UIControlStateNormal];
+            } else if ([cl isEqualToString:@"wechatpay"]) {
+                [self.wechatPayBtn setImage:[UIImage imageNamed:@"app_radius_unselect"] forState:UIControlStateNormal];
+            }
+        } else {
+            [self.payChannelDict setObject:[NSNumber numberWithBool:![[self.payChannelDict objectForKey:channel] boolValue]] forKey:channel];
+            BOOL vl = [[self.payChannelDict objectForKey:channel] boolValue];
+            
+            if (vl) {
+                [sender setImage:[UIImage imageNamed:@"app_radius_gou"] forState:UIControlStateNormal];
+            } else {
+                [sender setImage:[UIImage imageNamed:@"app_radius_unselect"] forState:UIControlStateNormal];
+            }
+        }
     }
+}
+
+- (NSString *)getPayChannel {
+    NSString *paychannel = nil;
+    for (NSString *channel in self.payChannelDict.allKeys) {
+        BOOL va = [self.payChannelDict[channel] boolValue];
+        if (va) {
+            paychannel = channel;
+            break;
+        }
+    }
+    return paychannel;
 }
 
 - (IBAction)confirmPayAction:(UIButton *)sender {
     CLog(@"-->> 确认支付出去");
     
-    KTVPaySuccessController *vc = (KTVPaySuccessController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVPaySuccessController"];
-    [self.navigationController pushViewController:vc animated:YES];
+    NSString *channel = [self getPayChannel];
+    if (!channel) {
+        [KTVToast toast:TOAST_SELECTED_PAYCHANNEL];
+        return;
+    }
+    
+    NSDictionary *payParams = @{@"channel" : channel,
+                                @"amount" : @"1",
+                                @"subject" : @"aaaa",
+                                @"body" : @"bbbb",
+                                @"orderNo" : @"1504017453722k9qadqq"};
+    [KTVBuyService postPayParams:payParams result:^(NSDictionary *result) {
+        NSDictionary *charge = result[@"data"];
+        [KTVPayManager ktvPay:AlipayType payment:charge contoller:nil completion:^(NSString *result) {
+            KTVPaySuccessController *vc = (KTVPaySuccessController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVPaySuccessController"];
+            [self.navigationController pushViewController:vc animated:YES];
+        }];
+    }];
 }
 
 - (IBAction)hideActivityAction:(UIButton *)sender {
@@ -83,6 +139,9 @@
     } else {
         [sender setImage:[UIImage imageNamed:@"app_selected_kuang"] forState:UIControlStateNormal];
     }
+    
+    // 保存变量
+    self.isHiddenActivity = sender.isSelected;
 }
 
 #pragma mark - UITableViewDelegate

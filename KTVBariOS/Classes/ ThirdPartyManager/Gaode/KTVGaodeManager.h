@@ -12,6 +12,8 @@
 
 @interface KTVGaodeManager : NSObject
 
++ (instancetype)defaultGaode;
+
 - (void)startAMapLocation;
 
 + (CLLocationDistance)distanceMeterCoordinate:(CLLocation *)pointA toPoint:(CLLocation *)pointB;

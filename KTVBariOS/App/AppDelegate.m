@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "KTVShareSDKManager.h"
 #import "KTVGaodeManager.h"
+#import <Pingpp/Pingpp.h>
 
 @interface AppDelegate ()
 
@@ -21,8 +22,8 @@
 
     // 初始ShareSDK
     [KTVShareSDKManager shareSDKInitial];
-    // 启动app就定位
-    [[[KTVGaodeManager alloc] init] startAMapLocation];
+    // 启动高德app就定位
+    [[KTVGaodeManager defaultGaode] startAMapLocation];
     
     return YES;
 }
@@ -52,6 +53,25 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+
+#pragma mark - 用于APP之间调用的回调
+
+// iOS8
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+    BOOL canHandleURL = [Pingpp handleOpenURL:url withCompletion:nil];
+    return canHandleURL;
+}
+// >= iOS9
+- (BOOL)application:(UIApplication *)app
+            openURL:(NSURL *)url
+            options:(NSDictionary *)options {
+    BOOL canHandleURL = [Pingpp handleOpenURL:url withCompletion:nil];
+    return canHandleURL;
 }
 
 

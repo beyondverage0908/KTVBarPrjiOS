@@ -46,6 +46,9 @@
 
 - (void)gotoYuePaoAction:(UIButton *)btn {
     CLog(@"-- 在约的小伙伴有45人");
+    if (self.callback) {
+        self.callback();
+    }
 }
 
 @end

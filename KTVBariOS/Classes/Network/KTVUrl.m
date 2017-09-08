@@ -42,4 +42,28 @@
     return @"/api/password/user/changePassword";
 }
 
++ (NSString *)getPingPayUrl {
+    return @"/api/pay";
+}
+
++ (NSString *)getMainUrl {
+    return @"/api/main/data";
+}
+
++ (NSString *)getAtivitorsUrl {
+    return @"/api/store/activitors/";
+}
+
++ (NSString *)getStoreGoodsUrl {
+    return @"/api/store/goods/";
+}
+
++ (NSString *)getStoreUrl {
+    return @"/api/store/";
+}
+
++ (NSString *)getStoreInvitatorsUrl {
+    return @"/api/store/invitators/";
+}
+
 @end

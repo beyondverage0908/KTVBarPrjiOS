@@ -65,13 +65,12 @@ static KTVNetworkHelper *_instance = nil;
 
 - (void)getRequestWithResquestMessage:(KTVRequestMessage *)message success:(RequestSuccess)success failure:(RequestFailure)failure {
     
-    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:message.params];
-    
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-    NSString *urlString = [NSString stringWithFormat:@"%@%@", [KTVUrl getDomainUrl], message.path];
+    NSString *url = [NSString stringWithFormat:@"%@%@", [KTVUrl getDomainUrl], message.path];
+    NSString *urlString = [NSString stringWithFormat:@"%@%@", url, message.params];
     CLog(@"URL %@", urlString);
     
-    [_manager GET:urlString parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [_manager GET:urlString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         
         // 解密服务器返回值
@@ -110,6 +109,26 @@ static KTVNetworkHelper *_instance = nil;
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     
+        if (failure) {
+            failure(error);
+        }
+    }];
+}
+
+- (void)putRequestWithResquestMessage:(KTVRequestMessage *)message success:(RequestSuccess)success failure:(RequestFailure)failure {
+    
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:message.params];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    NSString *urlString = [NSString stringWithFormat:@"%@%@", [KTVUrl getDomainUrl], message.path];
+    CLog(@"URL %@", urlString);
+    
+    [_manager PUT:urlString parameters:dict success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        // 解密服务器返回值
+        NSDictionary *result = [self sessionWithNetResponse:responseObject message:message];
+        if (success) success(result); //成功回调
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         if (failure) {
             failure(error);
         }
@@ -188,18 +207,21 @@ static KTVNetworkHelper *_instance = nil;
         [self postRequestWithResquestMessage:message success:successBlock failure:failBlock];
     } else if (message.httpType == KtvUpload) {
         [self uploadRequestWithResquestMessage:message success:successBlock failure:failBlock];
+    } else if (message.httpType == KtvPUT) {
+        [self putRequestWithResquestMessage:message success:successBlock failure:failBlock];
     } else {
         [self getRequestWithResquestMessage:message success:successBlock failure:failBlock];
     }
 }
 
 - (void)setHttpHeaderFieldWithMessage:(KTVRequestMessage *)message {
-//    if (![VHSCommon isNullString:[VHSCommon vhstoken]]) {
-//        [_manager.requestSerializer setValue:[VHSCommon vhstoken] forHTTPHeaderField:@"vhstoken"];
-//    } else {
-//        [_manager.requestSerializer setValue:@"" forHTTPHeaderField:@"vhstoken"];
-//    }
-//    
+
+    if (![KTVUtil isNullString:[KTVCommon ktvToken]]) {
+        [_manager.requestSerializer setValue:[KTVCommon ktvToken] forHTTPHeaderField:@"token"];
+    } else {
+        [_manager.requestSerializer setValue:@"" forHTTPHeaderField:@"token"];
+    }
+//
 //    [_manager.requestSerializer setValue:[VHSCommon deviceToken] forHTTPHeaderField:@"imei"];
 //    [_manager.requestSerializer setValue:[VHSCommon osVersion] forHTTPHeaderField:@"osversion"];
 //    [_manager.requestSerializer setValue:[VHSCommon appVersion] forHTTPHeaderField:@"appversion"];
@@ -209,7 +231,7 @@ static KTVNetworkHelper *_instance = nil;
 //        [_manager.requestSerializer setValue:@"ios" forHTTPHeaderField:@"encrypt"];
 //    }
 //    
-//    CLog(@"vhstoken = %@", [VHSCommon vhstoken]);
+    CLog(@"ktvtoken = %@", [KTVCommon ktvToken]);
 }
 
 #pragma mark - 加密和解密服务器数据

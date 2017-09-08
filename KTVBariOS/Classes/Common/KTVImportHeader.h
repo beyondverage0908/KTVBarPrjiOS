@@ -12,6 +12,7 @@
 // ThirdParty
 #import "Masonry.h"
 #import <YYModel/YYModel.h>
+#import <Pingpp/Pingpp.h>
 
 // Category
 #import "UIColor+KTVExtension.h"

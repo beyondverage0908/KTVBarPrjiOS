@@ -10,4 +10,6 @@
 
 @interface KTVBarKtvDetailHeaderCell : UITableViewCell
 
+@property (nonatomic, copy) void (^callback)();
+
 @end

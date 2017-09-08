@@ -16,6 +16,7 @@
 
 #import "KTVPackageDetailController.h"
 #import "KTVOrderConfirmController.h"
+#import "KTVShareFriendController.h"
 
 @interface KTVPackageController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -30,6 +31,7 @@
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.backgroundColor = [UIColor ktvBG];
     
     self.tableView.tableFooterView = [self tableViewFooter];
 }
@@ -204,6 +206,10 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         KTVBarKtvDetailHeaderCell *cell = (KTVBarKtvDetailHeaderCell *)[tableView dequeueReusableCellWithIdentifier:KTVStringClass(KTVBarKtvDetailHeaderCell)];
+        cell.callback = ^() {
+            KTVShareFriendController *vc = (KTVShareFriendController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVShareFriendController"];
+            [self.navigationController pushViewController:vc animated:YES];
+        };
         return cell;
     } else if (indexPath.section == 1) {
         KTVIntroduceCell *cell = (KTVIntroduceCell *)[tableView dequeueReusableCellWithIdentifier:KTVStringClass(KTVIntroduceCell)];

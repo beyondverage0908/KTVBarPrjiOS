@@ -1450,9 +1450,11 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="alipayBtn" destination="amV-aB-cvi" id="Mt1-ad-W2X"/>
                         <outlet property="bankPayBtn" destination="Eab-gj-41r" id="pk9-kY-Sih"/>
                         <outlet property="hideActivityAnsLabel" destination="LNj-BT-paT" id="FwB-Sc-g2d"/>
                         <outlet property="tableView" destination="VfM-oS-N9W" id="gEa-qR-rrM"/>
+                        <outlet property="wechatPayBtn" destination="oO8-N0-MaN" id="49I-QQ-qIV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8CS-d4-HUO" userLabel="First Responder" sceneMemberID="firstResponder"/>

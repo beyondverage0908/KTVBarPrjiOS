@@ -33,4 +33,22 @@
 
 /// 更改密码
 + (NSString *)getChangePasswordUrl;
+
+/// ping++支付
++ (NSString *)getPingPayUrl;
+
+/// 首页数据
++ (NSString *)getMainUrl;
+
+/// 获取门店暖场人
++ (NSString *)getAtivitorsUrl;
+
+/// 获取门店商品
++ (NSString *)getStoreGoodsUrl;
+
+/// 获取门店
++ (NSString *)getStoreUrl;
+
+/// 获取门店在约人数
++ (NSString *)getStoreInvitatorsUrl;
 @end
