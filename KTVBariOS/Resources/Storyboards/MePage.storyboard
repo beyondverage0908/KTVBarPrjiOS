@@ -648,6 +648,7 @@
                             <constraint firstItem="IAg-Mh-pvD" firstAttribute="top" secondItem="Gdc-1t-ERe" secondAttribute="top" id="wLf-NS-aF3"/>
                         </constraints>
                     </view>
+                    <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="tableView" destination="IAg-Mh-pvD" id="1qr-Up-dAv"/>
                     </connections>

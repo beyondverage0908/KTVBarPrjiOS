@@ -9,6 +9,7 @@
 #import "KTVMineFriendController.h"
 
 #import "KTVFriendCell.h"
+#import "KTVThreeRightView.h"
 
 @interface KTVMineFriendController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -25,10 +26,33 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.backgroundColor = [UIColor ktvBG];
+    
+    [self customRightNavigation];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+- (void)customRightNavigation {
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn.frame = CGRectMake(0, 0, 52, 18);
+    [btn setImage:[UIImage imageNamed:@"app_add_friend"] forState:UIControlStateNormal];
+    [btn addTarget:self action:@selector(addFriendAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *rightBtnItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
+    self.navigationItem.rightBarButtonItem = rightBtnItem;
+}
+
+#pragma mark - 事件
+
+- (void)addFriendAction:(UIButton *)btn {
+    CLog(@"-->> 添加好友");
+    KTVThreeRightView *rightView = [[KTVThreeRightView alloc] initCustomImageArray:nil textArray:@[@"游戏源码",@"户等场景",@"于选择",@"虽然"] selfFrame:CGRectMake(SCREENW - 160, 50, 145, 176)];
+    rightView.selectRowBlock = ^(NSInteger row) {
+        CLog(@"-->> 选中了第%@行", @(row));
+    };
+    [rightView show:YES];
 }
 
 #pragma mark - UITableViewDelegate
