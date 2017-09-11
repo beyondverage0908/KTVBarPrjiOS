@@ -14,10 +14,16 @@
 #import "KTVBarKtvDetailController.h"
 #import "KTVGroupBuyDetailController.h"
 
+#import "KTVMainService.h"
+#import "KTVStoreContainer.h"
+
 @interface KTVBarController ()<UITableViewDelegate, UITableViewDataSource, SDCycleScrollViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+
+@property (strong, nonatomic) NSMutableDictionary *mainParams;
+@property (strong, nonatomic) NSMutableArray *storeContainerList;
 
 @end
 
@@ -27,6 +33,12 @@
     [super viewDidLoad];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.backgroundColor = [UIColor ktvBG];
+    // 数据初始化
+    [self initData];
+    
+    // 获取酒吧/ktv主页数据
+    [self loadMainData];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -78,8 +90,39 @@
     return allBgView;
 }
 
+#pragma mark - 初始化
+
+- (void)initData {
+    self.mainParams = [NSMutableDictionary dictionary];
+    self.storeContainerList = [NSMutableArray array];
+}
+
 - (void)loadMoreInfoAction:(UIButton *)btn {
     CLog(@"--->>> 查看其他2个团购");
+}
+
+#pragma mark - 网络
+
+- (void)loadMainData {
+    
+    [self.mainParams setObject:@"0" forKey:@"storeType"];
+    [self.mainParams setObject:@"500.0" forKey:@"distance"];
+    [self.mainParams setObject:@"121.48789949" forKey:@"latitude"];
+    [self.mainParams setObject:@"31.24916171" forKey:@"longitude"];
+    [self.mainParams setObject:[NSNumber numberWithBool:YES] forKey:@"sortByDistance"];
+    [self.mainParams setObject:[NSNumber numberWithBool:NO] forKey:@"sortByStar"];
+    
+    [KTVMainService postMainPage:self.mainParams result:^(NSDictionary *result) {
+        if ([result[@"code"] isEqualToString:ktvCode]) {
+            for (NSDictionary *dict in result[@"data"]) {
+                KTVStoreContainer *storeContainer = [KTVStoreContainer yy_modelWithDictionary:dict];
+                [self.storeContainerList addObject:storeContainer];
+            }
+            [self.tableView reloadData];
+        } else {
+            CLog(@"-- >> filure");
+        }
+    }];
 }
 
 #pragma mark - UITableViewDelegate
@@ -108,14 +151,25 @@
         KTVFilterView *filterView = [[KTVFilterView alloc] initWithFilter:@[@"酒吧", @"附近", @"智能排序", @"筛选"]];
         return filterView;
     }
-    return [self sectionFooterView:@"2"];
+    
+    // 是否显示团购
+    NSInteger idx = section - 1;
+    KTVStoreContainer *storeContainer = self.storeContainerList[idx];
+    NSInteger groupbuyCount = [storeContainer.store.groupBuyList count];
+    // 查看其他几个团购
+    return [self sectionFooterView:[NSString stringWithFormat:@"%@", @(groupbuyCount)]];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     if (section == 0) {
         return 40;
     }
-    return 35;
+    
+    // 是否显示团购
+    NSInteger idx = section - 1;
+    KTVStoreContainer *storeContainer = self.storeContainerList[idx];
+    NSInteger groupbuyCount = [storeContainer.store.groupBuyList count] + 1;
+    return groupbuyCount ? 35.0f : 0.0f;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -134,7 +188,7 @@
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return 1 + [self.storeContainerList count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -143,7 +197,16 @@
             return 1;
             break;
         default:
-            return 3;
+        {
+            NSInteger idx = section - 1;
+            KTVStoreContainer *storeContainer = self.storeContainerList[idx];
+            
+            NSInteger count = 1;
+            NSInteger packageCount = storeContainer.store.packageList.count + 1;
+            count += packageCount;
+            
+            return count;
+        }
             break;
     }
 }
@@ -163,13 +226,16 @@
             break;
         default:
         {
+            NSInteger idx = indexPath.section - 1;
+            KTVStoreContainer *storeContainer = self.storeContainerList[idx];
+            
             if (indexPath.row == 0) {
                 KTVGuessLikeCell *cell = (KTVGuessLikeCell *)[tableView dequeueReusableCellWithIdentifier:KTVStringClass(KTVGuessLikeCell)];
-                return cell;
-            } else {
-                KTVPackageCell *cell = (KTVPackageCell *)[tableView dequeueReusableCellWithIdentifier:KTVStringClass(KTVPackageCell)];
+                cell.storeContainer = self.storeContainerList[indexPath.section - 1];
                 return cell;
             }
+            KTVPackageCell *cell = (KTVPackageCell *)[tableView dequeueReusableCellWithIdentifier:KTVStringClass(KTVPackageCell)];
+            return cell;
         }
             break;
     }

@@ -8,17 +8,23 @@
 
 #import "KTVRecommendCell.h"
 
+@interface KTVRecommendCell ()
+
+@property (weak, nonatomic) IBOutlet UIImageView *toastImageView;
+@property (weak, nonatomic) IBOutlet UILabel *locationLabel;
+@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
+
+
+@end
+
 @implementation KTVRecommendCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 
 @end

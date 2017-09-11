@@ -19,7 +19,7 @@
 #import "KTVTableHeaderView.h"
 
 #import "KTVDandianController.h"
-
+#import "KTVSelectedBeautyController.h"
 
 @interface KTVGroupBuyDetailController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -82,10 +82,16 @@
         KTVTableHeaderView *headerView = [[KTVTableHeaderView alloc] initWithImageUrl:nil title:@"活动详情" remark:nil];
         return headerView;
     } else if (section == 3) {
-        KTVTableHeaderView *headerView = [[KTVTableHeaderView alloc] initWithImageUrl:nil title:@"邀约TA暖场" headerImgUrl:@"app_change_batch" remark:nil];
+        KTVTableHeaderView *headerView = [[KTVTableHeaderView alloc] initWithImageUrl:nil title:@"邀约TA暖场" headerImgUrl:@"app_change_batch" remarkUrl:@"app_arrow_right_hui" remark:nil];
         headerView.headerActionBlock = ^(KTVHeaderType type) {
             if (type == HeaderType) {
                 CLog(@"--->>> 邀约TA暖床");
+            }
+        };
+        headerView.bgActionBlock = ^(KTVHeaderType headerType) {
+            if (headerType == BGType) {
+                KTVSelectedBeautyController *vc = (KTVSelectedBeautyController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVSelectedBeautyController"];
+                [self.navigationController pushViewController:vc animated:YES];
             }
         };
         return headerView;

@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+#import "KTVUser.h"
+
 @interface KTVBeautyGirlCollectionCell : UICollectionViewCell
+
+@property (nonatomic, strong) KTVUser *user;
+
+@property (nonatomic, copy) void (^callback)(KTVUser *user, BOOL isSelected);
 
 @end

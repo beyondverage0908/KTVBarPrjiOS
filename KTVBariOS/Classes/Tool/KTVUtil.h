@@ -18,4 +18,6 @@
 
 + (id)objectForKey:(NSString *)key;
 
++ (void)tellphone:(NSString *)phone;
+
 @end

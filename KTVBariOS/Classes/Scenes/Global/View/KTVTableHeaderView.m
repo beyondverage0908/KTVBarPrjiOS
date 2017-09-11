@@ -13,8 +13,12 @@
 - (instancetype)initWithImageUrl:(NSString *)leadingImgUrl title:(NSString *)headerTitle headerImgUrl:(NSString *)headerUrl remarkUrl:(NSString *)remarkUrl remark:(NSString *)headerRemark {
     self = [super init];
     if (self) {
-        UIImageView *bgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"mainpage_all_bg_line"]];
+    
+        UIButton *bgView = [[UIButton alloc] init];
         [self addSubview:bgView];
+        [bgView setBackgroundImage:[UIImage imageNamed:@"mainpage_all_bg_line"]
+                          forState:UIControlStateNormal];
+        [bgView addTarget:self action:@selector(bgBtnAction:) forControlEvents:UIControlEventTouchUpInside];
         [bgView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.equalTo(self);
         }];
@@ -122,6 +126,12 @@
         } else if (btn.tag == 10002) {
             self.headerActionBlock(RemarkType);
         }
+    }
+}
+
+- (void)bgBtnAction:(UIButton *)btn {
+    if (self.bgActionBlock) {
+        self.bgActionBlock(BGType);
     }
 }
 

@@ -66,4 +66,13 @@
     return [[NSUserDefaults standardUserDefaults] objectForKey:key];
 }
 
++ (void)tellphone:(NSString *)phone {
+    if ([KTVUtil isNullString:phone]) return;
+    
+    NSURL *telUrl = [NSURL URLWithString:[NSString stringWithFormat:@"tel://%@", phone]];
+    if ([[UIApplication sharedApplication] canOpenURL:telUrl]) {
+        [[UIApplication sharedApplication] openURL:telUrl];
+    }
+}
+
 @end

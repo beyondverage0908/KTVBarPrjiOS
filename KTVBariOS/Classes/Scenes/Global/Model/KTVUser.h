@@ -7,10 +7,19 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "KTVUserDetail.h"
 
 @interface KTVUser : NSObject
 
 @property (nonatomic, strong) NSString *account;
 @property (nonatomic, strong) NSString *phone;
+
+@property (nonatomic, assign) NSInteger userType;
+@property (nonatomic, strong) NSString * username;
+@property (nonatomic, strong) NSString * nickName;
+@property (nonatomic, assign) NSInteger age;
+@property (nonatomic, assign) NSInteger sex;
+@property (nonatomic, strong) NSString * gender;
+@property (nonatomic, strong) KTVUserDetail *userDetail;
 
 @end

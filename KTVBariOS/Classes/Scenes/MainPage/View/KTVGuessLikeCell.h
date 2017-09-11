@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "KTVStoreContainer.h"
 
 @interface KTVGuessLikeCell : UITableViewCell
+
+@property (nonatomic, strong) KTVStoreContainer *storeContainer;
 
 @end

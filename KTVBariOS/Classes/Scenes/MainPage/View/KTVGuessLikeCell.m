@@ -47,6 +47,7 @@
 // 下订单 - 订座
 - (IBAction)placeOrderAction:(UIButton *)sender {
     CLog(@"首页-猜你喜欢-下订单-订座");
+    [KTVUtil tellphone:@"18516133629"];
 }
 
 // 查看详情
@@ -54,6 +55,17 @@
     CLog(@"首页-猜你喜欢-查看详情");
 }
 
+
+#pragma mark - 设值
+
+- (void)setStoreContainer:(KTVStoreContainer *)storeContainer {
+    _storeContainer = storeContainer;
+    
+    self.store.text = _storeContainer.store.storeName;
+    self.starView.stars = _storeContainer.store.star;
+    self.location.text = [NSString stringWithFormat:@"%@ %@km", _storeContainer.store.address.addressName, @(_storeContainer.distance)];
+    self.appointment.text = [NSString stringWithFormat:@"在约的小伙伴%@人", @([_storeContainer.userList count])];;
+}
 
 
 @end

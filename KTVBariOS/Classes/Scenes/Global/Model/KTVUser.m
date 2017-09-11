@@ -10,4 +10,15 @@
 
 @implementation KTVUser
 
+- (BOOL)modelCustomTransformFromDictionary:(NSDictionary *)dic {
+    if ([dic[@"sex"] integerValue] == 0) {
+        _gender = @"女";
+    }
+    if ([dic[@"sex"] integerValue] == 1) {
+        _gender = @"男";
+    }
+    
+    return YES;
+}
+
 @end

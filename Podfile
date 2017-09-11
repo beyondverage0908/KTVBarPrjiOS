@@ -12,6 +12,7 @@ target 'KTVBariOS' do
     pod 'Masonry'
     pod 'SDWebImage'
     pod 'YYModel'
+	pod 'SDWebImage', '~> 4.0'
 
 
 # Ping++

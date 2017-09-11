@@ -10,7 +10,7 @@
 
 @interface KTVThreeRightView : UIView
 
-@property(nonatomic,copy)void (^selectRowBlock)(NSInteger row);
+@property(nonatomic,copy) void (^selectRowBlock)(NSInteger row);
 
 //点击空白部分隐藏
 @property (nonatomic, assign) BOOL closeOnTouchUpOutside;

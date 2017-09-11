@@ -12,6 +12,10 @@
 #import "KTVBeautyGirlCollectionCell.h"
 #import "KTVFilterView.h"
 
+#import "KTVMainService.h"
+
+#import "KTVUser.h"
+
 @interface KTVSelectedBeautyController ()<UICollectionViewDelegate, UICollectionViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
@@ -19,6 +23,9 @@
 @property (weak, nonatomic) IBOutlet UIView *collectionHeaderView;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UIButton *yueTaBtn;
+
+@property (strong, nonatomic) NSMutableArray *activitorList;    // 暖场人列表
+@property (strong, nonatomic) NSMutableArray *selActivitorList; // 已约的暖场人列表
 
 @end
 
@@ -28,6 +35,7 @@ static NSInteger RowCount = 2;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"邀约暖场人";
     
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
@@ -35,20 +43,48 @@ static NSInteger RowCount = 2;
     self.collectionView.collectionViewLayout = [self setupFlowLayout];
     
     [self layoutCollectionHeader];
+    
+    [self initData];
+    
+    // 获取暖场人
+    [self loadStoreActivitors];
+}
+
+- (void)initData {
+    self.activitorList = [NSMutableArray array];
+    self.selActivitorList = [NSMutableArray array];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [self hideNavigationBar:NO];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self hideNavigationBar:YES];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+#pragma mark - 网络
+
+// 获取暖场人
+- (void)loadStoreActivitors {
+    [KTVMainService getStoreActivitors:@"4" result:^(NSDictionary *result) {
+        CLog(@"-->> %@", result);
+        if (![result[@"msg"] isEqualToString:ktvSuccess]) {
+            return;
+        }
+        
+        NSArray *activitorList = result[@"data"][@"activitorList"];
+        for (NSDictionary *dict in activitorList) {
+            KTVUser *user = [KTVUser yy_modelWithDictionary:dict];
+            [self.activitorList addObject:user];
+        }
+        
+        [self.collectionView reloadData];
+    }];
 }
 
 #pragma mark - 布局
@@ -83,6 +119,9 @@ static NSInteger RowCount = 2;
 
 - (IBAction)resetAction:(UIButton *)sender {
     CLog(@"选美女--重置");
+    [self.selActivitorList removeAllObjects];
+    [self resetBtnYueNumber:[self.selActivitorList count]];
+    [self.collectionView reloadData];
 }
 
 - (IBAction)yueTaAction:(UIButton *)sender {
@@ -93,6 +132,13 @@ static NSInteger RowCount = 2;
     CLog(@"选美女--下一步");
     KTVOrderUploadController *vc = (KTVOrderUploadController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVOrderUploadController"];
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+#pragma mark - 封装
+
+- (void)resetBtnYueNumber:(NSInteger)yueNumber {
+    NSString *yueStr = [NSString stringWithFormat:@"约TA(%@)", @(yueNumber)];
+    [self.yueTaBtn setTitle:yueStr forState:UIControlStateNormal];
 }
 
 #pragma mark - UICollectionViewDelegate
@@ -108,11 +154,23 @@ static NSInteger RowCount = 2;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 10;
+    return [self.activitorList count];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     KTVBeautyGirlCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"KTVBeautyGirlCollectionCell" forIndexPath:indexPath];
+    KTVUser *user = self.activitorList[indexPath.row];
+    cell.user = user;
+    
+    cell.callback = ^(KTVUser *user, BOOL isSelected) {
+        if (isSelected) {
+            [self.selActivitorList addObject:user];
+        } else {
+            [self.selActivitorList removeObject:user];
+        }
+        
+        [self resetBtnYueNumber:[self.selActivitorList count]];
+    };
     return cell;
 }
 

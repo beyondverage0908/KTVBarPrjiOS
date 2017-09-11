@@ -32,6 +32,25 @@
     } else {
         [sender setImage:[UIImage imageNamed:@"app_kuang_red"] forState:UIControlStateNormal];
     }
+    
+    if (self.callback) {
+        self.callback(self.user, sender.isSelected);
+    }
+}
+
+- (void)setUser:(KTVUser *)user {
+    _user = user;
+    
+    [self.yuetaBtn setSelected:NO];
+    
+    [self.yuetaBtn setImage:[UIImage imageNamed:@"app_kuang_red"] forState:UIControlStateNormal];
+    self.nicknameLabel.text = user.nickName;
+    self.ageLabel.text = [NSString stringWithFormat:@"%@岁", @(user.age)];
+    if (user.sex == 0) {
+        [self.genderBtn setImage:[UIImage imageNamed:@"app_user_woman"] forState:UIControlStateNormal];
+    } else {
+        [self.genderBtn setImage:[UIImage imageNamed:@"app_user_man"] forState:UIControlStateNormal];
+    }
 }
 
 

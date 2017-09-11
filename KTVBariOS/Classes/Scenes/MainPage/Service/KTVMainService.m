@@ -7,6 +7,7 @@
 //
 
 #import "KTVMainService.h"
+#import "KTVMainLogic.h"
 
 @implementation KTVMainService
 
@@ -17,6 +18,7 @@
     msg.params = params;
     
     [[KTVNetworkHelper sharedInstance] send:msg success:^(NSDictionary *result) {
+        // 数据接口解析
         responseResult(result);
     } fail:^(NSError *error) {
         CLog(@"--->>>%@", error);

@@ -25,8 +25,6 @@
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UIButton *scanQRbtn;
 
-@property (strong, nonatomic) NSMutableDictionary *mainParams;
-
 @end
 
 @implementation KTVMainController
@@ -42,7 +40,7 @@
     self.tableView.backgroundColor = [UIColor ktvBG];
     self.tableView.tableFooterView = [[UIView alloc] init];
     
-    [self loadMainData];
+    // 获取暖场人
     [self loadStoreActivitors];
     [self loadStoreGoods];
     [self loadStore];
@@ -65,24 +63,10 @@
 
 // 初始化
 - (void)initData {
-    self.mainParams = [NSMutableDictionary dictionary];
+    
 }
 
 #pragma mark - 网络
-
-- (void)loadMainData {
-
-    [self.mainParams setObject:@"0" forKey:@"storeType"];
-    [self.mainParams setObject:@"500.0" forKey:@"distance"];
-    [self.mainParams setObject:@"121.48789949" forKey:@"latitude"];
-    [self.mainParams setObject:@"31.24916171" forKey:@"longitude"];
-    [self.mainParams setObject:[NSNumber numberWithBool:YES] forKey:@"sortByDistance"];
-    [self.mainParams setObject:[NSNumber numberWithBool:NO] forKey:@"sortByStar"];
-    
-    [KTVMainService postMainPage:self.mainParams result:^(NSDictionary *result) {
-        CLog(@"--  main page data -- %@", result);
-    }];
-}
 
 - (void)loadStoreActivitors {
     [KTVMainService getStoreActivitors:@"4" result:^(NSDictionary *result) {
@@ -106,6 +90,62 @@
     [KTVMainService getStoreInvitators:@"4" result:^(NSDictionary *result) {
         CLog(@"-->> %@", result);
     }];
+}
+
+#pragma mark - 事件
+
+- (void)tableHeaderAction:(UIButton *)btn {
+    if (btn.tag == 2) {
+        CLog(@"--->> 猜你喜欢");
+    } else if (btn.tag == 3) {
+        CLog(@"--->> 附近活动");
+    }
+}
+
+#pragma mark - Section Header 封装方法
+
+- (UIView *)tableViewHeader:(NSString *)title tableSection:(NSInteger)section {
+    
+    UIView *bgView = [[UIView alloc] init];
+    bgView.backgroundColor = [UIColor ktvBG];
+    
+    UIButton *bgImgView = [[UIButton alloc] init];
+    [bgView addSubview:bgImgView];
+    [bgImgView setBackgroundImage:[UIImage imageNamed:@"mainpage_all_bg_line"] forState:UIControlStateNormal];
+    [bgImgView addTarget:self action:@selector(tableHeaderAction:) forControlEvents:UIControlEventTouchUpInside];
+    bgImgView.tag = section;
+    [bgImgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(bgView);
+    }];
+    
+    UIView *leftLine = [[UIView alloc] init];
+    [bgView addSubview:leftLine];
+    leftLine.backgroundColor = [UIColor ktvRed];
+    [leftLine mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(bgView);
+        make.height.equalTo(bgView).multipliedBy(0.5f);
+        make.width.mas_equalTo(2.0f);
+        make.centerY.equalTo(bgView);
+    }];
+    
+    UILabel *titleLabel = [[UILabel alloc] init];
+    [bgView addSubview:titleLabel];
+    titleLabel.textColor = [UIColor whiteColor];
+    titleLabel.font = [UIFont boldSystemFontOfSize:15.0f];
+    titleLabel.text = title;
+    [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(leftLine.mas_right).offset(7.0f);
+        make.centerY.equalTo(bgView);
+    }];
+    
+    UIImageView *arrowImgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"app_arrow_right_hui"]];
+    [bgView addSubview:arrowImgView];
+    [arrowImgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(bgView);
+        make.left.mas_equalTo(titleLabel.mas_right).offset(7.0f);
+    }];
+    
+    return bgView;
 }
 
 #pragma mark - UITableViewDelegate 
@@ -148,43 +188,12 @@
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 40.0f)];
-    bgView.backgroundColor = [UIColor ktvBG];
-    
-    UIImageView *bgImgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"mainpage_all_bg_line"]];
-    [bgView addSubview:bgImgView];
-    [bgImgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(bgView);
-    }];
-    
-    UIView *leftLine = [[UIView alloc] init];
-    [bgView addSubview:leftLine];
-    leftLine.backgroundColor = [UIColor ktvRed];
-    [leftLine mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(bgView);
-        make.height.equalTo(bgView).multipliedBy(0.5f);
-        make.width.mas_equalTo(2.0f);
-        make.centerY.equalTo(bgView);
-    }];
-    
-    UILabel *titleLabel = [[UILabel alloc] init];
-    [bgView addSubview:titleLabel];
-    titleLabel.textColor = [UIColor whiteColor];
-    titleLabel.font = [UIFont boldSystemFontOfSize:15.0f];
-    titleLabel.text = @"猜你喜欢";
-    [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(leftLine.mas_right).offset(7.0f);
-        make.centerY.equalTo(bgView);
-    }];
-    
-    UIImageView *arrowImgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"app_arrow_right_hui"]];
-    [bgView addSubview:arrowImgView];
-    [arrowImgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(bgView);
-        make.left.mas_equalTo(titleLabel.mas_right).offset(7.0f);
-    }];
-    
-    return bgView;
+    if (section == 2) {
+        return [self tableViewHeader:@"猜你喜欢" tableSection:section];
+    } else if (section == 3) {
+        return [self tableViewHeader:@"附近活动" tableSection:section];
+    }
+    return nil;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
