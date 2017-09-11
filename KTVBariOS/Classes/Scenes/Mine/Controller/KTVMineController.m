@@ -10,6 +10,7 @@
 #import "KTVLoginGuideController.h"
 #import "KTVUserInfoController.h"
 #import "KTVMineFriendController.h"
+#import "KTVOrderStatusListController.h"
 
 #import "KTVUserHeaderCell.h"
 #import "KTVUserInfoCell.h"
@@ -54,8 +55,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 1) {
-        CLog(@"-- 查看个人信息 下一页");
-        if (indexPath.row == 3) {
+        if (indexPath.row == 1) {
+            KTVOrderStatusListController *vc = (KTVOrderStatusListController *)[UIViewController storyboardName:@"MePage" storyboardId:@"KTVOrderStatusListController"];
+            [self.navigationController pushViewController:vc animated:YES];
+        } else if (indexPath.row == 3) {
+            CLog(@"-- 查看个人信息 下一页");
             KTVMineFriendController *vc = (KTVMineFriendController *)[UIViewController storyboardName:@"MePage" storyboardId:@"KTVMineFriendController"];
             [self.navigationController pushViewController:vc animated:YES];
         }

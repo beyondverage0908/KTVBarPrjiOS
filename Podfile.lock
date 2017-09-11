@@ -37,7 +37,7 @@ DEPENDENCIES:
   - AMapSearch-NO-IDFA
   - Masonry
   - Pingpp/Alipay (~> 2.2.17)
-  - SDWebImage
+  - SDWebImage (~> 4.0)
   - YYModel
 
 SPEC CHECKSUMS:
@@ -51,6 +51,6 @@ SPEC CHECKSUMS:
   SDWebImage: 0e435c14e402a6730315a0fb79f95e68654d55a4
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
-PODFILE CHECKSUM: 2370b6830c83e8fdf1e3affb0c1ba8bd752d5304
+PODFILE CHECKSUM: de4fa799b9de985a864df56bd6ab16f26c068f18
 
 COCOAPODS: 1.2.1

@@ -30,8 +30,10 @@
 
 @implementation KTVBarKtvDetailController
 
+// 店铺详情(酒吧选座)
 - (void)viewDidLoad {
     [super viewDidLoad];
+    CLog(@"-->> 店铺详情(酒吧选座)");
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;

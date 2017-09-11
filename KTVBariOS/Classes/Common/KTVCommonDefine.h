@@ -42,7 +42,9 @@
 
 
 // 对服务端状态定义
-#define ktvSuccess       @"Success"
-#define ktvCode          @"00000"
+#define ktvSuccess          @"Success"
+#define ktvCode             @"00000"
+#define ktvDetail           @"detail"
+
 
 #endif /* KTVCommonDefine_h */

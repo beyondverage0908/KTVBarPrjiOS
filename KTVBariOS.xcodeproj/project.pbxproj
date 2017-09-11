@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		33038AC81F5CF05D0045A818 /* UILabel+Ktv.m in Sources */ = {isa = PBXBuildFile; fileRef = 33038AC71F5CF05D0045A818 /* UILabel+Ktv.m */; };
+		330622B51F66BEA8001B0EE5 /* KTVOrderStatusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 330622B41F66BEA8001B0EE5 /* KTVOrderStatusCell.m */; };
+		330622B81F66BEEC001B0EE5 /* KTVOrderStatusListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 330622B71F66BEEC001B0EE5 /* KTVOrderStatusListController.m */; };
 		3308B1EA1F63C70000012F9A /* KTVStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 3308B1E91F63C70000012F9A /* KTVStore.m */; };
 		3308B1ED1F63C89E00012F9A /* KTVAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 3308B1EC1F63C89E00012F9A /* KTVAddress.m */; };
 		330A93871F03ED2A001B320A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 330A93831F03ED2A001B320A /* AppDelegate.m */; };
@@ -185,6 +187,10 @@
 /* Begin PBXFileReference section */
 		33038AC61F5CF05D0045A818 /* UILabel+Ktv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+Ktv.h"; sourceTree = "<group>"; };
 		33038AC71F5CF05D0045A818 /* UILabel+Ktv.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+Ktv.m"; sourceTree = "<group>"; };
+		330622B31F66BEA8001B0EE5 /* KTVOrderStatusCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVOrderStatusCell.h; sourceTree = "<group>"; };
+		330622B41F66BEA8001B0EE5 /* KTVOrderStatusCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVOrderStatusCell.m; sourceTree = "<group>"; };
+		330622B61F66BEEC001B0EE5 /* KTVOrderStatusListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVOrderStatusListController.h; sourceTree = "<group>"; };
+		330622B71F66BEEC001B0EE5 /* KTVOrderStatusListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVOrderStatusListController.m; sourceTree = "<group>"; };
 		3308B1E81F63C70000012F9A /* KTVStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVStore.h; sourceTree = "<group>"; };
 		3308B1E91F63C70000012F9A /* KTVStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVStore.m; sourceTree = "<group>"; };
 		3308B1EB1F63C89E00012F9A /* KTVAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVAddress.h; sourceTree = "<group>"; };
@@ -1222,6 +1228,8 @@
 				3382712E1F5D992000D4E366 /* KTVUserInfoController.m */,
 				33E446E31F6157C000D792A3 /* KTVMineFriendController.h */,
 				33E446E41F6157C000D792A3 /* KTVMineFriendController.m */,
+				330622B61F66BEEC001B0EE5 /* KTVOrderStatusListController.h */,
+				330622B71F66BEEC001B0EE5 /* KTVOrderStatusListController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1264,6 +1272,8 @@
 				33AEAC3A1F5E7D05000003AE /* KTVUserPhotoCollectionCell.m */,
 				33E446E01F6156A100D792A3 /* KTVFriendCell.h */,
 				33E446E11F6156A100D792A3 /* KTVFriendCell.m */,
+				330622B31F66BEA8001B0EE5 /* KTVOrderStatusCell.h */,
+				330622B41F66BEA8001B0EE5 /* KTVOrderStatusCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1630,6 +1640,7 @@
 			files = (
 				33AEAC421F5E9FC1000003AE /* KTVUser.m in Sources */,
 				339AED4B1F528DCD00473C29 /* KTVDandianItemCollectionCell.m in Sources */,
+				330622B51F66BEA8001B0EE5 /* KTVOrderStatusCell.m in Sources */,
 				3398266D1F55750F00EAB238 /* KTVOrderConfirmController.m in Sources */,
 				33F0E2131F1C51EC009AA2DC /* KTVUnderlineButton.m in Sources */,
 				331684951F5C3A3A002C2AD2 /* KTVPZUserHeaderCell.m in Sources */,
@@ -1649,6 +1660,7 @@
 				3329B74D1F400C9400729FB6 /* KTVBarKtvReserveCell.m in Sources */,
 				338872591F6028C0008693B9 /* KTVMainService.m in Sources */,
 				334214E61F49813400D7D5D0 /* KTVLoginService.m in Sources */,
+				330622B81F66BEEC001B0EE5 /* KTVOrderStatusListController.m in Sources */,
 				33D777031F305CD100077BE5 /* KTVToast.m in Sources */,
 				3319C0FE1F6513A00008E897 /* KTVMainLogic.m in Sources */,
 				33C138F61F56FD00000F8C37 /* KTVOrderUploadCell.m in Sources */,

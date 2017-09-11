@@ -21,9 +21,15 @@
 #import "KTVDandianController.h"
 #import "KTVSelectedBeautyController.h"
 
+#import "KTVMainService.h"
+
+#import "KTVUser.h"
+
 @interface KTVGroupBuyDetailController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+
+@property (strong, nonatomic) NSMutableArray *activitorList;
 
 @end
 
@@ -31,11 +37,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    CLog(@"-->> 团购详情");
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    
     self.tableView.backgroundColor = [UIColor ktvBG];
+    
+    [self initData];
+    
+    [self loadStoreActivitors];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -46,6 +55,28 @@
     [super didReceiveMemoryWarning];
 }
 
+- (void)initData {
+    self.activitorList = [NSMutableArray array];
+}
+
+#pragma mark - 网络
+
+/// 获取门店在约人数
+- (void)loadStoreActivitors {
+    // 在约的小伙伴
+    [KTVMainService getStoreActivitors:@"4" result:^(NSDictionary *result) {
+        if (![result[@"code"] isEqualToString:ktvCode]) {
+            [KTVToast toast:result[@"detail"]];
+            return;
+        }
+        
+        for (NSDictionary *dict in result[@"data"][@"activitorList"]) {
+            KTVUser *user = [KTVUser yy_modelWithDictionary:dict];
+            [self.activitorList addObject:user];
+        }
+        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
+    }];
+}
 
 #pragma mark - UITableViewDelegate
 
@@ -139,6 +170,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         KTVGroupBuyHeaderCell *cell = (KTVGroupBuyHeaderCell *)[tableView dequeueReusableCellWithIdentifier:@"KTVGroupBuyHeaderCell"];
+        cell.activitorList = self.activitorList;
         return cell;
     } else if (indexPath.section == 1) {
         if (indexPath.row == 0) {

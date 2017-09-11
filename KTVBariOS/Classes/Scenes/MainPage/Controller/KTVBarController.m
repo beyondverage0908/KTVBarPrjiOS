@@ -99,6 +99,9 @@
 
 - (void)loadMoreInfoAction:(UIButton *)btn {
     CLog(@"--->>> 查看其他2个团购");
+    // 进入团购详情页面
+    KTVGroupBuyDetailController *vc = (KTVGroupBuyDetailController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVGroupBuyDetailController"];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - 网络
@@ -174,12 +177,14 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section != 0) {
+        // 直接点击酒吧和选择酒吧套餐，下级页面是一样的(店铺详情(酒吧选座))
         if (indexPath.row == 0) {
+            // 店铺详情(酒吧选座)
             KTVBarKtvDetailController *vc = (KTVBarKtvDetailController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVBarKtvDetailController"];
             [self.navigationController pushViewController:vc animated:YES];
         } else {
-            // 进入团购详情页面
-            KTVGroupBuyDetailController *vc = (KTVGroupBuyDetailController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVGroupBuyDetailController"];
+            // 店铺详情(酒吧选座)
+            KTVBarKtvDetailController *vc = (KTVBarKtvDetailController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVBarKtvDetailController"];
             [self.navigationController pushViewController:vc animated:YES];
         }
     }

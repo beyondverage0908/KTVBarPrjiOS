@@ -8,6 +8,9 @@
 
 #import "KTVGroupBuyHeaderCell.h"
 #import "KTVStarView.h"
+#import "UILabel+Ktv.h"
+
+#import "KTVMainService.h"
 
 @interface KTVGroupBuyHeaderCell ()
 
@@ -52,4 +55,15 @@
 - (void)gotoYueAction:(UILabel *)sender {
     CLog(@"-- 在约的小伙伴有100人");
 }
+
+#pragma mark - 设置值
+
+- (void)setActivitorList:(NSArray *)activitorList {
+    _activitorList = activitorList;
+    self.yuepaoNumberLabel.text = [NSString stringWithFormat:@"在约的小伙伴%@人", @([_activitorList count])];
+    
+    [self.yuepaoNumberLabel addUnderlineStyle];
+}
+
+
 @end

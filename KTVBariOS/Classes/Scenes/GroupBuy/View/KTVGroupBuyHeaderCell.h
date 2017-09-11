@@ -10,4 +10,8 @@
 
 @interface KTVGroupBuyHeaderCell : UITableViewCell
 
+@property (nonatomic, strong) NSString *storeId;
+
+@property (nonatomic, strong) NSArray *activitorList; // 在约小小伙伴列表
+
 @end
