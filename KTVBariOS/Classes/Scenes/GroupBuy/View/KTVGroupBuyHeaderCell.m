@@ -72,5 +72,11 @@
     self.locationLabel.text = store.address.addressName;
 }
 
+- (void)setGroupbuy:(KTVGroupbuy *)groupbuy {
+    _groupbuy = groupbuy;
+    
+    self.moneyLabel.text = [NSString stringWithFormat:@"¥%@", self.groupbuy.totalPrice];
+}
+
 
 @end

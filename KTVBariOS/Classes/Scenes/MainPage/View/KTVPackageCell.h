@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+#import "KTVGroupbuy.h"
+
 @interface KTVPackageCell : UITableViewCell
+
+@property (nonatomic, strong)KTVGroupbuy *groupbuy;
 
 @end

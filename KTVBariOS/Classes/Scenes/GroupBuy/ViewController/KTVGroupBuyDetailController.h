@@ -8,6 +8,10 @@
 
 #import "KTVBaseViewController.h"
 
+#import "KTVGroupbuy.h"
+
 @interface KTVGroupBuyDetailController : KTVBaseViewController
+
+@property (nonatomic, strong) KTVGroupbuy * groupbuy;
 
 @end

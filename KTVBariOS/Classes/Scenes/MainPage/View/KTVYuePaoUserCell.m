@@ -57,7 +57,7 @@
         self.genderImage.image = [UIImage imageNamed:@"app_user_woman"];
     }
     self.ageLabel.text = [NSString stringWithFormat:@"%@岁", @(_user.age)];
-    self.moneyLabel.text = [NSString stringWithFormat:@"¥%@/场", _user.money];
+    self.moneyLabel.text = [NSString stringWithFormat:@"¥%@/", @(_user.userDetail.price)];
     [self.userHeaderImageView sd_setImageWithURL:[NSURL URLWithString:_user.userDetail.headerUrl]
                                 placeholderImage:ktvUserHeaderDefaultImg];
 }

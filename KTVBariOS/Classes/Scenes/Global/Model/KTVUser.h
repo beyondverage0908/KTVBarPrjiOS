@@ -19,7 +19,6 @@
 @property (nonatomic, strong) NSString * nickName;
 @property (nonatomic, assign) NSInteger age;
 @property (nonatomic, assign) NSInteger sex;
-@property (nonatomic, strong) NSString *money;
 @property (nonatomic, strong) NSString * gender;
 @property (nonatomic, strong) KTVUserDetail *userDetail;
 

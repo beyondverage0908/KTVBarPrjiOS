@@ -8,10 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "KTVStore.h"
+#import "KTVGroupbuy.h"
 
 @interface KTVGroupBuyHeaderCell : UITableViewCell
 
 @property (nonatomic, strong) KTVStore *store;        // 门店详情
 @property (nonatomic, strong) NSArray *invitatorList; // 在约小伙伴列表
+@property (nonatomic, strong) KTVGroupbuy *groupbuy;
 
 @end

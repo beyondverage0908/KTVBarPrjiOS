@@ -17,13 +17,18 @@
 #import "KTVMainService.h"
 #import "KTVStoreContainer.h"
 
-@interface KTVBarController ()<UITableViewDelegate, UITableViewDataSource, SDCycleScrollViewDelegate>
+@interface KTVBarController ()<UITableViewDelegate, UITableViewDataSource, SDCycleScrollViewDelegate> {
+    NSInteger _tapIndex;
+}
 
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (strong, nonatomic) NSMutableDictionary *mainParams;
 @property (strong, nonatomic) NSMutableArray *storeContainerList;
+
+@property (strong, nonatomic) NSMutableArray *packageCollection;
+@property (strong, nonatomic) NSMutableDictionary *groupBuyCollection;
 
 @end
 
@@ -58,7 +63,13 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (UIView *)sectionFooterView:(NSString *)tip {
+- (UIView *)sectionFooterView {
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 5.0f)];
+    view.backgroundColor = [UIColor ktvSeparateBG];
+    return view;
+}
+
+- (UIView *)section:(NSInteger)section footerView:(NSString *)tip {
     UIView *allBgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 35)];
     allBgView.backgroundColor = [UIColor ktvSeparateBG];
     
@@ -69,7 +80,9 @@
         make.left.right.and.top.equalTo(allBgView);
         make.height.mas_equalTo(30);
     }];
-    [topBgView addTarget:self action:@selector(loadMoreInfoAction:) forControlEvents:UIControlEventTouchUpInside];
+    topBgView.tag = section;
+    [topBgView addTarget:self action:@selector(loadMoreInfoAction:)
+        forControlEvents:UIControlEventTouchUpInside];
     
     UILabel *leftLabel = [[UILabel alloc] init];
     leftLabel.text = [NSString stringWithFormat:@"查看其他%@个团购", tip];
@@ -93,15 +106,20 @@
 #pragma mark - 初始化
 
 - (void)initData {
+    _tapIndex = -1;
     self.mainParams = [NSMutableDictionary dictionary];
     self.storeContainerList = [NSMutableArray array];
+    self.packageCollection = [NSMutableArray array];
+    self.groupBuyCollection = [NSMutableDictionary new];
 }
+
+#pragma mark - 事件
 
 - (void)loadMoreInfoAction:(UIButton *)btn {
     CLog(@"--->>> 查看其他2个团购");
-    // 进入团购详情页面
-    KTVGroupBuyDetailController *vc = (KTVGroupBuyDetailController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVGroupBuyDetailController"];
-    [self.navigationController pushViewController:vc animated:YES];
+    CLog(@"--->>> %@", @(btn.tag));
+    _tapIndex = btn.tag;
+    [self.tableView reloadData];
 }
 
 #pragma mark - 网络
@@ -121,11 +139,42 @@
                 KTVStoreContainer *storeContainer = [KTVStoreContainer yy_modelWithDictionary:dict];
                 [self.storeContainerList addObject:storeContainer];
             }
+
+            [self generateAllData:self.storeContainerList];
             [self.tableView reloadData];
         } else {
             CLog(@"-- >> filure");
         }
     }];
+}
+
+#pragma mark - 数据解析
+
+- (void)generateAllData:(NSArray<KTVStoreContainer *> *)storeContainerList {
+    for (NSInteger i = 0; i<[storeContainerList count]; i++) {
+        KTVStoreContainer *container = storeContainerList[i];
+        
+        [self.packageCollection addObject:container.store.packageList];
+        [self.groupBuyCollection setObject:container.store.groupBuyList
+                                    forKey:[NSNumber numberWithInteger:i]];
+    }
+}
+
+- (id)generatePackageOrGroupbuy:(NSIndexPath *)indexPath {
+    NSInteger idx = indexPath.section - 1;
+    
+    NSArray *packageList = self.packageCollection[idx];
+    NSArray *groupbuyList = [self.groupBuyCollection objectForKey:[NSNumber numberWithInteger:idx]];
+    if (indexPath.row > 0 && indexPath.row < 1 + [packageList count]) {
+        // 取出package
+//                packageList[indexPath.row - 1]
+        return nil;
+    } else if (indexPath.row > [packageList count]) {
+        // 取出groupbuy item
+        KTVGroupbuy *gb = groupbuyList[indexPath.row - [packageList count] - 1];
+        return gb;
+    }
+    return nil;
 }
 
 #pragma mark - UITableViewDelegate
@@ -159,8 +208,18 @@
     NSInteger idx = section - 1;
     KTVStoreContainer *storeContainer = self.storeContainerList[idx];
     NSInteger groupbuyCount = [storeContainer.store.groupBuyList count];
-    // 查看其他几个团购
-    return [self sectionFooterView:[NSString stringWithFormat:@"%@", @(groupbuyCount)]];
+    
+    if (_tapIndex == section) {
+        return [self sectionFooterView];
+    }
+    
+    if (groupbuyCount) {
+        // 查看其他几个团购
+        NSString *tip = [NSString stringWithFormat:@"%@", @(groupbuyCount)];
+        return [self section:section footerView:tip];
+    } else {
+        return [self sectionFooterView];
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
@@ -171,21 +230,35 @@
     // 是否显示团购
     NSInteger idx = section - 1;
     KTVStoreContainer *storeContainer = self.storeContainerList[idx];
-    NSInteger groupbuyCount = [storeContainer.store.groupBuyList count] + 1;
-    return groupbuyCount ? 35.0f : 0.0f;
+    NSInteger groupbuyCount = [storeContainer.store.groupBuyList count];
+    
+    if (_tapIndex == section) {
+        return 5.0f;
+    }
+    return groupbuyCount ? 35.0f : 5.0f;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section != 0) {
-        // 直接点击酒吧和选择酒吧套餐，下级页面是一样的(店铺详情(酒吧选座))
+    if (indexPath.section == 0) {
+        // banner
+    } else {
         if (indexPath.row == 0) {
+            // 店面cell
             // 店铺详情(酒吧选座)
             KTVBarKtvDetailController *vc = (KTVBarKtvDetailController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVBarKtvDetailController"];
             [self.navigationController pushViewController:vc animated:YES];
         } else {
-            // 店铺详情(酒吧选座)
-            KTVBarKtvDetailController *vc = (KTVBarKtvDetailController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVBarKtvDetailController"];
-            [self.navigationController pushViewController:vc animated:YES];
+            id obj = [self generatePackageOrGroupbuy:indexPath];
+            if (obj && [obj isKindOfClass:[KTVGroupbuy class]]) {
+                // 进入团购详情页面
+                KTVGroupBuyDetailController *vc = (KTVGroupBuyDetailController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVGroupBuyDetailController"];
+                vc.groupbuy = obj;
+                [self.navigationController pushViewController:vc animated:YES];
+            } else {
+                // 店铺详情(酒吧选座)
+                KTVBarKtvDetailController *vc = (KTVBarKtvDetailController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVBarKtvDetailController"];
+                [self.navigationController pushViewController:vc animated:YES];
+            }
         }
     }
 }
@@ -204,11 +277,17 @@
         default:
         {
             NSInteger idx = section - 1;
-            KTVStoreContainer *storeContainer = self.storeContainerList[idx];
+            NSArray *packageList = self.packageCollection[idx];
             
-            NSInteger count = 1;
-            NSInteger packageCount = storeContainer.store.packageList.count + 1;
-            count += packageCount;
+            NSInteger groupbuyListCount = 0;
+            if (_tapIndex == section) {
+                NSArray *groupbuyList = [self.groupBuyCollection objectForKey:[NSNumber numberWithInteger:_tapIndex - 1]];
+                groupbuyListCount = [groupbuyList count];
+            }
+            
+            NSInteger count = 1; // 表示店面cell，每个section必然有一个
+            NSInteger otherCount = packageList.count + 0 + groupbuyListCount;
+            count += otherCount;
             
             return count;
         }
@@ -233,14 +312,33 @@
         {
             NSInteger idx = indexPath.section - 1;
             KTVStoreContainer *storeContainer = self.storeContainerList[idx];
-            
             if (indexPath.row == 0) {
                 KTVGuessLikeCell *cell = (KTVGuessLikeCell *)[tableView dequeueReusableCellWithIdentifier:KTVStringClass(KTVGuessLikeCell)];
-                cell.storeContainer = self.storeContainerList[indexPath.section - 1];
+                cell.storeContainer = storeContainer;
                 return cell;
             }
-            KTVPackageCell *cell = (KTVPackageCell *)[tableView dequeueReusableCellWithIdentifier:KTVStringClass(KTVPackageCell)];
+            KTVPackageCell *cell = (KTVPackageCell *)[tableView dequeueReusableCellWithIdentifier:
+                                                      KTVStringClass(KTVPackageCell)];
+//            NSArray *packageList = self.packageCollection[idx];
+//            NSArray *groupbuyList = [self.groupBuyCollection objectForKey:[NSNumber numberWithInteger:idx]];
+//            if (indexPath.row > 0 && indexPath.row < 1 + [packageList count]) {
+//                // 取出package
+////                packageList[indexPath.row - 1]
+//            }
+//            if (indexPath.row > [packageList count]) {
+//                // 取出groupbuy item
+//                KTVGroupbuy *gb = groupbuyList[indexPath.row - [packageList count] - 1];
+//                cell.groupbuy = gb;
+//                
+//            }
+            
+            id obj = [self generatePackageOrGroupbuy:indexPath];
+            if ([obj isKindOfClass:[KTVGroupbuy class]]) {
+                cell.groupbuy = obj;
+            }
+            
             return cell;
+        
         }
             break;
     }

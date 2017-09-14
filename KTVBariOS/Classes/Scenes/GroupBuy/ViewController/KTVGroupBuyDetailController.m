@@ -204,6 +204,7 @@
         KTVGroupBuyHeaderCell *cell = (KTVGroupBuyHeaderCell *)[tableView dequeueReusableCellWithIdentifier:@"KTVGroupBuyHeaderCell"];
         cell.invitatorList = self.invitatorList;
         cell.store = self.store;
+        cell.groupbuy = self.groupbuy;
         return cell;
     } else if (indexPath.section == 1) {
         if (indexPath.row == 0) {
