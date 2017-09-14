@@ -26,7 +26,6 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     [self setupView];
-    self.starView.stars = 4;
 }
 
 - (void)setupView {

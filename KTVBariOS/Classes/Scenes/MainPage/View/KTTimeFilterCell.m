@@ -113,6 +113,9 @@
     
     NSInteger idx = timeBtn.tag - 1000;
     CLog(@"---->> %@", self.filterItems[idx]);
+    if (self.filterCallback) {
+        self.filterCallback(idx);
+    }
 }
 
 - (void)awakeFromNib {

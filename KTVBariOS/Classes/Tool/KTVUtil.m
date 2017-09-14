@@ -75,4 +75,72 @@
     }
 }
 
++ (NSArray *)getFiltertimeByDay:(NSInteger)days {
+    
+    NSMutableArray *filtertimeList = [NSMutableArray arrayWithCapacity:days];
+    
+    NSTimeInterval secondsPerDay = 24 * 60 * 60;
+    NSDate *today = [NSDate date];
+    NSDateFormatter *myDateFormatter = [[NSDateFormatter alloc] init];
+    [myDateFormatter setDateFormat:@"MM-dd"];
+    for (int i = 0; i < days; i ++) {
+        NSDate *d = [today dateByAddingTimeInterval:i * secondsPerDay];
+        NSString *week = [self calculateWeek:d];
+        NSString *dateString = [myDateFormatter stringFromDate:d];
+        NSString *filerString = [NSString stringWithFormat:@"%@;%@", week, dateString];
+        
+        [filtertimeList addObject:filerString];
+    }
+    
+    return [filtertimeList copy];
+}
+
++ (NSString *)calculateWeek:(NSDate *)date {
+
+    NSDateFormatter *myDateFormatter = [[NSDateFormatter alloc] init];
+    [myDateFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *dateString1 = [myDateFormatter stringFromDate:date];
+    NSString *dateString2 = [myDateFormatter stringFromDate:[NSDate date]];
+    
+    if ([dateString1 isEqualToString:dateString2]) {
+        return @"今天";
+    }
+    
+    //计算week数
+    NSCalendar * myCalendar = [NSCalendar currentCalendar];
+    myCalendar.timeZone = [NSTimeZone systemTimeZone];
+    NSInteger week = [[myCalendar components:NSCalendarUnitWeekday fromDate:date] weekday];
+    switch (week) {
+        case 1:
+        {
+            return @"周日";
+        }
+        case 2:
+        {
+            return @"周一";
+        }
+        case 3:
+        {
+            return @"周二";
+        }
+        case 4:
+        {
+            return @"周三";
+        }
+        case 5:
+        {
+            return @"周四";
+        }
+        case 6:
+        {
+            return @"周五";
+        }
+        case 7:
+        {
+            return @"周六";
+        }
+    }
+    return @"";
+}
+
 @end

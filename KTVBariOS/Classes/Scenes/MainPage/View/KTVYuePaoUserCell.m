@@ -34,12 +34,32 @@
 
 - (IBAction)yuetaAction:(UIButton *)sender {
     CLog(@"--->>>约她");
-    if (!sender.isSelected) {
+    [sender setSelected:!sender.isSelected];
+    
+    if (sender.isSelected) {
         [sender setImage:[UIImage imageNamed:@"app_gou_red"] forState:UIControlStateNormal];
     } else {
         [sender setImage:[UIImage imageNamed:@"app_selected_kuang"] forState:UIControlStateNormal];
     }
-    [sender setSelected:!sender.isSelected];
+    
+    if (self.yueCallback) {
+        self.yueCallback(self.user, sender.isSelected);
+    }
+}
+
+- (void)setUser:(KTVUser *)user {
+    _user = user;
+    
+    self.nicknameLabel.text = _user.nickName;
+    if (user.sex == 1) {
+        self.genderImage.image = [UIImage imageNamed:@"app_user_man"];
+    } else {
+        self.genderImage.image = [UIImage imageNamed:@"app_user_woman"];
+    }
+    self.ageLabel.text = [NSString stringWithFormat:@"%@岁", @(_user.age)];
+    self.moneyLabel.text = [NSString stringWithFormat:@"¥%@/场", _user.money];
+    [self.userHeaderImageView sd_setImageWithURL:[NSURL URLWithString:_user.userDetail.headerUrl]
+                                placeholderImage:ktvUserHeaderDefaultImg];
 }
 
 @end

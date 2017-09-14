@@ -7,6 +7,7 @@
 //
 
 #import "KTVOrderStatusListController.h"
+#import "KTVStoreUseOrderController.h"
 
 #import "KTVOrderStatusCell.h"
 #import "KTVFilterView.h"
@@ -47,6 +48,11 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 184.0f;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    KTVStoreUseOrderController *vc = (KTVStoreUseOrderController *)[UIViewController storyboardName:@"MePage" storyboardId:@"KTVStoreUseOrderController"];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark -  UITableViewDataSource

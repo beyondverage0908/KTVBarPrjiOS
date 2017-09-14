@@ -42,9 +42,10 @@
 
 
 // 对服务端状态定义
-#define ktvSuccess          @"Success"
-#define ktvCode             @"00000"
-#define ktvDetail           @"detail"
+#define ktvSuccess                          @"Success"
+#define ktvCode                             @"00000"
+#define ktvDetail                           @"detail"
+#define ktvUserHeaderDefaultImg             [UIImage imageNamed:@"bar_yuepao_user_placeholder"]
 
 
 #endif /* KTVCommonDefine_h */

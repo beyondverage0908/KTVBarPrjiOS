@@ -31,5 +31,6 @@
 @property (nonatomic, strong) NSString * constellation;
 @property (nonatomic, assign) NSInteger status;
 @property (nonatomic, assign) NSInteger active;
+@property (nonatomic, strong) NSString *headerUrl;
 
 @end

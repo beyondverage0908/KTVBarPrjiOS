@@ -10,6 +10,8 @@
 
 @interface KTTimeFilterCell : UITableViewCell
 
+@property (nonatomic, copy) void (^filterCallback)(NSInteger idx);
+
 - (instancetype)initWithItems:(NSArray *)items reuseIdentifier:(NSString *)reuseIdentifier;
 
 @end

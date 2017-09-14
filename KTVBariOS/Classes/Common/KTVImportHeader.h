@@ -13,6 +13,7 @@
 #import "Masonry.h"
 #import <YYModel/YYModel.h>
 #import <Pingpp/Pingpp.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 
 // Category
 #import "UIColor+KTVExtension.h"

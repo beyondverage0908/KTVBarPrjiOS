@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "KTVUser.h"
 
 @interface KTVYuePaoUserCell : UITableViewCell
+
+@property (nonatomic, strong) KTVUser *user;
+
+@property (nonatomic, copy) void (^yueCallback)(KTVUser *user, BOOL isSelected);
 
 @end

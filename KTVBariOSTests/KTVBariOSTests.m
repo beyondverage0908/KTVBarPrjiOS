@@ -9,6 +9,7 @@
 #import <XCTest/XCTest.h>
 
 #import "KTVMainService.h"
+#import "KTVUtil.h"
 
 @interface KTVBariOSTests : XCTestCase
 
@@ -29,7 +30,9 @@
 - (void)testExample {
     // This is an example of a functional test case.
     // Use XCTAssert and related functions to verify your tests produce the correct results.
-    [self getStoreActivitors];
+//    [self getStoreActivitors];
+    [self getOneWeekFilter];
+    [self getCalculateWeek];
 }
 
 - (void)testPerformanceExample {
@@ -44,6 +47,14 @@
     [KTVMainService getStoreActivitors:@"4" result:^(NSDictionary *result) {
         NSLog(@"-->> %@", result);
     }];
+}
+
+- (void)getOneWeekFilter {
+    [KTVUtil getFiltertimeByDay:7];
+}
+
+- (void)getCalculateWeek {
+    [KTVUtil calculateWeek:[NSDate date]];
 }
 
 @end

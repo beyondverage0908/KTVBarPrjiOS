@@ -10,6 +10,10 @@
 
 @implementation KTVStore
 
-
-
++ (NSDictionary *)modelContainerPropertyGenericClass {
+    // value should be Class or Class name.
+    return @{@"activitorList" : [KTVUser class],
+             @"pictureList" : [KTVPicture class],
+             @"groupBuyList" : [KTVGroupbuy class]};
+}
 @end

@@ -58,11 +58,18 @@
 
 #pragma mark - 设置值
 
-- (void)setActivitorList:(NSArray *)activitorList {
-    _activitorList = activitorList;
-    self.yuepaoNumberLabel.text = [NSString stringWithFormat:@"在约的小伙伴%@人", @([_activitorList count])];
-    
+- (void)setInvitatorList:(NSArray *)invitatorList {
+    _invitatorList = invitatorList;
+    self.yuepaoNumberLabel.text = [NSString stringWithFormat:@"在约的小伙伴%@人", @([_invitatorList count])];
     [self.yuepaoNumberLabel addUnderlineStyle];
+}
+
+- (void)setStore:(KTVStore *)store {
+    _store = store;
+    
+    self.storeNameLabel.text = store.storeName;
+    self.starView.stars = store.star;
+    self.locationLabel.text = store.address.addressName;
 }
 
 

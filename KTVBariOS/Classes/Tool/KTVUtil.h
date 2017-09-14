@@ -20,4 +20,8 @@
 
 + (void)tellphone:(NSString *)phone;
 
++ (NSArray *)getFiltertimeByDay:(NSInteger)days;
+
++ (NSString *)calculateWeek:(NSDate *)date;
+
 @end

@@ -8,7 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "KTVAddress.h"
-
+#import "KTVUser.h"
+#import "KTVPicture.h"
+#import "KTVGroupbuy.h"
 
 @interface KTVStore : NSObject
 

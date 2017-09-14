@@ -22,6 +22,7 @@
 #import "KTVSelectedBeautyController.h"
 
 #import "KTVMainService.h"
+#import "KTVStore.h"
 
 #import "KTVUser.h"
 
@@ -29,7 +30,9 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
-@property (strong, nonatomic) NSMutableArray *activitorList;
+@property (strong, nonatomic) KTVStore *store;
+@property (strong, nonatomic) NSMutableArray *activitorList; // 暖场人列表
+@property (strong, nonatomic) NSMutableArray *invitatorList;   // 在约小伙伴列表
 
 @end
 
@@ -44,6 +47,8 @@
     
     [self initData];
     
+    [self loadStore];
+    [self loadStoreInvitators];
     [self loadStoreActivitors];
 }
 
@@ -57,13 +62,40 @@
 
 - (void)initData {
     self.activitorList = [NSMutableArray array];
+    self.invitatorList = [NSMutableArray array];
 }
 
 #pragma mark - 网络
 
+/// 获取门店信息
+- (void)loadStore {
+    [KTVMainService getStore:@"4" result:^(NSDictionary *result) {
+        if (![result[@"code"] isEqualToString:ktvCode]) {
+            return;
+        }
+        
+        self.store = [KTVStore yy_modelWithDictionary:result[@"data"]];
+        [self.tableView reloadData];
+    }];
+}
+
 /// 获取门店在约人数
+- (void)loadStoreInvitators {
+    [KTVMainService getStoreInvitators:@"4" result:^(NSDictionary *result) {
+        if (![result[@"code"] isEqualToString:ktvCode]) {
+            return;
+        }
+        
+        for (NSDictionary *dict in result[@"data"]) {
+            KTVUser *user = [KTVUser yy_modelWithDictionary:dict];
+            [self.invitatorList addObject:user];
+        }
+    }];
+}
+
+/// 获取门店暖场人
 - (void)loadStoreActivitors {
-    // 在约的小伙伴
+    // 获取门店暖场人
     [KTVMainService getStoreActivitors:@"4" result:^(NSDictionary *result) {
         if (![result[@"code"] isEqualToString:ktvCode]) {
             [KTVToast toast:result[@"detail"]];
@@ -158,7 +190,7 @@
     } else if (section == 2) {
         return 1;
     } else if (section == 3) {
-        return 4;
+        return [self.store.activitorList count];
     } else if (section == 4) {
         return 1;
     } else if (section == 5) {
@@ -170,23 +202,21 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         KTVGroupBuyHeaderCell *cell = (KTVGroupBuyHeaderCell *)[tableView dequeueReusableCellWithIdentifier:@"KTVGroupBuyHeaderCell"];
-        cell.activitorList = self.activitorList;
+        cell.invitatorList = self.invitatorList;
+        cell.store = self.store;
         return cell;
     } else if (indexPath.section == 1) {
         if (indexPath.row == 0) {
             NSString *KTTimeFilterCellIdentifer = @"KTTimeFilterCell";
             KTTimeFilterCell *cell = [tableView dequeueReusableCellWithIdentifier:KTTimeFilterCellIdentifer];
+            NSArray *timefilterItems = [KTVUtil getFiltertimeByDay:7];
             if (!cell) {
-                cell = [[KTTimeFilterCell alloc] initWithItems:@[@"今天;06-28",
-                                                                 @"周四;06-29",
-                                                                 @"周五;06-30",
-                                                                 @"周六;07-01",
-                                                                 @"周日;07-02",
-                                                                 @"周一;07-03",
-                                                                 @"周二;07-04",
-                                                                 @"周三;07-05"]
+                cell = [[KTTimeFilterCell alloc] initWithItems:timefilterItems
                                                reuseIdentifier:KTTimeFilterCellIdentifer];
             }
+            cell.filterCallback = ^(NSInteger idx) {
+                CLog(@"-->> %@", timefilterItems[idx]);
+            };
             return cell;
         } else {
             NSString *KTVPositionFilterCellIdentifier = @"KTVPositionFilterCell";
@@ -206,7 +236,16 @@
         KTVBarKtvBeautyCell *cell = (KTVBarKtvBeautyCell *)[tableView dequeueReusableCellWithIdentifier:@"KTVBarKtvBeautyCell"];
         return cell;
     } else if (indexPath.section == 3) {
+        KTVUser *user = self.store.activitorList[indexPath.row];
         KTVYuePaoUserCell *cell = (KTVYuePaoUserCell *)[tableView dequeueReusableCellWithIdentifier:@"KTVYuePaoUserCell"];
+        cell.user = user;
+        cell.yueCallback = ^(KTVUser *user, BOOL isSelected) {
+            if (isSelected) {
+                CLog(@"--->>> 约了%@", user.nickName);
+            } else {
+                CLog(@"--->>> 不约%@", user.nickName);
+            }
+        };
         return cell;
     } else if (indexPath.section == 4) {
         KTVBuyNotesCell *cell = (KTVBuyNotesCell *)[tableView dequeueReusableCellWithIdentifier:@"KTVBuyNotesCell"];
