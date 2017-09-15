@@ -67,7 +67,25 @@ static KTVNetworkHelper *_instance = nil;
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     NSString *url = [NSString stringWithFormat:@"%@%@", [KTVUrl getDomainUrl], message.path];
-    NSString *urlString = [NSString stringWithFormat:@"%@%@", url, message.params];
+    NSMutableString *urlString = [NSMutableString stringWithString:url];
+    
+    if (message.params) {
+        if ([message.params isKindOfClass:[NSString class]] || [message.params isKindOfClass:[NSMutableString class]]) {
+            [urlString appendString:[NSString stringWithFormat:@"%@", message.params]];
+        } else if ([message.params isKindOfClass:[NSDictionary class]] || [message.params isKindOfClass:[NSMutableDictionary class]]) {
+            NSDictionary *params = [NSDictionary dictionaryWithDictionary:message.params];
+            [urlString appendString:@"?"];
+            for (NSInteger i = 0; i < params.allKeys.count; i++) {
+                NSString *key = params.allKeys[i];
+                NSString *value = params[key];
+                [urlString appendString:[NSString stringWithFormat:@"%@=%@", key, value]];
+                if (i < params.allKeys.count - 1) {
+                    [urlString appendString:@"&"];
+                }
+            }
+        }
+    }
+    
     CLog(@"URL %@", urlString);
     
     [_manager GET:urlString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {

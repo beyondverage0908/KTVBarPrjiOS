@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *alipayBtn;
 @property (weak, nonatomic) IBOutlet UIButton *wechatPayBtn;
 @property (weak, nonatomic) IBOutlet UILabel *hideActivityAnsLabel; // 隐藏本次活动说明
+@property (weak, nonatomic) IBOutlet UIButton *confirmPayBtn;
 
 @property (strong, nonatomic) NSMutableDictionary *payChannelDict; // 支付渠道
 @property (assign, nonatomic) BOOL isHiddenActivity;
@@ -39,6 +40,8 @@
     self.tableView.backgroundColor = [UIColor ktvBG];
     
     [self initData];
+    
+    [self.confirmPayBtn setTitle:[NSString stringWithFormat:@"确认支付 ¥%@", [self getOrderAllMoney]] forState:UIControlStateNormal];
 }
 
 - (void)initData {
@@ -50,6 +53,54 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+#pragma mark - 封装
+
+- (NSString *)getOrderAllMoney {
+    NSInteger groupbuyTotalPrice = [self.orderUploadDictionary[@"groupbuyTotalPrice"] integerValue]; // 套餐基础价格
+    NSArray *yueUserDetails = self.orderUploadDictionary[@"userOrderDetails"];
+    NSInteger money = 0;
+    for (NSDictionary *dict in yueUserDetails) {
+        money += [dict[@"price"] integerValue];
+    }
+    money += groupbuyTotalPrice;
+    
+    return @(money).stringValue;
+}
+
+#pragma mark - 网络
+
+- (void)networkConfirmPay {
+    NSString *channel = [self getPayChannel];
+    if (!channel) {
+        [KTVToast toast:TOAST_SELECTED_PAYCHANNEL];
+        return;
+    }
+    
+    NSDictionary *payParams = @{@"channel" : channel,
+                                @"amount" : @"1",
+                                @"subject" : @"aaaa",
+                                @"body" : @"bbbb",
+                                @"orderNo" : @"1504017453722k9qadqq"};
+    [KTVBuyService postPayParams:payParams result:^(NSDictionary *result) {
+        NSDictionary *charge = result[@"data"];
+        [KTVPayManager ktvPay:AlipayType payment:charge contoller:nil completion:^(NSString *result) {
+            KTVPaySuccessController *vc = (KTVPaySuccessController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVPaySuccessController"];
+            [self.navigationController pushViewController:vc animated:YES];
+        }];
+    }];
+}
+
+- (void)networkCreateOrder:(void (^)(NSDictionary *success))createSuccessBlock {
+    [KTVBuyService postCreateOrder:self.orderUploadDictionary result:^(NSDictionary *result) {
+        if ([result[@"code"] isEqualToString:ktvCode]) {
+            if (createSuccessBlock){
+                createSuccessBlock([NSDictionary new]);
+            }
+        }
+        CLog(@"--->>> %@", result);
+    }];
 }
 
 #pragma mark - 事件
@@ -105,29 +156,25 @@
             break;
         }
     }
+    
+    if ([paychannel isEqualToString:@"unionpay"]) {
+        [self.orderUploadDictionary setObject:@(0) forKey:@"payType"];
+    } else if ([paychannel isEqualToString:@"alipay"]) {
+        [self.orderUploadDictionary setObject:@(1) forKey:@"payType"];
+    } else if ([paychannel isEqualToString:@"wechatpay"]) {
+        [self.orderUploadDictionary setObject:@(2) forKey:@"payType"];
+    }
+    
     return paychannel;
 }
 
 - (IBAction)confirmPayAction:(UIButton *)sender {
     CLog(@"-->> 确认支付出去");
     
-    NSString *channel = [self getPayChannel];
-    if (!channel) {
-        [KTVToast toast:TOAST_SELECTED_PAYCHANNEL];
-        return;
-    }
+    [self networkConfirmPay];
     
-    NSDictionary *payParams = @{@"channel" : channel,
-                                @"amount" : @"1",
-                                @"subject" : @"aaaa",
-                                @"body" : @"bbbb",
-                                @"orderNo" : @"1504017453722k9qadqq"};
-    [KTVBuyService postPayParams:payParams result:^(NSDictionary *result) {
-        NSDictionary *charge = result[@"data"];
-        [KTVPayManager ktvPay:AlipayType payment:charge contoller:nil completion:^(NSString *result) {
-            KTVPaySuccessController *vc = (KTVPaySuccessController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVPaySuccessController"];
-            [self.navigationController pushViewController:vc animated:YES];
-        }];
+    [self networkCreateOrder:^(NSDictionary *success) {
+        [self networkConfirmPay];
     }];
 }
 
@@ -142,6 +189,11 @@
     
     // 保存变量
     self.isHiddenActivity = sender.isSelected;
+    if (sender.isSelected) {
+        [self.orderUploadDictionary setObject:@(1) forKey:@"userHide"];
+    } else {
+        [self.orderUploadDictionary setObject:@(0) forKey:@"userHide"];
+    }
 }
 
 #pragma mark - UITableViewDelegate
@@ -175,6 +227,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         KTVPayCell *cell = (KTVPayCell *)[tableView dequeueReusableCellWithIdentifier:@"KTVPayCell"];
+        cell.allMoney = [self getOrderAllMoney];
         return cell;
     }
     return nil;

@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "KTVStore.h"
 
 @interface KTVPayCell : UITableViewCell
+
+@property (nonatomic, strong) NSString *allMoney;
+@property (nonatomic, strong) KTVStore *store;
 
 @end

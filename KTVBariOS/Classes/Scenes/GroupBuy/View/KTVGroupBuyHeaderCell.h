@@ -16,4 +16,6 @@
 @property (nonatomic, strong) NSArray *invitatorList; // 在约小伙伴列表
 @property (nonatomic, strong) KTVGroupbuy *groupbuy;
 
+@property (nonatomic, copy) void (^bookedGroupbuyCallback)();
+
 @end

@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+#import "KTVStore.h"
+#import "KTVGroupbuy.h"
+
 @interface KTVBuyNotesCell : UITableViewCell
+
+@property (strong, nonatomic) KTVStore *store;
+@property (strong, nonatomic) KTVGroupbuy *groupbuy;
 
 @end

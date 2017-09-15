@@ -7,11 +7,12 @@
 //
 
 #import "KTVBaseViewController.h"
-
+#import "KTVStore.h"
 #import "KTVGroupbuy.h"
 
 @interface KTVGroupBuyDetailController : KTVBaseViewController
 
+@property (nonatomic, strong) KTVStore *store;
 @property (nonatomic, strong) KTVGroupbuy * groupbuy;
 
 @end

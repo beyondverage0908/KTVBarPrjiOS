@@ -18,6 +18,9 @@ typedef void(^ResponseSuccess)(NSDictionary *result);
 /// 获取门店暖场人
 + (void)getStoreActivitors:(NSString *)storeId result:(ResponseSuccess)responseResult;
 
+/// 分页获取门店暖场人
++ (void)getStorePageActivitors:(NSDictionary *)params result:(ResponseSuccess)responseResult;
+
 /// 获取门店商品
 + (void)getStoreGoods:(NSString *)storeId result:(ResponseSuccess)responseResult;
 

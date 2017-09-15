@@ -11,9 +11,11 @@
 #import "KTVUser.h"
 #import "KTVPicture.h"
 #import "KTVGroupbuy.h"
+#import "KTVPackage.h"
 
 @interface KTVStore : NSObject
 
+@property (nonatomic, strong) NSString * storeId;
 @property (nonatomic, strong) NSString * storeName;
 @property (nonatomic, assign) NSInteger  star;
 @property (nonatomic, strong) NSString * fromTime;
@@ -28,6 +30,8 @@
 @property (nonatomic, strong) NSArray * activitorList;
 @property (nonatomic, strong) NSArray * pictureList;
 @property (nonatomic, strong) NSArray * groupBuyList;
+@property (nonatomic, strong) KTVUser * user;
+@property (nonatomic, assign) BOOL showGroupbuy;
 
 @property (nonatomic, strong) KTVAddress * address;
 

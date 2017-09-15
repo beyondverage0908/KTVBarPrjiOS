@@ -1495,6 +1495,7 @@
                     <connections>
                         <outlet property="alipayBtn" destination="amV-aB-cvi" id="Mt1-ad-W2X"/>
                         <outlet property="bankPayBtn" destination="Eab-gj-41r" id="pk9-kY-Sih"/>
+                        <outlet property="confirmPayBtn" destination="G1M-mG-vtx" id="hh0-6Z-ckK"/>
                         <outlet property="hideActivityAnsLabel" destination="LNj-BT-paT" id="FwB-Sc-g2d"/>
                         <outlet property="tableView" destination="VfM-oS-N9W" id="gEa-qR-rrM"/>
                         <outlet property="wechatPayBtn" destination="oO8-N0-MaN" id="49I-QQ-qIV"/>
@@ -5315,7 +5316,7 @@
         <image name="buy_car_purple" width="16" height="13"/>
         <image name="dianpu_dandian" width="74" height="74"/>
         <image name="dianpu_dandian_single" width="92" height="92"/>
-        <image name="mainpage_all_bg_line" width="375" height="115"/>
+        <image name="mainpage_all_bg_line" width="375" height="200"/>
         <image name="mainpage_bar" width="50" height="50"/>
         <image name="mainpage_bar_placeholder_img" width="141" height="82"/>
         <image name="mainpage_ktv" width="50" height="50"/>

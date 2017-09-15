@@ -26,6 +26,7 @@
 //    "username": null
 //}
 
+@property (nonatomic, strong) NSString *groupbuyId;
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *totalPrice;
 @property (nonatomic, strong) NSString *startTime;

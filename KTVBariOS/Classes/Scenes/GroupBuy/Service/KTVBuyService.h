@@ -16,4 +16,7 @@ typedef void(^ResponseSuccess)(NSDictionary *result);
 /// 支付接口
 + (void)postPayParams:(NSDictionary *)params result:(ResponseSuccess)responseResult;
 
+/// 创建订单
++ (void)postCreateOrder:(NSDictionary *)params result:(ResponseSuccess)responseResult;
+
 @end

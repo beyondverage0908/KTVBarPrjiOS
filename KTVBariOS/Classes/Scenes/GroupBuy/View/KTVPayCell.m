@@ -28,4 +28,16 @@
     [super setSelected:selected animated:animated];
 }
 
+- (void)setStore:(KTVStore *)store {
+    _store = store;
+    
+    self.nameLabel.text = _store.storeName;
+}
+
+- (void)setAllMoney:(NSString *)allMoney {
+    _allMoney = allMoney;
+    
+    self.moneyLabel.text = [NSString stringWithFormat:@"¥%@", _allMoney];
+}
+
 @end

@@ -10,4 +10,9 @@
 
 @interface KTVSelectedBeautyController : KTVBaseViewController
 
+// 接受提交订单参数
+@property (nonatomic, strong) NSMutableDictionary *orderUploadDictionary;
+
+@property (strong, nonatomic) NSMutableArray *selectedActivitorList;
+
 @end

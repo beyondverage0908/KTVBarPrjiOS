@@ -25,4 +25,12 @@
     [super setSelected:selected animated:animated];
 }
 
+#pragma mark - 设置
+
+- (void)setStore:(KTVStore *)store {
+    _store = store;
+    
+    self.doBusinessTimeLabel.text = [NSString stringWithFormat:@"营业时间:%@到%@", _store.fromTime, _store.toTime];
+}
+
 @end

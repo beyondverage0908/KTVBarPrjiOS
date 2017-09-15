@@ -7,7 +7,11 @@
 //
 
 #import "KTVBaseViewController.h"
+#import "KTVStore.h"
 
 @interface KTVPayController : KTVBaseViewController
+
+@property (nonatomic, strong) NSMutableDictionary *orderUploadDictionary;
+@property (nonatomic, strong) KTVStore *store;
 
 @end

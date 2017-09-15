@@ -51,6 +51,7 @@
     } else {
         [self.genderBtn setImage:[UIImage imageNamed:@"app_user_man"] forState:UIControlStateNormal];
     }
+    self.moneyLabel.text = [NSString stringWithFormat:@"%@/场", @(_user.userDetail.price)];
 }
 
 

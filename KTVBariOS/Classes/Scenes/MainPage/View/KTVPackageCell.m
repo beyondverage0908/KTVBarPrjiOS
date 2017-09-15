@@ -29,4 +29,13 @@
     [super setSelected:selected animated:animated];
 }
 
+- (void)setGroupbuy:(KTVGroupbuy *)groupbuy {
+    _groupbuy = groupbuy;
+    
+    [self.orderBtn setImage:[UIImage imageNamed:@"app_order_tuan"] forState:UIControlStateNormal];
+    self.packageNameLabel.text = _groupbuy.title;
+    self.moneyLabel.text = [NSString stringWithFormat:@"¥ %@", _groupbuy.totalPrice];
+    
+}
+
 @end

@@ -26,4 +26,19 @@
     [super setSelected:selected animated:animated];
 }
 
+#pragma mark - 设置
+
+- (void)setStore:(KTVStore *)store {
+    _store = store;
+}
+
+- (void)setGroupbuy:(KTVGroupbuy *)groupbuy {
+    _groupbuy = groupbuy;
+    
+    self.buyValidtime.text = _groupbuy.buyNotice;
+    self.buyRuleLabel.text = _groupbuy.remark;
+    self.buynotesLabel.text = _groupbuy.notice;
+    
+}
+
 @end

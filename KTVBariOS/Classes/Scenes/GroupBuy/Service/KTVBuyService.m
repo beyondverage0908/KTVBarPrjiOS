@@ -21,4 +21,15 @@
     } fail:^(NSError *error) {}];
 }
 
++ (void)postCreateOrder:(NSDictionary *)params result:(ResponseSuccess)responseResult {
+    KTVRequestMessage *msg = [[KTVRequestMessage alloc] init];
+    msg.params = params;
+    msg.httpType = KtvPOST;
+    msg.path = [KTVUrl getCreateOrderUrl];
+    
+    [[KTVNetworkHelper sharedInstance] send:msg success:^(NSDictionary *result) {
+        responseResult(result);
+    } fail:^(NSError *error) {}];
+}
+
 @end

@@ -14,6 +14,7 @@
 @property (nonatomic, strong) NSString *account;
 @property (nonatomic, strong) NSString *phone;
 
+@property (nonatomic, strong) NSString *userId;
 @property (nonatomic, assign) NSInteger userType;
 @property (nonatomic, strong) NSString * username;
 @property (nonatomic, strong) NSString * nickName;

@@ -22,7 +22,7 @@
 //    "active": 0
 //}
 
-
+@property (nonatomic, strong) NSString * userDetailId;
 @property (nonatomic, strong) NSString * sign;
 @property (nonatomic, assign) NSInteger type;
 @property (nonatomic, assign) NSInteger price;

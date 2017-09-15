@@ -21,6 +21,7 @@
 //    "status": null
 //}
 
+@property (nonatomic, strong) NSString * pictureId;
 @property (nonatomic, strong) NSString *pictureName;
 @property (nonatomic, strong) NSString *pictureUrl;
 @property (nonatomic, assign) CGFloat height;

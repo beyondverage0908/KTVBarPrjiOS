@@ -23,7 +23,7 @@ typedef NS_ENUM(NSInteger, KtvRequestType) {
 // imageMap = {@"imageName" : image}
 @property (nonatomic, copy)     NSDictionary        *imageMap;                  // 上传图片集合
 @property (nonatomic, assign)   NSTimeInterval      timeout;                    // 请求服务器超时时间
-@property (nonatomic, strong)   id                  params;                    // body参数
+@property (nonatomic, strong)   id                  params;                     // body参数
 
 @property (nonatomic, strong)   NSString            *sign;                      // 加密，关键参数签名
 @property (nonatomic, strong)   NSString            *aesKey;                    // 用于解密服务器返回已经加密的数据

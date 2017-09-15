@@ -46,6 +46,7 @@
 		332A63D51F03B14D007EF65F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 332A63D41F03B14D007EF65F /* Assets.xcassets */; };
 		332A63E31F03B14D007EF65F /* KTVBariOSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 332A63E21F03B14D007EF65F /* KTVBariOSTests.m */; };
 		332A63EE1F03B14D007EF65F /* KTVBariOSUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 332A63ED1F03B14D007EF65F /* KTVBariOSUITests.m */; };
+		332D9AFF1F6BA9EC00B6B622 /* KTVPackage.m in Sources */ = {isa = PBXBuildFile; fileRef = 332D9AFE1F6BA9EC00B6B622 /* KTVPackage.m */; };
 		334214E31F49456800D7D5D0 /* KTVUrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 334214E21F49456800D7D5D0 /* KTVUrl.m */; };
 		334214E61F49813400D7D5D0 /* KTVLoginService.m in Sources */ = {isa = PBXBuildFile; fileRef = 334214E51F49813400D7D5D0 /* KTVLoginService.m */; };
 		3342B2EB1F1862B400E47483 /* UIColor+KTVSkin.m in Sources */ = {isa = PBXBuildFile; fileRef = 3342B2EA1F1862B400E47483 /* UIColor+KTVSkin.m */; };
@@ -269,6 +270,8 @@
 		332A63E91F03B14D007EF65F /* KTVBariOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KTVBariOSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		332A63ED1F03B14D007EF65F /* KTVBariOSUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KTVBariOSUITests.m; sourceTree = "<group>"; };
 		332A63EF1F03B14D007EF65F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		332D9AFD1F6BA9EC00B6B622 /* KTVPackage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVPackage.h; sourceTree = "<group>"; };
+		332D9AFE1F6BA9EC00B6B622 /* KTVPackage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVPackage.m; sourceTree = "<group>"; };
 		334214E11F49456800D7D5D0 /* KTVUrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVUrl.h; sourceTree = "<group>"; };
 		334214E21F49456800D7D5D0 /* KTVUrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVUrl.m; sourceTree = "<group>"; };
 		334214E41F49813400D7D5D0 /* KTVLoginService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVLoginService.h; sourceTree = "<group>"; };
@@ -1347,6 +1350,8 @@
 				3319C1001F65170B0008E897 /* KTVStoreContainer.m */,
 				33C483B61F6A86E800004FF6 /* KTVGroupbuy.h */,
 				33C483B71F6A86E800004FF6 /* KTVGroupbuy.m */,
+				332D9AFD1F6BA9EC00B6B622 /* KTVPackage.h */,
+				332D9AFE1F6BA9EC00B6B622 /* KTVPackage.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1732,6 +1737,7 @@
 				337779E91F3CA28400743B90 /* KTVPackageCell.m in Sources */,
 				33CD20C01F4F09F90090DBEE /* KTVPackageDetailCareCell.m in Sources */,
 				33CB83551F3F7319002E6F3B /* KTVPositionFilterCell.m in Sources */,
+				332D9AFF1F6BA9EC00B6B622 /* KTVPackage.m in Sources */,
 				33D776F31F301D9600077BE5 /* TAAbstractDotView.m in Sources */,
 				33216CFC1F4EB84500ECA24E /* KTVGroupBuyDetailController.m in Sources */,
 				33E446E21F6156A100D792A3 /* KTVFriendCell.m in Sources */,

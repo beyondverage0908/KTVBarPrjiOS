@@ -50,6 +50,9 @@
 
 - (IBAction)buyAction:(UIButton *)sender {
     CLog(@"--->>>团购详情-立即购买");
+    if (self.bookedGroupbuyCallback) {
+        self.bookedGroupbuyCallback();
+    }
 }
 
 - (void)gotoYueAction:(UILabel *)sender {

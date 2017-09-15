@@ -18,7 +18,7 @@
 #import "KTVStoreContainer.h"
 
 @interface KTVBarController ()<UITableViewDelegate, UITableViewDataSource, SDCycleScrollViewDelegate> {
-    NSInteger _tapIndex;
+    NSInteger _tapSectionIndex;
 }
 
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
@@ -106,7 +106,6 @@
 #pragma mark - 初始化
 
 - (void)initData {
-    _tapIndex = -1;
     self.mainParams = [NSMutableDictionary dictionary];
     self.storeContainerList = [NSMutableArray array];
     self.packageCollection = [NSMutableArray array];
@@ -116,9 +115,10 @@
 #pragma mark - 事件
 
 - (void)loadMoreInfoAction:(UIButton *)btn {
-    CLog(@"--->>> 查看其他2个团购");
     CLog(@"--->>> %@", @(btn.tag));
-    _tapIndex = btn.tag;
+    _tapSectionIndex = btn.tag;
+    KTVStoreContainer *storeContainer = self.storeContainerList[_tapSectionIndex - 1];
+    storeContainer.store.showGroupbuy = YES;
     [self.tableView reloadData];
 }
 
@@ -209,7 +209,7 @@
     KTVStoreContainer *storeContainer = self.storeContainerList[idx];
     NSInteger groupbuyCount = [storeContainer.store.groupBuyList count];
     
-    if (_tapIndex == section) {
+    if (_tapSectionIndex == section) {
         return [self sectionFooterView];
     }
     
@@ -232,7 +232,7 @@
     KTVStoreContainer *storeContainer = self.storeContainerList[idx];
     NSInteger groupbuyCount = [storeContainer.store.groupBuyList count];
     
-    if (_tapIndex == section) {
+    if (_tapSectionIndex == section) {
         return 5.0f;
     }
     return groupbuyCount ? 35.0f : 5.0f;
@@ -248,15 +248,21 @@
             KTVBarKtvDetailController *vc = (KTVBarKtvDetailController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVBarKtvDetailController"];
             [self.navigationController pushViewController:vc animated:YES];
         } else {
-            id obj = [self generatePackageOrGroupbuy:indexPath];
-            if (obj && [obj isKindOfClass:[KTVGroupbuy class]]) {
-                // 进入团购详情页面
-                KTVGroupBuyDetailController *vc = (KTVGroupBuyDetailController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVGroupBuyDetailController"];
-                vc.groupbuy = obj;
-                [self.navigationController pushViewController:vc animated:YES];
-            } else {
+            
+            NSInteger idx = indexPath.section - 1;
+            KTVStoreContainer *storeContainer = self.storeContainerList[idx];
+            if (indexPath.row > 0 && indexPath.row < (1 + storeContainer.store.packageList.count)) {
+                KTVPackage *package = storeContainer.store.packageList[indexPath.row - 1];
                 // 店铺详情(酒吧选座)
                 KTVBarKtvDetailController *vc = (KTVBarKtvDetailController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVBarKtvDetailController"];
+                vc.package = package;
+                [self.navigationController pushViewController:vc animated:YES];
+            } else if (indexPath.row > [storeContainer.store.packageList count]) {
+                KTVGroupbuy *groupbuy = storeContainer.store.groupBuyList[indexPath.row - [storeContainer.store.packageList count] - 1];
+                // 进入团购详情页面
+                KTVGroupBuyDetailController *vc = (KTVGroupBuyDetailController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVGroupBuyDetailController"];
+                vc.groupbuy = groupbuy;
+                vc.store = storeContainer.store;
                 [self.navigationController pushViewController:vc animated:YES];
             }
         }
@@ -276,20 +282,12 @@
             break;
         default:
         {
-            NSInteger idx = section - 1;
-            NSArray *packageList = self.packageCollection[idx];
-            
-            NSInteger groupbuyListCount = 0;
-            if (_tapIndex == section) {
-                NSArray *groupbuyList = [self.groupBuyCollection objectForKey:[NSNumber numberWithInteger:_tapIndex - 1]];
-                groupbuyListCount = [groupbuyList count];
+            NSInteger index = section - 1;
+            KTVStoreContainer *storeContainer = self.storeContainerList[index];
+            if (storeContainer.store.showGroupbuy) {
+                return 1 + storeContainer.store.packageList.count + storeContainer.store.groupBuyList.count;
             }
-            
-            NSInteger count = 1; // 表示店面cell，每个section必然有一个
-            NSInteger otherCount = packageList.count + 0 + groupbuyListCount;
-            count += otherCount;
-            
-            return count;
+            return 1 + storeContainer.store.packageList.count;
         }
             break;
     }
@@ -319,22 +317,12 @@
             }
             KTVPackageCell *cell = (KTVPackageCell *)[tableView dequeueReusableCellWithIdentifier:
                                                       KTVStringClass(KTVPackageCell)];
-//            NSArray *packageList = self.packageCollection[idx];
-//            NSArray *groupbuyList = [self.groupBuyCollection objectForKey:[NSNumber numberWithInteger:idx]];
-//            if (indexPath.row > 0 && indexPath.row < 1 + [packageList count]) {
-//                // 取出package
-////                packageList[indexPath.row - 1]
-//            }
-//            if (indexPath.row > [packageList count]) {
-//                // 取出groupbuy item
-//                KTVGroupbuy *gb = groupbuyList[indexPath.row - [packageList count] - 1];
-//                cell.groupbuy = gb;
-//                
-//            }
-            
-            id obj = [self generatePackageOrGroupbuy:indexPath];
-            if ([obj isKindOfClass:[KTVGroupbuy class]]) {
-                cell.groupbuy = obj;
+            if (indexPath.row > 0 && indexPath.row < (1 + storeContainer.store.packageList.count)) {
+                KTVPackage *package = storeContainer.store.packageList[indexPath.row - 1];
+                cell.package = package;
+            } else if (indexPath.row > [storeContainer.store.packageList count]) {
+                KTVGroupbuy *groupbuy = storeContainer.store.groupBuyList[indexPath.row - [storeContainer.store.packageList count] - 1];
+                cell.groupbuy = groupbuy;
             }
             
             return cell;

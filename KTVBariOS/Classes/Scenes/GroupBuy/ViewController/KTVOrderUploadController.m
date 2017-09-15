@@ -32,11 +32,27 @@
     self.tableView.backgroundColor = [UIColor ktvBG];
     self.bottomBgView.backgroundColor = [UIColor ktvBG];
     
-    self.allMoneyLabel.text = @"¥2000";
+    NSString *allMoney = [self getOrderAllMoney];
+    
+    self.allMoneyLabel.text = [NSString stringWithFormat:@"¥%@", allMoney];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+#pragma mark - 封装
+
+- (NSString *)getOrderAllMoney {
+    NSInteger groupbuyTotalPrice = [self.orderUploadDictionary[@"groupbuyTotalPrice"] integerValue]; // 套餐基础价格
+    NSArray *yueUserDetails = self.orderUploadDictionary[@"userOrderDetails"];
+    NSInteger money = 0;
+    for (NSDictionary *dict in yueUserDetails) {
+        money += [dict[@"price"] integerValue];
+    }
+    money += groupbuyTotalPrice;
+    
+    return @(money).stringValue;
 }
 
 #pragma mark - 事件
@@ -44,6 +60,7 @@
 - (IBAction)endPayAction:(UIButton *)sender {
     CLog(@"-->> 结账");
     KTVPayController *vc = (KTVPayController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVPayController"];
+    vc.orderUploadDictionary = self.orderUploadDictionary;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

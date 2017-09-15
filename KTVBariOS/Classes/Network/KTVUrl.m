@@ -54,6 +54,10 @@
     return @"/api/store/activitors/";
 }
 
++ (NSString *)getAtivitorsByPageUrl {
+    return @"/api/store/activitors";
+}
+
 + (NSString *)getStoreGoodsUrl {
     return @"/api/store/goods/";
 }
@@ -64,6 +68,10 @@
 
 + (NSString *)getStoreInvitatorsUrl {
     return @"/api/store/invitators/";
+}
+
++ (NSString *)getCreateOrderUrl {
+    return @"/api/order/createOrder";
 }
 
 @end

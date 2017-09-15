@@ -10,4 +10,6 @@
 
 @interface KTVOrderUploadController : KTVBaseViewController
 
+@property (nonatomic, strong) NSMutableDictionary *orderUploadDictionary;
+
 @end

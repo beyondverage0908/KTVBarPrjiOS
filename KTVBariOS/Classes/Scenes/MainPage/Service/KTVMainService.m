@@ -38,6 +38,19 @@
     }];
 }
 
++ (void)getStorePageActivitors:(NSDictionary *)params result:(ResponseSuccess)responseResult {
+    KTVRequestMessage *msg = [[KTVRequestMessage alloc] init];
+    msg.path = [KTVUrl getAtivitorsByPageUrl];
+    msg.httpType = KtvGET;
+    msg.params = params;
+    
+    [[KTVNetworkHelper sharedInstance] send:msg success:^(NSDictionary *result) {
+        responseResult(result);
+    } fail:^(NSError *error) {
+        CLog(@"--->>>%@", error);
+    }];
+}
+
 + (void)getStoreGoods:(NSString *)storeId result:(ResponseSuccess)responseResult {
     KTVRequestMessage *msg = [[KTVRequestMessage alloc] init];
     msg.path = [KTVUrl getStoreGoodsUrl];

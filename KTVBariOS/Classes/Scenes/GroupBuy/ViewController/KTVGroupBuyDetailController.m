@@ -20,6 +20,7 @@
 
 #import "KTVDandianController.h"
 #import "KTVSelectedBeautyController.h"
+#import "KTVOrderUploadController.h"
 
 #import "KTVMainService.h"
 #import "KTVStore.h"
@@ -30,9 +31,12 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
-@property (strong, nonatomic) KTVStore *store;
 @property (strong, nonatomic) NSMutableArray *activitorList; // 暖场人列表
 @property (strong, nonatomic) NSMutableArray *invitatorList;   // 在约小伙伴列表
+
+@property (assign, nonatomic) NSInteger activitorPage;      // 获取暖场人 - 分页
+@property (strong, nonatomic) NSMutableArray *selectedActivitorList;  // 已经选择的暖场人列表
+@property (strong, nonatomic) NSMutableDictionary *orderUploadDictionary; // 提交订单参数
 
 @end
 
@@ -47,9 +51,9 @@
     
     [self initData];
     
-    [self loadStore];
+    //[self loadStore];
     [self loadStoreInvitators];
-    [self loadStoreActivitors];
+    [self loadPageStoreActivitors];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -60,20 +64,44 @@
     [super didReceiveMemoryWarning];
 }
 
+#pragma mark - 数据拼接
+
+- (void)mergeUploadParam {
+    // 套餐价格
+    [self.orderUploadDictionary setObject:self.groupbuy.totalPrice forKey:@"groupbuyTotalPrice"];
+    [self.orderUploadDictionary setObject:@(self.store.storeId.integerValue) forKey:@"storeId"];
+    [self.orderUploadDictionary setObject:@(self.store.user.userId.integerValue) forKey:@"userId"];
+    // 1套餐，2酒吧位置价格 3包厢类型的价格 ,4暖场人，5 单点商品的价格如果是单点商品，会出现数量为2的情况），6普通邀约人（这个单价为0）7 团购 8 活动
+    [self.orderUploadDictionary setObject:@(7) forKey:@"orderType"];
+    [self.orderUploadDictionary setObject:@(0) forKey:@"userHide"];
+    
+    NSMutableArray *userOrderDetails = [NSMutableArray array];
+    for (KTVUser *user in self.selectedActivitorList) {
+        NSDictionary *dict = @{@"sourceId" : @(user.userId.integerValue),
+                               @"price" : @(user.userDetail.price),
+                               @"orderType" : @(4)};
+        [userOrderDetails addObject:dict];
+    }
+    [self.orderUploadDictionary setObject:userOrderDetails forKey:@"userOrderDetails"];
+}
+
+#pragma mark - 初始化数据
+
 - (void)initData {
     self.activitorList = [NSMutableArray array];
     self.invitatorList = [NSMutableArray array];
+    self.selectedActivitorList = [NSMutableArray array];
+    self.orderUploadDictionary = [NSMutableDictionary dictionary];
 }
 
 #pragma mark - 网络
 
 /// 获取门店信息
 - (void)loadStore {
-    [KTVMainService getStore:@"4" result:^(NSDictionary *result) {
+    [KTVMainService getStore:self.store.storeId result:^(NSDictionary *result) {
         if (![result[@"code"] isEqualToString:ktvCode]) {
             return;
         }
-        
         self.store = [KTVStore yy_modelWithDictionary:result[@"data"]];
         [self.tableView reloadData];
     }];
@@ -81,7 +109,7 @@
 
 /// 获取门店在约人数
 - (void)loadStoreInvitators {
-    [KTVMainService getStoreInvitators:@"4" result:^(NSDictionary *result) {
+    [KTVMainService getStoreInvitators:self.store.storeId result:^(NSDictionary *result) {
         if (![result[@"code"] isEqualToString:ktvCode]) {
             return;
         }
@@ -90,23 +118,32 @@
             KTVUser *user = [KTVUser yy_modelWithDictionary:dict];
             [self.invitatorList addObject:user];
         }
+        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
     }];
 }
 
-/// 获取门店暖场人
-- (void)loadStoreActivitors {
-    // 获取门店暖场人
-    [KTVMainService getStoreActivitors:@"4" result:^(NSDictionary *result) {
+/// 分页获取门店暖场人
+- (void)loadPageStoreActivitors {
+    NSDictionary *params = @{@"storeId" : self.store.storeId,
+                             @"size" : @"2",
+                             @"currentPage" : @(self.activitorPage)};
+    [KTVMainService getStorePageActivitors:params result:^(NSDictionary *result) {
         if (![result[@"code"] isEqualToString:ktvCode]) {
             [KTVToast toast:result[@"detail"]];
             return;
         }
-        
-        for (NSDictionary *dict in result[@"data"][@"activitorList"]) {
+        NSArray *activitorList = result[@"data"][@"activitorList"];
+        if ([activitorList count]) {
+            [self.activitorList removeAllObjects];
+            ++self.activitorPage;
+        } else {
+            [KTVToast toast:TOAST_NOMORE_ACTIVITORS];
+        }
+        for (NSDictionary *dict in activitorList) {
             KTVUser *user = [KTVUser yy_modelWithDictionary:dict];
             [self.activitorList addObject:user];
         }
-        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
+        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:3] withRowAnimation:UITableViewRowAnimationNone];
     }];
 }
 
@@ -149,11 +186,17 @@
         headerView.headerActionBlock = ^(KTVHeaderType type) {
             if (type == HeaderType) {
                 CLog(@"--->>> 邀约TA暖床");
+                [self loadPageStoreActivitors];
             }
         };
         headerView.bgActionBlock = ^(KTVHeaderType headerType) {
             if (headerType == BGType) {
+                // 合并提交团购参数
+                [self mergeUploadParam];
+                
                 KTVSelectedBeautyController *vc = (KTVSelectedBeautyController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVSelectedBeautyController"];
+                vc.selectedActivitorList = self.selectedActivitorList;
+                vc.orderUploadDictionary = self.orderUploadDictionary;
                 [self.navigationController pushViewController:vc animated:YES];
             }
         };
@@ -190,7 +233,7 @@
     } else if (section == 2) {
         return 1;
     } else if (section == 3) {
-        return [self.store.activitorList count];
+        return [self.activitorList count];
     } else if (section == 4) {
         return 1;
     } else if (section == 5) {
@@ -205,6 +248,14 @@
         cell.invitatorList = self.invitatorList;
         cell.store = self.store;
         cell.groupbuy = self.groupbuy;
+        cell.bookedGroupbuyCallback = ^{
+            // 合并提交参数
+            [self mergeUploadParam];
+            
+            KTVOrderUploadController *vc = (KTVOrderUploadController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVOrderUploadController"];
+            vc.orderUploadDictionary = self.orderUploadDictionary;
+            [self.navigationController pushViewController:vc animated:YES];
+        };
         return cell;
     } else if (indexPath.section == 1) {
         if (indexPath.row == 0) {
@@ -222,13 +273,9 @@
         } else {
             NSString *KTVPositionFilterCellIdentifier = @"KTVPositionFilterCell";
             KTVPositionFilterCell *cell = [tableView dequeueReusableCellWithIdentifier:KTVPositionFilterCellIdentifier];
+            NSArray *groupbuyTimeList = [self.groupbuy.groupBuyTime componentsSeparatedByString:@";"];
             if (!cell) {
-                cell = [[KTVPositionFilterCell alloc] initWithPositionFilterItems:@[@"13:00~18:00",
-                                                                                    @"18:00~20:00",
-                                                                                    @"20:00~23:00",
-                                                                                    @"23:00~01:00",
-                                                                                    @"01:00~07:00",
-                                                                                    @"07:00~13:00"]
+                cell = [[KTVPositionFilterCell alloc] initWithPositionFilterItems:groupbuyTimeList
                                                                   reuseIdentifier:KTVPositionFilterCellIdentifier];
             }
             return cell;
@@ -237,23 +284,27 @@
         KTVBarKtvBeautyCell *cell = (KTVBarKtvBeautyCell *)[tableView dequeueReusableCellWithIdentifier:@"KTVBarKtvBeautyCell"];
         return cell;
     } else if (indexPath.section == 3) {
-        KTVUser *user = self.store.activitorList[indexPath.row];
+        KTVUser *user = self.activitorList[indexPath.row];
         KTVYuePaoUserCell *cell = (KTVYuePaoUserCell *)[tableView dequeueReusableCellWithIdentifier:@"KTVYuePaoUserCell"];
         cell.user = user;
         cell.yueCallback = ^(KTVUser *user, BOOL isSelected) {
             if (isSelected) {
                 CLog(@"--->>> 约了%@", user.nickName);
+                [self.selectedActivitorList addObject:user];
             } else {
                 CLog(@"--->>> 不约%@", user.nickName);
+                [self.selectedActivitorList removeObject:user];
             }
         };
         return cell;
     } else if (indexPath.section == 4) {
         KTVBuyNotesCell *cell = (KTVBuyNotesCell *)[tableView dequeueReusableCellWithIdentifier:@"KTVBuyNotesCell"];
+        cell.groupbuy = self.groupbuy;
         return cell;
     } else if (indexPath.section == 5) {
         if (indexPath.row == 0) {
             KTVDoBusinessCell *cell = [tableView dequeueReusableCellWithIdentifier:@"KTVDoBusinessCell"];
+            cell.store = self.store;
             return cell;
         } else {
             KTVOtherDianpuCell *cell = [tableView dequeueReusableCellWithIdentifier:@"KTVOtherDianpuCell"];

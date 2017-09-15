@@ -43,6 +43,9 @@
 /// 获取门店暖场人
 + (NSString *)getAtivitorsUrl;
 
+/// 分页获取门店暖场人
++ (NSString *)getAtivitorsByPageUrl;
+
 /// 获取门店商品
 + (NSString *)getStoreGoodsUrl;
 
@@ -51,4 +54,8 @@
 
 /// 获取门店在约人数
 + (NSString *)getStoreInvitatorsUrl;
+
+/// 创建订单
++ (NSString *)getCreateOrderUrl;
+
 @end

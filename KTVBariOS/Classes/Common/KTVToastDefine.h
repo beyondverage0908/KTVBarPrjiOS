@@ -14,5 +14,6 @@ static NSString * const TOAST_MOBILE_CANT_NULL                      = @"电话�
 static NSString * const TOAST_CONFIRM_PROTOCOL                      = @"请您确认协议";
 static NSString * const TOAST_MODIFIED_SUCCESS                      = @"修改成功";
 static NSString * const TOAST_SELECTED_PAYCHANNEL                   = @"请选择支付方式";
+static NSString * const TOAST_NOMORE_ACTIVITORS                     = @"没有更多暖场人了";
 
 #endif /* KTVToastDefine_h */
