@@ -71,6 +71,10 @@
 
 #pragma mark - 网络
 
+// 订单支付流程
+// 获取订单需要参数 -> 创建订单(获取到订单号) -> 获取支付的charge -> 调用支付接口
+
+// 支付宝支付
 - (void)networkConfirmPay {
     NSString *channel = [self getPayChannel];
     if (!channel) {
@@ -92,6 +96,7 @@
     }];
 }
 
+// 创建订单
 - (void)networkCreateOrder:(void (^)(NSDictionary *success))createSuccessBlock {
     [KTVBuyService postCreateOrder:self.orderUploadDictionary result:^(NSDictionary *result) {
         if ([result[@"code"] isEqualToString:ktvCode]) {
@@ -170,8 +175,6 @@
 
 - (IBAction)confirmPayAction:(UIButton *)sender {
     CLog(@"-->> 确认支付出去");
-    
-    [self networkConfirmPay];
     
     [self networkCreateOrder:^(NSDictionary *success) {
         [self networkConfirmPay];

@@ -25,6 +25,9 @@ typedef void(^ResponseSuccess)(NSDictionary *result);
 /// 注册
 + (void)postRegisterParams:(NSDictionary *)params result:(ResponseSuccess)responseResult;
 
+/// 用户注册详情
++ (void)postRegisterDetaliParams:(NSDictionary *)params result:(ResponseSuccess)responseResult;
+
 /// 微信登陆
 + (void)postWechatLoginParams:(NSDictionary *)params result:(ResponseSuccess)responseResult;
 

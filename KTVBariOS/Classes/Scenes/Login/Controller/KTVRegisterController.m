@@ -22,6 +22,7 @@
 
 @property (assign, nonatomic) NSInteger currentPage;            // scrollView当前第几页
 @property (strong, nonatomic) NSMutableDictionary *registerParams;
+@property (strong, nonatomic) NSMutableDictionary *registerDetailParams; // 注册详情
 
 @property (nonatomic, assign) BOOL agreeProtocol;                // 是否同意协议
 
@@ -42,11 +43,13 @@
 
 - (void)initData {
     self.registerParams = [NSMutableDictionary dictionaryWithCapacity:6];
-    // 默认出生年月1990-08-21
-    [self.registerParams setObject:@"1990-08-21" forKey:@"borthday"];
-    // 默认男
-    [self.registerParams setObject:@"1" forKey:@"gender"];
+    [self.registerParams setObject:[NSNumber numberWithInteger:1] forKey:@"userType"];
     
+    self.registerDetailParams = [NSMutableDictionary dictionary];
+    // 默认出生年月1990-08-21
+    [self.registerDetailParams setObject:@"1990-08-21" forKey:@"birthday"];
+    // 默认男
+    [self.registerDetailParams setObject:@"1" forKey:@"sex"];
 }
 
 - (void)initDatePickerUI {
@@ -458,6 +461,7 @@
     switch (type) {
         case KTVInputMobileType:
         {
+            [self.registerDetailParams setObject:inputValue forKey:@"phone"]; // 用户的电话号码
             [self.registerParams setObject:inputValue forKey:@"phone"]; // 用户的电话号码
         }
             break;
@@ -498,14 +502,14 @@
         CLog(@"--->>> 男");
         gender = @"1";
         genderLabel.text = @"男";
-        [self.registerParams setObject:gender forKey:@"gender"];
+        [self.registerDetailParams setObject:gender forKey:@"sex"];
     }];
     [alertvc addAction:manAction];
     UIAlertAction *womanAction = [UIAlertAction actionWithTitle:@"女" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         CLog(@"--->>> 女");
         gender = @"0";
         genderLabel.text = @"女";
-        [self.registerParams setObject:gender forKey:@"gender"];
+        [self.registerDetailParams setObject:gender forKey:@"sex"];
     }];
     [alertvc addAction:womanAction];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
@@ -522,11 +526,26 @@
         [KTVToast toast:TOAST_CONFIRM_PROTOCOL];
         return;
     }
-    self.agreeProtocol = NO;
     
     CLog(@"--->>> 下一步");
     self.currentPage++;
-    [self switchPage:self.currentPage];
+    
+    if (self.currentPage == 1) {
+        [self switchPage:self.currentPage];
+        self.agreeProtocol = NO;
+        return;
+    }
+    
+    if (self.currentPage == 2) {
+        [KTVLoginService postRegisterDetaliParams:self.registerDetailParams result:^(NSDictionary *result) {
+            if (![result[@"code"] isEqualToString:ktvCode]) {
+                --self.currentPage;
+                [KTVToast toast:result[@"detail"]];
+                return;
+            }
+            [self switchPage:self.currentPage];
+        }];
+    }
 }
 
 - (void)completeRegisterAction:(UIButton *)btn {
@@ -560,11 +579,11 @@
     }];
     
     CLog(@"--->>> %@", self.datePickerView.date);
-    NSString *borthday = [NSDate dateStringWithDate:self.datePickerView.date andFormatString:@"yyyy-MM-dd"];
-    UILabel *borthdaylabel = (UILabel *)[self.pageView viewWithTag:10000];
-    borthdaylabel.text = borthday;
+    NSString *birthday = [NSDate dateStringWithDate:self.datePickerView.date andFormatString:@"yyyy-MM-dd"];
+    UILabel *birthdaylabel = (UILabel *)[self.pageView viewWithTag:10000];
+    birthdaylabel.text = birthday;
     
-    [self.registerParams setObject:borthday forKey:@"borthday"];
+    [self.registerDetailParams setObject:birthday forKey:@"birthday"];
 }
 
 @end

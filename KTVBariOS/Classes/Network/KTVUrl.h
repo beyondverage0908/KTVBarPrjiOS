@@ -31,6 +31,9 @@
 /// 用户注册
 + (NSString *)getRegisterUrl;
 
+/// 用户注册详情
++ (NSString *)getRegisterDetailUrl;
+
 /// 更改密码
 + (NSString *)getChangePasswordUrl;
 

@@ -38,6 +38,10 @@
     return @"/api/login/user/register";
 }
 
++ (NSString *)getRegisterDetailUrl {
+    return @"/api/login/user/registerDetail";
+}
+
 + (NSString *)getChangePasswordUrl {
     return @"/api/password/user/changePassword";
 }

@@ -315,7 +315,7 @@
         params = self.loginMobileParams;
     }
     [KTVLoginService getCommonLoginParams:params result:^(NSDictionary *result) {
-        if ([result[@"msg"] isEqualToString:ktvSuccess]) {
+        if ([result[@"code"] isEqualToString:ktvCode]) {
             NSString *ktvToken = result[@"data"][@"token"];
             // 保存token
             [KTVUtil setObject:ktvToken forKey:@"ktvToken"];
