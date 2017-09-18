@@ -10,4 +10,6 @@
 
 @interface KTVPaySuccessController : KTVBaseViewController
 
+@property (nonatomic, strong) NSString *payedMoney;
+
 @end

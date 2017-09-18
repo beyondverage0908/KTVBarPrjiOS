@@ -7,12 +7,13 @@
 //
 
 #import "KTVBaseViewController.h"
+#import "KTVStore.h"
+#import "KTVGroupbuy.h"
 
 @interface KTVSelectedBeautyController : KTVBaseViewController
 
-// 接受提交订单参数
-@property (nonatomic, strong) NSMutableDictionary *orderUploadDictionary;
-
-@property (strong, nonatomic) NSMutableArray *selectedActivitorList;
+@property (strong, nonatomic) KTVStore *store;
+@property (strong, nonatomic) KTVGroupbuy *groupbuy;
+@property (strong, nonatomic) NSMutableArray *selectedActivitorList; //已经选中的暖场人
 
 @end

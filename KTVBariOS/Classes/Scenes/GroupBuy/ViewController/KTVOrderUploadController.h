@@ -7,9 +7,13 @@
 //
 
 #import "KTVBaseViewController.h"
+#import "KTVStore.h"
+#import "KTVGroupbuy.h"
 
 @interface KTVOrderUploadController : KTVBaseViewController
 
-@property (nonatomic, strong) NSMutableDictionary *orderUploadDictionary;
+@property (nonatomic, strong) KTVStore *store;
+@property (nonatomic, strong) KTVGroupbuy *groupbuy;
+@property (nonatomic, strong) NSArray *selectedActivitorList;
 
 @end

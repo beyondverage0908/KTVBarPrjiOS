@@ -8,6 +8,10 @@
 
 #import "KTVBaseViewController.h"
 
+#import "KTVStore.h"
+
 @interface KTVStoreViewController : KTVBaseViewController
+
+@property (nonatomic, copy) void (^selectedStoreCallback)(KTVStore *store);
 
 @end

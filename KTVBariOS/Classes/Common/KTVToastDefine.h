@@ -15,5 +15,15 @@ static NSString * const TOAST_CONFIRM_PROTOCOL                      = @"请您�
 static NSString * const TOAST_MODIFIED_SUCCESS                      = @"修改成功";
 static NSString * const TOAST_SELECTED_PAYCHANNEL                   = @"请选择支付方式";
 static NSString * const TOAST_NOMORE_ACTIVITORS                     = @"没有更多暖场人了";
+static NSString * const TOAST_PAY_FAIL                              = @"支付失败";
+
+
+// MBProgressHUD定义
+
+static NSString * const MB_CREATE_ORDER                             = @"创建订单中...";
+static NSString * const MB_ORDER_PAYING                             = @"支付中...";
+
+
+
 
 #endif /* KTVToastDefine_h */

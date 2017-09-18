@@ -39,8 +39,8 @@
         [mask addSubview:bgView];
         bgView.backgroundColor = [UIColor whiteColor];
         [bgView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.height.equalTo(mask).multipliedBy(0.35);
             make.left.and.right.and.bottom.equalTo(self);
-            make.height.equalTo(mask).multipliedBy(0.4);
         }];
         
         
@@ -80,8 +80,8 @@
         self.pickerView.delegate = self;
         self.pickerView.dataSource = self;
         [self.pickerView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.and.right.and.bottom.equalTo(bgView);
             make.top.equalTo(headerView.mas_bottom);
+            make.left.and.right.and.bottom.equalTo(bgView);
         }];
     }
     

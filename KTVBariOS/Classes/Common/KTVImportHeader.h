@@ -23,6 +23,7 @@
 #import "UIFont+Ktv.h"
 #import "NSDate+Processing.h"
 #import "UILabel+Ktv.h"
+#import "MBProgressHUD+KTV.h"
 
 // Common
 #import "KTVCommonDefine.h"

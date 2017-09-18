@@ -20,6 +20,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"店铺";
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -48,9 +49,12 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     KTVStoreCell *cell = (KTVStoreCell *)[tableView dequeueReusableCellWithIdentifier:@"KTVStoreCell"];
-    cell.callBack = ^(NSDictionary *dict) {
-        NSString *name = dict[@"name"];
-        CLog(@"-->> %@", name);
+    cell.callBack = ^(KTVStore *store) {
+        CLog(@"-->> 花生酒店");
+        if (self.selectedStoreCallback) {
+            self.selectedStoreCallback(store);
+        }
+        [self.navigationController popViewControllerAnimated:YES];
     };
     return cell;
 }

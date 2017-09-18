@@ -27,9 +27,36 @@
 @property (strong, nonatomic) NSMutableDictionary *payChannelDict; // 支付渠道
 @property (assign, nonatomic) BOOL isHiddenActivity;
 
+@property (strong, nonatomic) NSMutableDictionary *orderUploadDictionary;
+
 @end
 
 @implementation KTVPayController
+
+- (void)mergeUploadParam {
+    // 套餐价格
+    [self.orderUploadDictionary setObject:self.groupbuy.totalPrice forKey:@"groupbuyTotalPrice"];
+    [self.orderUploadDictionary setObject:@(self.store.storeId.integerValue) forKey:@"storeId"];
+    [self.orderUploadDictionary setObject:@(self.store.user.userId.integerValue) forKey:@"userId"];
+    // 1套餐，2酒吧位置价格 3包厢类型的价格 ,4暖场人，5 单点商品的价格如果是单点商品，会出现数量为2的情况），6普通邀约人（这个单价为0）7 团购 8 活动
+    [self.orderUploadDictionary setObject:@(7) forKey:@"orderType"];
+    [self.orderUploadDictionary setObject:@(0) forKey:@"userHide"];
+    // 订单时间
+    NSString *currentDate = [NSDate dateStringWithDate:[NSDate date] andFormatString:@"yyyy-MM-dd"];
+    [self.orderUploadDictionary setObject:currentDate forKey:@"startDate"];
+    
+    NSMutableArray *userOrderDetails = [NSMutableArray array];
+    for (KTVUser *user in self.selectedActivitorList) {
+        NSDictionary *dict = @{@"sourceId" : @(user.userId.integerValue),
+                               @"price" : @(user.userDetail.price),
+                               @"orderType" : @(user.userDetail.type),
+                               @"count" : @(1),
+                               @"discount" : @(100)};
+        [userOrderDetails addObject:dict];
+    }
+    [self.orderUploadDictionary setObject:userOrderDetails forKey:@"userOrderDetails"];
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -44,25 +71,28 @@
     [self.confirmPayBtn setTitle:[NSString stringWithFormat:@"确认支付 ¥%@", [self getOrderAllMoney]] forState:UIControlStateNormal];
 }
 
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
+
+#pragma mark - 初始化
+
 - (void)initData {
     self.payChannelDict = [NSMutableDictionary dictionaryWithCapacity:3];
     [self.payChannelDict setObject:[NSNumber numberWithBool:NO] forKey:@"unionpay"];
     [self.payChannelDict setObject:[NSNumber numberWithBool:NO] forKey:@"alipay"];
     [self.payChannelDict setObject:[NSNumber numberWithBool:NO] forKey:@"wechatpay"];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
+    
+    self.orderUploadDictionary = [NSMutableDictionary dictionary];
 }
 
 #pragma mark - 封装
 
 - (NSString *)getOrderAllMoney {
-    NSInteger groupbuyTotalPrice = [self.orderUploadDictionary[@"groupbuyTotalPrice"] integerValue]; // 套餐基础价格
-    NSArray *yueUserDetails = self.orderUploadDictionary[@"userOrderDetails"];
+    NSInteger groupbuyTotalPrice = self.groupbuy.totalPrice.integerValue; // 套餐基础价格
     NSInteger money = 0;
-    for (NSDictionary *dict in yueUserDetails) {
-        money += [dict[@"price"] integerValue];
+    for (KTVUser *user in self.selectedActivitorList) {
+        money += user.userDetail.price;
     }
     money += groupbuyTotalPrice;
     
@@ -75,7 +105,7 @@
 // 获取订单需要参数 -> 创建订单(获取到订单号) -> 获取支付的charge -> 调用支付接口
 
 // 支付宝支付
-- (void)networkConfirmPay {
+- (void)networkConfirmPay:(NSString *)orderNo {
     NSString *channel = [self getPayChannel];
     if (!channel) {
         [KTVToast toast:TOAST_SELECTED_PAYCHANNEL];
@@ -86,23 +116,41 @@
                                 @"amount" : @"1",
                                 @"subject" : @"aaaa",
                                 @"body" : @"bbbb",
-                                @"orderNo" : @"1504017453722k9qadqq"};
+                                @"orderNo" : orderNo};
+    [MBProgressHUD showMessage:MB_ORDER_PAYING];
     [KTVBuyService postPayParams:payParams result:^(NSDictionary *result) {
+        [MBProgressHUD hiddenHUD];
+        if (![result[@"code"] isEqualToString:ktvCode]) {
+            [KTVToast toast:result[@"detail"]];
+            return;
+        }
         NSDictionary *charge = result[@"data"];
         [KTVPayManager ktvPay:AlipayType payment:charge contoller:nil completion:^(NSString *result) {
-            KTVPaySuccessController *vc = (KTVPaySuccessController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVPaySuccessController"];
-            [self.navigationController pushViewController:vc animated:YES];
+            if ([result isEqualToString:@"success"]) {
+                // 支付成功
+                KTVPaySuccessController *vc = (KTVPaySuccessController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVPaySuccessController"];
+                vc.payedMoney = [self getOrderAllMoney];
+                [self.navigationController pushViewController:vc animated:YES];
+            } else {
+                // 支付失败或取消
+                [KTVToast toast:TOAST_PAY_FAIL];
+            }
         }];
     }];
 }
 
 // 创建订单
 - (void)networkCreateOrder:(void (^)(NSDictionary *success))createSuccessBlock {
+    
+    [MBProgressHUD showMessage:MB_CREATE_ORDER];
     [KTVBuyService postCreateOrder:self.orderUploadDictionary result:^(NSDictionary *result) {
+        [MBProgressHUD hiddenHUD];
         if ([result[@"code"] isEqualToString:ktvCode]) {
             if (createSuccessBlock){
-                createSuccessBlock([NSDictionary new]);
+                createSuccessBlock(result[@"data"]);
             }
+        } else {
+            [KTVToast toast:result[@"detail"]];
         }
         CLog(@"--->>> %@", result);
     }];
@@ -161,23 +209,26 @@
             break;
         }
     }
-    
-    if ([paychannel isEqualToString:@"unionpay"]) {
-        [self.orderUploadDictionary setObject:@(0) forKey:@"payType"];
-    } else if ([paychannel isEqualToString:@"alipay"]) {
-        [self.orderUploadDictionary setObject:@(1) forKey:@"payType"];
-    } else if ([paychannel isEqualToString:@"wechatpay"]) {
-        [self.orderUploadDictionary setObject:@(2) forKey:@"payType"];
-    }
-    
     return paychannel;
 }
 
 - (IBAction)confirmPayAction:(UIButton *)sender {
     CLog(@"-->> 确认支付出去");
     
-    [self networkCreateOrder:^(NSDictionary *success) {
-        [self networkConfirmPay];
+    [self mergeUploadParam];
+    
+    NSString *paychannel = [self getPayChannel];
+    if ([paychannel isEqualToString:@"unionpay"]) {
+        [self.orderUploadDictionary setObject:@(3) forKey:@"payType"];
+    } else if ([paychannel isEqualToString:@"alipay"]) {
+        [self.orderUploadDictionary setObject:@(1) forKey:@"payType"];
+    } else if ([paychannel isEqualToString:@"wechatpay"]) {
+        [self.orderUploadDictionary setObject:@(2) forKey:@"payType"];
+    }
+    
+    [self networkCreateOrder:^(NSDictionary *orderDict) {
+        NSString *orderNo = orderDict[@"orderId"];
+        [self networkConfirmPay:orderNo];
     }];
 }
 

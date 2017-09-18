@@ -46,8 +46,16 @@
     return @"/api/password/user/changePassword";
 }
 
++ (NSString *)getLocationRecentStatusUrl {
+    return @"/api/login/user/recentStatus";
+}
+
 + (NSString *)getPingPayUrl {
     return @"/api/pay";
+}
+
++ (NSString *)getRefundUrl {
+    return @"/api/refund";
 }
 
 + (NSString *)getMainUrl {
@@ -76,6 +84,14 @@
 
 + (NSString *)getCreateOrderUrl {
     return @"/api/order/createOrder";
+}
+
++ (NSString *)getRecentStatusUrl {
+    return @"/api/user/recentStatus";
+}
+
++ (NSString *)getCommentUrl {
+    return @"/api/store/comment";
 }
 
 @end

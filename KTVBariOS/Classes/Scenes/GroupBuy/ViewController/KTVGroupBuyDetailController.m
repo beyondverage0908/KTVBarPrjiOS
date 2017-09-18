@@ -36,7 +36,6 @@
 
 @property (assign, nonatomic) NSInteger activitorPage;      // 获取暖场人 - 分页
 @property (strong, nonatomic) NSMutableArray *selectedActivitorList;  // 已经选择的暖场人列表
-@property (strong, nonatomic) NSMutableDictionary *orderUploadDictionary; // 提交订单参数
 
 @end
 
@@ -64,34 +63,12 @@
     [super didReceiveMemoryWarning];
 }
 
-#pragma mark - 数据拼接
-
-- (void)mergeUploadParam {
-    // 套餐价格
-    [self.orderUploadDictionary setObject:self.groupbuy.totalPrice forKey:@"groupbuyTotalPrice"];
-    [self.orderUploadDictionary setObject:@(self.store.storeId.integerValue) forKey:@"storeId"];
-    [self.orderUploadDictionary setObject:@(self.store.user.userId.integerValue) forKey:@"userId"];
-    // 1套餐，2酒吧位置价格 3包厢类型的价格 ,4暖场人，5 单点商品的价格如果是单点商品，会出现数量为2的情况），6普通邀约人（这个单价为0）7 团购 8 活动
-    [self.orderUploadDictionary setObject:@(7) forKey:@"orderType"];
-    [self.orderUploadDictionary setObject:@(0) forKey:@"userHide"];
-    
-    NSMutableArray *userOrderDetails = [NSMutableArray array];
-    for (KTVUser *user in self.selectedActivitorList) {
-        NSDictionary *dict = @{@"sourceId" : @(user.userId.integerValue),
-                               @"price" : @(user.userDetail.price),
-                               @"orderType" : @(4)};
-        [userOrderDetails addObject:dict];
-    }
-    [self.orderUploadDictionary setObject:userOrderDetails forKey:@"userOrderDetails"];
-}
-
 #pragma mark - 初始化数据
 
 - (void)initData {
     self.activitorList = [NSMutableArray array];
     self.invitatorList = [NSMutableArray array];
     self.selectedActivitorList = [NSMutableArray array];
-    self.orderUploadDictionary = [NSMutableDictionary dictionary];
 }
 
 #pragma mark - 网络
@@ -191,12 +168,11 @@
         };
         headerView.bgActionBlock = ^(KTVHeaderType headerType) {
             if (headerType == BGType) {
-                // 合并提交团购参数
-                [self mergeUploadParam];
-                
+                // 跳转邀约暖场人列表
                 KTVSelectedBeautyController *vc = (KTVSelectedBeautyController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVSelectedBeautyController"];
+                vc.store = self.store;
+                vc.groupbuy = self.groupbuy;
                 vc.selectedActivitorList = self.selectedActivitorList;
-                vc.orderUploadDictionary = self.orderUploadDictionary;
                 [self.navigationController pushViewController:vc animated:YES];
             }
         };
@@ -249,11 +225,11 @@
         cell.store = self.store;
         cell.groupbuy = self.groupbuy;
         cell.bookedGroupbuyCallback = ^{
-            // 合并提交参数
-            [self mergeUploadParam];
-            
+            // 跳转到订单提交
             KTVOrderUploadController *vc = (KTVOrderUploadController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVOrderUploadController"];
-            vc.orderUploadDictionary = self.orderUploadDictionary;
+            vc.store = self.store;
+            vc.groupbuy = self.groupbuy;
+            vc.selectedActivitorList = self.selectedActivitorList; // 已经选中的暖场
             [self.navigationController pushViewController:vc animated:YES];
         };
         return cell;

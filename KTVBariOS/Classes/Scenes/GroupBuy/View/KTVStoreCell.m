@@ -37,7 +37,17 @@
 - (IBAction)confirmAction:(UIButton *)sender {
     CLog(@"-->> 选中店铺 确定");
     if (self.callBack) {
-        self.callBack(@{@"name" : @"鲁豫花生酒店"});
+        self.callBack(self.store);
     }
 }
+
+- (void)setStore:(KTVStore *)store {
+    _store = store;
+    
+    self.nameLabel.text = _store.storeName;
+    self.starView.stars = _store.star;
+    self.storeTimeLabel.text = [NSString stringWithFormat:@"营业时间 %@-%@", _store.fromTime, _store.toTime];
+    self.locationLabel.text = _store.address.addressName;
+}
+
 @end

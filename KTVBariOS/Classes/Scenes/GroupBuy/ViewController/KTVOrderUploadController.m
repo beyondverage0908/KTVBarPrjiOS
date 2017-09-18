@@ -44,11 +44,10 @@
 #pragma mark - 封装
 
 - (NSString *)getOrderAllMoney {
-    NSInteger groupbuyTotalPrice = [self.orderUploadDictionary[@"groupbuyTotalPrice"] integerValue]; // 套餐基础价格
-    NSArray *yueUserDetails = self.orderUploadDictionary[@"userOrderDetails"];
+    NSInteger groupbuyTotalPrice = self.groupbuy.totalPrice.integerValue; // 套餐基础价格
     NSInteger money = 0;
-    for (NSDictionary *dict in yueUserDetails) {
-        money += [dict[@"price"] integerValue];
+    for (KTVUser *user in self.selectedActivitorList) {
+        money += user.userDetail.price;
     }
     money += groupbuyTotalPrice;
     
@@ -60,7 +59,9 @@
 - (IBAction)endPayAction:(UIButton *)sender {
     CLog(@"-->> 结账");
     KTVPayController *vc = (KTVPayController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVPayController"];
-    vc.orderUploadDictionary = self.orderUploadDictionary;
+    vc.groupbuy = self.groupbuy;
+    vc.store = self.store;
+    vc.selectedActivitorList = self.selectedActivitorList;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

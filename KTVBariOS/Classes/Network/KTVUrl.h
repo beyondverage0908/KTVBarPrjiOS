@@ -37,8 +37,14 @@
 /// 更改密码
 + (NSString *)getChangePasswordUrl;
 
+/// 登录成功之后更新用户的位置和最后一次登录的时间
++ (NSString *)getLocationRecentStatusUrl;
+
 /// ping++支付
 + (NSString *)getPingPayUrl;
+
+/// ping++退款 
++ (NSString *)getRefundUrl;
 
 /// 首页数据
 + (NSString *)getMainUrl;
@@ -60,5 +66,11 @@
 
 /// 创建订单
 + (NSString *)getCreateOrderUrl;
+
+/// 创建评论
++ (NSString *)getRecentStatusUrl;
+
+/// 获取门店评论
++ (NSString *)getCommentUrl;
 
 @end

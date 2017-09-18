@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "KTVStore.h"
 
 @interface KTVStoreCell : UITableViewCell
 
-@property (copy, nonatomic) void (^callBack)(NSDictionary *storeDict);
+@property (copy, nonatomic) void (^callBack)(KTVStore *store);
+@property (nonatomic, strong) KTVStore *store;
 
 @end

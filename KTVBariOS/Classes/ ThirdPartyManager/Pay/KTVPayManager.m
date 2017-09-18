@@ -23,14 +23,8 @@ static NSString * const unionUrlScheme = @"ktvunionpaytype";
         case AlipayType:
         {
             [Pingpp createPayment:charge appURLScheme:alipayUrlScheme withCompletion:^(NSString *result, PingppError *error) {
-                if ([result isEqualToString:@"success"]) {
-                    // 支付成功
-                    if (completion) {
-                        completion(result);
-                    }
-                } else {
-                    // 支付失败或取消
-                    NSLog(@"Error: code=%lu msg=%@", error.code, [error getMsg]);
+                if (completion) {
+                    completion(result);
                 }
             }];
         }
@@ -39,14 +33,8 @@ static NSString * const unionUrlScheme = @"ktvunionpaytype";
         {
             // URLScheme -- 必须是在微信官方平台注册后以wx开头的字符串 -- shareSDK同理
             [Pingpp createPayment:charge appURLScheme:wechatUrlScheme withCompletion:^(NSString *result, PingppError *error) {
-                if ([result isEqualToString:@"success"]) {
-                    // 支付成功
-                    if (completion) {
-                        completion(result);
-                    }
-                } else {
-                    // 支付失败或取消
-                    NSLog(@"Error: code=%lu msg=%@", error.code, [error getMsg]);
+                if (completion) {
+                    completion(result);
                 }
             }];
         }
@@ -57,14 +45,8 @@ static NSString * const unionUrlScheme = @"ktvunionpaytype";
                    viewController:controller
                      appURLScheme:unionUrlScheme
                    withCompletion:^(NSString *result, PingppError *error) {
-                       if ([result isEqualToString:@"success"]) {
-                           // 支付成功
-                           if (completion) {
-                               completion(result);
-                           }
-                       } else {
-                           // 支付失败或取消
-                           NSLog(@"Error: code=%lu msg=%@", error.code, [error getMsg]);
+                       if (completion) {
+                           completion(result);
                        }
                    }];
         }

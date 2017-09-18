@@ -71,8 +71,7 @@ static NSInteger RowCount = 2;
 
 // 获取暖场人
 - (void)loadStoreActivitors {
-    [KTVMainService getStoreActivitors:@"4" result:^(NSDictionary *result) {
-        CLog(@"-->> %@", result);
+    [KTVMainService getStoreActivitors:self.store.storeId result:^(NSDictionary *result) {
         if (![result[@"msg"] isEqualToString:ktvSuccess]) {
             return;
         }
@@ -130,10 +129,17 @@ static NSInteger RowCount = 2;
 
 - (IBAction)nextStepAction:(UIButton *)sender {
     CLog(@"选美女--下一步");
-    [self mergeOrderUploadParam];
+    
+    for (KTVUser *user in self.selActivitorList) {
+        if (![self.selectedActivitorList containsObject:user]) {
+            [self.selectedActivitorList addObject:user];
+        }
+    }
     
     KTVOrderUploadController *vc = (KTVOrderUploadController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVOrderUploadController"];
-    vc.orderUploadDictionary = self.orderUploadDictionary;
+    vc.store = self.store;
+    vc.groupbuy = self.groupbuy;
+    vc.selectedActivitorList = self.selectedActivitorList;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -142,21 +148,6 @@ static NSInteger RowCount = 2;
 - (void)resetBtnYueNumber:(NSInteger)yueNumber {
     NSString *yueStr = [NSString stringWithFormat:@"约TA(%@)", @(yueNumber)];
     [self.yueTaBtn setTitle:yueStr forState:UIControlStateNormal];
-}
-
-- (void)mergeOrderUploadParam {
-    NSMutableArray *selActivitorList = self.orderUploadDictionary[@"userOrderDetails"];
-    if (!selActivitorList) {
-        selActivitorList = [NSMutableArray array];
-    }
-    
-    for (KTVUser *user in self.selActivitorList) {
-        NSDictionary *dict = @{@"sourceId" : @(user.userId.integerValue),
-                               @"price" : @(user.userDetail.price),
-                               @"orderType" : @(4)};
-        [selActivitorList addObject:dict];
-    }
-    [self.orderUploadDictionary setObject:selActivitorList forKey:@"userOrderDetails"];
 }
 
 #pragma mark - UICollectionViewDelegate
@@ -185,6 +176,9 @@ static NSInteger RowCount = 2;
             [self.selActivitorList addObject:user];
         } else {
             [self.selActivitorList removeObject:user];
+            if ([self.selectedActivitorList containsObject:user]) {
+                [self.selectedActivitorList removeObject:user];
+            }
         }
         
         [self resetBtnYueNumber:[self.selActivitorList count]];
