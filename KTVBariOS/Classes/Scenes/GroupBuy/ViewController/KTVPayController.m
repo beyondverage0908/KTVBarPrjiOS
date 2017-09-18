@@ -42,7 +42,7 @@
     [self.orderUploadDictionary setObject:@(7) forKey:@"orderType"];
     [self.orderUploadDictionary setObject:@(0) forKey:@"userHide"];
     // 订单时间
-    NSString *currentDate = [NSDate dateStringWithDate:[NSDate date] andFormatString:@"yyyy-MM-dd"];
+    NSString *currentDate = [NSDate dateStringWithDate:[NSDate date] andFormatString:@"yyyy-MM-dd HH:mm:ss"];
     [self.orderUploadDictionary setObject:currentDate forKey:@"startDate"];
     
     NSMutableArray *userOrderDetails = [NSMutableArray array];

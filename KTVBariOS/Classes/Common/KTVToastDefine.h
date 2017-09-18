@@ -16,6 +16,7 @@ static NSString * const TOAST_MODIFIED_SUCCESS                      = @"修改�
 static NSString * const TOAST_SELECTED_PAYCHANNEL                   = @"请选择支付方式";
 static NSString * const TOAST_NOMORE_ACTIVITORS                     = @"没有更多暖场人了";
 static NSString * const TOAST_PAY_FAIL                              = @"支付失败";
+static NSString * const TOAST_LOGIN_SUCCESS                         = @"登陆成功";
 
 
 // MBProgressHUD定义

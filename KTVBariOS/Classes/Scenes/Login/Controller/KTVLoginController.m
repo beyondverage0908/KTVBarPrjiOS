@@ -316,6 +316,7 @@
     }
     [KTVLoginService getCommonLoginParams:params result:^(NSDictionary *result) {
         if ([result[@"code"] isEqualToString:ktvCode]) {
+            [KTVToast toast:TOAST_LOGIN_SUCCESS];
             NSString *ktvToken = result[@"data"][@"token"];
             // 保存token
             [KTVUtil setObject:ktvToken forKey:@"ktvToken"];
