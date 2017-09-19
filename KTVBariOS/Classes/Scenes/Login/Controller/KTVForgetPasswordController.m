@@ -36,6 +36,10 @@
     self.accountTF.attributedPlaceholder = [[NSAttributedString alloc] initWithString:self.accountTF.placeholder attributes:attrs];
     self.veryfitTF.attributedPlaceholder = [[NSAttributedString alloc] initWithString:self.veryfitTF.placeholder attributes:attrs];
     self.passwordTF.attributedPlaceholder = [[NSAttributedString alloc] initWithString:self.passwordTF.placeholder attributes:attrs];
+    
+    self.accountTF.font = [UIFont bold14];
+    self.veryfitTF.font = [UIFont bold14];
+    self.passwordTF.font = [UIFont bold14];
 }
 
 - (IBAction)getVerfitAction:(UIButton *)sender {
@@ -62,7 +66,7 @@
     }
     
     [KTVLoginService postChangePassword:self.forgetParams result:^(NSDictionary *result) {
-        if ([result[@"msg"] isEqualToString:ktvSuccess]) {
+        if ([result[@"code"] isEqualToString:ktvCode]) {
             [KTVToast toast:TOAST_MODIFIED_SUCCESS];
             [self.navigationController popViewControllerAnimated:YES];
         } else {

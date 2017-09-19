@@ -16,6 +16,7 @@
 #import "KTVBarKtvDetailController.h"
 
 #import "KTVMainService.h"
+#import "KTVLoginService.h"
 
 @interface KTVMainController ()<UITableViewDelegate, UITableViewDataSource, SDCycleScrollViewDelegate>
 
@@ -45,6 +46,7 @@
     [self loadStoreGoods];
     [self loadStore];
     [self loadStoreInvitators];
+    [self loadUserInfo];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -89,6 +91,22 @@
 - (void)loadStoreInvitators {
     [KTVMainService getStoreInvitators:@"4" result:^(NSDictionary *result) {
         CLog(@"-->> %@", result);
+    }];
+}
+
+- (void)loadUserInfo {
+    KTVUser *user = [KTVCommon userInfo];
+    [KTVLoginService getUserInfo:user.phone result:^(NSDictionary *result) {
+        if ([result[@"code"] isEqualToString:ktvCode]) {
+            NSDictionary *userinfo = result[@"data"];
+            
+            for (NSString *key in userinfo.allKeys) {
+                NSString *value = [NSString stringWithFormat:@"%@", userinfo[key]];
+                if (value && value.length) {
+                    [KTVCommon setUserInfoKey:key infoValue:value];
+                }
+            }
+        }
     }];
 }
 

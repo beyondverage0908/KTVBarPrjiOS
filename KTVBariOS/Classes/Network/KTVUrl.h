@@ -13,6 +13,9 @@
 /// 获取项目的域名
 + (NSString *)getDomainUrl;
 
+/// 获取用户信息
++ (NSString *)getUserInfoUrl;
+
 /// 获取验证码
 + (NSString *)getIdentifyingCodeUrl;
 
@@ -21,6 +24,9 @@
 
 /// 一般登录（手机号+密码）
 + (NSString *)getCommonLoginUrl;
+
+/// 手机快捷登陆
++ (NSString *)getPhoneLoginUrl;
 
 /// QQ登录
 + (NSString *)getQQLoginUrl;

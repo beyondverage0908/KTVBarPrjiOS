@@ -10,6 +10,17 @@
 
 @implementation KTVLoginService
 
++ (void)getUserInfo:(NSString *)userId result:(ResponseSuccess)responseResult {
+    KTVRequestMessage *msg = [[KTVRequestMessage alloc] init];
+    msg.params = userId;
+    msg.httpType = KtvGET;
+    msg.path = [KTVUrl getUserInfoUrl];
+    
+    [[KTVNetworkHelper sharedInstance] send:msg success:^(NSDictionary *result) {
+        responseResult(result);
+    } fail:^(NSError *error) {}];
+}
+
 + (void)getIdentifyingCodeParams:(NSDictionary *)params result:(ResponseSuccess)responseResult {
     KTVRequestMessage *msg = [[KTVRequestMessage alloc] init];
     msg.params = params;
@@ -24,6 +35,19 @@
 + (void)getCommonLoginParams:(NSDictionary *)params result:(ResponseSuccess)responseResult {
     KTVRequestMessage *msg = [[KTVRequestMessage alloc] init];
     msg.path = [KTVUrl getCommonLoginUrl];
+    msg.httpType = KtvPOST;
+    msg.params = params;
+    
+    [[KTVNetworkHelper sharedInstance] send:msg success:^(NSDictionary *result) {
+        responseResult(result);
+    } fail:^(NSError *error) {
+        CLog(@"--->>>%@", error);
+    }];
+}
+
++ (void)postPhoneLoginParams:(NSDictionary *)params result:(ResponseSuccess)responseResult {
+    KTVRequestMessage *msg = [[KTVRequestMessage alloc] init];
+    msg.path = [KTVUrl getPhoneLoginUrl];
     msg.httpType = KtvPOST;
     msg.params = params;
     

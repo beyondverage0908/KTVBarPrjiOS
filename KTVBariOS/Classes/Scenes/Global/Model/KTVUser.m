@@ -23,7 +23,8 @@
 
 // 属性转换 - 服务端返回的属性和需要定义的属性不一致
 + (NSDictionary *)modelCustomPropertyMapper {
-    return @{@"userId" : @"id"};
+    return @{@"userId" : @"id",
+             @"des" : @"description"};
 }
 
 @end

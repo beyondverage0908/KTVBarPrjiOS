@@ -13,6 +13,9 @@ typedef void(^ResponseSuccess)(NSDictionary *result);
 
 @interface KTVLoginService : NSObject
 
+/// 获取用户信息
++ (void)getUserInfo:(NSString *)userId result:(ResponseSuccess)responseResult;
+
 /// 获取验证码
 + (void)getIdentifyingCodeParams:(NSDictionary *)params result:(ResponseSuccess)result;
 
@@ -21,6 +24,9 @@ typedef void(^ResponseSuccess)(NSDictionary *result);
 
 /// 普通登陆
 + (void)getCommonLoginParams:(NSDictionary *)params result:(ResponseSuccess)responseResult;
+
+/// 手机快捷登陆
++ (void)postPhoneLoginParams:(NSDictionary *)params result:(ResponseSuccess)responseResult;
 
 /// 注册
 + (void)postRegisterParams:(NSDictionary *)params result:(ResponseSuccess)responseResult;

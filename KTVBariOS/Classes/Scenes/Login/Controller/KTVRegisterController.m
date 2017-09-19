@@ -537,13 +537,13 @@
     }
     
     if (self.currentPage == 2) {
-        [KTVLoginService postRegisterDetaliParams:self.registerDetailParams result:^(NSDictionary *result) {
-            if (![result[@"code"] isEqualToString:ktvCode]) {
+        [KTVLoginService postRegisterParams:self.registerParams result:^(NSDictionary *result) {
+            if ([result[@"code"] isEqualToString:ktvCode]) {
+                [self switchPage:self.currentPage];
+            } else {
                 --self.currentPage;
                 [KTVToast toast:result[@"detail"]];
-                return;
             }
-            [self switchPage:self.currentPage];
         }];
     }
 }
@@ -552,11 +552,11 @@
     [self.view endEditing:YES];
     CLog(@"--->>> 完成注册");
     // 接口请求放这里
-    [KTVLoginService postRegisterParams:self.registerParams result:^(NSDictionary *result) {
-        if ([result[@"msg"] isEqualToString:@"Success"]) {
-            [self dismissViewControllerAnimated:YES completion:nil];
-        } else {
+    [KTVLoginService postRegisterDetaliParams:self.registerDetailParams result:^(NSDictionary *result) {
+        if (![result[@"code"] isEqualToString:ktvCode]) {
             [KTVToast toast:result[@"detail"]];
+        } else {
+            [self dismissViewControllerAnimated:YES completion:nil];
         }
     }];
 }

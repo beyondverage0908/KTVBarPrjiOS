@@ -82,7 +82,7 @@
         self.accountInputView.inputType = KTVInputMobileType;
         self.accountInputView.inputValue = self.loginMobileParams[@"phone"];
         self.passwordInputView.inputType = KTVInputVerfiyType;
-        self.passwordInputView.inputValue = self.loginMobileParams[@"password"];
+        self.passwordInputView.inputValue = self.loginMobileParams[@"code"];
     }
 }
 
@@ -239,7 +239,11 @@
     NSLog(@"--->>>loginAction");
     [self.view endEditing:YES];
     
-    [self accountLoginService];
+    if (self.loginType == KTVLoginAccountType) {
+        [self accountLoginService];
+    } else {
+        [self phoneLoginService];
+    }
 }
 
 - (void)fastRegisterAction:(UIButton *)btn {
@@ -280,7 +284,7 @@
         {
             CLog(@"---2>>>%@", inputValue);
             if (self.loginType == KTVLoginMobileType) {
-                [self.loginMobileParams setObject:inputValue forKey:@"password"];
+                [self.loginMobileParams setObject:inputValue forKey:@"code"];
             }
         }
             break;
@@ -307,14 +311,27 @@
 
 #pragma mark - 网络请求
 
+// 普通账号登陆
 - (void)accountLoginService {
-    NSDictionary *params = nil;
-    if (self.loginType == KTVLoginAccountType) {
-        params = self.loginAccountParams;
-    } else {
-        params = self.loginMobileParams;
-    }
-    [KTVLoginService getCommonLoginParams:params result:^(NSDictionary *result) {
+    [KTVLoginService getCommonLoginParams:self.loginAccountParams result:^(NSDictionary *result) {
+        if ([result[@"code"] isEqualToString:ktvCode]) {
+            [KTVToast toast:TOAST_LOGIN_SUCCESS];
+            NSString *ktvToken = result[@"data"][@"token"];
+            // 保存token
+            [KTVUtil setObject:ktvToken forKey:@"ktvToken"];
+            [KTVCommon setUserInfoKey:@"phone" infoValue:self.loginAccountParams[@"phone"]];
+            
+            [self dismissViewControllerAnimated:YES completion:nil];
+        } else {
+            [KTVToast toast:result[@"detail"]];
+        }
+    }];
+}
+
+/// 手机快捷登陆
+- (void)phoneLoginService {
+    
+    [KTVLoginService postPhoneLoginParams:self.loginMobileParams result:^(NSDictionary *result) {
         if ([result[@"code"] isEqualToString:ktvCode]) {
             [KTVToast toast:TOAST_LOGIN_SUCCESS];
             NSString *ktvToken = result[@"data"][@"token"];

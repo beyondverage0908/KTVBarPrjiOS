@@ -14,6 +14,10 @@
     return @"http://119.23.148.104";
 }
 
++ (NSString *)getUserInfoUrl {
+    return @"/api/login/user/";
+}
+
 + (NSString *)getIdentifyingCodeUrl {
     return @"/api/login/user/getIdentifyingCode";
 }
@@ -24,6 +28,10 @@
 
 + (NSString *)getCommonLoginUrl {
     return @"/api/login/user/commonLogin";
+}
+
++ (NSString *)getPhoneLoginUrl {
+    return @"/api/login/user/phoneLogin";
 }
 
 + (NSString *)getQQLoginUrl {
