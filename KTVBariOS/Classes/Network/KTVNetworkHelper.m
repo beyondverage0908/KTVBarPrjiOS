@@ -89,18 +89,14 @@ static KTVNetworkHelper *_instance = nil;
     CLog(@"URL %@", urlString);
     
     [_manager GET:urlString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         // 解密服务器返回值
         NSDictionary *result = [self sessionWithNetResponse:responseObject message:message];
+        [self requestResponse:result success:success];
         
-        if (success) {
-            success(result); //成功回调
-        }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-        
         if (failure) {
             failure(error);
         }
@@ -118,11 +114,9 @@ static KTVNetworkHelper *_instance = nil;
     [_manager POST:urlString parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-        
         // 解密服务器返回值
         NSDictionary *result = [self sessionWithNetResponse:responseObject message:message];
-        
-        if (success) success(result); //成功回调
+        [self requestResponse:result success:success];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
@@ -144,7 +138,8 @@ static KTVNetworkHelper *_instance = nil;
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         // 解密服务器返回值
         NSDictionary *result = [self sessionWithNetResponse:responseObject message:message];
-        if (success) success(result); //成功回调
+        [self requestResponse:result success:success];
+        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         if (failure) {
@@ -194,14 +189,12 @@ static KTVNetworkHelper *_instance = nil;
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable response) {
         // 解密服务器返回值
-        NSDictionary *result = [self sessionWithNetResponse:response message:message];
-        
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-        if (success) success(result);
+        NSDictionary *result = [self sessionWithNetResponse:response message:message];
+        [self requestResponse:result success:success];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-        
         if (failure) failure(error);
     }];
 }
@@ -279,6 +272,16 @@ static KTVNetworkHelper *_instance = nil;
 //    NSDictionary *result = [response convertObject];
     
     return netResponse;
+}
+
+#pragma mark - 封装请求返回数据
+
+- (void)requestResponse:(NSDictionary *)responese success:(RequestSuccess)success {
+    if ([responese[@"code"] isEqualToString:ktvInvalidateToken]) {
+        [KtvNotiCenter postNotificationName:ktvInvalidateToken object:nil];
+        return;
+    }
+    if (success) success(responese);
 }
 
 @end

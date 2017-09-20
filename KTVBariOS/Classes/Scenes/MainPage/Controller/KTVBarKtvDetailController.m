@@ -21,10 +21,15 @@
 #import "KTVOtherDianpuCell.h"
 
 #import "KTVPackageController.h"
+#import "KTVGroupBuyDetailController.h"
+
+#import "KTVMainService.h"
 
 @interface KTVBarKtvDetailController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+
+@property (strong, nonatomic) NSMutableArray *invitatorList;
 
 @end
 
@@ -38,20 +43,20 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.backgroundColor = [UIColor ktvBG];
-    
+    if (@available(iOS 11.0, *)) {
+        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }
     [self customRightBarItems];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
-    [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0];
+    [self clearNavigationbar:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-
-    [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:1];
+    [self clearNavigationbar:NO];
 }
 
 - (void)navigationBackAction:(id)action {
@@ -79,6 +84,31 @@
     CLog(@"-->> 订单分享");
 }
 
+#pragma mark - 初始化
+
+- (void)initData {
+//    self.activitorList = [NSMutableArray array];
+    self.invitatorList = [NSMutableArray array];
+//    self.selectedActivitorList = [NSMutableArray array];
+}
+
+#pragma mark - 网络
+
+/// 获取门店在约人数
+- (void)loadStoreInvitators {
+    [KTVMainService getStoreInvitators:self.store.storeId result:^(NSDictionary *result) {
+        if (![result[@"code"] isEqualToString:ktvCode]) {
+            return;
+        }
+        
+        for (NSDictionary *dict in result[@"data"]) {
+            KTVUser *user = [KTVUser yy_modelWithDictionary:dict];
+            [self.invitatorList addObject:user];
+        }
+        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
+    }];
+}
+
 #pragma mark - UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -104,7 +134,8 @@
         KTVTableHeaderView *headerView = [[KTVTableHeaderView alloc] initWithImageUrl:@"app_order_ding" title:@"预定" remark:@"2946人订过"];
         return headerView;
     } else if (section == 2) {
-        KTVTableHeaderView *headerView = [[KTVTableHeaderView alloc] initWithImageUrl:@"app_order_tuan" title:@"团购(2)" remark:nil];
+        NSString *title = [NSString stringWithFormat:@"(团购%@)", @(self.store.groupBuyList.count)];
+        KTVTableHeaderView *headerView = [[KTVTableHeaderView alloc] initWithImageUrl:@"app_order_tuan" title:title remark:nil];
         return headerView;
     } else if (section == 3) {
         KTVTableHeaderView *headerView = [[KTVTableHeaderView alloc] initWithImageUrl:nil title:@"活动详情" remark:nil];
@@ -121,8 +152,10 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if (section == 1 || section == 2 || section == 3 || section == 4 || section == 5) {
+    if (section == 1 || section == 3 || section == 4 || section == 5) {
         return 28;
+    } else if (section == 2) {
+        return self.store.groupBuyList.count ? 28 : 0;
     } else {
         return 0;
     }
@@ -144,8 +177,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {    
     if (indexPath.section == 2) {
-        KTVPackageController *vc = (KTVPackageController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVPackageController"];
+        KTVGroupbuy *groupbuy = self.store.groupBuyList[indexPath.row];
+        KTVGroupBuyDetailController *vc = (KTVGroupBuyDetailController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVGroupBuyDetailController"];
+        vc.store = self.store;
+        vc.groupbuy = groupbuy;
         [self.navigationController pushViewController:vc animated:YES];
+//        KTVPackageController *vc = (KTVPackageController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVPackageController"];
+//        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 
@@ -161,7 +199,7 @@
     } else if (section == 1) {
         return 4;
     } else if (section == 2) {
-        return 4;
+        return self.store.groupBuyList.count;
     } else if (section == 3) {
         return 1;
     } else if (section == 4) {
@@ -176,6 +214,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         KTVBarKtvDetailHeaderCell *cell = (KTVBarKtvDetailHeaderCell *)[tableView dequeueReusableCellWithIdentifier:KTVStringClass(KTVBarKtvDetailHeaderCell)];
+        cell.store = self.store;
         return cell;
     } else if (indexPath.section == 1) {
         if (indexPath.row == 0) {
@@ -214,6 +253,8 @@
         
     } else if (indexPath.section == 2) {
         KTVPackageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"KTVPackageCell"];
+        KTVGroupbuy *groupbuy = self.store.groupBuyList[indexPath.row];
+        cell.groupbuy = groupbuy;
         return cell;
     } else if (indexPath.section == 3) {
         KTVBarKtvBeautyCell *cell = [tableView dequeueReusableCellWithIdentifier:@"KTVBarKtvBeautyCell"];

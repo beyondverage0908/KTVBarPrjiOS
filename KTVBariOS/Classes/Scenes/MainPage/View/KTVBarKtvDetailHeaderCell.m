@@ -36,10 +36,21 @@
 - (IBAction)yudingNumberAction:(UIButton *)sender {
     // 订座，指的是拨打酒店的电话
     CLog(@"--->>>拨打订座电话");
+    [KTVUtil tellphone:self.store.phone];
 }
 
 - (void)setupUI {
     [self.yuepaoNumber addUnderlineStyle];
+}
+
+#pragma mark - 设置
+
+- (void)setStore:(KTVStore *)store {
+    _store = store;
+    
+    self.storeNameLabel.text = store.storeName;
+    self.starView.stars = store.star;
+    self.locationName.text = store.address.addressName;
 }
 
 #pragma mark - 事件

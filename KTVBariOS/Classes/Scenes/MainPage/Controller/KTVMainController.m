@@ -26,6 +26,8 @@
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UIButton *scanQRbtn;
 
+@property (strong, nonatomic) KTVStore *store;
+
 @end
 
 @implementation KTVMainController
@@ -70,6 +72,7 @@
 
 #pragma mark - 网络
 
+// 获取门店暖场人
 - (void)loadStoreActivitors {
     [KTVMainService getStoreActivitors:@"4" result:^(NSDictionary *result) {
         CLog(@"-->> %@", result);
@@ -82,9 +85,15 @@
     }];
 }
 
+// 获取门店
 - (void)loadStore {
     [KTVMainService getStore:@"4" result:^(NSDictionary *result) {
-        CLog(@"-->> %@", result);
+        if ([result[@"code"] isEqualToString:ktvCode]) {
+            KTVStore *store = [KTVStore yy_modelWithDictionary:result[@"data"]];
+            self.store = store;
+            
+            [self.tableView reloadData];
+        }
     }];
 }
 
@@ -218,6 +227,7 @@
     if (indexPath.section == 2) {
         CLog(@"-- 酒吧详情");
         KTVBarKtvDetailController *vc = (KTVBarKtvDetailController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVBarKtvDetailController"];
+        vc.store = self.store;
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

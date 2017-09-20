@@ -1944,7 +1944,7 @@
 					"$(PROJECT_DIR)/KTVBariOS/Classes/ThirdParty/ShareSDK/ShareSDK/Support/PlatformSDK/SinaWeiboSDK",
 					"$(PROJECT_DIR)/KTVBariOS/Classes/ThirdParty/ShareSDK/ShareSDK/Support/PlatformSDK/WeChatSDK",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.vhs.gongyuntong;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vhs.vhealth.kldf;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1975,7 +1975,7 @@
 					"$(PROJECT_DIR)/KTVBariOS/Classes/ThirdParty/ShareSDK/ShareSDK/Support/PlatformSDK/SinaWeiboSDK",
 					"$(PROJECT_DIR)/KTVBariOS/Classes/ThirdParty/ShareSDK/ShareSDK/Support/PlatformSDK/WeChatSDK",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.vhs.gongyuntong;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vhs.vhealth.kldf;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};

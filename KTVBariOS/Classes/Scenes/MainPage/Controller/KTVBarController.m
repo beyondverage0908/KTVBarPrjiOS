@@ -27,9 +27,6 @@
 @property (strong, nonatomic) NSMutableDictionary *mainParams;
 @property (strong, nonatomic) NSMutableArray *storeContainerList;
 
-@property (strong, nonatomic) NSMutableArray *packageCollection;
-@property (strong, nonatomic) NSMutableDictionary *groupBuyCollection;
-
 @end
 
 @implementation KTVBarController
@@ -108,8 +105,6 @@
 - (void)initData {
     self.mainParams = [NSMutableDictionary dictionary];
     self.storeContainerList = [NSMutableArray array];
-    self.packageCollection = [NSMutableArray array];
-    self.groupBuyCollection = [NSMutableDictionary new];
 }
 
 #pragma mark - 事件
@@ -140,41 +135,11 @@
                 [self.storeContainerList addObject:storeContainer];
             }
 
-            [self generateAllData:self.storeContainerList];
             [self.tableView reloadData];
         } else {
             CLog(@"-- >> filure");
         }
     }];
-}
-
-#pragma mark - 数据解析
-
-- (void)generateAllData:(NSArray<KTVStoreContainer *> *)storeContainerList {
-    for (NSInteger i = 0; i<[storeContainerList count]; i++) {
-        KTVStoreContainer *container = storeContainerList[i];
-        
-        [self.packageCollection addObject:container.store.packageList];
-        [self.groupBuyCollection setObject:container.store.groupBuyList
-                                    forKey:[NSNumber numberWithInteger:i]];
-    }
-}
-
-- (id)generatePackageOrGroupbuy:(NSIndexPath *)indexPath {
-    NSInteger idx = indexPath.section - 1;
-    
-    NSArray *packageList = self.packageCollection[idx];
-    NSArray *groupbuyList = [self.groupBuyCollection objectForKey:[NSNumber numberWithInteger:idx]];
-    if (indexPath.row > 0 && indexPath.row < 1 + [packageList count]) {
-        // 取出package
-//                packageList[indexPath.row - 1]
-        return nil;
-    } else if (indexPath.row > [packageList count]) {
-        // 取出groupbuy item
-        KTVGroupbuy *gb = groupbuyList[indexPath.row - [packageList count] - 1];
-        return gb;
-    }
-    return nil;
 }
 
 #pragma mark - UITableViewDelegate

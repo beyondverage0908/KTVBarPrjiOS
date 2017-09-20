@@ -39,9 +39,11 @@
 
 - (void)clearNavigationbar:(BOOL)isClear {
     if (isClear) {
-        [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0];
+        //[[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0];
+        [self.navigationController.navigationBar setColor:[UIColor clearColor]];
     } else {
-        [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:1];
+        [self.navigationController.navigationBar setColor:[UIColor ktvBG]];
+//        [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:1];
     }
 }
 
@@ -53,6 +55,7 @@
 - (void)setNavigationBarColor:(UIColor *)color {
 //    [self.navigationController.navigationBar ktv_setBackgroundColor:color];
 //    self.navigationController.navigationBar.barTintColor = color;
+    
     [self.navigationController.navigationBar setColor:color];
 }
 
@@ -65,7 +68,8 @@
 - (void)setNavigationBackButtonItem {
     // reference: http://www.jianshu.com/p/c229dc1aa325
     // 方法2:通过父视图NaviController来设置
-    UIBarButtonItem *bcItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:self action:@selector(navigationBackAction:)];
+    // 此处空格是有作用的，用于扩大点击作用域
+    UIBarButtonItem *bcItem = [[UIBarButtonItem alloc] initWithTitle:@"  " style:UIBarButtonItemStylePlain target:self action:@selector(navigationBackAction:)];
     self.navigationController.navigationBar.tintColor = [UIColor ktvRed];
     //主要是以下两个图片设置
     [self.navigationController.navigationBar setBackIndicatorImage:[UIImage imageNamed:@"app_navi_back_arrow"]];

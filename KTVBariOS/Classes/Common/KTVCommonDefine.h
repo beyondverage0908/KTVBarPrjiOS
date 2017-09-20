@@ -45,7 +45,10 @@
 #define ktvSuccess                          @"Success"
 #define ktvCode                             @"00000"
 #define ktvDetail                           @"detail"
+#define ktvInvalidateToken                  @"2"
 #define ktvUserHeaderDefaultImg             [UIImage imageNamed:@"bar_yuepao_user_placeholder"]
+
+#define KTVInvalidateToken                  @"KTVInvalidateToken"
 
 
 #endif /* KTVCommonDefine_h */

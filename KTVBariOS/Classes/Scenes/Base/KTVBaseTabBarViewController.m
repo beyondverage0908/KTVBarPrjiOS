@@ -8,6 +8,7 @@
 
 #import "KTVBaseTabBarViewController.h"
 #import "KTVBaseNavigationViewController.h"
+#import "KTVLoginGuideController.h"
 
 @interface KTVBaseTabBarViewController ()
 
@@ -41,6 +42,9 @@
                                tabBarItemTitle:@"我的"
                                          image:@"app_tab_mine_unselect"
                                 andSelectImage:@"app_tab_mine_select"];
+    
+    // 检测token失效
+    [KtvNotiCenter addObserver:self selector:@selector(notiInvalidateToken) name:ktvInvalidateToken object:nil];
 }
 
 
@@ -73,6 +77,23 @@
     KTVBaseNavigationViewController *nav = [[KTVBaseNavigationViewController alloc] initWithRootViewController:targetvc];
     [self addChildViewController:nav];
     
+}
+
+#pragma mark - 通知
+
+- (void)notiInvalidateToken {
+    UIAlertController *alertControler = [UIAlertController alertControllerWithTitle:@"提醒" message:@"您还未登陆，请登陆进行预订" preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:@"登陆" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        KTVLoginGuideController *guideVC = [[KTVLoginGuideController alloc] init];
+        KTVBaseNavigationViewController *nav = [[KTVBaseNavigationViewController alloc] initWithRootViewController:guideVC];
+        [self presentViewController:nav animated:YES completion:nil];
+    }];
+    [alertControler addAction:confirmAction];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
+    [alertControler addAction:cancelAction];
+    
+    [self presentViewController:alertControler animated:YES completion:nil];
 }
 
 @end

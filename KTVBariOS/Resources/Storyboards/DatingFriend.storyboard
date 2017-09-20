@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="7MJ-7Z-aHn">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="7MJ-7Z-aHn">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,7 +16,7 @@
                 <navigationController storyboardIdentifier="KTVDiscoverSBId" id="7MJ-7Z-aHn" customClass="KTVBaseNavigationViewController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="发现" id="uTr-kx-DAP"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="r1f-kG-WOT">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -76,7 +76,7 @@
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F92-L0-a3P">
-                                                <rect key="frame" x="314" y="11" width="51" height="22"/>
+                                                <rect key="frame" x="304" y="11" width="51" height="22"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="22" id="HQN-xy-L4k"/>
                                                     <constraint firstAttribute="width" constant="51" id="gqy-WH-ZCw"/>
@@ -101,7 +101,7 @@
                                             <constraint firstItem="6w6-xf-vmg" firstAttribute="centerY" secondItem="KDe-wq-XFX" secondAttribute="centerY" id="U3S-J0-F8O"/>
                                             <constraint firstItem="agw-O9-zwC" firstAttribute="leading" secondItem="KDe-wq-XFX" secondAttribute="leading" id="fXF-Vt-Hni"/>
                                             <constraint firstItem="F92-L0-a3P" firstAttribute="centerY" secondItem="KDe-wq-XFX" secondAttribute="centerY" id="gbb-Mc-un7"/>
-                                            <constraint firstAttribute="trailing" secondItem="F92-L0-a3P" secondAttribute="trailing" constant="10" id="z6o-oK-i3g"/>
+                                            <constraint firstAttribute="trailing" secondItem="F92-L0-a3P" secondAttribute="trailing" constant="20" id="z6o-oK-i3g"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -159,13 +159,13 @@
                                                     <state key="normal" image="app_user_man"/>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TA正在拼桌，点击查看" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z5f-la-GNP">
-                                                    <rect key="frame" x="250" y="36.5" width="115" height="13.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                    <rect key="frame" x="219.5" y="34" width="145.5" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.96470588239999999" green="0.2274509804" blue="0.50980392159999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我喜欢御姐，祝来快来和我玩" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5a3-WV-drC">
-                                                    <rect key="frame" x="94" y="55" width="271" height="22"/>
+                                                    <rect key="frame" x="94" y="56" width="271" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" red="0.53333333329999999" green="0.23137254900000001" blue="0.69019607839999997" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -281,7 +281,7 @@
         <image name="app_yaoyue_add" width="58" height="58"/>
         <image name="app_yueta_red" width="51" height="18"/>
         <image name="bar_yuepao_user_placeholder" width="64" height="64"/>
-        <image name="mainpage_all_bg_line" width="375" height="115"/>
+        <image name="mainpage_all_bg_line" width="375" height="200"/>
         <image name="mainpage_list_location" width="12" height="15"/>
     </resources>
 </document>

@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "KTVStore.h"
 
 @interface KTVBarKtvDetailHeaderCell : UITableViewCell
+
+@property (nonatomic, strong) KTVStore * store;
 
 @property (nonatomic, copy) void (^callback)();
 
