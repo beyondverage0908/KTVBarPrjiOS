@@ -1537,8 +1537,13 @@
 				TargetAttributes = {
 					332A63C41F03B14D007EF65F = {
 						CreatedOnToolsVersion = 8.3.1;
-						DevelopmentTeam = C76485U944;
+						DevelopmentTeam = P4Q3S6FX46;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					332A63DD1F03B14D007EF65F = {
 						CreatedOnToolsVersion = 8.3.1;
@@ -1925,7 +1930,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				DEVELOPMENT_TEAM = C76485U944;
+				DEVELOPMENT_TEAM = P4Q3S6FX46;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/KTVBariOS/Classes/ThirdParty/ShareSDK/Required",
@@ -1944,7 +1949,7 @@
 					"$(PROJECT_DIR)/KTVBariOS/Classes/ThirdParty/ShareSDK/ShareSDK/Support/PlatformSDK/SinaWeiboSDK",
 					"$(PROJECT_DIR)/KTVBariOS/Classes/ThirdParty/ShareSDK/ShareSDK/Support/PlatformSDK/WeChatSDK",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.vhs.vhealth.kldf;
+				PRODUCT_BUNDLE_IDENTIFIER = com.weixinzhifu.jiuba;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1956,7 +1961,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				DEVELOPMENT_TEAM = C76485U944;
+				DEVELOPMENT_TEAM = P4Q3S6FX46;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/KTVBariOS/Classes/ThirdParty/ShareSDK/Required",
@@ -1975,7 +1980,7 @@
 					"$(PROJECT_DIR)/KTVBariOS/Classes/ThirdParty/ShareSDK/ShareSDK/Support/PlatformSDK/SinaWeiboSDK",
 					"$(PROJECT_DIR)/KTVBariOS/Classes/ThirdParty/ShareSDK/ShareSDK/Support/PlatformSDK/WeChatSDK",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.vhs.vhealth.kldf;
+				PRODUCT_BUNDLE_IDENTIFIER = com.weixinzhifu.jiuba;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};

@@ -17,5 +17,9 @@
 + (void)setUserInfoKey:(NSString *)infoKey infoValue:(NSString *)infoValue;
 /// 获取token
 + (NSString *)ktvToken;
+/// 以key值为 lat:long(纬经)
++ (void)saveUserLocation:(NSString *)locationString;
+/// 返回经纬度数组，纬度为第一个元素，经度为第二个元素，获取不到则为nil
++ (NSArray *)getUserLocation;
 
 @end

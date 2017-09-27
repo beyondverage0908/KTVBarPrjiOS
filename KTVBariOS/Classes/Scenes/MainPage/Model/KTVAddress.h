@@ -11,8 +11,8 @@
 @interface KTVAddress : NSObject
 
 @property (nonatomic, strong) NSString *addressId;
-@property (nonatomic, assign) NSInteger latitude;
-@property (nonatomic, assign) NSInteger longitude;
+@property (nonatomic, assign) double latitude;
+@property (nonatomic, assign) double longitude;
 @property (nonatomic, strong) NSString * addressName;
 @property (nonatomic, strong) NSString * cityCode;
 @property (nonatomic, strong) NSString * cityName;

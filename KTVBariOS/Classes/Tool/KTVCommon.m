@@ -40,4 +40,17 @@
     return [KTVUtil objectForKey:@"ktvToken"];
 }
 
++ (void)saveUserLocation:(NSString *)locationString {
+    [KTVUtil setObject:locationString forKey:@"lat:long"];
+}
+
++ (NSArray *)getUserLocation {
+    NSString *latlong = [KTVUtil objectForKey:@"lat:long"];
+    NSArray *locationArr = nil;
+    if (latlong) {
+        locationArr = [latlong componentsSeparatedByString:@":"];
+    }
+    return locationArr;
+}
+
 @end

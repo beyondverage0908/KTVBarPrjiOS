@@ -26,7 +26,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lss-s5-8w1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1926" y="154"/>
+            <point key="canvasLocation" x="-1664" y="152"/>
         </scene>
         <!--Main Controller-->
         <scene sceneID="5XQ-rd-mjX">
@@ -317,45 +317,8 @@
                                             <outlet property="store" destination="hZv-sW-J7r" id="R8P-4H-uRT"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="40" id="U7k-1Y-42R">
-                                        <rect key="frame" x="0.0" y="358" width="375" height="40"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="U7k-1Y-42R" id="XpG-8i-NvM">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="frO-7g-715">
-                                                    <rect key="frame" x="0.0" y="10" width="2" height="19.5"/>
-                                                    <color key="backgroundColor" red="0.96470588239999999" green="0.2274509804" blue="0.50980392159999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="2" id="XDM-eB-QrF"/>
-                                                    </constraints>
-                                                </view>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nJx-et-9sN">
-                                                    <rect key="frame" x="10" y="3" width="74" height="34"/>
-                                                    <state key="normal" title="猜你喜欢">
-                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MXI-Ci-gXL">
-                                                    <rect key="frame" x="89" y="9" width="6" height="22"/>
-                                                    <state key="normal" image="app_arrow_right_hui"/>
-                                                </button>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="MXI-Ci-gXL" firstAttribute="leading" secondItem="nJx-et-9sN" secondAttribute="trailing" constant="5" id="6qA-1l-b1a"/>
-                                                <constraint firstItem="nJx-et-9sN" firstAttribute="centerY" secondItem="XpG-8i-NvM" secondAttribute="centerY" id="7vy-Us-Euc"/>
-                                                <constraint firstItem="MXI-Ci-gXL" firstAttribute="centerY" secondItem="XpG-8i-NvM" secondAttribute="centerY" id="CMk-8g-OGU"/>
-                                                <constraint firstItem="nJx-et-9sN" firstAttribute="leading" secondItem="XpG-8i-NvM" secondAttribute="leading" constant="10" id="cgB-jT-Ypi"/>
-                                                <constraint firstItem="frO-7g-715" firstAttribute="leading" secondItem="XpG-8i-NvM" secondAttribute="leading" id="g70-KX-RIv"/>
-                                                <constraint firstAttribute="bottom" secondItem="frO-7g-715" secondAttribute="bottom" constant="10" id="ibi-Ls-31l"/>
-                                                <constraint firstItem="frO-7g-715" firstAttribute="top" secondItem="XpG-8i-NvM" secondAttribute="top" constant="10" id="im0-Ae-xOz"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.13333333333333333" green="0.12941176470588234" blue="0.16078431372549018" alpha="1" colorSpace="calibratedRGB"/>
-                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="KTVRecommendCell" id="7mn-p8-gCz" customClass="KTVRecommendCell">
-                                        <rect key="frame" x="0.0" y="398" width="375" height="145"/>
+                                        <rect key="frame" x="0.0" y="358" width="375" height="145"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7mn-p8-gCz" id="FuK-eb-15h">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="145"/>

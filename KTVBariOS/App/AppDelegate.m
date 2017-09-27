@@ -23,7 +23,15 @@
     // 初始ShareSDK
     [KTVShareSDKManager shareSDKInitial];
     // 启动高德app就定位
-    [[KTVGaodeManager defaultGaode] startAMapLocation];
+    [[KTVGaodeManager defaultGaode] startSerialLocation];
+    
+    // 地理逆解析demo
+    KTVAddress *address = [[KTVAddress alloc] init];
+    address.latitude = 31.25585856119792;
+    address.longitude = 121.3237915039062;
+    [[KTVGaodeManager defaultGaode] startReGeocodeWithLocation:address completionBlock:^(AMapReGeocode *reGencode) {
+        CLog(@"--->>> %@", reGencode);
+    }];
     
     return YES;
 }
