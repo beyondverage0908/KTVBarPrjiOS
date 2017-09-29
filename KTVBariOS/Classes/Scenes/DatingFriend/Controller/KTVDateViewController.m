@@ -7,6 +7,7 @@
 //
 
 #import "KTVDateViewController.h"
+#import "KTVPublishDateController.h"
 
 #import "KTVYaoYueUserCell.h"
 #import "KTVFilterView.h"
@@ -67,11 +68,16 @@
     yueView.frame = [[UIScreen mainScreen] bounds];
     [[UIApplication sharedApplication].keyWindow addSubview:yueView];
     yueView.yaoYueCallback = ^(NSString *sign) {
+        NSInteger type = 0;
         if ([sign isEqualToString:@"bar"]) {
             CLog(@"-- bar邀约");
+            type = 0;
         } else if ([sign isEqualToString:@"ktv"]) {
             CLog(@"-- ktv邀约");
+            type = 1;
         }
+        KTVPublishDateController *vc = (KTVPublishDateController *)[UIViewController storyboardName:@"DatingFriend" storyboardId:@"KTVPublishDateController"];
+        [self.navigationController pushViewController:vc animated:YES];
     };
 }
 
