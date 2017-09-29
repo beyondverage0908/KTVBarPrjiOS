@@ -26,6 +26,9 @@ PODS:
   - Pingpp/Alipay (2.2.17):
     - Pingpp/Core
   - Pingpp/Core (2.2.17)
+  - RongCloudIM/IMKit (2.8.17):
+    - RongCloudIM/IMLib
+  - RongCloudIM/IMLib (2.8.17)
   - SDWebImage (4.1.0):
     - SDWebImage/Core (= 4.1.0)
   - SDWebImage/Core (4.1.0)
@@ -39,6 +42,8 @@ DEPENDENCIES:
   - Masonry
   - MBProgressHUD
   - Pingpp/Alipay (~> 2.2.17)
+  - RongCloudIM/IMKit
+  - RongCloudIM/IMLib
   - SDWebImage (~> 4.0)
   - YYModel
 
@@ -51,9 +56,10 @@ SPEC CHECKSUMS:
   Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   Pingpp: 166fc31888e8639c8a9a287330ba49dd5c5a250d
+  RongCloudIM: 98e7b716d1de918db429b74e2b046752d28add3e
   SDWebImage: 0e435c14e402a6730315a0fb79f95e68654d55a4
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
-PODFILE CHECKSUM: dee8403d56aa850e63af23758ca59aee0aaa62e8
+PODFILE CHECKSUM: 7fc533ebc76558b7bb3df013c83b0c2f8b174190
 
 COCOAPODS: 1.2.1

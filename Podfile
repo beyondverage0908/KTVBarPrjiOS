@@ -13,6 +13,8 @@ target 'KTVBariOS' do
     pod 'YYModel'
     pod 'SDWebImage', '~> 4.0'
     pod 'MBProgressHUD'
+    pod 'RongCloudIM/IMLib'
+    pod 'RongCloudIM/IMKit'
 
 
 # Ping++
