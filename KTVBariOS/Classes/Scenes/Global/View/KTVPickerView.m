@@ -33,25 +33,35 @@
         [self addSubview:mask];
         [mask mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.equalTo(self);
+            make.width.height.equalTo(self);
         }];
         
         UIView *bgView = [[UIView alloc] init];
         [mask addSubview:bgView];
         bgView.backgroundColor = [UIColor whiteColor];
         [bgView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.height.equalTo(mask).multipliedBy(0.35);
-            make.left.and.right.and.bottom.equalTo(self);
+            make.height.equalTo(mask).multipliedBy(0.4);
+            make.left.and.right.and.bottom.equalTo(mask);
         }];
-        
         
         UIView *headerView = [[UIView alloc] init];
         [bgView addSubview:headerView];
         headerView.backgroundColor = [UIColor whiteColor];
         [headerView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.top.equalTo(bgView);
-            make.height.equalTo(@40);
+            make.top.left.right.equalTo(bgView);
+            make.height.mas_equalTo(bgView.mas_height).multipliedBy(0.16);
         }];
-
+        
+        self.pickerView = [[UIPickerView alloc] init];
+        [bgView addSubview:self.pickerView];
+        self.pickerView.backgroundColor = [UIColor whiteColor];
+        self.pickerView.delegate = self;
+        self.pickerView.dataSource = self;
+        [self.pickerView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.and.bottom.equalTo(bgView);
+            make.height.equalTo(bgView.mas_height).multipliedBy(0.84);
+        }];
+        
         UIButton *leftBtn = [[UIButton alloc] init];
         [headerView addSubview:leftBtn];
         [leftBtn setTitle:@"取消" forState:UIControlStateNormal];
@@ -62,7 +72,7 @@
             make.centerY.equalTo(headerView);
             make.left.equalTo(headerView).offset(10);
         }];
-
+        
         UIButton *rightBtn = [[UIButton alloc] init];
         [headerView addSubview:rightBtn];
         [rightBtn setTitle:@"确定" forState:UIControlStateNormal];
@@ -72,16 +82,6 @@
         [rightBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(headerView);
             make.right.equalTo(headerView).offset(-10);
-        }];
-
-        self.pickerView = [[UIPickerView alloc] init];
-        [bgView addSubview:self.pickerView];
-        self.pickerView.backgroundColor = [UIColor whiteColor];
-        self.pickerView.delegate = self;
-        self.pickerView.dataSource = self;
-        [self.pickerView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(headerView.mas_bottom);
-            make.left.and.right.and.bottom.equalTo(bgView);
         }];
     }
     

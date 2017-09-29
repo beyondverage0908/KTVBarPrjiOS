@@ -37,9 +37,18 @@ static char overlayKey;
 
 
 - (void)setColor:(UIColor *)color {
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, -20, [UIScreen mainScreen].bounds.size.width, self.bounds.size.height + 20)];
-    view.backgroundColor = color;
-    [self setValue:view forKey:@"backgroundView"];
+    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, -20, [UIScreen mainScreen].bounds.size.width, self.bounds.size.height + 20)];
+    bgView.backgroundColor = color;
+    
+    if (![color isEqual:[UIColor clearColor]]) {
+        UIView *bottomLine = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(bgView.frame) + 20 - 1, CGRectGetWidth(bgView.frame), 1)];
+        bottomLine.backgroundColor = [UIColor ktvSeparateBG];
+        bottomLine.layer.shadowOffset = CGSizeMake(CGRectGetWidth(bgView.frame), 2);
+        bottomLine.layer.shadowColor = color.CGColor;
+        [bgView addSubview:bottomLine];
+    }
+    
+    [self setValue:bgView forKey:@"backgroundView"];
 }
 
 @end
