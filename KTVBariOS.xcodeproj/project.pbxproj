@@ -138,6 +138,7 @@
 		33A352191F7E50360095B138 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33A352181F7E50360095B138 /* UIKit.framework */; };
 		33A3521B1F7E50420095B138 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33A3521A1F7E50420095B138 /* Photos.framework */; };
 		33A3521D1F7E504C0095B138 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33A3521C1F7E504C0095B138 /* SafariServices.framework */; };
+		33A352211F7E51E30095B138 /* KTVRongCloudManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 33A352201F7E51E30095B138 /* KTVRongCloudManager.m */; };
 		33A74CAD1F331EC100D32F14 /* KTVShareSDKManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 33A74CAC1F331EC100D32F14 /* KTVShareSDKManager.m */; };
 		33A74CB11F331EEE00D32F14 /* KTVGaodeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 33A74CB01F331EEE00D32F14 /* KTVGaodeManager.m */; };
 		33AEAC3B1F5E7D05000003AE /* KTVUserPhotoCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33AEAC3A1F5E7D05000003AE /* KTVUserPhotoCollectionCell.m */; };
@@ -439,6 +440,8 @@
 		33A352181F7E50360095B138 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		33A3521A1F7E50420095B138 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		33A3521C1F7E504C0095B138 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
+		33A3521F1F7E51E30095B138 /* KTVRongCloudManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KTVRongCloudManager.h; sourceTree = "<group>"; };
+		33A352201F7E51E30095B138 /* KTVRongCloudManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KTVRongCloudManager.m; sourceTree = "<group>"; };
 		33A74CAB1F331EC100D32F14 /* KTVShareSDKManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVShareSDKManager.h; sourceTree = "<group>"; };
 		33A74CAC1F331EC100D32F14 /* KTVShareSDKManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVShareSDKManager.m; sourceTree = "<group>"; };
 		33A74CAF1F331EEE00D32F14 /* KTVGaodeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVGaodeManager.h; sourceTree = "<group>"; };
@@ -1270,6 +1273,15 @@
 			path = Logic;
 			sourceTree = "<group>";
 		};
+		33A3521E1F7E51C20095B138 /* RongCloud */ = {
+			isa = PBXGroup;
+			children = (
+				33A3521F1F7E51E30095B138 /* KTVRongCloudManager.h */,
+				33A352201F7E51E30095B138 /* KTVRongCloudManager.m */,
+			);
+			path = RongCloud;
+			sourceTree = "<group>";
+		};
 		33A74CAA1F331EC100D32F14 /* ShareSDK */ = {
 			isa = PBXGroup;
 			children = (
@@ -1497,6 +1509,7 @@
 		33DC05861F26E16400AEB5C4 /*  ThirdPartyManager */ = {
 			isa = PBXGroup;
 			children = (
+				33A3521E1F7E51C20095B138 /* RongCloud */,
 				33A74CAE1F331ED300D32F14 /* Gaode */,
 				33A74CAA1F331EC100D32F14 /* ShareSDK */,
 				33882AAF1F5EDEF0006B2B5E /* Pay */,
@@ -1612,7 +1625,7 @@
 		332A63BD1F03B14D007EF65F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0830;
+				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = Lin;
 				TargetAttributes = {
 					332A63C41F03B14D007EF65F = {
@@ -1852,6 +1865,7 @@
 				33C850B91F4488AF00F947B8 /* KTVPackageDetailCell.m in Sources */,
 				330A93871F03ED2A001B320A /* AppDelegate.m in Sources */,
 				33D776F51F301D9600077BE5 /* TADotView.m in Sources */,
+				33A352211F7E51E30095B138 /* KTVRongCloudManager.m in Sources */,
 				338872C21F5D41C700DAB247 /* KTVDateViewController.m in Sources */,
 				339856611F3F10AB0085BD1A /* KTVBarKtvDetailController.m in Sources */,
 				33AEAC3B1F5E7D05000003AE /* KTVUserPhotoCollectionCell.m in Sources */,
@@ -1924,7 +1938,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -1932,7 +1948,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -1972,7 +1992,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -1980,7 +2002,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
