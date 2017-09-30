@@ -7,6 +7,7 @@
 //
 
 #import "KTVPublishDateController.h"
+#import "KTVCallOtherController.h"
 #import "KTVPickerView.h"
 
 @interface KTVPublishDateController ()
@@ -120,6 +121,100 @@
 
 - (IBAction)publishYueAction:(UIButton *)sender {
     CLog(@"-->> 发布预约");
+    [self showYaoYueSuccess:YES];
+}
+
+- (void)cancelAction:(UIButton *)btn {
+    [btn.superview.superview removeFromSuperview];
+}
+
+- (void)callOtherPlayAction:(UIButton *)btn {
+    [btn.superview.superview removeFromSuperview];
+    CLog(@"-->>> 喊人玩");
+    KTVCallOtherController *vc = (KTVCallOtherController *)[UIViewController storyboardName:@"DatingFriend" storyboardId:@"KTVCallOtherController"];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+#pragma mark - 展示邀约成功弹出框
+
+- (void)showYaoYueSuccess:(BOOL)isShow {
+    UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
+    
+    UIView *mask = [[UIView alloc] init];
+    [keyWindow addSubview:mask];
+    mask.backgroundColor = [UIColor colorWithWhite:0.3 alpha:0.2];
+    [mask mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(keyWindow);
+    }];
+    
+    UIView *toastBgView = [[UIView alloc] init];
+    [mask addSubview:toastBgView];
+    toastBgView.backgroundColor = [UIColor whiteColor];
+    toastBgView.layer.cornerRadius = 8;
+    [toastBgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.equalTo(mask);
+        make.width.equalTo(mask).multipliedBy(0.8);
+        make.height.equalTo(toastBgView.mas_width).multipliedBy(0.6);
+    }];
+    
+    UILabel *titleLabel = [[UILabel alloc] init];
+    [toastBgView addSubview:titleLabel];
+    titleLabel.textColor = [UIColor ktvBG];
+    titleLabel.text = @"发布邀约成功";
+    titleLabel.font = [UIFont bold17];
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+    [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(toastBgView);
+        make.top.equalTo(toastBgView).offset(20);
+        make.width.equalTo(toastBgView).multipliedBy(0.9);
+    }];
+    
+    UIButton *cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [toastBgView addSubview:cancelBtn];
+    [cancelBtn setTitle:@"知道了" forState:UIControlStateNormal];
+    cancelBtn.layer.borderColor = [UIColor ktvPlaceHolder].CGColor;
+    cancelBtn.layer.borderWidth = 1;
+    cancelBtn.layer.cornerRadius = 5;
+    cancelBtn.titleLabel.font = [UIFont bold17];
+    [cancelBtn setTitleColor:[UIColor ktvPlaceHolder] forState:UIControlStateNormal];
+    [cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(toastBgView).offset(-15);
+        make.width.equalTo(toastBgView).multipliedBy(0.4);
+        make.height.equalTo(@40);
+        make.left.equalTo(toastBgView).offset(10);
+    }];
+    
+    UIButton *confirmBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [toastBgView addSubview:confirmBtn];
+    [confirmBtn setTitle:@"喊人玩" forState:UIControlStateNormal];
+    confirmBtn.layer.cornerRadius = 5;
+    [confirmBtn setBackgroundColor:[UIColor ktvGold]];
+    cancelBtn.titleLabel.font = [UIFont bold17];
+    [confirmBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [confirmBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(toastBgView).offset(-15);
+        make.width.equalTo(toastBgView).multipliedBy(0.4);
+        make.height.equalTo(@40);
+        make.right.equalTo(toastBgView).offset(-10);
+    }];
+    
+    UILabel *messageLabel = [[UILabel alloc] init];
+    [toastBgView addSubview:messageLabel];
+    messageLabel.textColor = [UIColor ktvBG];
+    messageLabel.text = @"您的邀约已经发布，可以喊人来玩了～";
+    messageLabel.textAlignment = NSTextAlignmentCenter;
+    messageLabel.numberOfLines = 2;
+    messageLabel.font = [UIFont systemFontOfSize:15];
+    [messageLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(toastBgView);
+        make.top.equalTo(titleLabel.mas_bottom).offset(20);
+        make.width.equalTo(toastBgView).multipliedBy(0.9);
+        make.bottom.equalTo(cancelBtn.mas_top).offset(-20);
+    }];
+    
+    // 添加按钮事件
+    [cancelBtn addTarget:self action:@selector(cancelAction:) forControlEvents:UIControlEventTouchUpInside];
+    [confirmBtn addTarget:self action:@selector(callOtherPlayAction:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 @end

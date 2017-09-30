@@ -108,7 +108,7 @@
         [self.delegate ktvPickerView:self selectedTitle:self.selectedTitle];
     }
     
-    if (self.selectedCallback) {
+    if (self.selectedCallback && ![KTVUtil isNullString:self.selectedTitle]) {
         self.selectedCallback(self.selectedTitle);
     }
     

@@ -81,6 +81,7 @@ EOM
 }
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "AMap2DMap-NO-IDFA/MAMapKit.framework/AMap.bundle"
+  install_resource "IQKeyboardManager/IQKeyboardManager/Resources/IQKeyboardManager.bundle"
   install_resource "Pingpp/lib/Channels/Alipay/AlipaySDK.bundle"
   install_resource "Pingpp/lib/Pingpp.bundle"
   install_resource "RongCloudIM/RongCloudIM/RongCloud.bundle"
@@ -91,6 +92,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "AMap2DMap-NO-IDFA/MAMapKit.framework/AMap.bundle"
+  install_resource "IQKeyboardManager/IQKeyboardManager/Resources/IQKeyboardManager.bundle"
   install_resource "Pingpp/lib/Channels/Alipay/AlipaySDK.bundle"
   install_resource "Pingpp/lib/Pingpp.bundle"
   install_resource "RongCloudIM/RongCloudIM/RongCloud.bundle"
