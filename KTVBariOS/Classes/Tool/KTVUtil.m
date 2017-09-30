@@ -143,4 +143,48 @@
     return @"";
 }
 
++ (NSArray *)monthList {
+    return @[@"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"10", @"11", @"12"];
+}
+
++ (NSArray *)dayListByMonth:(NSInteger)month {
+    if (month <= 0 || month > 12) {
+        return @[];
+    }
+    NSMutableArray *dataSource = [NSMutableArray array];
+    switch (month) {
+        case 1:
+        case 3:
+        case 5:
+        case 7:
+        case 8:
+        case 10:
+        case 12:
+        {
+            for (NSInteger i = 1; i <= 31; i++) {
+                [dataSource addObject:@(i).stringValue];
+            }
+        }
+            break;
+        case 4:
+        case 6:
+        case 9:
+        case 11:
+        {
+            for (NSInteger i = 1; i <= 30; i++) {
+                [dataSource addObject:@(i).stringValue];
+            }
+        }
+            break;
+        case 2: {
+            for (NSInteger i = 1; i <= 29; i++) {
+                [dataSource addObject:@(i).stringValue];
+            }
+        }
+        default:
+            break;
+    }
+    return dataSource;
+}
+
 @end

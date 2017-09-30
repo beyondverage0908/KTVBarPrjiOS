@@ -7,6 +7,7 @@
 //
 
 #import "KTVPublishDateController.h"
+#import "KTVPickerView.h"
 
 @interface KTVPublishDateController ()
 
@@ -56,22 +57,53 @@
 
 - (IBAction)chooseYearAction:(UIButton *)sender {
     CLog(@"-->> 选择年");
+    KTVPickerView *pv = [[KTVPickerView alloc] initWithSelectedCallback:^(NSString *selectedTitle) {
+        [sender setTitle:selectedTitle forState:UIControlStateNormal];
+    }];
+    [self.view addSubview:pv];
+    pv.dataSource = @[@"2017", @"2018", @"2019", @"2020"];
+    [pv mas_makeConstraints:^(MASConstraintMaker *make) {make.edges.equalTo(self.view);}];
 }
 
 - (IBAction)chooseMonthAction:(UIButton *)sender {
     CLog(@"-->> 选择月");
+    KTVPickerView *pv = [[KTVPickerView alloc] initWithSelectedCallback:^(NSString *selectedTitle) {
+        [sender setTitle:selectedTitle forState:UIControlStateNormal];
+    }];
+    [self.view addSubview:pv];
+    pv.dataSource = [KTVUtil monthList];
+    [pv mas_makeConstraints:^(MASConstraintMaker *make) {make.edges.equalTo(self.view);}];
 }
 
 - (IBAction)chooseDayAction:(UIButton *)sender {
     CLog(@"-->> 选择日");
+    NSInteger month = [self.monthBtn.currentTitle integerValue];
+    KTVPickerView *pv = [[KTVPickerView alloc] initWithSelectedCallback:^(NSString *selectedTitle) {
+        [sender setTitle:selectedTitle forState:UIControlStateNormal];
+    }];
+    [self.view addSubview:pv];
+    pv.dataSource = [KTVUtil dayListByMonth:month];
+    [pv mas_makeConstraints:^(MASConstraintMaker *make) {make.edges.equalTo(self.view);}];
 }
 
 - (IBAction)chooseGenderAction:(UIButton *)sender {
     CLog(@"-->> 选择性别");
+    KTVPickerView *pv = [[KTVPickerView alloc] initWithSelectedCallback:^(NSString *selectedTitle) {
+        [sender setTitle:selectedTitle forState:UIControlStateNormal];
+    }];
+    [self.view addSubview:pv];
+    pv.dataSource = @[@"男", @"女"];
+    [pv mas_makeConstraints:^(MASConstraintMaker *make) {make.edges.equalTo(self.view);}];
 }
 
 - (IBAction)choosePayAction:(UIButton *)sender {
     CLog(@"-->> 选择付款方式");
+    KTVPickerView *pv = [[KTVPickerView alloc] initWithSelectedCallback:^(NSString *selectedTitle) {
+        [sender setTitle:selectedTitle forState:UIControlStateNormal];
+    }];
+    [self.view addSubview:pv];
+    pv.dataSource = @[@"AA制", @"我一个付", @"我付大部分"];
+    [pv mas_makeConstraints:^(MASConstraintMaker *make) {make.edges.equalTo(self.view);}];
 }
 
 - (IBAction)chooseAendAction:(UIButton *)sender {

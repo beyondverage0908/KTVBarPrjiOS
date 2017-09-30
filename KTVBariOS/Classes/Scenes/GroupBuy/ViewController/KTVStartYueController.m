@@ -97,7 +97,7 @@
 }
 - (IBAction)monthAction:(UIButton *)sender {
     CLog(@"-->> 选月");
-    NSArray *dataSource = @[@"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"10", @"11", @"12"];
+    NSArray *dataSource = [KTVUtil monthList];
     [self pickDataSource:dataSource sender:sender];
 }
 - (IBAction)dayAction:(UIButton *)sender {
