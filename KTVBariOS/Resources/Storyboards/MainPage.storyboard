@@ -8,6 +8,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -26,7 +27,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lss-s5-8w1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1664" y="152"/>
+            <point key="canvasLocation" x="-1993" y="152"/>
         </scene>
         <!--Main Controller-->
         <scene sceneID="5XQ-rd-mjX">
@@ -57,9 +58,7 @@
                                             </imageView>
                                             <searchBar contentMode="redraw" placeholder="南昌五月花" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Jn-Ud-wKK">
                                                 <rect key="frame" x="75" y="0.0" width="225" height="44"/>
-                                                <color key="backgroundColor" red="0.19616722089999999" green="0.198232139" blue="0.198232139" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <color key="tintColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
-                                                <color key="barTintColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="barTintColor" name="ktvBGColor"/>
                                                 <textInputTraits key="textInputTraits" returnKeyType="search"/>
                                                 <scopeButtonTitles>
                                                     <string>Title</string>
@@ -74,7 +73,7 @@
                                                 </state>
                                             </button>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.13333333333333333" green="0.12941176470588234" blue="0.16078431372549018" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" name="ktvBGColor"/>
                                         <constraints>
                                             <constraint firstItem="cFc-dT-Htf" firstAttribute="centerY" secondItem="3Jt-fw-hJk" secondAttribute="centerY" id="609-IG-x9v"/>
                                             <constraint firstAttribute="trailing" secondItem="cFc-dT-Htf" secondAttribute="trailing" constant="10" id="BII-2H-6eE"/>
@@ -91,7 +90,7 @@
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" red="0.13333333333333333" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" name="ktvBGColor"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="3Jt-fw-hJk" secondAttribute="bottom" id="JCo-jj-dbf"/>
                                     <constraint firstAttribute="trailing" secondItem="3Jt-fw-hJk" secondAttribute="trailing" id="RVf-wC-AXS"/>
@@ -442,18 +441,16 @@
                                                     <action selector="backBtnAction:" destination="YhQ-ad-Edb" eventType="touchUpInside" id="Xob-FX-mmX"/>
                                                 </connections>
                                             </button>
-                                            <searchBar contentMode="redraw" placeholder="输入商家名" translatesAutoresizingMaskIntoConstraints="NO" id="OA7-eG-3du">
+                                            <searchBar contentMode="redraw" placeholder="输入商家名" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OA7-eG-3du">
                                                 <rect key="frame" x="75" y="-6" width="225" height="56"/>
-                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="225" id="WKK-gh-SL8"/>
                                                 </constraints>
-                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <color key="barTintColor" red="0.1333333333" green="0.1215686275" blue="0.1647058824" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="barTintColor" name="ktvBGColor"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </searchBar>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.1333333333" green="0.1215686275" blue="0.1647058824" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" name="ktvBGColor"/>
                                         <constraints>
                                             <constraint firstItem="9Y3-Ca-KYg" firstAttribute="leading" secondItem="VPh-24-xiV" secondAttribute="leading" constant="10" id="6xc-So-nmR"/>
                                             <constraint firstItem="9Y3-Ca-KYg" firstAttribute="centerY" secondItem="VPh-24-xiV" secondAttribute="centerY" id="XDa-Q8-Axe"/>
@@ -462,7 +459,7 @@
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" red="0.13333333333333333" green="0.12156862745098039" blue="0.16470588235294117" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" name="ktvBGColor"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="VPh-24-xiV" secondAttribute="trailing" id="5kw-jO-Xnn"/>
                                     <constraint firstAttribute="bottom" secondItem="VPh-24-xiV" secondAttribute="bottom" id="SjS-3e-Vhc"/>
@@ -734,18 +731,16 @@
                                                     <action selector="backBtnAction:" destination="mPr-HC-jMO" eventType="touchUpInside" id="ecX-Yd-fbw"/>
                                                 </connections>
                                             </button>
-                                            <searchBar contentMode="redraw" placeholder="输入商家名" translatesAutoresizingMaskIntoConstraints="NO" id="5hP-Vb-ClY">
+                                            <searchBar contentMode="redraw" placeholder="输入商家名" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5hP-Vb-ClY">
                                                 <rect key="frame" x="75" y="-6" width="225" height="56"/>
-                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="225" id="vcM-Ii-gNI"/>
                                                 </constraints>
-                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <color key="barTintColor" red="0.1333333333" green="0.1215686275" blue="0.1647058824" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="barTintColor" name="ktvBGColor"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </searchBar>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.1333333333" green="0.1215686275" blue="0.1647058824" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" name="ktvBGColor"/>
                                         <constraints>
                                             <constraint firstItem="5hP-Vb-ClY" firstAttribute="centerY" secondItem="1Al-sn-nNu" secondAttribute="centerY" id="1ww-Pr-ewg"/>
                                             <constraint firstItem="5hP-Vb-ClY" firstAttribute="centerX" secondItem="1Al-sn-nNu" secondAttribute="centerX" id="Tpa-43-KmD"/>
@@ -754,7 +749,7 @@
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" red="0.1333333333" green="0.1215686275" blue="0.1647058824" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" name="ktvBGColor"/>
                                 <constraints>
                                     <constraint firstItem="1Al-sn-nNu" firstAttribute="top" secondItem="h66-IF-DEJ" secondAttribute="top" constant="20" id="36G-zy-KdP"/>
                                     <constraint firstAttribute="height" constant="64" id="Lc2-Yq-A6z"/>
@@ -5344,5 +5339,8 @@
         <image name="mainpage_menu_split" width="375" height="72"/>
         <image name="package_detail_placeholder" width="368" height="144"/>
         <image name="reduce_sign" width="32" height="32"/>
+        <namedColor name="ktvBGColor">
+            <color red="0.13300000131130219" green="0.12200000137090683" blue="0.16099999845027924" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

@@ -24,6 +24,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"个人信息";
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;

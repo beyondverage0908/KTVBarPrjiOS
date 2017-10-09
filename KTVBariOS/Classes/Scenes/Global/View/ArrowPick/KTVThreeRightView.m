@@ -30,7 +30,7 @@
         if (self.parentView ==nil) {
             UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0,SCREEN_WIDTH,SCREEN_HEIGHT)];
             view.userInteractionEnabled = YES;
-            UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(pressParentView)];
+            UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pressParentView)];
             [view addGestureRecognizer:tap];
             view.backgroundColor = [UIColor blackColor];
             view.alpha = 0.1;
@@ -78,7 +78,12 @@
     if (!cell) {
         cell = [[KTVThirdRightTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"KTVThirdRightTableViewCell"];
     }
-    [cell iconiv:[UIImage imageNamed:self.imageArr[indexPath.row]] titleText:[NSString stringWithFormat:@"%@",self.textArray[indexPath.row]]];
+    NSString *iconImgName = self.imageArr[indexPath.row];
+    UIImage *img = nil;
+    if (iconImgName) {
+        img = [UIImage imageNamed:iconImgName];
+    }
+    [cell iconiv:img titleText:[NSString stringWithFormat:@"%@",self.textArray[indexPath.row]]];
     
     return cell;
 }
