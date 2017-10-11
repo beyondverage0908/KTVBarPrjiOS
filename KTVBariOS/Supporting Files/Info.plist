@@ -102,6 +102,8 @@
 	<string>需要访问您的位置信息，为您提供更好的服务1</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>需要访问您的位置信息，为您提供更好的服务2</string>
+    <key>NSCameraUsageDescription</key>
+    <string>需要使用您的相机进行拍照</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>location</string>

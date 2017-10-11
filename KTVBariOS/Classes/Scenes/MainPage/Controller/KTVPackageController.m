@@ -17,10 +17,18 @@
 #import "KTVPackageDetailController.h"
 #import "KTVOrderConfirmController.h"
 #import "KTVShareFriendController.h"
+#import "KTVSelectedBeautyController.h"
+
+#import "KTVMainService.h"
 
 @interface KTVPackageController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) UILabel *moneyLabel;
+
+@property (strong, nonatomic) NSMutableArray<KTVUser *> *selectedActivitorList; // 选中的暖场人
+@property (strong, nonatomic) NSMutableArray<KTVUser *> *activitorList; // 暖场人列表
+@property (assign, nonatomic) NSInteger activitorPage;      // 分页获取暖场人
 
 @end
 
@@ -28,25 +36,66 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"选择套餐";
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.backgroundColor = [UIColor ktvBG];
     
     self.tableView.tableFooterView = [self tableViewFooter];
+    
+    [self initData];
+    [self initUI];
+    // 下载暖场人
+    [self loadPageStoreActivitors];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
     [self hideNavigationBar:NO];
-    [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    
-    [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:1];
+}
+
+#pragma mark - 初始化
+
+- (void)initUI {
+    self.moneyLabel.text = [NSString stringWithFormat:@"¥%@", [self getOrderMoney]];
+}
+
+- (void)initData {
+    self.selectedActivitorList = [NSMutableArray array];
+    self.activitorList = [NSMutableArray array];
+}
+
+#pragma mark - 网络
+
+/// 分页获取门店暖场人
+- (void)loadPageStoreActivitors {
+    NSDictionary *params = @{@"storeId" : self.store.storeId,
+                             @"size" : @"4",
+                             @"currentPage" : @(self.activitorPage)};
+    [KTVMainService getStorePageActivitors:params result:^(NSDictionary *result) {
+        if (![result[@"code"] isEqualToString:ktvCode]) {
+            [KTVToast toast:result[@"detail"]];
+            return;
+        }
+        NSArray *activitorList = result[@"data"][@"activitorList"];
+        if ([activitorList count]) {
+            [self.activitorList removeAllObjects];
+            ++self.activitorPage;
+        } else {
+            [KTVToast toast:TOAST_NOMORE_ACTIVITORS];
+        }
+        for (NSDictionary *dict in activitorList) {
+            KTVUser *user = [KTVUser yy_modelWithDictionary:dict];
+            [self.activitorList addObject:user];
+        }
+        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:3] withRowAnimation:UITableViewRowAnimationNone];
+    }];
 }
 
 #pragma mark - UITableView Header Footer
@@ -107,12 +156,12 @@
         make.height.equalTo(@93);
     }];
     
-    UILabel *moneyLabel = [[UILabel alloc] init];
-    [downImageview addSubview:moneyLabel];
-    moneyLabel.text = @"¥1024";
-    moneyLabel.textColor = [UIColor ktvGold];
-    moneyLabel.font = [UIFont boldSystemFontOfSize:25];
-    [moneyLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    self.moneyLabel = [[UILabel alloc] init];
+    [downImageview addSubview:self.moneyLabel];
+    self.moneyLabel.text = @"¥0";
+    self.moneyLabel.textColor = [UIColor ktvGold];
+    self.moneyLabel.font = [UIFont boldSystemFontOfSize:25];
+    [self.moneyLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(downImageview).offset(10);
         make.centerY.equalTo(downImageview);
     }];
@@ -131,13 +180,53 @@
     return allBgView;
 }
 
-#pragma mark - UIControl Event
+#pragma mark - 事件
 
 - (void)payAction:(UIButton *)btn {
     CLog(@"--->>>套餐-立即支付");
     // 跳转到订单确认
     KTVOrderConfirmController *vc = (KTVOrderConfirmController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVOrderConfirmController"];
+    vc.store = self.store;
+    vc.packageList = [self getSelectedPackageList];
+    vc.selectedActivitorList = self.selectedActivitorList;
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+#pragma mark - 封装
+
+- (void)setPackage:(KTVPackage *)package {
+    _package = package;
+    
+    for (KTVPackage *pv in self.store.packageList) {
+        if ([pv isEqual:_package]) {
+            pv.isSelected = YES;
+        }
+    }
+}
+
+/// 获取当前选择套餐和暖场人的总价
+- (NSString *)getOrderMoney {
+    float price = 0;
+    // 套餐价格
+    for (KTVPackage *pk in [self getSelectedPackageList]) {
+        price += pk.price.floatValue;
+    }
+    // 暖场人价格
+    for (KTVUser *user in self.selectedActivitorList) {
+        price += user.userDetail.price;
+    }
+    return @(price).stringValue;
+}
+
+/// 获取已经选中的套餐
+- (NSArray *)getSelectedPackageList {
+    NSMutableArray *packageList = [NSMutableArray array];
+    for (KTVPackage *pk in self.store.packageList) {
+        if (pk.isSelected) {
+            [packageList addObject:pk];
+        }
+    }
+    return packageList;
 }
 
 #pragma mark - UITableViewDelegate
@@ -163,7 +252,22 @@
         KTVTableHeaderView *headerView = [[KTVTableHeaderView alloc] initWithImageUrl:nil title:@"套餐详情" remark:nil];
         return headerView;
     } else if (section == 3) {
-        KTVTableHeaderView *headerView = [[KTVTableHeaderView alloc] initWithImageUrl:nil title:@"邀请她暖场" remark:nil];
+        KTVTableHeaderView *headerView = [[KTVTableHeaderView alloc] initWithImageUrl:nil title:@"邀约TA暖场" headerImgUrl:@"app_change_batch" remarkUrl:@"app_arrow_right_hui" remark:nil];
+        headerView.headerActionBlock = ^(KTVHeaderType type) {
+            if (type == HeaderType) {
+                CLog(@"--->>> 邀约TA暖床");
+                [self loadPageStoreActivitors];
+            }
+        };
+        headerView.bgActionBlock = ^(KTVHeaderType headerType) {
+            if (headerType == BGType) {
+                // 跳转邀约暖场人列表
+                KTVSelectedBeautyController *vc = (KTVSelectedBeautyController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVSelectedBeautyController"];
+                vc.store = self.store;
+                vc.selectedActivitorList = self.selectedActivitorList;
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+        };
         return headerView;
     }
     return nil;
@@ -196,9 +300,9 @@
     } else if (section == 1) {
         return 1;
     } else if (section == 2) {
-        return 3;
+        return [self.store.packageList count];
     } else if (section == 3) {
-        return 3;
+        return [self.activitorList count];
     }
     return 0;
 }
@@ -206,6 +310,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         KTVBarKtvDetailHeaderCell *cell = (KTVBarKtvDetailHeaderCell *)[tableView dequeueReusableCellWithIdentifier:KTVStringClass(KTVBarKtvDetailHeaderCell)];
+        cell.store = self.store;
         cell.callback = ^() {
             KTVShareFriendController *vc = (KTVShareFriendController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVShareFriendController"];
             [self.navigationController pushViewController:vc animated:YES];
@@ -216,9 +321,26 @@
         return cell;
     } else if (indexPath.section == 2) {
         KTVPackageDetailCell *cell = (KTVPackageDetailCell *)[tableView dequeueReusableCellWithIdentifier:KTVStringClass(KTVPackageDetailCell)];
+        KTVPackage *package = self.store.packageList[indexPath.row];
+        cell.package = package;
+        cell.selectCallback = ^(KTVPackage *package, BOOL isSelected) {
+            self.moneyLabel.text = [NSString stringWithFormat:@"¥%@", [self getOrderMoney]];
+        };
         return cell;
     } else if (indexPath.section == 3) {
         KTVYuePaoUserCell *cell = (KTVYuePaoUserCell *)[tableView dequeueReusableCellWithIdentifier:KTVStringClass(KTVYuePaoUserCell)];
+        KTVUser *user = self.activitorList[indexPath.row];
+        cell.user = user;
+        cell.yueCallback = ^(KTVUser *user, BOOL isSelected) {
+            if (isSelected) {
+                CLog(@"--->>> 约了%@", user.nickName);
+                [self.selectedActivitorList addObject:user];
+            } else {
+                CLog(@"--->>> 不约%@", user.nickName);
+                [self.selectedActivitorList removeObject:user];
+            }
+            self.moneyLabel.text = [NSString stringWithFormat:@"¥%@", [self getOrderMoney]];
+        };
         return cell;
     }
     return nil;

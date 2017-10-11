@@ -15,7 +15,8 @@
     // value should be Class or Class name.
     return @{@"activitorList" : [KTVUser class],
              @"pictureList" : [KTVPicture class],
-             @"groupBuyList" : [KTVGroupbuy class]};
+             @"groupBuyList" : [KTVGroupbuy class],
+             @"packageList" : [KTVPackage class]};
 }
 
 

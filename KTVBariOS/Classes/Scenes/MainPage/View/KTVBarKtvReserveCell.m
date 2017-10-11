@@ -27,6 +27,13 @@
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 }
-  
+
+- (void)setPackage:(KTVPackage *)package {
+    _package = package;
+    
+    self.moneyLabel.text = _package.price;
+    self.moneyOldLabel.text = _package.realPrice;
+    self.orderTimeLabel.text = _package.belong;
+}
 
 @end

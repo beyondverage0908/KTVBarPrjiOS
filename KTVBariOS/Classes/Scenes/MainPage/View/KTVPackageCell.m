@@ -35,7 +35,15 @@
     [self.orderBtn setImage:[UIImage imageNamed:@"app_order_tuan"] forState:UIControlStateNormal];
     self.packageNameLabel.text = _groupbuy.title;
     self.moneyLabel.text = [NSString stringWithFormat:@"¥ %@", _groupbuy.totalPrice];
+}
+
+- (void)setPackage:(KTVPackage *)package {
+    _package = package;
     
+    [self.orderBtn setImage:[UIImage imageNamed:@"app_order_ding"] forState:UIControlStateNormal];
+    self.packageNameLabel.text = _package.packageName;
+    self.moneyLabel.text = _package.price;
+    self.oldMoneyLabel.text = _package.realPrice;
 }
 
 @end

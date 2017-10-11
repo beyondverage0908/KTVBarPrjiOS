@@ -9,7 +9,7 @@
 #import "KTVCallOtherController.h"
 #import "KTVPhotoPicker.h"
 
-@interface KTVCallOtherController ()
+@interface KTVCallOtherController ()<UINavigationBarDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @end
 
@@ -39,6 +39,8 @@
 
 - (IBAction)shareToQQAction:(id)sender {
     CLog(@"-->> 分享到QQ");
-    [KTVPhotoPicker pickPhoto];
+    KTVPhotoPicker *picker = [[KTVPhotoPicker alloc] init];
+    [picker startPickPhoto];
 }
+
 @end

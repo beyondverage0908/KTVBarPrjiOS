@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "KTVPackage.h"
+
 
 @interface KTVOrderConfirmCell : UITableViewCell
+
+@property (nonatomic, strong) NSArray<KTVUser *> *selectedActivitorList;
+@property (nonatomic, strong) NSArray<KTVPackage *> *packageList;
 
 @end

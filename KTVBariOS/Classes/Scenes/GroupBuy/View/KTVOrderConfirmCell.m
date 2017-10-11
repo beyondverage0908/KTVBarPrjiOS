@@ -25,7 +25,35 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
+}
 
+- (void)setPackageList:(NSArray<KTVPackage *> *)packageList {
+    _packageList = packageList;
+    
+    KTVPackage *package = [_packageList firstObject];
+    self.nameLabel.text = package.packageName;
+    
+    self.moneyLabel.text = [NSString stringWithFormat:@"¥%@", [self getOrderMoney]];
+}
+
+- (void)setSelectedActivitorList:(NSArray<KTVUser *> *)selectedActivitorList {
+    _selectedActivitorList = selectedActivitorList;
+    
+    self.moneyLabel.text = [NSString stringWithFormat:@"¥%@", [self getOrderMoney]];
+}
+
+/// 获取当前选择套餐和暖场人的总价
+- (NSString *)getOrderMoney {
+    float price = 0;
+    // 套餐价格
+    for (KTVPackage *pk in self.packageList) {
+        price += pk.price.floatValue;
+    }
+    // 暖场人价格
+    for (KTVUser *user in self.selectedActivitorList) {
+        price += user.userDetail.price;
+    }
+    return @(price).stringValue;
 }
 
 @end

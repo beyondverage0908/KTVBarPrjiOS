@@ -35,11 +35,19 @@
 
 - (void)mergeUploadParam {
     // 套餐价格
-    [self.orderUploadDictionary setObject:self.groupbuy.totalPrice forKey:@"groupbuyTotalPrice"];
+    if (self.groupbuy.totalPrice) {
+        [self.orderUploadDictionary setObject:self.groupbuy.totalPrice forKey:@"groupbuyTotalPrice"];
+    }
     [self.orderUploadDictionary setObject:@(self.store.storeId.integerValue) forKey:@"storeId"];
     [self.orderUploadDictionary setObject:@(self.store.user.userId.integerValue) forKey:@"userId"];
     // 1套餐，2酒吧位置价格 3包厢类型的价格 ,4暖场人，5 单点商品的价格如果是单点商品，会出现数量为2的情况），6普通邀约人（这个单价为0）7 团购 8 活动
-    [self.orderUploadDictionary setObject:@(7) forKey:@"orderType"];
+    if (self.groupbuy) {
+        [self.orderUploadDictionary setObject:@(7) forKey:@"orderType"];
+    }
+    // 套餐类型
+    if (self.packageList && [self.packageList count]) {
+        [self.orderUploadDictionary setObject:@(1) forKey:@"orderType"];
+    }
     [self.orderUploadDictionary setObject:@(0) forKey:@"userHide"];
     // 订单时间
     NSString *currentDate = [NSDate dateStringWithDate:[NSDate date] andFormatString:@"yyyy-MM-dd HH:mm:ss"];
@@ -89,12 +97,20 @@
 #pragma mark - 封装
 
 - (NSString *)getOrderAllMoney {
-    NSInteger groupbuyTotalPrice = self.groupbuy.totalPrice.integerValue; // 套餐基础价格
+    NSInteger totalPrice = 0; // 套餐基础价格
+    if (self.groupbuy) {
+        totalPrice = self.groupbuy.totalPrice.floatValue;
+    }
+    if (self.packageList) {
+        for (KTVPackage *pk in self.packageList) {
+            totalPrice += pk.price.floatValue;
+        }
+    }
     NSInteger money = 0;
     for (KTVUser *user in self.selectedActivitorList) {
         money += user.userDetail.price;
     }
-    money += groupbuyTotalPrice;
+    money += totalPrice;
     
     return @(money).stringValue;
 }

@@ -8,6 +8,7 @@
 
 #import "KTVOrderConfirmController.h"
 #import "KTVSelectedBeautyController.h"
+#import "KTVOrderUploadController.h"
 
 #import "KTVOrderConfirmCell.h"
 #import "KTVYuePaoUserCell.h"
@@ -42,11 +43,12 @@
 
 - (IBAction)continuePayActon:(UIButton *)sender {
     CLog(@"确认订单-下一步");
-    
-    KTVSelectedBeautyController *vc = (KTVSelectedBeautyController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVSelectedBeautyController"];
+    KTVOrderUploadController *vc = (KTVOrderUploadController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVOrderUploadController"];
+    vc.store = self.store;
+    vc.packageList = self.packageList;
+    vc.selectedActivitorList = self.selectedActivitorList; // 已经选中的暖场人
     [self.navigationController pushViewController:vc animated:YES];
 }
-
 
 #pragma mark - UITableViewDelegate
 
@@ -74,6 +76,9 @@
                 CLog(@"--->>> 换一批泡");
             } else if (headerType == RemarkType) {
                 CLog(@"--->>> 付费约");
+                KTVSelectedBeautyController *vc = (KTVSelectedBeautyController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVSelectedBeautyController"];
+                vc.store = self.store;
+                [self.navigationController pushViewController:vc animated:YES];
             }
         };
         return headerView;
@@ -99,6 +104,8 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         KTVOrderConfirmCell *cell = (KTVOrderConfirmCell *)[tableView dequeueReusableCellWithIdentifier:@"KTVOrderConfirmCell"];
+        cell.packageList = self.packageList;
+        cell.selectedActivitorList = self.selectedActivitorList;
         return cell;
     } else if (indexPath.section == 1) {
         KTVYuePaoUserCell *cell = (KTVYuePaoUserCell *)[tableView dequeueReusableCellWithIdentifier:@"KTVYuePaoUserCell"];

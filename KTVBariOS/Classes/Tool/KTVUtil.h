@@ -35,4 +35,17 @@
 /// 获取指定月份的日的天数列表
 + (NSArray *)dayListByMonth:(NSInteger)month;
 
+/**
+ * 将图片缩放到指定的CGSize大小
+ * UIImage image 原始的图片
+ * CGSize size 要缩放到的大小
+ */
++ (UIImage *)scaleImage:(UIImage *)image toSize:(CGSize)size;
+/**
+ * 根据给定的size的宽高比自动缩放原图片、自动判断截取位置,进行图片截取
+ * UIImage image 原始的图片
+ * CGSize size 截取图片的size
+ */
++ (UIImage *)clipImage:(UIImage *)image toRect:(CGSize)size;
+
 @end

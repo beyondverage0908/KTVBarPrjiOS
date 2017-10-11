@@ -35,5 +35,26 @@
     } else {
         [sender setImage:[UIImage imageNamed:@"app_selected_kuang"] forState:UIControlStateNormal];
     }
+    // 同步套餐选择
+    self.package.isSelected = sender.isSelected;
+    
+    if (self.selectCallback) {
+        self.selectCallback(self.package, self.package.isSelected);
+    }
+}
+
+- (void)setPackage:(KTVPackage *)package {
+    _package = package;
+    
+    if (_package.isSelected) {
+        [self.selectBtn setImage:[UIImage imageNamed:@"app_gou_red"] forState:UIControlStateNormal];
+    } else {
+        [self.selectBtn setImage:[UIImage imageNamed:@"app_selected_kuang"] forState:UIControlStateNormal];
+    }
+    [self.selectBtn setSelected:_package.isSelected];
+    
+    self.moneyLabe.text = _package.price;
+    self.oldMoneyLabel.text = _package.realPrice;
+    self.selectTimeLabel.text = _package.belong;
 }
 @end

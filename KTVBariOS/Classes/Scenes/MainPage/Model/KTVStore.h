@@ -31,7 +31,7 @@
 @property (nonatomic, strong) NSArray * pictureList;
 @property (nonatomic, strong) NSArray * groupBuyList;
 @property (nonatomic, strong) KTVUser * user;
-@property (nonatomic, assign) BOOL showGroupbuy;
+@property (nonatomic, assign) BOOL showGroupbuy; // 自定义属性，默认不显示团购
 
 @property (nonatomic, strong) KTVAddress * address;
 

@@ -59,6 +59,8 @@
     [self clearNavigationbar:NO];
 }
 
+#pragma mark - 事件
+
 - (void)navigationBackAction:(id)action {
     [self hideNavigationBar:YES];
     [self.navigationController popViewControllerAnimated:YES];
@@ -175,15 +177,21 @@
     return 0;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {    
-    if (indexPath.section == 2) {
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 1) {
+        if (indexPath.row > 1) {
+            // 选座->选择套餐页面
+            KTVPackageController *vc = (KTVPackageController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVPackageController"];
+            vc.store = self.store;
+            vc.package = self.package;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+    } else if (indexPath.section == 2) {
         KTVGroupbuy *groupbuy = self.store.groupBuyList[indexPath.row];
         KTVGroupBuyDetailController *vc = (KTVGroupBuyDetailController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVGroupBuyDetailController"];
         vc.store = self.store;
         vc.groupbuy = groupbuy;
         [self.navigationController pushViewController:vc animated:YES];
-//        KTVPackageController *vc = (KTVPackageController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVPackageController"];
-//        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 
@@ -197,7 +205,7 @@
     if (section == 0) {
         return 1;
     } else if (section == 1) {
-        return 4;
+        return 2 + [self.store.packageList count];
     } else if (section == 2) {
         return self.store.groupBuyList.count;
     } else if (section == 3) {
@@ -221,15 +229,12 @@
             NSString *KTTimeFilterCellIdentifer = @"KTTimeFilterCell";
             KTTimeFilterCell *cell = [tableView dequeueReusableCellWithIdentifier:KTTimeFilterCellIdentifer];
             if (!cell) {
-                cell = [[KTTimeFilterCell alloc] initWithItems:@[@"今天;06-28",
-                                                                 @"周四;06-29",
-                                                                 @"周五;06-30",
-                                                                 @"周六;07-01",
-                                                                 @"周日;07-02",
-                                                                 @"周一;07-03",
-                                                                 @"周二;07-04",
-                                                                 @"周三;07-05"]
+                NSArray *timefilterItems = [KTVUtil getFiltertimeByDay:7];
+                cell = [[KTTimeFilterCell alloc] initWithItems:timefilterItems
                                                reuseIdentifier:KTTimeFilterCellIdentifer];
+                cell.filterCallback = ^(NSInteger idx) {
+                    CLog(@"-->> %@", timefilterItems[idx]);
+                };
             }
             return cell;
         } else if (indexPath.row == 1) {
@@ -247,7 +252,9 @@
             }
             return cell;
         } else {
+            KTVPackage *package = self.store.packageList[indexPath.row - 2];
             KTVBarKtvReserveCell *cell = [tableView dequeueReusableCellWithIdentifier:@"KTVBarKtvReserveCell"];
+            cell.package = package;
             return cell;
         }
         

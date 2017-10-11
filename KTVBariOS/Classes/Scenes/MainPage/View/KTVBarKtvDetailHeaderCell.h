@@ -13,6 +13,6 @@
 
 @property (nonatomic, strong) KTVStore * store;
 
-@property (nonatomic, copy) void (^callback)();
+@property (nonatomic, copy) void (^callback)(void);
 
 @end

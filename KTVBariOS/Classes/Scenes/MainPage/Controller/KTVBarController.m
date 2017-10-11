@@ -207,20 +207,24 @@
     if (indexPath.section == 0) {
         // banner
     } else {
+        
+        // 获取店铺对象
+        NSInteger idx = indexPath.section - 1;
+        KTVStoreContainer *storeContainer = self.storeContainerList[idx];
+        
         if (indexPath.row == 0) {
             // 店面cell
             // 店铺详情(酒吧选座)
             KTVBarKtvDetailController *vc = (KTVBarKtvDetailController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVBarKtvDetailController"];
+            vc.store = storeContainer.store;
             [self.navigationController pushViewController:vc animated:YES];
         } else {
-            
-            NSInteger idx = indexPath.section - 1;
-            KTVStoreContainer *storeContainer = self.storeContainerList[idx];
             if (indexPath.row > 0 && indexPath.row < (1 + storeContainer.store.packageList.count)) {
                 KTVPackage *package = storeContainer.store.packageList[indexPath.row - 1];
                 // 店铺详情(酒吧选座)
                 KTVBarKtvDetailController *vc = (KTVBarKtvDetailController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVBarKtvDetailController"];
                 vc.package = package;
+                vc.store = storeContainer.store;
                 [self.navigationController pushViewController:vc animated:YES];
             } else if (indexPath.row > [storeContainer.store.packageList count]) {
                 KTVGroupbuy *groupbuy = storeContainer.store.groupBuyList[indexPath.row - [storeContainer.store.packageList count] - 1];
@@ -280,12 +284,13 @@
                 cell.storeContainer = storeContainer;
                 return cell;
             }
-            KTVPackageCell *cell = (KTVPackageCell *)[tableView dequeueReusableCellWithIdentifier:
-                                                      KTVStringClass(KTVPackageCell)];
+            KTVPackageCell *cell = (KTVPackageCell *)[tableView dequeueReusableCellWithIdentifier:KTVStringClass(KTVPackageCell)];
             if (indexPath.row > 0 && indexPath.row < (1 + storeContainer.store.packageList.count)) {
+                // 套餐对象
                 KTVPackage *package = storeContainer.store.packageList[indexPath.row - 1];
                 cell.package = package;
             } else if (indexPath.row > [storeContainer.store.packageList count]) {
+                // 团购对象
                 KTVGroupbuy *groupbuy = storeContainer.store.groupBuyList[indexPath.row - [storeContainer.store.packageList count] - 1];
                 cell.groupbuy = groupbuy;
             }

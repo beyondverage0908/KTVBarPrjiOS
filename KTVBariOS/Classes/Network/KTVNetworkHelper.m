@@ -281,6 +281,10 @@ static KTVNetworkHelper *_instance = nil;
         [KtvNotiCenter postNotificationName:ktvInvalidateToken object:nil];
         return;
     }
+    if ([responese[@"code"] isEqualToString:ktvHeaderTokenNull]) {
+        [KtvNotiCenter postNotificationName:ktvInvalidateToken object:nil];
+        return;
+    }
     if (success) success(responese);
 }
 
