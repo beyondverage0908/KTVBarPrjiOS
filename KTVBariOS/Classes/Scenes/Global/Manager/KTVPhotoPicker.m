@@ -7,6 +7,7 @@
 //
 
 #import "KTVPhotoPicker.h"
+#import <Photos/Photos.h>
 
 @interface KTVPhotoPicker ()<UINavigationBarDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
@@ -14,7 +15,31 @@
 
 @implementation KTVPhotoPicker
 
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
+            switch (status) {
+                case PHAuthorizationStatusAuthorized:
+                    NSLog(@"PHAuthorizationStatusAuthorized");
+                    break;
+                case PHAuthorizationStatusDenied:
+                    NSLog(@"PHAuthorizationStatusDenied");
+                    break;
+                case PHAuthorizationStatusNotDetermined:
+                    NSLog(@"PHAuthorizationStatusNotDetermined");
+                    break;
+                case PHAuthorizationStatusRestricted:
+                    NSLog(@"PHAuthorizationStatusRestricted");
+                    break;
+            }
+        }];
+    }
+    return self;
+}
+
 - (void)startPickPhoto {
+    
     UIViewController *rootNav = [UIApplication sharedApplication].keyWindow.rootViewController;
     
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
@@ -49,7 +74,7 @@
         imagepicker.allowsEditing = YES;
         imagepicker.sourceType = UIImagePickerControllerSourceTypeCamera;
         
-        [self presentViewController:imagepicker animated:YES completion:^{}];
+        [UIApplication.sharedApplication.keyWindow.rootViewController presentViewController:imagepicker animated:YES completion:^{}];
     }
 }
 
@@ -62,7 +87,7 @@
         picker.allowsEditing = YES;
         picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         
-        [self presentViewController:picker animated:YES completion:^{}];
+        [UIApplication.sharedApplication.keyWindow.rootViewController presentViewController:picker animated:YES completion:^{}];
     }
 }
 

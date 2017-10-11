@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface KTVPhotoPicker : UIViewController
+@interface KTVPhotoPicker : NSObject
 
 - (void)startPickPhoto;
 

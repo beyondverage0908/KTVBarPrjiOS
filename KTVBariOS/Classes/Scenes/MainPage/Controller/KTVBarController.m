@@ -38,7 +38,6 @@
     self.tableView.backgroundColor = [UIColor ktvBG];
     // 数据初始化
     [self initData];
-    
     // 获取酒吧/ktv主页数据
     [self loadMainData];
 }
