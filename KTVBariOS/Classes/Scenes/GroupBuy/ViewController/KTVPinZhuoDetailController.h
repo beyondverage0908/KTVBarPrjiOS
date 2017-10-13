@@ -10,4 +10,7 @@
 
 @interface KTVPinZhuoDetailController : KTVBaseViewController
 
+// 查询条件 -- 发起拼桌者的电话号码
+@property (nonatomic, strong) NSString *phone;
+
 @end

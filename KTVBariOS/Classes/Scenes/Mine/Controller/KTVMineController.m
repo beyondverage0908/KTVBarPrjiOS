@@ -11,6 +11,7 @@
 #import "KTVUserInfoController.h"
 #import "KTVMineFriendController.h"
 #import "KTVOrderStatusListController.h"
+#import "KTVStartYueController.h"
 
 #import "KTVUserHeaderCell.h"
 #import "KTVUserInfoCell.h"
@@ -57,6 +58,10 @@
     if (indexPath.section == 1) {
         if (indexPath.row == 1) {
             KTVOrderStatusListController *vc = (KTVOrderStatusListController *)[UIViewController storyboardName:@"MePage" storyboardId:@"KTVOrderStatusListController"];
+            [self.navigationController pushViewController:vc animated:YES];
+        } else if (indexPath.row == 2) {
+            // 发起拼桌活动
+            KTVStartYueController *vc = (KTVStartYueController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVStartYueController"];
             [self.navigationController pushViewController:vc animated:YES];
         } else if (indexPath.row == 3) {
             CLog(@"-- 查看个人信息 下一页");

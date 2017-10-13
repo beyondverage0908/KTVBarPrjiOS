@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "KTVPinZhuoDetail.h"
 
 @interface KTVPZStoreCell : UITableViewCell
+
+@property (nonatomic, copy) void (^reportCallback)(KTVPinZhuoDetail *pzDetail);
+
+@property (nonatomic, strong) KTVPinZhuoDetail * pzDetail;
 
 @end

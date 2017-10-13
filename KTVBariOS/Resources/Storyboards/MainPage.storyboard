@@ -1701,7 +1701,7 @@
         <!--Start Yue Controller-->
         <scene sceneID="xvJ-s8-jbe">
             <objects>
-                <viewController storyboardIdentifier="KTVStartYueController" id="Ved-GS-LTt" customClass="KTVStartYueController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="KTVStartYueController" hidesBottomBarWhenPushed="YES" id="Ved-GS-LTt" customClass="KTVStartYueController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6P2-T8-k2K"/>
                         <viewControllerLayoutGuide type="bottom" id="VL3-Zk-4s3"/>
@@ -1756,7 +1756,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="活动说明:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EVU-7D-OnS">
-                                                <rect key="frame" x="20" y="465.5" width="66.5" height="18"/>
+                                                <rect key="frame" x="20" y="465" width="66.5" height="18"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
@@ -1785,12 +1785,12 @@
                                                 </state>
                                             </button>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="d7L-Of-LDu">
-                                                <rect key="frame" x="71" y="165.5" width="213" height="45"/>
+                                                <rect key="frame" x="71" y="166" width="213" height="45"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="45" id="UN5-jq-PC5"/>
                                                 </constraints>
                                                 <nil key="textColor"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dhu-gs-7r8">
@@ -1799,7 +1799,7 @@
                                                     <constraint firstAttribute="height" constant="45" id="GNZ-tt-JTr"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                                <state key="normal" title="诺亚方舟酒吧" backgroundImage="app_shuru_input">
+                                                <state key="normal" title="请选择酒吧" backgroundImage="app_shuru_input">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
@@ -1832,7 +1832,7 @@
                                                 </constraints>
                                                 <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="20" maxY="0.0"/>
                                                 <inset key="imageEdgeInsets" minX="45" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                <state key="normal" title="12" image="app_filter_sanjiao" backgroundImage="app_shuru_input">
+                                                <state key="normal" title="10" image="app_filter_sanjiao" backgroundImage="app_shuru_input">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
@@ -1847,7 +1847,7 @@
                                                 </constraints>
                                                 <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="20" maxY="0.0"/>
                                                 <inset key="imageEdgeInsets" minX="45" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                <state key="normal" title="12" image="app_filter_sanjiao" backgroundImage="app_shuru_input">
+                                                <state key="normal" title="1" image="app_filter_sanjiao" backgroundImage="app_shuru_input">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
@@ -1855,12 +1855,12 @@
                                                 </connections>
                                             </button>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tsq-3Y-qQo">
-                                                <rect key="frame" x="76" y="370.5" width="241.5" height="45"/>
+                                                <rect key="frame" x="76" y="370" width="241.5" height="45"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="45" id="q7r-YQ-KgG"/>
                                                 </constraints>
                                                 <nil key="textColor"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="人" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4dc-D3-XYS">
@@ -1870,13 +1870,13 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="bNp-TT-kSG">
-                                                <rect key="frame" x="30" y="491" width="315" height="100"/>
+                                                <rect key="frame" x="30" y="490.5" width="315" height="100"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="100" id="8Ki-Hd-ZEE"/>
                                                 </constraints>
                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -1885,7 +1885,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </textView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="元/人" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KGT-bU-XjM">
-                                                <rect key="frame" x="304" y="177" width="41" height="21"/>
+                                                <rect key="frame" x="304" y="178" width="41" height="21"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
@@ -2425,6 +2425,21 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HcX-lP-850">
+                                                    <rect key="frame" x="285" y="61.5" width="80" height="40"/>
+                                                    <color key="backgroundColor" red="0.99215686270000003" green="0.63529411759999999" blue="0.16862745100000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="40" id="Ylw-zB-d9d"/>
+                                                        <constraint firstAttribute="width" constant="80" id="gce-86-qYY"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <state key="normal" title="去报名">
+                                                        <color key="titleColor" red="0.96470588239999999" green="0.2274509804" blue="0.50980392159999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="toReportAction:" destination="eg9-6e-KqX" eventType="touchUpInside" id="x4A-ul-vJa"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="WJQ-lQ-FFt" firstAttribute="centerY" secondItem="erZ-29-BGD" secondAttribute="centerY" id="0Op-Gb-t9P"/>
@@ -2449,6 +2464,7 @@
                                                 <constraint firstItem="erZ-29-BGD" firstAttribute="top" secondItem="8oo-Zv-jeG" secondAttribute="bottom" constant="8" id="auM-sk-6AC"/>
                                                 <constraint firstAttribute="bottom" secondItem="XP7-KF-P6d" secondAttribute="bottom" id="by4-DD-aYc"/>
                                                 <constraint firstItem="tIK-Zi-oMl" firstAttribute="centerY" secondItem="tIP-3L-HlN" secondAttribute="centerY" id="cNb-Ep-2yl"/>
+                                                <constraint firstItem="HcX-lP-850" firstAttribute="centerY" secondItem="Iz1-To-lDr" secondAttribute="centerY" id="cVj-M1-Ii2"/>
                                                 <constraint firstItem="RVb-4I-kdo" firstAttribute="top" secondItem="a5m-5x-eKB" secondAttribute="bottom" constant="8" id="edQ-cS-zsM"/>
                                                 <constraint firstItem="rap-rf-hbQ" firstAttribute="leading" secondItem="Iz1-To-lDr" secondAttribute="leading" constant="15" id="fbI-yE-Tpn"/>
                                                 <constraint firstItem="ehu-M3-Rx1" firstAttribute="top" secondItem="7vN-Jl-Os8" secondAttribute="bottom" constant="5" id="g87-ww-Qhh"/>
@@ -2456,6 +2472,7 @@
                                                 <constraint firstItem="XP7-KF-P6d" firstAttribute="top" secondItem="Iz1-To-lDr" secondAttribute="top" id="mi3-C5-7wY"/>
                                                 <constraint firstItem="ndu-HN-cqd" firstAttribute="centerY" secondItem="ehu-M3-Rx1" secondAttribute="centerY" id="nGb-zv-oCz"/>
                                                 <constraint firstItem="a5m-5x-eKB" firstAttribute="leading" secondItem="ndu-HN-cqd" secondAttribute="trailing" constant="10" id="tVE-nT-wYR"/>
+                                                <constraint firstAttribute="trailing" secondItem="HcX-lP-850" secondAttribute="trailing" constant="10" id="wfO-qK-dXb"/>
                                                 <constraint firstItem="tIK-Zi-oMl" firstAttribute="leading" secondItem="tIP-3L-HlN" secondAttribute="trailing" constant="10" id="wgR-mW-oAY"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -2466,6 +2483,7 @@
                                             <outlet property="moneyLabel" destination="tIK-Zi-oMl" id="dvC-vm-4iw"/>
                                             <outlet property="nameLabel" destination="206-gr-IOX" id="V6A-8M-XUw"/>
                                             <outlet property="numberLabel" destination="8oo-Zv-jeG" id="YcZ-Bu-D1l"/>
+                                            <outlet property="reportBtn" destination="HcX-lP-850" id="HHZ-8w-YEe"/>
                                             <outlet property="starView" destination="7vN-Jl-Os8" id="23E-bL-x2h"/>
                                             <outlet property="storeHeaderImageView" destination="rap-rf-hbQ" id="DLG-n2-WTk"/>
                                         </connections>

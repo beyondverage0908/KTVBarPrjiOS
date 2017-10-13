@@ -30,4 +30,16 @@ typedef void(^ResponseSuccess)(NSDictionary *result);
 /// 获取门店在约人数
 + (void)getStoreInvitators:(NSString *)storeId result:(ResponseSuccess)responseResult;
 
+/// 创建拼桌
++ (void)postShareTable:(NSDictionary *)params result:(ResponseSuccess)responseResult;
+
+/// 拼桌地址
++ (void)postShareTableAddress:(NSDictionary *)params result:(ResponseSuccess)responseResult;
+
+/// 获取拼桌详情
++ (void)getShareTableDetail:(NSString *)mobileNum result:(ResponseSuccess)responseResult;
+
+/// 按条件查询门店
++ (void)postStoreSearch:(NSDictionary *)params result:(ResponseSuccess)responseResult;
+
 @end

@@ -79,4 +79,16 @@
 /// 获取门店评论
 + (NSString *)getCommentUrl;
 
+/// 创建拼桌
++ (NSString *)getCreatShareTableUrl;
+
+/// 拼桌地址
++ (NSString *)getShareTableAddressUrl;
+
+/// 获取拼桌详情
++ (NSString *)getShareTableDetailUrl;
+
+/// 按条件查询门店
++ (NSString *)getStoreSearchUrl;
+
 @end

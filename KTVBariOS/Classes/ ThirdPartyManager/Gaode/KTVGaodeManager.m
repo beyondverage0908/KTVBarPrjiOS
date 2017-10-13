@@ -62,38 +62,6 @@ static KTVGaodeManager *_instance = nil;
     [self.locationManager startUpdatingLocation];
 }
 
-//1、两点间的直线距离计算
-//根据用户指定的两个经纬度坐标点，计算这两个点间的直线距离，单位为米。代码如下:
-+ (CLLocationDistance)distanceMeterCoordinate:(CLLocation *)pointA toPoint:(CLLocation *)pointB {
-    CLLocationDistance distance = [pointA distanceFromLocation:pointB];
-    return distance;
-}
-
-- (void)locateReGeocodeOnceAction {
-    //带逆地理的单次定位
-    [self.locationManager requestLocationWithReGeocode:YES completionBlock:^(CLLocation *location, AMapLocationReGeocode *regeocode, NSError *error) {
-        
-        if (error)
-        {
-            NSLog(@"locError:{%ld - %@};", (long)error.code, error.localizedDescription);
-            
-            if (error.code == AMapLocationErrorLocateFailed)
-            {
-                return;
-            }
-        }
-        
-        //定位信息
-        NSLog(@"location:%@", location);
-        
-        //逆地理信息
-        if (regeocode)
-        {
-            NSLog(@"reGeocode:%@", regeocode);
-        }
-    }];
-}
-
 #pragma mark - AMapLocationManagerDelegate
 
 - (void)amapLocationManager:(AMapLocationManager *)manager didUpdateLocation:(CLLocation *)location reGeocode:(AMapLocationReGeocode *)reGeocode {

@@ -17,12 +17,17 @@ static NSString * const TOAST_SELECTED_PAYCHANNEL                   = @"请选�
 static NSString * const TOAST_NOMORE_ACTIVITORS                     = @"没有更多暖场人了";
 static NSString * const TOAST_PAY_FAIL                              = @"支付失败";
 static NSString * const TOAST_LOGIN_SUCCESS                         = @"登陆成功";
+static NSString * const TOAST_CANT_PINZHUO_DETAIL                   = @"无法获取拼座详情";
+static NSString * const TOAST_EMPTY_INFO                            = @"请补全信息";
+static NSString * const TOAST_PINZHUO_SUCCESS                       = @"已经发布拼桌成功";
 
 
 // MBProgressHUD定义
 
 static NSString * const MB_CREATE_ORDER                             = @"创建订单中...";
 static NSString * const MB_ORDER_PAYING                             = @"支付中...";
+static NSString * const MB_START_PINZHUO                            = @"发起拼桌中...";
+
 
 
 

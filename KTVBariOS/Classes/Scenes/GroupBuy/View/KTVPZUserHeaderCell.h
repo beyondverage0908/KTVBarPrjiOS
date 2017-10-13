@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "KTVUser.h"
 
 @interface KTVPZUserHeaderCell : UITableViewCell
+
+@property (nonatomic, strong) KTVUser * user;
 
 @end

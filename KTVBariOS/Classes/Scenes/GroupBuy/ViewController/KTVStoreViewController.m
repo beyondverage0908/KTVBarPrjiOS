@@ -10,9 +10,13 @@
 
 #import "KTVStoreCell.h"
 
+#import "KTVMainService.h"
+
 @interface KTVStoreViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+
+@property (strong, nonatomic) NSMutableArray<KTVStore *> *storeList;
 
 @end
 
@@ -25,10 +29,38 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.backgroundColor = [UIColor ktvBG];
+    
+    [self initData];
+    
+    [self loadStoresBySearch];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+- (void)initData {
+    self.storeList = [NSMutableArray array];
+}
+
+#pragma mark - 网络
+
+- (void)loadStoresBySearch {
+    self.storeType = 0;
+    self.storeName = @"dd";
+    
+    NSDictionary *params =@{@"storeType" : @(self.storeType), @"storeName" : self.storeName};
+    [KTVMainService postStoreSearch:params result:^(NSDictionary *result) {
+        if (![result[@"code"] isEqualToString:ktvCode]) {
+            [KTVToast toast:result[@"detail"]];
+            return;
+        }
+        for (NSDictionary *dict in result[@"data"]) {
+            KTVStore *store = [KTVStore yy_modelWithDictionary:dict];
+            [self.storeList addObject:store];
+        }
+        [self.tableView reloadData];
+    }];
 }
 
 #pragma mark - UITableViewDelegate
@@ -44,11 +76,13 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 7;
+    return [self.storeList count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     KTVStoreCell *cell = (KTVStoreCell *)[tableView dequeueReusableCellWithIdentifier:@"KTVStoreCell"];
+    KTVStore *store = self.storeList[indexPath.row];
+    cell.store = store;
     cell.callBack = ^(KTVStore *store) {
         CLog(@"-->> 花生酒店");
         if (self.selectedStoreCallback) {

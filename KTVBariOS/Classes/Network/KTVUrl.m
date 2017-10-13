@@ -102,4 +102,20 @@
     return @"/api/store/comment";
 }
 
++ (NSString *)getCreatShareTableUrl {
+    return @"/api/shareTable";
+}
+
++ (NSString *)getShareTableAddressUrl {
+    return @"/api/shareTable/address";
+}
+
++ (NSString *)getShareTableDetailUrl {
+    return @"/api/shareTable/";
+}
+
++ (NSString *)getStoreSearchUrl {
+    return @"/api/store/search";
+}
+
 @end

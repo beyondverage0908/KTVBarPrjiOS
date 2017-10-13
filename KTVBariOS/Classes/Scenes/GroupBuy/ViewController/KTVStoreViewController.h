@@ -14,4 +14,8 @@
 
 @property (nonatomic, copy) void (^selectedStoreCallback)(KTVStore *store);
 
+/// 查询条件
+@property (nonatomic, strong) NSString * storeName;
+@property (nonatomic, assign) NSInteger storeType;
+
 @end

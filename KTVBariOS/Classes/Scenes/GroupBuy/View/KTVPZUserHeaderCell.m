@@ -28,4 +28,16 @@
     [super setSelected:selected animated:animated];
 }
 
+- (void)setUser:(KTVUser *)user {
+    _user = user;
+    
+    self.nicknameLabel.text = user.username;
+    if (user.sex) {
+        [self.genderBtn setImage:[UIImage imageNamed:@"app_user_man"] forState:UIControlStateNormal];
+    } else {
+        [self.genderBtn setImage:[UIImage imageNamed:@"app_user_woman"] forState:UIControlStateNormal];
+    }
+    self.ageLabel.text = [NSString stringWithFormat:@"%@岁", @(user.age)];
+}
+
 @end

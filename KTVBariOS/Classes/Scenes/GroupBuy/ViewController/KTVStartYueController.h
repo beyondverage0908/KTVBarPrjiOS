@@ -7,7 +7,10 @@
 //
 
 #import "KTVBaseViewController.h"
+#import "KTVStore.h"
 
 @interface KTVStartYueController : KTVBaseViewController
+
+@property (nonatomic, strong) KTVStore *store;
 
 @end
