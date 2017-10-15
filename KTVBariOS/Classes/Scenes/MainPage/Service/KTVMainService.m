@@ -145,4 +145,60 @@
     }];
 }
 
++ (void)postSearchOrder:(NSDictionary *)params result:(ResponseSuccess)responseResult {
+    KTVRequestMessage *msg = [[KTVRequestMessage alloc] init];
+    msg.path = [KTVUrl getSearchOrderUrl];
+    msg.httpType = KtvPOST;
+    msg.params = params;
+    
+    [[KTVNetworkHelper sharedInstance] send:msg success:^(NSDictionary *result) {
+        // 数据接口解析
+        responseResult(result);
+    } fail:^(NSError *error) {
+        CLog(@"--->>>%@", error);
+    }];
+}
+
++ (void)postCreateInvite:(NSDictionary *)params result:(ResponseSuccess)responseResult {
+    KTVRequestMessage *msg = [[KTVRequestMessage alloc] init];
+    msg.path = [KTVUrl getCreateInviteUrl];
+    msg.httpType = KtvPOST;
+    msg.params = params;
+    
+    [[KTVNetworkHelper sharedInstance] send:msg success:^(NSDictionary *result) {
+        // 数据接口解析
+        responseResult(result);
+    } fail:^(NSError *error) {
+        CLog(@"--->>>%@", error);
+    }];
+}
+
++ (void)getSingleInvite:(NSString *)inviteId result:(ResponseSuccess)responseResult {
+    KTVRequestMessage *msg = [[KTVRequestMessage alloc] init];
+    msg.path = [KTVUrl getSingleInviteUrl];
+    msg.httpType = KtvGET;
+    msg.params = inviteId;
+    
+    [[KTVNetworkHelper sharedInstance] send:msg success:^(NSDictionary *result) {
+        // 数据接口解析
+        responseResult(result);
+    } fail:^(NSError *error) {
+        CLog(@"--->>>%@", error);
+    }];
+}
+
++ (void)postNearInvite:(NSDictionary *)params result:(ResponseSuccess)responseResult {
+    KTVRequestMessage *msg = [[KTVRequestMessage alloc] init];
+    msg.path = [KTVUrl getNearInviteUrl];
+    msg.httpType = KtvPOST;
+    msg.params = params;
+    
+    [[KTVNetworkHelper sharedInstance] send:msg success:^(NSDictionary *result) {
+        // 数据接口解析
+        responseResult(result);
+    } fail:^(NSError *error) {
+        CLog(@"--->>>%@", error);
+    }];
+}
+
 @end

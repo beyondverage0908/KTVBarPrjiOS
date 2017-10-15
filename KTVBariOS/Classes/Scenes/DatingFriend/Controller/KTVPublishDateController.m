@@ -8,7 +8,11 @@
 
 #import "KTVPublishDateController.h"
 #import "KTVCallOtherController.h"
+#import "KTVStoreViewController.h"
+
 #import "KTVPickerView.h"
+
+#import "KTVMainService.h"
 
 @interface KTVPublishDateController ()
 
@@ -22,6 +26,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *firstimageView;
 @property (weak, nonatomic) IBOutlet UIImageView *secondImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *thirdImageView;
+
+@property (strong, nonatomic) NSMutableDictionary *params;
 
 @end
 
@@ -37,6 +43,7 @@
     }
     
     [self initUI];
+    [self initData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -50,10 +57,26 @@
     self.explainTextView.layer.cornerRadius = 5;
 }
 
+#pragma mark - 初始化
+
+- (void)initData {
+    self.params = [NSMutableDictionary dictionary];
+    [self.params setObject:[KTVCommon userInfo].phone forKey:@"username"];
+    [self.params setObject:@"0" forKey:@"sex"];
+    [self.params setObject:@0 forKey:@"consumeType"];
+    [self.params setObject:[NSNumber numberWithBool:NO] forKey:@"puckUp"];
+}
+
 #pragma mark - 事件
 
 - (IBAction)chooseBarAction:(UIButton *)sender {
     CLog(@"-->> 选择酒吧");
+    KTVStoreViewController *vc = (KTVStoreViewController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVStoreViewController"];
+    vc.selectedStoreCallback = ^(KTVStore *store) {
+        [self.barNameBtn setTitle:store.storeName forState:UIControlStateNormal];
+        [self.params setObject:store.storeId forKey:@"storeId"];
+    };
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (IBAction)chooseYearAction:(UIButton *)sender {
@@ -62,7 +85,7 @@
         [sender setTitle:selectedTitle forState:UIControlStateNormal];
     }];
     [self.view addSubview:pv];
-    pv.dataSource = @[@"2017", @"2018", @"2019", @"2020"];
+    pv.dataSource = [KTVUtil yearList];
     [pv mas_makeConstraints:^(MASConstraintMaker *make) {make.edges.equalTo(self.view);}];
 }
 
@@ -91,19 +114,31 @@
     CLog(@"-->> 选择性别");
     KTVPickerView *pv = [[KTVPickerView alloc] initWithSelectedCallback:^(NSString *selectedTitle) {
         [sender setTitle:selectedTitle forState:UIControlStateNormal];
+        if ([selectedTitle isEqualToString:@"男"]) {
+            [self.params setObject:@"1" forKey:@"sex"];
+        } else {
+            [self.params setObject:@"0" forKey:@"sex"];
+        }
     }];
     [self.view addSubview:pv];
-    pv.dataSource = @[@"男", @"女"];
+    pv.dataSource = @[@"女", @"男"];
     [pv mas_makeConstraints:^(MASConstraintMaker *make) {make.edges.equalTo(self.view);}];
 }
 
 - (IBAction)choosePayAction:(UIButton *)sender {
     CLog(@"-->> 选择付款方式");
+    NSArray *dataSource = @[@"AA制", @"我一个付", @"我付大部分"];
     KTVPickerView *pv = [[KTVPickerView alloc] initWithSelectedCallback:^(NSString *selectedTitle) {
         [sender setTitle:selectedTitle forState:UIControlStateNormal];
+        for (NSInteger i = 0; i < dataSource.count; i++) {
+            if ([dataSource[i] isEqualToString:selectedTitle]) {
+                [self.params setObject:@(i) forKey:@"consumeType"];
+                return;
+            }
+        }
     }];
     [self.view addSubview:pv];
-    pv.dataSource = @[@"AA制", @"我一个付", @"我付大部分"];
+    pv.dataSource = dataSource;
     [pv mas_makeConstraints:^(MASConstraintMaker *make) {make.edges.equalTo(self.view);}];
 }
 
@@ -113,14 +148,38 @@
     UIImage *image = nil;
     if (sender.isSelected) {
         image = [UIImage imageNamed:@"app_gou_red"];
+        [self.params setObject:[NSNumber numberWithBool:YES] forKey:@"puckUp"];
     } else {
         image = [UIImage imageNamed:@"app_selected_kuang"];
+        [self.params setObject:[NSNumber numberWithBool:NO] forKey:@"puckUp"];
     }
     [sender setImage:image forState:UIControlStateNormal];
 }
 
 - (IBAction)publishYueAction:(UIButton *)sender {
     CLog(@"-->> 发布预约");
+    [self.params setObject:self.explainTextView.text forKey:@"description"];
+    NSString *month = self.monthBtn.currentTitle;
+    if (month.integerValue < 10) {
+        month = [NSString stringWithFormat:@"0%@", month];
+    }
+    NSString *day = self.dayBtn.currentTitle;
+    if (day.integerValue < 10) {
+        day = [NSString stringWithFormat:@"0%@", day];
+    }
+    NSString *year = self.yearBtn.currentTitle;
+    NSString *fullDate = [NSString stringWithFormat:@"%@-%@-%@", year, month, day];
+    
+    [self.params setObject:fullDate forKey:@"startTime"];
+    
+    [KTVMainService postCreateInvite:self.params result:^(NSDictionary *result) {
+        if (![result[@"code"] isEqualToString:ktvCode]) {
+            [KTVToast toast:TOAST_CREATE_INVITE_FAIL];
+            return;
+        }
+        [KTVToast toast:TOAST_CREATE_SUCCESS];
+    }];
+    
     [self showYaoYueSuccess:YES];
 }
 

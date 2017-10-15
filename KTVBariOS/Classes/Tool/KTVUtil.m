@@ -143,6 +143,18 @@
     return @"";
 }
 
++ (NSArray<NSString *> *)yearList {
+    NSCalendar *cal = [NSCalendar currentCalendar];
+    NSDateComponents *components = [cal components:NSCalendarUnitYear fromDate:[NSDate date]];
+    NSInteger year = components.year;
+    NSMutableArray *yearList = [NSMutableArray arrayWithCapacity:5];
+    for (NSInteger i = 0; i < 5; i++) {
+        NSString *y = [NSString stringWithFormat:@"%@", @(year + i)];
+        [yearList addObject:y];
+    }
+    return yearList;
+}
+
 + (NSArray *)monthList {
     return @[@"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"10", @"11", @"12"];
 }

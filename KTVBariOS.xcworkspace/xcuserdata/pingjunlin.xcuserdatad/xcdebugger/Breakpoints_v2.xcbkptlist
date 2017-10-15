@@ -77,5 +77,53 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KTVBariOS/Classes/Scenes/DatingFriend/Controller/KTVPublishDateController.m"
+            timestampString = "529745372.541203"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "173"
+            endingLineNumber = "173"
+            landmarkName = "-publishYueAction:"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[KTVPublishDateController publishYueAction:]"
+                  moduleName = "KTVBariOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pingjunlin/Documents/KTVBariOS/KTVBariOS/Classes/Scenes/DatingFriend/Controller/KTVPublishDateController.m"
+                  timestampString = "529745372.758995"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "174"
+                  endingLineNumber = "174"
+                  offsetFromSymbolStart = "816">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__45-[KTVPublishDateController publishYueAction:]_block_invoke"
+                  moduleName = "KTVBariOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pingjunlin/Documents/KTVBariOS/KTVBariOS/Classes/Scenes/DatingFriend/Controller/KTVPublishDateController.m"
+                  timestampString = "529745372.764471"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "175"
+                  endingLineNumber = "175"
+                  offsetFromSymbolStart = "51">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

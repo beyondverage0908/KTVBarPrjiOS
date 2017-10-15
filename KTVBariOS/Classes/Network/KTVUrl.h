@@ -70,14 +70,29 @@
 /// 获取门店在约人数
 + (NSString *)getStoreInvitatorsUrl;
 
+#pragma mark - 订单
+
 /// 创建订单
 + (NSString *)getCreateOrderUrl;
+
+/// 获取订单
++ (NSString *)getOrderUrl;
+
+/// 更改订单状态
++ (NSString *)getOrderUpdateStatusUrl;
+
+/// 查询订单 
++ (NSString *)getSearchOrderUrl;
+
+#pragma mark - 评论
 
 /// 创建评论
 + (NSString *)getRecentStatusUrl;
 
 /// 获取门店评论
 + (NSString *)getCommentUrl;
+
+#pragma mark - 拼桌
 
 /// 创建拼桌
 + (NSString *)getCreatShareTableUrl;
@@ -88,7 +103,20 @@
 /// 获取拼桌详情
 + (NSString *)getShareTableDetailUrl;
 
+#pragma mark - 门店
+
 /// 按条件查询门店
 + (NSString *)getStoreSearchUrl;
+
+#pragma mark - 邀约
+
+/// 创建邀约
++ (NSString *)getCreateInviteUrl;
+
+/// 获取单个邀约
++ (NSString *)getSingleInviteUrl;
+
+/// 邀约大厅数据
++ (NSString *)getNearInviteUrl;
 
 @end

@@ -17,10 +17,6 @@
 #import "KTVMainService.h"
 #import "KTVStoreContainer.h"
 
-// 测试
-#import "KTVPinZhuoDetailController.h"
-#import "KTVStartYueController.h"
-
 @interface KTVBarController ()<UITableViewDelegate, UITableViewDataSource, SDCycleScrollViewDelegate> {
     NSInteger _tapSectionIndex;
 }
@@ -309,10 +305,6 @@
 
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index {
     CLog(@"--%@--酒吧首页--", @(index));
-//    KTVPinZhuoDetailController *vc = (KTVPinZhuoDetailController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVPinZhuoDetailController"];
-//    [self.navigationController pushViewController:vc animated:YES];
-    KTVStartYueController *vc = (KTVStartYueController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVStartYueController"];
-    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end

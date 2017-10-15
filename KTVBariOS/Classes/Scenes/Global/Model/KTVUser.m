@@ -27,4 +27,10 @@
              @"des" : @"description"};
 }
 
+// 容器类转换
++ (NSDictionary *)modelContainerPropertyGenericClass {
+    // value should be Class or Class name.
+    return @{@"pictureList" : [KTVPicture class]};
+}
+
 @end

@@ -30,6 +30,9 @@
  *  @return: data的描述，例如今天，周一，周二，周三，周四 ...
  */
 + (NSString *)calculateWeek:(NSDate *)date;
+
+/// 获取年份列表 - 5年
++ (NSArray<NSString *> *)yearList;
 /// 获取月份列表
 + (NSArray *)monthList;
 /// 获取指定月份的日的天数列表

@@ -8,11 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import "KTVUserDetail.h"
+#import "KTVPicture.h"
 
 @interface KTVUser : NSObject
 
-@property (nonatomic, strong) NSString *account;
-@property (nonatomic, strong) NSString *phone;
+
+@property (nonatomic, strong) NSString *account; // 自定义属性
 
 @property (nonatomic, strong) NSString *userId;
 @property (nonatomic, assign) NSInteger userType;
@@ -24,8 +25,14 @@
 @property (nonatomic, strong) NSString * userEmail;
 @property (nonatomic, assign) NSInteger age;
 @property (nonatomic, assign) NSInteger sex;
-@property (nonatomic, strong) NSString * gender;
+@property (nonatomic, strong) NSString * birthday;
+@property (nonatomic, strong) NSString * phone;
+@property (nonatomic, assign) NSInteger shareTableStatus; // 拼桌状态
+@property (nonatomic, assign) NSInteger inviteStatus;   // 邀约状态
+
+
+@property (nonatomic, strong) NSString * gender;    // 自定义属性
 @property (nonatomic, strong) KTVUserDetail *userDetail;
-@property (nonatomic, strong) NSArray * pictureList;
+@property (nonatomic, strong) NSArray<KTVPicture *> * pictureList;
 
 @end

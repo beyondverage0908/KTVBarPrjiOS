@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "KTVInvitedUser.h"
 
 @interface KTVYaoYueUserCell : UITableViewCell
+
+@property (nonatomic, strong) KTVInvitedUser * inviteUser;
+
+@property (nonatomic, copy) void (^yueTaCallback)(KTVInvitedUser *inviteUser);
+@property (nonatomic, copy) void (^pinzhuoCallback)(KTVInvitedUser *inviteUser);
 
 @end

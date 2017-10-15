@@ -42,4 +42,16 @@ typedef void(^ResponseSuccess)(NSDictionary *result);
 /// 按条件查询门店
 + (void)postStoreSearch:(NSDictionary *)params result:(ResponseSuccess)responseResult;
 
+/// 查询订单
++ (void)postSearchOrder:(NSDictionary *)params result:(ResponseSuccess)responseResult;
+
+/// 创建邀约
++ (void)postCreateInvite:(NSDictionary *)params result:(ResponseSuccess)responseResult;
+
+/// 获取单个邀约
++ (void)getSingleInvite:(NSString *)inviteId result:(ResponseSuccess)responseResult;
+
+/// 邀约大厅数据
++ (void)postNearInvite:(NSDictionary *)params result:(ResponseSuccess)responseResult;
+
 @end

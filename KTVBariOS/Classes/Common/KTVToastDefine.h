@@ -20,6 +20,9 @@ static NSString * const TOAST_LOGIN_SUCCESS                         = @"登陆�
 static NSString * const TOAST_CANT_PINZHUO_DETAIL                   = @"无法获取拼座详情";
 static NSString * const TOAST_EMPTY_INFO                            = @"请补全信息";
 static NSString * const TOAST_PINZHUO_SUCCESS                       = @"已经发布拼桌成功";
+static NSString * const TOAST_GET_DATA_FAIL                         = @"获取数据失败";
+static NSString * const TOAST_CREATE_INVITE_FAIL                    = @"邀约创建失败，请重试";
+static NSString * const TOAST_CREATE_SUCCESS                        = @"创建成功";
 
 
 // MBProgressHUD定义

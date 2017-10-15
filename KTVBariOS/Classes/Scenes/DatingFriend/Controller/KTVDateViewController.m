@@ -8,10 +8,15 @@
 
 #import "KTVDateViewController.h"
 #import "KTVPublishDateController.h"
+#import "KTVPinZhuoDetailController.h"
 
 #import "KTVYaoYueUserCell.h"
 #import "KTVFilterView.h"
 #import "KTVAddYaoYueView.h"
+
+#import "KTVMainService.h"
+
+#import "KTVInvitedUser.h"
 
 @interface KTVDateViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -21,6 +26,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *locationLabel;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UIButton *fufeiYueBtn;
+
+@property (strong, nonatomic) NSMutableArray<KTVInvitedUser *> *inviteUserList;
 
 @end
 
@@ -32,6 +39,8 @@
     self.tableView.dataSource = self;
     
     [self setupUI];
+    [self initData];
+    [self loadNearInviteData];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -54,6 +63,36 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+#pragma mark - 初始化
+
+- (void)initData {
+    self.inviteUserList = [NSMutableArray array];
+}
+
+#pragma mark - 网络
+
+- (void)loadNearInviteData {
+    KTVAddress *address = [KTVCommon getUserLocation];
+    NSString *lat = @(address.latitude).stringValue;
+    NSString *lon = @(address.longitude).stringValue;
+    NSDictionary *params = @{@"latitude" : lat ? lat : @"121.48789949",
+                             @"longitude" : lon ? lon : @"31.24916171",
+                             @"distance" : @"1000000000",
+                             @"storeType" : @"0"};
+    [KTVMainService postNearInvite:params result:^(NSDictionary *result) {
+        if (![result[@"code"] isEqualToString:ktvCode]) {
+            [KTVToast toast:TOAST_GET_DATA_FAIL];
+            return;
+        }
+        
+        for (NSDictionary *dic in result[@"data"]) {
+            KTVInvitedUser *inviteUser = [KTVInvitedUser yy_modelWithDictionary:dic];
+            [self.inviteUserList addObject:inviteUser];
+        }
+        [self.tableView reloadData];
+    }];
 }
 
 #pragma mark - 事件
@@ -107,11 +146,22 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    return [self.inviteUserList count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     KTVYaoYueUserCell *cell = (KTVYaoYueUserCell *)[tableView dequeueReusableCellWithIdentifier:@"KTVYaoYueUserCell"];
+    KTVInvitedUser *inviteUser = self.inviteUserList[indexPath.row];
+    cell.inviteUser = inviteUser;
+    
+    cell.yueTaCallback = ^(KTVInvitedUser *inviteUser) {
+        CLog(@"-->>>约他");
+    };
+    cell.pinzhuoCallback = ^(KTVInvitedUser *inviteUser) {
+        KTVPinZhuoDetailController *vc = (KTVPinZhuoDetailController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVPinZhuoDetailController"];
+        vc.phone = inviteUser.user.phone;
+        [self.navigationController pushViewController:vc animated:YES];
+    };
     return cell;
 }
 

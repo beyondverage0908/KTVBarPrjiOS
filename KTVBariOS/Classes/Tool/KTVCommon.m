@@ -44,13 +44,16 @@
     [KTVUtil setObject:locationString forKey:@"lat:long"];
 }
 
-+ (NSArray *)getUserLocation {
++ (KTVAddress *)getUserLocation {
     NSString *latlong = [KTVUtil objectForKey:@"lat:long"];
     NSArray *locationArr = nil;
     if (latlong) {
         locationArr = [latlong componentsSeparatedByString:@":"];
     }
-    return locationArr;
+    KTVAddress *address = [[KTVAddress alloc] init];
+    address.latitude = [[locationArr firstObject] doubleValue];
+    address.longitude = [[locationArr lastObject] doubleValue];
+    return address;
 }
 
 @end

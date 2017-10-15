@@ -2193,7 +2193,7 @@
         <!--Pin Zhuo Detail Controller-->
         <scene sceneID="c3v-NI-lB8">
             <objects>
-                <viewController storyboardIdentifier="KTVPinZhuoDetailController" id="1tx-y1-VWS" customClass="KTVPinZhuoDetailController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="KTVPinZhuoDetailController" hidesBottomBarWhenPushed="YES" id="1tx-y1-VWS" customClass="KTVPinZhuoDetailController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="QvM-R2-Pa1"/>
                         <viewControllerLayoutGuide type="bottom" id="TYx-mF-ldY"/>
@@ -2203,7 +2203,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="141" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="OZ2-fz-tKt">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="602"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="KTVPZUserHeaderCell" rowHeight="100" id="MdK-rL-go1" customClass="KTVPZUserHeaderCell">
@@ -2490,47 +2490,12 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aMS-WF-Rvw">
-                                <rect key="frame" x="0.0" y="602" width="375" height="65"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dOh-Tv-5VL">
-                                        <rect key="frame" x="40" y="12" width="295" height="40"/>
-                                        <color key="backgroundColor" red="0.96470588239999999" green="0.2274509804" blue="0.50980392159999999" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="ruq-kq-LmU"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                        <state key="normal" title="去报名">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="8"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="gotoEnterAction:" destination="1tx-y1-VWS" eventType="touchUpInside" id="ftt-Vy-CLE"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" red="0.099425080380000003" green="0.10095224010000001" blue="0.1365041793" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstItem="dOh-Tv-5VL" firstAttribute="centerX" secondItem="aMS-WF-Rvw" secondAttribute="centerX" id="EPx-xy-iUi"/>
-                                    <constraint firstAttribute="trailing" secondItem="dOh-Tv-5VL" secondAttribute="trailing" constant="40" id="R4U-GH-Ynk"/>
-                                    <constraint firstItem="dOh-Tv-5VL" firstAttribute="centerY" secondItem="aMS-WF-Rvw" secondAttribute="centerY" id="ZeY-4B-8m3"/>
-                                    <constraint firstAttribute="height" constant="65" id="agS-HV-Hdq"/>
-                                    <constraint firstItem="dOh-Tv-5VL" firstAttribute="leading" secondItem="aMS-WF-Rvw" secondAttribute="leading" constant="40" id="eFy-lL-vVY"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="aMS-WF-Rvw" firstAttribute="top" secondItem="OZ2-fz-tKt" secondAttribute="bottom" id="1hi-H1-3VF"/>
                             <constraint firstItem="OZ2-fz-tKt" firstAttribute="leading" secondItem="ryF-co-OTb" secondAttribute="leading" id="7wz-4S-t1Y"/>
-                            <constraint firstItem="aMS-WF-Rvw" firstAttribute="leading" secondItem="ryF-co-OTb" secondAttribute="leading" id="8uU-Td-9ZV"/>
                             <constraint firstItem="OZ2-fz-tKt" firstAttribute="top" secondItem="ryF-co-OTb" secondAttribute="top" id="Qlw-RU-VSS"/>
-                            <constraint firstAttribute="trailing" secondItem="aMS-WF-Rvw" secondAttribute="trailing" id="Ygd-f4-mMe"/>
-                            <constraint firstItem="TYx-mF-ldY" firstAttribute="top" secondItem="aMS-WF-Rvw" secondAttribute="bottom" id="ZuL-8B-nR4"/>
+                            <constraint firstItem="TYx-mF-ldY" firstAttribute="top" secondItem="OZ2-fz-tKt" secondAttribute="bottom" id="R1k-Z1-lJp"/>
                             <constraint firstAttribute="trailing" secondItem="OZ2-fz-tKt" secondAttribute="trailing" id="pVa-XL-N3j"/>
                         </constraints>
                     </view>

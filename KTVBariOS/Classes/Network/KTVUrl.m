@@ -94,6 +94,18 @@
     return @"/api/order/createOrder";
 }
 
++ (NSString *)getOrderUrl {
+    return @"/api/order/";
+}
+
++ (NSString *)getOrderUpdateStatusUrl {
+    return @"/api/store/updateStatus";
+}
+
++ (NSString *)getSearchOrderUrl {
+    return @"/api/order/searchOrder";
+}
+
 + (NSString *)getRecentStatusUrl {
     return @"/api/user/recentStatus";
 }
@@ -116,6 +128,21 @@
 
 + (NSString *)getStoreSearchUrl {
     return @"/api/store/search";
+}
+
+/// 创建邀约
++ (NSString *)getCreateInviteUrl {
+    return @"/api/userInvite";
+}
+
+/// 获取单个邀约
++ (NSString *)getSingleInviteUrl {
+    return @"/api/userInvite/";
+}
+
+/// 邀约大厅数据
++ (NSString *)getNearInviteUrl {
+    return @"/api/userInvite/near";
 }
 
 @end

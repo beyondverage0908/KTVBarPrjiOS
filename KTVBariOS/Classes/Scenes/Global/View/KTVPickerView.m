@@ -12,8 +12,6 @@
 
 @property (strong, nonatomic) UIPickerView *pickerView;
 
-@property (strong, nonatomic) NSString *selectedTitle;
-
 @property (copy, nonatomic) void (^selectedCallback)(NSString *selectedTitle);
 
 @end
@@ -104,12 +102,14 @@
 - (void)confirmAction:(UIButton *)btn {
     CLog(@"-->> 确定");
     
+    NSInteger row = [self.pickerView selectedRowInComponent:0];
+    
     if ([self.delegate respondsToSelector:@selector(ktvPickerView:selectedTitle:)]) {
-        [self.delegate ktvPickerView:self selectedTitle:self.selectedTitle];
+        [self.delegate ktvPickerView:self selectedTitle:self.dataSource[row]];
     }
     
-    if (self.selectedCallback && ![KTVUtil isNullString:self.selectedTitle]) {
-        self.selectedCallback(self.selectedTitle);
+    if (self.selectedCallback && ![KTVUtil isNullString:self.dataSource[row]]) {
+        self.selectedCallback(self.dataSource[row]);
     }
     
     [self removeFromSuperview];
@@ -123,10 +123,6 @@
 
 - (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component {
     return 44.0f;
-}
-
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    self.selectedTitle = self.dataSource[row];
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {

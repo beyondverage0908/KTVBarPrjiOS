@@ -81,12 +81,6 @@
     }];
 }
 
-#pragma mark - 事件
-
-- (IBAction)gotoEnterAction:(UIButton *)sender {
-    CLog(@"-- 去报名");
-}
-
 #pragma mark - UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
