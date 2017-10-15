@@ -75,13 +75,13 @@
 // 获取门店暖场人
 - (void)loadStoreActivitors {
     [KTVMainService getStoreActivitors:@"4" result:^(NSDictionary *result) {
-        CLog(@"-->> %@", result);
+        //CLog(@"-->> %@", result);
     }];
 }
 
 - (void)loadStoreGoods {
     [KTVMainService getStoreGoods:@"4" result:^(NSDictionary *result) {
-        CLog(@"-->> %@", result);
+        //CLog(@"-->> %@", result);
     }];
 }
 
@@ -99,7 +99,7 @@
 
 - (void)loadStoreInvitators {
     [KTVMainService getStoreInvitators:@"4" result:^(NSDictionary *result) {
-        CLog(@"-->> %@", result);
+        //CLog(@"-->> %@", result);
     }];
 }
 
