@@ -168,6 +168,8 @@
 		33CD20BD1F4F05A60090DBEE /* KTVPackageDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33CD20BC1F4F05A60090DBEE /* KTVPackageDetailController.m */; };
 		33CD20C01F4F09F90090DBEE /* KTVPackageDetailCareCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33CD20BF1F4F09F90090DBEE /* KTVPackageDetailCareCell.m */; };
 		33CD20C31F4F0BBC0090DBEE /* KTVPackageUserSelectedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33CD20C21F4F0BBC0090DBEE /* KTVPackageUserSelectedCell.m */; };
+		33CD4B041F935B8500B82C4E /* KTVOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = 33CD4B031F935B8500B82C4E /* KTVOrder.m */; };
+		33CD4B071F935CF400B82C4E /* KTVOrderDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 33CD4B061F935CF400B82C4E /* KTVOrderDetail.m */; };
 		33D0E5A11F1F6C8C009A45B3 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33D0E5A01F1F6C8C009A45B3 /* Login.storyboard */; };
 		33D0E5A41F1F6CE2009A45B3 /* KTVForgetPasswordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D0E5A31F1F6CE2009A45B3 /* KTVForgetPasswordController.m */; };
 		33D0E5A71F1F99A6009A45B3 /* UIViewController+StoryboardHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D0E5A61F1F99A6009A45B3 /* UIViewController+StoryboardHelper.m */; };
@@ -507,6 +509,10 @@
 		33CD20BF1F4F09F90090DBEE /* KTVPackageDetailCareCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVPackageDetailCareCell.m; sourceTree = "<group>"; };
 		33CD20C11F4F0BBC0090DBEE /* KTVPackageUserSelectedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVPackageUserSelectedCell.h; sourceTree = "<group>"; };
 		33CD20C21F4F0BBC0090DBEE /* KTVPackageUserSelectedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVPackageUserSelectedCell.m; sourceTree = "<group>"; };
+		33CD4B021F935B8500B82C4E /* KTVOrder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KTVOrder.h; sourceTree = "<group>"; };
+		33CD4B031F935B8500B82C4E /* KTVOrder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KTVOrder.m; sourceTree = "<group>"; };
+		33CD4B051F935CF400B82C4E /* KTVOrderDetail.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KTVOrderDetail.h; sourceTree = "<group>"; };
+		33CD4B061F935CF400B82C4E /* KTVOrderDetail.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KTVOrderDetail.m; sourceTree = "<group>"; };
 		33D0E5A01F1F6C8C009A45B3 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		33D0E5A21F1F6CE2009A45B3 /* KTVForgetPasswordController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVForgetPasswordController.h; sourceTree = "<group>"; };
 		33D0E5A31F1F6CE2009A45B3 /* KTVForgetPasswordController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVForgetPasswordController.m; sourceTree = "<group>"; };
@@ -1003,6 +1009,10 @@
 			children = (
 				335E103C1F8F635700EA9692 /* KTVPinZhuoDetail.h */,
 				335E103D1F8F635700EA9692 /* KTVPinZhuoDetail.m */,
+				33CD4B021F935B8500B82C4E /* KTVOrder.h */,
+				33CD4B031F935B8500B82C4E /* KTVOrder.m */,
+				33CD4B051F935CF400B82C4E /* KTVOrderDetail.h */,
+				33CD4B061F935CF400B82C4E /* KTVOrderDetail.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1818,6 +1828,7 @@
 				33C39EFD1F8B980200FB2BCD /* KTVAddFriendController.m in Sources */,
 				331684951F5C3A3A002C2AD2 /* KTVPZUserHeaderCell.m in Sources */,
 				3316848F1F5C2D24002C2AD2 /* KTVStoreCell.m in Sources */,
+				33CD4B041F935B8500B82C4E /* KTVOrder.m in Sources */,
 				33982EC31F32FC5A005FD363 /* KTVBarEnterMenuCell.m in Sources */,
 				33D0E5AA1F1F9E8F009A45B3 /* UIButton+KTVExtension.m in Sources */,
 				33A74CAD1F331EC100D32F14 /* KTVShareSDKManager.m in Sources */,
@@ -1911,6 +1922,7 @@
 				3345F9D61F3F392000164D9C /* KTVBarKtvDetailHeaderCell.m in Sources */,
 				33C850B91F4488AF00F947B8 /* KTVPackageDetailCell.m in Sources */,
 				330A93871F03ED2A001B320A /* AppDelegate.m in Sources */,
+				33CD4B071F935CF400B82C4E /* KTVOrderDetail.m in Sources */,
 				33D776F51F301D9600077BE5 /* TADotView.m in Sources */,
 				33A352211F7E51E30095B138 /* KTVRongCloudManager.m in Sources */,
 				338872C21F5D41C700DAB247 /* KTVDateViewController.m in Sources */,

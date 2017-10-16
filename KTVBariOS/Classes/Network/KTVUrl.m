@@ -90,6 +90,14 @@
     return @"/api/store/invitators/";
 }
 
++ (NSString *)getStoreNearActivityUrl {
+    return @"/api/nearActivity";
+}
+
++ (NSString *)getGroupBuyUrl {
+    return @"/api/groupBuy/";
+}
+
 + (NSString *)getCreateOrderUrl {
     return @"/api/order/createOrder";
 }

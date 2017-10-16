@@ -92,6 +92,10 @@
 - (void)filterBtnAction:(UIButton *)filterBtn {
     NSInteger idx = filterBtn.tag - 1000;
     CLog(@"筛选--->>>%@", self.filters[idx]);
+    
+    if (self.filterCallback) {
+        self.filterCallback(self.filters[idx]);
+    }
 }
 
 @end

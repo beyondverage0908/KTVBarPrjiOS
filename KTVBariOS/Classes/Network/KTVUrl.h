@@ -55,6 +55,8 @@
 /// 首页数据
 + (NSString *)getMainUrl;
 
+#pragma mark - 门店
+
 /// 获取门店暖场人
 + (NSString *)getAtivitorsUrl;
 
@@ -69,6 +71,15 @@
 
 /// 获取门店在约人数
 + (NSString *)getStoreInvitatorsUrl;
+
+/// 按条件查询门店
++ (NSString *)getStoreSearchUrl;
+
+/// 获取门店附近的活动
++ (NSString *)getStoreNearActivityUrl;
+
+/// 获取单个团购信息
++ (NSString *)getGroupBuyUrl;
 
 #pragma mark - 订单
 
@@ -102,11 +113,6 @@
 
 /// 获取拼桌详情
 + (NSString *)getShareTableDetailUrl;
-
-#pragma mark - 门店
-
-/// 按条件查询门店
-+ (NSString *)getStoreSearchUrl;
 
 #pragma mark - 邀约
 

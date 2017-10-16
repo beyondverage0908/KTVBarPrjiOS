@@ -23,6 +23,7 @@ static NSString * const TOAST_PINZHUO_SUCCESS                       = @"已经�
 static NSString * const TOAST_GET_DATA_FAIL                         = @"获取数据失败";
 static NSString * const TOAST_CREATE_INVITE_FAIL                    = @"邀约创建失败，请重试";
 static NSString * const TOAST_CREATE_SUCCESS                        = @"创建成功";
+static NSString * const TOAST_GET_ORDER_FAIL                        = @"获取订单失败";
 
 
 // MBProgressHUD定义

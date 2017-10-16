@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "KTVOrder.h"
 
 @interface KTVOrderStatusCell : UITableViewCell
+
+@property (nonatomic, strong) KTVOrder *order;
 
 @end
