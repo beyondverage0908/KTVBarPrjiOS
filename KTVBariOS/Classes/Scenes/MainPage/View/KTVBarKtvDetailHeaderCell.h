@@ -12,7 +12,8 @@
 @interface KTVBarKtvDetailHeaderCell : UITableViewCell
 
 @property (nonatomic, strong) KTVStore * store;
+@property (nonatomic, strong) NSArray<KTVUser *> *invitorList;
 
-@property (nonatomic, copy) void (^callback)(void);
+@property (nonatomic, copy) void (^callback)(KTVStore *store);
 
 @end

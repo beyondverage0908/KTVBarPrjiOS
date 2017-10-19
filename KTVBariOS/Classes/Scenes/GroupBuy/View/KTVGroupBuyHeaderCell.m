@@ -57,6 +57,9 @@
 
 - (void)gotoYueAction:(UILabel *)sender {
     CLog(@"-- 在约的小伙伴有100人");
+    if (self.yueCallback) {
+        self.yueCallback(self.store);
+    }
 }
 
 #pragma mark - 设置值

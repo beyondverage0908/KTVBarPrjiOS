@@ -21,6 +21,7 @@
 #import "KTVDandianController.h"
 #import "KTVSelectedBeautyController.h"
 #import "KTVOrderUploadController.h"
+#import "KTVFriendDetailController.h"
 
 #import "KTVMainService.h"
 #import "KTVStore.h"
@@ -230,6 +231,11 @@
             vc.store = self.store;
             vc.groupbuy = self.groupbuy;
             vc.selectedActivitorList = self.selectedActivitorList; // 已经选中的暖场
+            [self.navigationController pushViewController:vc animated:YES];
+        };
+        cell.yueCallback = ^(KTVStore *store) {
+            KTVFriendDetailController *vc = (KTVFriendDetailController *)[UIViewController storyboardName:@"MePage" storyboardId:KTVStringClass(KTVFriendDetailController)];
+            vc.store = store;
             [self.navigationController pushViewController:vc animated:YES];
         };
         return cell;

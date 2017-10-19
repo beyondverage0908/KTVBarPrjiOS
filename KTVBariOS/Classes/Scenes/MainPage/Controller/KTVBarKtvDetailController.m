@@ -8,6 +8,7 @@
 //  酒吧，KTV店铺详情
 
 #import "KTVBarKtvDetailController.h"
+#import "KTVFriendDetailController.h"
 
 #import "KTVBarKtvDetailHeaderCell.h"
 #import "KTTimeFilterCell.h"
@@ -29,7 +30,7 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
-@property (strong, nonatomic) NSMutableArray *invitatorList;
+@property (strong, nonatomic) NSMutableArray<KTVUser *> *invitatorList;
 
 @end
 
@@ -78,12 +79,27 @@
     self.navigationItem.rightBarButtonItems = @[firstItem, secondItem];
 }
 
+// 分享
 - (void)firstRightBarItemAction:(id)sender {
     CLog(@"-->> 订单分享");
 }
 
+// 收藏
 - (void)secondRightBarItemAction:(id)sender {
-    CLog(@"-->> 订单分享");
+    CLog(@"-->> 订单收藏");
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    NSString *phone = [KTVCommon userInfo].phone;
+    if (phone && self.store.storeId) {
+        [params setObject:phone forKey:@"username"];
+        [params setObject:self.store.storeId forKey:@"storeId"];
+    }
+    [KTVMainService postUserCollect:params result:^(NSDictionary *result) {
+        if ([result[@"code"] isEqualToString:ktvCode]) {
+            [KTVToast toast:TOAST_COLLECT_SUCCESS];
+        } else {
+            [KTVToast toast:TOAST_COLLECT_FAIL];
+        }
+    }];
 }
 
 #pragma mark - 初始化
@@ -223,6 +239,12 @@
     if (indexPath.section == 0) {
         KTVBarKtvDetailHeaderCell *cell = (KTVBarKtvDetailHeaderCell *)[tableView dequeueReusableCellWithIdentifier:KTVStringClass(KTVBarKtvDetailHeaderCell)];
         cell.store = self.store;
+        cell.invitorList = self.invitatorList;
+        cell.callback = ^(KTVStore *store) {
+            KTVFriendDetailController *vc = (KTVFriendDetailController *)[UIViewController storyboardName:@"MePage" storyboardId:KTVStringClass(KTVFriendDetailController)];
+            vc.store = store;
+            [self.navigationController pushViewController:vc animated:YES];
+        };
         return cell;
     } else if (indexPath.section == 1) {
         if (indexPath.row == 0) {

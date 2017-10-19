@@ -53,12 +53,18 @@
     self.locationName.text = store.address.addressName;
 }
 
+- (void)setInvitorList:(NSArray<KTVUser *> *)invitorList {
+    _invitorList = invitorList;
+    self.yuepaoNumber.text = [NSString stringWithFormat:@"在约的小伙伴%@人，点击查看",@([_invitorList count])];
+    [self.yuepaoNumber addUnderlineStyle];
+}
+
 #pragma mark - 事件
 
 - (void)gotoYuePaoAction:(UIButton *)btn {
     CLog(@"-- 在约的小伙伴有45人");
     if (self.callback) {
-        self.callback();
+        self.callback(self.store);
     }
 }
 

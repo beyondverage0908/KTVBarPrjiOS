@@ -14,6 +14,9 @@
 #import "KTVBarKtvDetailController.h"
 #import "KTVGroupBuyDetailController.h"
 
+// 测试
+#import "KTVFriendDetailController.h"
+
 #import "KTVMainService.h"
 #import "KTVStoreContainer.h"
 
@@ -305,6 +308,10 @@
 
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index {
     CLog(@"--%@--酒吧首页--", @(index));
+    KTVFriendDetailController *vc = (KTVFriendDetailController *)[UIViewController storyboardName:@"MePage" storyboardId:KTVStringClass(KTVFriendDetailController)];
+    [self.navigationController pushViewController:vc animated:YES];
+//        KTVShareFriendController *vc = (KTVShareFriendController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVShareFriendController"];
+//        [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end

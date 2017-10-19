@@ -17,5 +17,6 @@
 @property (nonatomic, strong) KTVGroupbuy *groupbuy;
 
 @property (nonatomic, copy) void (^bookedGroupbuyCallback)(void);
+@property (nonatomic, copy) void (^yueCallback)(KTVStore *store);   // 在约的小伙伴xx人
 
 @end

@@ -24,6 +24,11 @@ static NSString * const TOAST_GET_DATA_FAIL                         = @"获取�
 static NSString * const TOAST_CREATE_INVITE_FAIL                    = @"邀约创建失败，请重试";
 static NSString * const TOAST_CREATE_SUCCESS                        = @"创建成功";
 static NSString * const TOAST_GET_ORDER_FAIL                        = @"获取订单失败";
+static NSString * const TOAST_GET_ORDER_EMPTY                       = @"暂无该订单";
+static NSString * const TOAST_APPLY_STORE_FILE                      = @"提交申请入驻商家失败";
+static NSString * const TOAST_APPLY_STORE_SUCCESS                   = @"已经提交申请入驻，后续商家审核";
+static NSString * const TOAST_COLLECT_SUCCESS                       = @"收藏成功";
+static NSString * const TOAST_COLLECT_FAIL                          = @"收藏失败";
 
 
 // MBProgressHUD定义

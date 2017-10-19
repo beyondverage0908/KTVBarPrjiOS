@@ -54,4 +54,17 @@ typedef void(^ResponseSuccess)(NSDictionary *result);
 /// 邀约大厅数据
 + (void)postNearInvite:(NSDictionary *)params result:(ResponseSuccess)responseResult;
 
+/// 用户申请入驻
++ (void)postUserEnter:(NSDictionary *)params result:(ResponseSuccess)responseResult;
+
+/// 同意用户入驻
++ (void)postAgreeUserEnter:(NSDictionary *)params result:(ResponseSuccess)responseResult;
+
+/// 添加收藏
++ (void)postUserCollect:(NSDictionary *)params result:(ResponseSuccess)responseResult;
+
+/// 获取收藏
++ (void)getUserCollect:(NSString *)mobile result:(ResponseSuccess)responseResult;
+
+
 @end

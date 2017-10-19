@@ -112,6 +112,9 @@
                     KTVOrder *order = [KTVOrder yy_modelWithDictionary:dic];
                     [self.allOrderList addObject:order];
                 }
+                if (![self.allOrderList count]) {
+                    [KTVToast toast:TOAST_GET_ORDER_EMPTY];
+                }
             }
                 break;
             case -1:
@@ -119,6 +122,9 @@
                 for (NSDictionary *dic in result[@"data"]) {
                     KTVOrder *order = [KTVOrder yy_modelWithDictionary:dic];
                     [self.allWaitPayList addObject:order];
+                }
+                if (![self.allWaitPayList count]) {
+                    [KTVToast toast:TOAST_GET_ORDER_EMPTY];
                 }
             }
                 break;
@@ -128,6 +134,9 @@
                     KTVOrder *order = [KTVOrder yy_modelWithDictionary:dic];
                     [self.allWaitUseList addObject:order];
                 }
+                if (![self.allWaitUseList count]) {
+                    [KTVToast toast:TOAST_GET_ORDER_EMPTY];
+                }
             }
                 break;
             case 5:
@@ -135,6 +144,9 @@
                 for (NSDictionary *dic in result[@"data"]) {
                     KTVOrder *order = [KTVOrder yy_modelWithDictionary:dic];
                     [self.allWaitCommentList addObject:order];
+                }
+                if (![self.allWaitCommentList count]) {
+                    [KTVToast toast:TOAST_GET_ORDER_EMPTY];
                 }
             }
                 break;

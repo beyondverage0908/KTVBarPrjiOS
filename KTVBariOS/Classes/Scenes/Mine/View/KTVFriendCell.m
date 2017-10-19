@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *funcBtn; // 更具类型区分按钮的功能，和图片的现实
 @property (weak, nonatomic) IBOutlet UILabel *ageLabel;
 @property (weak, nonatomic) IBOutlet UILabel *tipLabel;
+@property (weak, nonatomic) IBOutlet UILabel *statusLabel;
 
 @end
 
@@ -23,7 +24,10 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-
+    
+    self.statusLabel.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(statusTapAction:)];
+    [self.statusLabel addGestureRecognizer:tap];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -41,6 +45,20 @@
     }
 }
 
+- (void)setUser:(KTVUser *)user {
+    _user = user;
+    
+    self.nicknameLabel.text = _user.nickName ? _user.nickName : _user.username;
+    self.ageLabel.text = [NSString stringWithFormat:@"%@岁", @(_user.age)];
+    self.tipLabel.text = _user.userDetail.todayMood;
+    if (_user.inviteStatus == 2) {
+        self.statusLabel.text = @"他正在拼桌，点击查看";
+    } else {
+        self.statusLabel.text = @"";
+    }
+    [self.statusLabel addUnderlineStyle];
+}
+
 - (IBAction)btnAction:(UIButton *)sender {
     if (_friendType == FriendChatType) {
         CLog(@"-->> 聊天");
@@ -48,4 +66,12 @@
         CLog(@"-->> 添加好友");
     }
 }
+
+- (void)statusTapAction:(UITapGestureRecognizer *)tap {
+    CLog(@"-->> 他正在拼桌");
+    if (self.pinzuoCallback) {
+        self.pinzuoCallback(self.user);
+    }
+}
+
 @end

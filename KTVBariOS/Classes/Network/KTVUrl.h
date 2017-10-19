@@ -125,4 +125,20 @@
 /// 邀约大厅数据
 + (NSString *)getNearInviteUrl;
 
+#pragma mark - 用户入驻
+
+/// 用户申请入驻
++ (NSString *)getUserEnterUrl;
+
+/// 同意用户入驻
++ (NSString *)getAgreeUserEnterUrl;
+
+#pragma mark - 收藏
+
+/// 添加收藏
++ (NSString *)getUserCollectUrl;
+
+/// 获取收藏
++ (NSString *)getAlreadyCollectUrl;
+
 @end

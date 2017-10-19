@@ -18,6 +18,7 @@
 #import "KTVOrderConfirmController.h"
 #import "KTVShareFriendController.h"
 #import "KTVSelectedBeautyController.h"
+#import "KTVFriendDetailController.h"
 
 #import "KTVMainService.h"
 
@@ -29,6 +30,7 @@
 @property (strong, nonatomic) NSMutableArray<KTVUser *> *selectedActivitorList; // 选中的暖场人
 @property (strong, nonatomic) NSMutableArray<KTVUser *> *activitorList; // 暖场人列表
 @property (assign, nonatomic) NSInteger activitorPage;      // 分页获取暖场人
+@property (strong, nonatomic) NSMutableArray<KTVUser *> * invitatorList;
 
 @end
 
@@ -46,6 +48,8 @@
     
     [self initData];
     [self initUI];
+    
+    [self loadStoreInvitators];
     // 下载暖场人
     [self loadPageStoreActivitors];
 }
@@ -60,6 +64,15 @@
     [super viewWillDisappear:animated];
 }
 
+#pragma mark - 重写
+
+- (NSMutableArray<KTVUser *> *)invitatorList {
+    if (!_invitatorList) {
+        _invitatorList = [NSMutableArray array];
+    }
+    return _invitatorList;
+}
+
 #pragma mark - 初始化
 
 - (void)initUI {
@@ -72,6 +85,21 @@
 }
 
 #pragma mark - 网络
+
+/// 获取门店在约人数
+- (void)loadStoreInvitators {
+    [KTVMainService getStoreInvitators:self.store.storeId result:^(NSDictionary *result) {
+        if (![result[@"code"] isEqualToString:ktvCode]) {
+            return;
+        }
+        
+        for (NSDictionary *dict in result[@"data"]) {
+            KTVUser *user = [KTVUser yy_modelWithDictionary:dict];
+            [self.invitatorList addObject:user];
+        }
+        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
+    }];
+}
 
 /// 分页获取门店暖场人
 - (void)loadPageStoreActivitors {
@@ -311,8 +339,10 @@
     if (indexPath.section == 0) {
         KTVBarKtvDetailHeaderCell *cell = (KTVBarKtvDetailHeaderCell *)[tableView dequeueReusableCellWithIdentifier:KTVStringClass(KTVBarKtvDetailHeaderCell)];
         cell.store = self.store;
-        cell.callback = ^() {
-            KTVShareFriendController *vc = (KTVShareFriendController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVShareFriendController"];
+        cell.invitorList = self.invitatorList;
+        cell.callback = ^(KTVStore *store) {
+            KTVFriendDetailController *vc = (KTVFriendDetailController *)[UIViewController storyboardName:@"MePage" storyboardId:KTVStringClass(KTVFriendDetailController)];
+            vc.store = store;
             [self.navigationController pushViewController:vc animated:YES];
         };
         return cell;

@@ -153,4 +153,28 @@
     return @"/api/userInvite/near";
 }
 
+#pragma mark - 用户入驻
+
+/// 用户申请入驻
++ (NSString *)getUserEnterUrl {
+    return @"/api/userEnter";
+}
+
+/// 同意用户入驻
++ (NSString *)getAgreeUserEnterUrl {
+    return @"/api/agreeUserEnter";
+}
+
+#pragma mark - 收藏
+
+/// 添加收藏
++ (NSString *)getUserCollectUrl {
+    return @"/api/userCollect";
+}
+
+/// 获取收藏
++ (NSString *)getAlreadyCollectUrl {
+    return @"/api/userCollect/";
+}
+
 @end

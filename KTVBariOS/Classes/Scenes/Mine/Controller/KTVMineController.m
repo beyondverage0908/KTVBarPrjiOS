@@ -12,6 +12,7 @@
 #import "KTVMineFriendController.h"
 #import "KTVOrderStatusListController.h"
 #import "KTVStartYueController.h"
+#import "KTVApplyStoreController.h"
 
 #import "KTVUserHeaderCell.h"
 #import "KTVUserInfoCell.h"
@@ -66,6 +67,9 @@
         } else if (indexPath.row == 3) {
             CLog(@"-- 查看个人信息 下一页");
             KTVMineFriendController *vc = (KTVMineFriendController *)[UIViewController storyboardName:@"MePage" storyboardId:@"KTVMineFriendController"];
+            [self.navigationController pushViewController:vc animated:YES];
+        } else if (indexPath.row == 6) {
+            KTVApplyStoreController *vc = (KTVApplyStoreController *)[UIViewController storyboardName:@"MePage" storyboardId:KTVStringClass(KTVApplyStoreController)];
             [self.navigationController pushViewController:vc animated:YES];
         }
     }
