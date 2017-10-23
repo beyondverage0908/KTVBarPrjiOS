@@ -10,6 +10,7 @@
 #import <Photos/Photos.h>
 #import "KTVMainService.h"
 #import "UIImage+extension.h"
+#import "KTVPickerView.h"
 
 @interface KTVApplyStoreController ()<UINavigationControllerDelegate,UIImagePickerControllerDelegate, UIImagePickerControllerDelegate>
 
@@ -22,6 +23,7 @@
 
 @property (assign, nonatomic) NSInteger pickNumber;
 @property (strong, nonatomic) NSMutableDictionary *params;
+@property (strong, nonatomic) NSNumber *storeType;
 
 @end
 
@@ -88,6 +90,10 @@
     [self showAlterSheet];
 }
 
+- (IBAction)selectStoreType:(UIButton *)sender {
+    [self pickDataSource:@[@"酒吧", @"KTV"] sender:sender];
+}
+
 - (IBAction)submitAction:(UIButton *)sender {
     CLog(@"--->>> 申请入驻商家提交");
     
@@ -103,7 +109,9 @@
     if (![KTVUtil isNullString:self.addressTextField.text]) {
         self.params[@"addressName"] = self.addressTextField.text;
     }
-    self.params[@"storeType"] = [NSNumber numberWithInteger:0];
+    if (self.storeType) {
+        self.params[@"storeType"] = self.storeType;
+    }
     self.params[@"latitude"] = @"121.48799949";
     self.params[@"longitude"] = @"31.24914171";
     
@@ -114,7 +122,7 @@
     
     [KTVMainService postUserEnter:self.params result:^(NSDictionary *result) {
         if (![result[@"code"] isEqualToString:ktvCode]) {
-            [KTVToast toast:TOAST_APPLY_STORE_FILE];
+            [KTVToast toast:result[@"detail"]];
             return;
         }
         [KTVToast toast:TOAST_APPLY_STORE_SUCCESS];
@@ -143,6 +151,23 @@
 }
 
 #pragma mark - 封装
+
+- (void)pickDataSource:(NSArray<NSString *> *)dataSource sender:(UIButton *)sender {
+    UIView *superView = [UIApplication sharedApplication].keyWindow;
+    KTVPickerView *pv = [[KTVPickerView alloc] initWithSelectedCallback:^(NSString *selectedTitle) {
+        [sender setTitle:selectedTitle forState:UIControlStateNormal];
+        if ([selectedTitle isEqualToString:@"酒吧"]) {
+            self.storeType = [NSNumber numberWithInteger:0];
+        } else if ([selectedTitle isEqualToString:@"KTV"]) {
+            self.storeType = [NSNumber numberWithInteger:1];
+        }
+    }];
+    [superView addSubview:pv];
+    [pv mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(superView);
+    }];
+    pv.dataSource = dataSource;
+}
 
 // 拍照处理
 - (void)takePhotoAction {

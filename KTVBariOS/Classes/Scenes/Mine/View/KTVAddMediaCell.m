@@ -11,7 +11,7 @@
 @interface KTVAddMediaCell()
 
 @property (strong, nonatomic) UIView *horiContentView;
-@property (strong, nonatomic) NSMutableArray *photoList;
+
 @property (strong, nonatomic) NSMutableArray *vedioList;
 
 @end
@@ -20,11 +20,8 @@
 
 #pragma mark - 重写
 
-- (NSMutableArray *)photoList {
-    if (!_photoList) {
-        _photoList = [NSMutableArray array];
-    }
-    return _photoList;
+- (void)setPhotoList:(NSMutableArray *)photoList {
+    _photoList = photoList;
 }
 
 - (NSMutableArray *)vedioList {
@@ -36,8 +33,9 @@
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        for (NSInteger i = 0; i < 10; i++) {
-            [self.photoList addObject:@(i).stringValue];
+        if (!self.photoList) {
+            self.photoList = [NSMutableArray arrayWithCapacity:10];
+            [self.photoList addObject:@"1"];
         }
         
         UIImageView *bgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"mainpage_all_bg_line"]];

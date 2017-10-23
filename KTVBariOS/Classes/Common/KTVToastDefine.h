@@ -18,6 +18,7 @@ static NSString * const TOAST_NOMORE_ACTIVITORS                     = @"没有�
 static NSString * const TOAST_PAY_FAIL                              = @"支付失败";
 static NSString * const TOAST_LOGIN_SUCCESS                         = @"登陆成功";
 static NSString * const TOAST_CANT_PINZHUO_DETAIL                   = @"无法获取拼座详情";
+static NSString * const TOAST_ENTER_PINZHUO_SUCCESS                 = @"加入拼桌成功";
 static NSString * const TOAST_EMPTY_INFO                            = @"请补全信息";
 static NSString * const TOAST_PINZHUO_SUCCESS                       = @"已经发布拼桌成功";
 static NSString * const TOAST_GET_DATA_FAIL                         = @"获取数据失败";
@@ -29,6 +30,8 @@ static NSString * const TOAST_APPLY_STORE_FILE                      = @"提交�
 static NSString * const TOAST_APPLY_STORE_SUCCESS                   = @"已经提交申请入驻，后续商家审核";
 static NSString * const TOAST_COLLECT_SUCCESS                       = @"收藏成功";
 static NSString * const TOAST_COLLECT_FAIL                          = @"收藏失败";
+static NSString * const TOAST_NO_USEING_ORDER                       = @"没有未使用的订单，不能进行拼桌活动";
+static NSString * const TOAST_SAVE_USERINFO_SUCCESS                 = @"修改信息成功";
 
 
 // MBProgressHUD定义

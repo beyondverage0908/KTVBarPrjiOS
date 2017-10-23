@@ -7,6 +7,7 @@
 //
 
 #import "KTVPinZhuoDetailController.h"
+#import "KTVMineFriendController.h"
 
 #import "KTVPZUserHeaderCell.h"
 #import "KTVPZStoreCell.h"
@@ -81,6 +82,22 @@
     }];
 }
 
+- (void)loadEnrollShareTableWith:(NSString *)shareTableId {
+    NSString *username = [KTVCommon userInfo].phone;
+    if (!username) {
+        return;
+    }
+    NSDictionary *param = @{@"shareTableId" : shareTableId,
+                            @"username" : username};
+    [KTVMainService postShareTableEnroll:param result:^(NSDictionary *result) {
+        if ([result[@"code"] isEqualToString:ktvCode]) {
+            [KTVToast toast:TOAST_ENTER_PINZHUO_SUCCESS];
+        } else {
+            [KTVToast toast:result[@"detail"]];
+        }
+    }];
+}
+
 #pragma mark - UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -118,6 +135,13 @@
         cell.pzDetail = detail;
         cell.reportCallback = ^(KTVPinZhuoDetail *pzDetail) {
             CLog(@"-->> 点击了去报名");
+            [self loadEnrollShareTableWith:pzDetail.pinZhuoId];
+        };
+        cell.enrollCallback = ^(KTVPinZhuoDetail *pzDetail) {
+            // 去用户列表页
+            KTVMineFriendController *vc = (KTVMineFriendController *)[UIViewController storyboardName:@"MePage" storyboardId:@"KTVMineFriendController"];
+            vc.userList = pzDetail.userList;
+            [self.navigationController pushViewController:vc animated:YES];
         };
         return cell;
     }

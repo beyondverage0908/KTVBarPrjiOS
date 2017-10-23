@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.1.1</string>
+	<string>1.1.2</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -68,7 +68,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>2</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>weibosdk</string>
@@ -96,16 +96,16 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>需要使用您的相机进行拍照</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>需要访问您的位置信息，为您提供更好的服务</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>需要访问您的位置信息，为您提供更好的服务1</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>需要访问您的位置信息，为您提供更好的服务2</string>
-    <key>NSCameraUsageDescription</key>
-    <string>需要使用您的相机进行拍照</string>
-    <key>NSPhotoLibraryUsageDescription</key>
-    <string>需要访问您的相册选择照片</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>需要访问您的相册选择照片</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>location</string>

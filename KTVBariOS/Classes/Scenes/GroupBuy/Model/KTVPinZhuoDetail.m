@@ -16,4 +16,9 @@
              @"pzDescription" : @"description"};
 }
 
++ (NSDictionary *)modelContainerPropertyGenericClass {
+    // value should be Class or Class name.
+    return @{@"userList" : [KTVUser class]};
+}
+
 @end

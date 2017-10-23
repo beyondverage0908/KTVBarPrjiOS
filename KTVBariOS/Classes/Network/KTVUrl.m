@@ -14,9 +14,17 @@
     return @"http://119.23.148.104";
 }
 
+#pragma mark - 用户
+
 + (NSString *)getUserInfoUrl {
     return @"/api/login/user/";
 }
+
++ (NSString *)getSaveUserDetailUrl {
+    return @"/api/login/saveUserDetail";
+}
+
+#pragma mark - 登陆
 
 + (NSString *)getIdentifyingCodeUrl {
     return @"/api/login/user/getIdentifyingCode";
@@ -122,6 +130,8 @@
     return @"/api/store/comment";
 }
 
+#pragma mark - 拼桌
+
 + (NSString *)getCreatShareTableUrl {
     return @"/api/shareTable";
 }
@@ -132,6 +142,10 @@
 
 + (NSString *)getShareTableDetailUrl {
     return @"/api/shareTable/";
+}
+
++ (NSString *)getShareTableEnrollUrl {
+    return @"/api/shareTable/enroll";
 }
 
 + (NSString *)getStoreSearchUrl {

@@ -10,4 +10,6 @@
 
 @interface KTVDynamicUserBaseCell : UITableViewCell
 
+@property (nonatomic, copy) void (^userInfoCallback)(NSDictionary *userInfo);
+
 @end

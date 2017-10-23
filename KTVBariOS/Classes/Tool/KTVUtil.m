@@ -9,10 +9,10 @@
 #import "KTVUtil.h"
 #import <SystemConfiguration/SystemConfiguration.h>
 #include <netdb.h>
+#import <sys/utsname.h>
 //#include <sys/types.h>
 //#include <sys/sysctl.h>
 //#import <CommonCrypto/CommonDigest.h>
-//#import <sys/utsname.h>
 
 @implementation KTVUtil
 
@@ -268,6 +268,81 @@
         return [self imageFromImage:image inRect:CGRectMake((image.size.width -width)/2, 0, width, height)];
     }
     return nil;
+}
+
+#pragma mark - 版本相关
+
++ (NSString *)appName {
+    NSString *appName = [NSString stringWithFormat:@"%@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleDisplayName"]];
+    return appName;
+}
+
++ (NSString *)appVersion {
+    return [NSString stringWithFormat:@"%@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
+}
+
++ (NSString *)osVersion {
+    return [NSString stringWithFormat:@"%@", [[UIDevice currentDevice] systemVersion]];
+}
+
++ (NSString *)osName {
+    return [[UIDevice currentDevice] systemName];
+}
+
++ (NSString *)osNameVersion {
+    return [NSString stringWithFormat:@"%@%@", [self osName], [self osVersion]];
+}
+
++ (NSString *)idfv {
+    NSString *idfv = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+    return idfv;
+}
+
++ (NSString *)uuid {
+    CFUUIDRef theUUID = CFUUIDCreate(NULL);
+    CFStringRef string = CFUUIDCreateString(NULL, theUUID);
+    CFRelease(theUUID);
+    return (__bridge_transfer NSString *)string ;
+}
+
++ (NSString *)bundleIdentifier {
+    NSString *bundleIdentifer = [NSString stringWithFormat:@"%@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"]];
+    return bundleIdentifer;
+}
+
++ (NSString *)phoneModel {
+    return [self deviceModelName];
+}
+
+// 需要#import <sys/utsname.h>
++ (NSString *)deviceModelName {
+    struct utsname systemInfo;
+    uname(&systemInfo);
+    NSString *deviceModel = [NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding];
+    
+    //iPhone 系列
+    if ([deviceModel isEqualToString:@"iPhone1,1"])    return @"iPhone 1G";
+    if ([deviceModel isEqualToString:@"iPhone1,2"])    return @"iPhone 3G";
+    if ([deviceModel isEqualToString:@"iPhone2,1"])    return @"iPhone 3GS";
+    if ([deviceModel isEqualToString:@"iPhone3,1"])    return @"iPhone 4";
+    if ([deviceModel isEqualToString:@"iPhone3,2"])    return @"Verizon iPhone 4";
+    if ([deviceModel isEqualToString:@"iPhone4,1"])    return @"iPhone 4S";
+    if ([deviceModel isEqualToString:@"iPhone5,1"])    return @"iPhone 5";
+    if ([deviceModel isEqualToString:@"iPhone5,2"])    return @"iPhone 5";
+    if ([deviceModel isEqualToString:@"iPhone5,3"])    return @"iPhone 5C";
+    if ([deviceModel isEqualToString:@"iPhone5,4"])    return @"iPhone 5C";
+    if ([deviceModel isEqualToString:@"iPhone6,1"])    return @"iPhone 5S";
+    if ([deviceModel isEqualToString:@"iPhone6,2"])    return @"iPhone 5S";
+    if ([deviceModel isEqualToString:@"iPhone7,1"])    return @"iPhone 6 Plus";
+    if ([deviceModel isEqualToString:@"iPhone7,2"])    return @"iPhone 6";
+    if ([deviceModel isEqualToString:@"iPhone8,1"])    return @"iPhone 6s";
+    if ([deviceModel isEqualToString:@"iPhone8,2"])    return @"iPhone 6s Plus";
+    if ([deviceModel isEqualToString:@"iPhone9,1"])    return @"iPhone 7 (CDMA)";
+    if ([deviceModel isEqualToString:@"iPhone9,3"])    return @"iPhone 7 (GSM)";
+    if ([deviceModel isEqualToString:@"iPhone9,2"])    return @"iPhone 7 Plus (CDMA)";
+    if ([deviceModel isEqualToString:@"iPhone9,4"])    return @"iPhone 7 Plus (GSM)";
+    
+    return deviceModel;
 }
 
 @end

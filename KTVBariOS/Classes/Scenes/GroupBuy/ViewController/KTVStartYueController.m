@@ -43,8 +43,6 @@
     [self.view addGestureRecognizer:tap];
     
     [self initData];
-    
-    [self loadSearchOrder];
 }
 
 - (void)setupUI {
@@ -72,19 +70,7 @@
 
 #pragma mark - 网络
 
-/// 查询订单
-- (void)loadSearchOrder {
-    NSString *phone = self.phone ? self.phone : @"18516133629";
-    
-    NSDictionary *params = @{@"username" : phone, @"orderStatus" : @"1"};
-    [KTVMainService postSearchOrder:params result:^(NSDictionary *result) {
-        if (![result[@"code"] isEqualToString:ktvCode]) {
-            return;
-        }
-        
-        CLog(@"-->> %@", result);
-    }];
-}
+
 
 #pragma mark - 封装
 
@@ -119,7 +105,22 @@
 
 - (IBAction)selectionTypeAction:(UIButton *)sender {
     CLog(@"-->> 拼桌选择类型");
-    NSArray *dataSource = @[@"酒吧", @"KTV"];
+    NSMutableArray *dataSource = [NSMutableArray arrayWithCapacity:2];
+    NSInteger i = -1;
+    NSInteger j = -1;
+    for (KTVStore *store in self.storeList) {
+        if (store.storeType == 0) {
+            i = 1;
+        } else if (store.storeType == 1) {
+            j = 1;
+        }
+    }
+    if (i == 1) {
+        [dataSource addObject:@"酒吧"];
+    }
+    if (j == 1) {
+        [dataSource addObject:@"KTV"];
+    }
     [self pickDataSource:dataSource sender:sender];
 }
 

@@ -12,11 +12,15 @@
 #import "KTVDynamicUserBaseCell.h"
 #import "KTVAddMediaCell.h"
 
+#import "KTVMainService.h"
+
 #import "KTVTableHeaderView.h"
 
 @interface KTVPublishDynamicController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+
+@property (strong, nonatomic) NSMutableDictionary *userInfo;
 
 @end
 
@@ -28,11 +32,57 @@
     self.tableView.backgroundColor = [UIColor ktvBG];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    
+    if (@available(iOS 11.0, *)) {
+        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }
+    
+    [self initData];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self clearNavigationbar:YES];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self clearNavigationbar:NO];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
+
+#pragma mark - 初始化
+
+- (void)initData {
+    self.userInfo = [NSMutableDictionary dictionary];
+    
+    if ([KTVCommon userInfo].phone) {
+        [self.userInfo setObject:[KTVCommon userInfo].phone forKey:@"username"];
+    }
+}
+
+#pragma mark - 网络
+
+- (void)submitUserDetail {
+    [KTVMainService postSaveUserDetail:self.userInfo result:^(NSDictionary *result) {
+        if ([result[@"code"] isEqualToString:ktvCode]) {
+            [KTVToast toast:TOAST_SAVE_USERINFO_SUCCESS];
+        } else {
+            [KTVToast toast:result[@"detail"]];
+        }
+    }];
+}
+
+#pragma mark - 事件
+
+- (IBAction)submitAction:(UIButton *)sender {
+    CLog(@"-->> 提交");
+    [self submitUserDetail];
+}
+
 
 #pragma mark - UITableViewDataSource
 
@@ -50,6 +100,7 @@
         return cell;
     } else if (indexPath.section == 1) {
         KTVAddMediaCell *cell = [[KTVAddMediaCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"KTVAddMediaCell"];
+        cell.photoList = [NSMutableArray arrayWithArray:@[@"1", @"2", @"3"]];
         return cell;
     } else if (indexPath.section == 2) {
         KTVAddMediaCell *cell = [[KTVAddMediaCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"KTVAddMediaCell"];
@@ -59,6 +110,9 @@
         return cell;
     } else if (indexPath.section == 4) {
         KTVDynamicUserBaseCell *cell = [tableView dequeueReusableCellWithIdentifier:KTVStringClass(KTVDynamicUserBaseCell)];
+        cell.userInfoCallback = ^(NSDictionary *userInfo) {
+            [self.userInfo setObject:userInfo forKey:@"userDetail"];
+        };
         return cell;
     }
     return [UITableViewCell new];

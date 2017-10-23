@@ -14,9 +14,13 @@
 #import "KTVStartYueController.h"
 #import "KTVApplyStoreController.h"
 #import "KTVPublishDynamicController.h"
+#import "KTVSettingController.h"
 
 #import "KTVUserHeaderCell.h"
 #import "KTVUserInfoCell.h"
+
+#import "KTVMainService.h"
+#import "KTVStore.h"
 
 
 @interface KTVMineController ()<UITableViewDelegate, UITableViewDataSource, KTVUserHeaderCellDelegate>
@@ -24,6 +28,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (nonatomic, strong) NSArray *userInfoArray;
+@property (nonatomic, strong) NSMutableArray<KTVStore *> *storeList;
 
 @end
 
@@ -38,10 +43,38 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.backgroundColor = [UIColor ktvBG];
+    
+    [self loadSearchOrder];
 }
 
 - (void)setupData {
     self.userInfoArray = @[@"我的消息", @"我的订单", @"发起拼桌活动", @"我的好友", @"发布动态", @"我的收藏", @"申请入驻成为商家", @"设置"];
+}
+
+- (NSMutableArray<KTVStore *> *)storeList {
+    if (!_storeList) {
+        _storeList = [NSMutableArray array];
+    }
+    return _storeList;
+}
+
+#pragma mark - 网络
+
+/// 查询订单
+- (void)loadSearchOrder {
+    NSString *phone = [KTVCommon userInfo].phone;
+    
+    NSDictionary *params = @{@"username" : phone, @"orderStatus" : @"1"};
+    [KTVMainService postSearchOrder:params result:^(NSDictionary *result) {
+        if (![result[@"code"] isEqualToString:ktvCode]) {
+            return;
+        }
+        for (NSDictionary *dic in result[@"data"]) {
+            NSDictionary *storeDic = dic[@"store"];
+            KTVStore *store = [KTVStore yy_modelWithDictionary:storeDic];
+            [self.storeList addObject:store];
+        }
+    }];
 }
 
 
@@ -63,6 +96,10 @@
             [self.navigationController pushViewController:vc animated:YES];
         } else if (indexPath.row == 2) {
             // 发起拼桌活动
+            if (![self.storeList count]) {
+                [KTVToast toast:TOAST_NO_USEING_ORDER];
+                return;
+            }
             KTVStartYueController *vc = (KTVStartYueController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVStartYueController"];
             [self.navigationController pushViewController:vc animated:YES];
         } else if (indexPath.row == 3) {
@@ -70,11 +107,15 @@
             KTVMineFriendController *vc = (KTVMineFriendController *)[UIViewController storyboardName:@"MePage" storyboardId:@"KTVMineFriendController"];
             [self.navigationController pushViewController:vc animated:YES];
         } else if (indexPath.row == 4) {
+            // 发布动态
             KTVPublishDynamicController *vc = (KTVPublishDynamicController *)[UIViewController storyboardName:@"MePage" storyboardId:KTVStringClass(KTVPublishDynamicController)];
             [self.navigationController pushViewController:vc animated:YES];
         }
         else if (indexPath.row == 6) {
             KTVApplyStoreController *vc = (KTVApplyStoreController *)[UIViewController storyboardName:@"MePage" storyboardId:KTVStringClass(KTVApplyStoreController)];
+            [self.navigationController pushViewController:vc animated:YES];
+        } else if (indexPath.row == 7) {
+            KTVSettingController *vc = (KTVSettingController *)[UIViewController storyboardName:@"MePage" storyboardId:KTVStringClass(KTVSettingController)];
             [self.navigationController pushViewController:vc animated:YES];
         }
     }
@@ -137,7 +178,10 @@
 
 - (void)toseeMineInfo:(NSDictionary *)info {
     CLog(@"-- 查看个人信息");
-    KTVUserInfoController *vc = (KTVUserInfoController *)[UIViewController storyboardName:@"MePage" storyboardId:@"KTVUserInfoController"];
+//    KTVUserInfoController *vc = (KTVUserInfoController *)[UIViewController storyboardName:@"MePage" storyboardId:@"KTVUserInfoController"];
+//    [self.navigationController pushViewController:vc animated:YES];
+    // 个人信息
+    KTVPublishDynamicController *vc = (KTVPublishDynamicController *)[UIViewController storyboardName:@"MePage" storyboardId:KTVStringClass(KTVPublishDynamicController)];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

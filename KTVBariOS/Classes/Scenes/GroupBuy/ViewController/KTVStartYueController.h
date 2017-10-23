@@ -10,10 +10,9 @@
 #import "KTVStore.h"
 
 @interface KTVStartYueController : KTVBaseViewController
-
-@property (nonatomic, strong) KTVStore *store;
-
 /// 查询条件-拼桌者电话号码
 @property (nonatomic, strong) NSString *phone;
+
+@property (nonatomic, strong) NSArray * storeList;
 
 @end

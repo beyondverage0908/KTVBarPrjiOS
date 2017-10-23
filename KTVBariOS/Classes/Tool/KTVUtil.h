@@ -51,4 +51,23 @@
  */
 + (UIImage *)clipImage:(UIImage *)image toRect:(CGSize)size;
 
+#pragma mark - 版本相关
+
+/// app的应用名称
++ (NSString *)appName;
+///  app 版本
++ (NSString *)appVersion;
+/// 系统版本
++ (NSString *)osVersion;
+/// 系统名字
++ (NSString *)osName;
+/// 版本和名字
++ (NSString *)osNameVersion;
+/// 获取开发厂商ID
++ (NSString *)idfv;
+/// 获取手机型号
++ (NSString *)phoneModel;
+/// App Bundle identifier
++ (NSString *)bundleIdentifier;
+
 @end

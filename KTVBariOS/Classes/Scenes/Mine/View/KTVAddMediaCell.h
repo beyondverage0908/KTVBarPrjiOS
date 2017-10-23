@@ -10,6 +10,8 @@
 
 @interface KTVAddMediaCell : UITableViewCell
 
+@property (strong, nonatomic) NSMutableArray *photoList;
+
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier;
 
 @end

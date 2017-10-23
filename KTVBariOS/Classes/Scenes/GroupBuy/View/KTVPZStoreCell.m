@@ -27,6 +27,10 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    
+    self.numberLabel.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(seeEnrollUserAction:)];
+    [self.numberLabel addGestureRecognizer:tap];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -41,10 +45,17 @@
     }
 }
 
+- (void)seeEnrollUserAction:(UIButton *)sender {
+    if (self.enrollCallback) {
+        self.enrollCallback(self.pzDetail);
+    }
+}
+
 - (void)setPzDetail:(KTVPinZhuoDetail *)pzDetail {
     _pzDetail = pzDetail;
     
-    self.numberLabel.text = [NSString stringWithFormat:@"%@人", pzDetail.limitPeople];
+    self.numberLabel.text = [NSString stringWithFormat:@"%@/%@", @(pzDetail.userList.count), pzDetail.limitPeople];
+    [self.numberLabel addUnderlineStyle];
     self.dielineLabel.text = pzDetail.endTime;
     self.moneyLabel.text = [NSString stringWithFormat:@"¥%@/人", pzDetail.consume];
 }

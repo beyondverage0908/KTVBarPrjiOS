@@ -7,7 +7,10 @@
 //
 
 #import "KTVBaseViewController.h"
+#import "KTVUser.h"
 
 @interface KTVMineFriendController : KTVBaseViewController
+
+@property (nonatomic, strong) NSArray<KTVUser *> * userList;
 
 @end

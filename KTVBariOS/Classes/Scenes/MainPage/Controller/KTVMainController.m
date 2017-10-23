@@ -109,10 +109,12 @@
         if ([result[@"code"] isEqualToString:ktvCode]) {
             NSDictionary *userinfo = result[@"data"];
             
-            for (NSString *key in userinfo.allKeys) {
-                NSString *value = [NSString stringWithFormat:@"%@", userinfo[key]];
-                if (value && value.length) {
-                    [KTVCommon setUserInfoKey:key infoValue:value];
+            if (![userinfo isKindOfClass:[NSNull class]]) {
+                for (NSString *key in userinfo.allKeys) {
+                    NSString *value = [NSString stringWithFormat:@"%@", userinfo[key]];
+                    if (value && value.length) {
+                        [KTVCommon setUserInfoKey:key infoValue:value];
+                    }
                 }
             }
         }

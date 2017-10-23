@@ -13,8 +13,15 @@
 /// 获取项目的域名
 + (NSString *)getDomainUrl;
 
+#pragma mark - 用户
+
 /// 获取用户信息
 + (NSString *)getUserInfoUrl;
+
+/// 保存用户详情
++ (NSString *)getSaveUserDetailUrl;
+
+#pragma mark - 登陆
 
 /// 获取验证码
 + (NSString *)getIdentifyingCodeUrl;
@@ -113,6 +120,9 @@
 
 /// 获取拼桌详情
 + (NSString *)getShareTableDetailUrl;
+
+/// 加入拼桌
++ (NSString *)getShareTableEnrollUrl;
 
 #pragma mark - 邀约
 
