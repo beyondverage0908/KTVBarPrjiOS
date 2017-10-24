@@ -169,6 +169,8 @@
     pv.dataSource = dataSource;
 }
 
+#pragma mark - 相机相册相关
+
 // 拍照处理
 - (void)takePhotoAction {
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {

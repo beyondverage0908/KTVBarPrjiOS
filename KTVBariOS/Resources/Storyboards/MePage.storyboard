@@ -2083,10 +2083,10 @@
                                                     <rect key="frame" x="18" y="131" width="339" height="83"/>
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DfZ-u3-vhR">
-                                                            <rect key="frame" x="30" y="15" width="53" height="53"/>
+                                                            <rect key="frame" x="15" y="6.5" width="70" height="70"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="height" constant="53" id="VT8-Dc-e5c"/>
-                                                                <constraint firstAttribute="width" constant="53" id="cud-bB-b3x"/>
+                                                                <constraint firstAttribute="height" constant="70" id="VT8-Dc-e5c"/>
+                                                                <constraint firstAttribute="width" constant="70" id="cud-bB-b3x"/>
                                                             </constraints>
                                                             <state key="normal" image="mine_apply_store"/>
                                                             <connections>
@@ -2094,10 +2094,10 @@
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7pX-Yr-UpD">
-                                                            <rect key="frame" x="143" y="15" width="53" height="53"/>
+                                                            <rect key="frame" x="134.5" y="6.5" width="70" height="70"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="53" id="Nel-Wx-2FO"/>
-                                                                <constraint firstAttribute="height" constant="53" id="yeh-I0-leN"/>
+                                                                <constraint firstAttribute="width" constant="70" id="Nel-Wx-2FO"/>
+                                                                <constraint firstAttribute="height" constant="70" id="yeh-I0-leN"/>
                                                             </constraints>
                                                             <state key="normal" image="mine_apply_store"/>
                                                             <connections>
@@ -2105,10 +2105,10 @@
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gNx-RH-y0z">
-                                                            <rect key="frame" x="256" y="15" width="53" height="53"/>
+                                                            <rect key="frame" x="254" y="6.5" width="70" height="70"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="53" id="0pZ-gg-s4p"/>
-                                                                <constraint firstAttribute="height" constant="53" id="TUJ-ZQ-UUV"/>
+                                                                <constraint firstAttribute="width" constant="70" id="0pZ-gg-s4p"/>
+                                                                <constraint firstAttribute="height" constant="70" id="TUJ-ZQ-UUV"/>
                                                             </constraints>
                                                             <state key="normal" image="mine_apply_store"/>
                                                             <connections>
@@ -2118,11 +2118,11 @@
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="trailing" secondItem="gNx-RH-y0z" secondAttribute="trailing" constant="30" id="1PC-xg-GVo"/>
+                                                        <constraint firstAttribute="trailing" secondItem="gNx-RH-y0z" secondAttribute="trailing" constant="15" id="1PC-xg-GVo"/>
                                                         <constraint firstItem="7pX-Yr-UpD" firstAttribute="centerX" secondItem="cRM-vC-ZO0" secondAttribute="centerX" id="8eP-yH-jTp"/>
                                                         <constraint firstItem="7pX-Yr-UpD" firstAttribute="centerY" secondItem="cRM-vC-ZO0" secondAttribute="centerY" id="EBy-78-Zkt"/>
                                                         <constraint firstItem="gNx-RH-y0z" firstAttribute="centerY" secondItem="cRM-vC-ZO0" secondAttribute="centerY" id="JZO-kf-ddk"/>
-                                                        <constraint firstItem="DfZ-u3-vhR" firstAttribute="leading" secondItem="cRM-vC-ZO0" secondAttribute="leading" constant="30" id="OrM-EH-QO4"/>
+                                                        <constraint firstItem="DfZ-u3-vhR" firstAttribute="leading" secondItem="cRM-vC-ZO0" secondAttribute="leading" constant="15" id="OrM-EH-QO4"/>
                                                         <constraint firstItem="DfZ-u3-vhR" firstAttribute="centerY" secondItem="cRM-vC-ZO0" secondAttribute="centerY" id="jmF-rQ-ktZ"/>
                                                     </constraints>
                                                 </view>
@@ -2648,12 +2648,6 @@
         <image name="user_info_placeholder" width="90" height="90"/>
         <namedColor name="ktvBGColor">
             <color red="0.13300000131130219" green="0.12200000137090683" blue="0.16099999845027924" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="ktvBGColor">
-            <color red="0.13300000131130219" green="0.12200000137090683" blue="0.16099999845027924" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="ktvRedColor">
-            <color red="0.96899998188018799" green="0.22400000691413879" blue="0.60000002384185791" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="ktvRedColor">
             <color red="0.96899998188018799" green="0.22400000691413879" blue="0.60000002384185791" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -10,33 +10,13 @@
 
 @interface KTVAddMediaCell()
 
-@property (strong, nonatomic) UIView *horiContentView;
-
-@property (strong, nonatomic) NSMutableArray *vedioList;
-
 @end
 
 @implementation KTVAddMediaCell
 
-#pragma mark - 重写
 
-- (void)setPhotoList:(NSMutableArray *)photoList {
-    _photoList = photoList;
-}
-
-- (NSMutableArray *)vedioList {
-    if (!_vedioList) {
-        _vedioList = [NSMutableArray array];
-    }
-    return _vedioList;
-}
-
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+- (instancetype)initWithMediaList:(NSArray *)mediaList style:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        if (!self.photoList) {
-            self.photoList = [NSMutableArray arrayWithCapacity:10];
-            [self.photoList addObject:@"1"];
-        }
         
         UIImageView *bgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"mainpage_all_bg_line"]];
         [self.contentView addSubview:bgView];
@@ -50,44 +30,69 @@
             make.edges.equalTo(self.contentView);
         }];
         
-        self.horiContentView = [[UIView alloc] init];
-        [scrollView addSubview:self.horiContentView];
-        [self.horiContentView mas_makeConstraints:^(MASConstraintMaker *make) {
+        UIView *horiContentView = [[UIView alloc] init];
+        [scrollView addSubview:horiContentView];
+        [horiContentView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.left.right.bottom.equalTo(scrollView);
             make.height.equalTo(scrollView);
+//            make.width.equalTo(scrollView);
         }];
+
         
         UIView *lastView = nil;
-        for (NSInteger i = 0; i < self.photoList.count; i++) {
+        for (NSInteger i = 0; i < mediaList.count + 1; i++) {
             UIView *itemView = [[UIView alloc] init];
-            [self.horiContentView addSubview:itemView];
-            itemView.layer.borderColor = [UIColor whiteColor].CGColor;
-            itemView.layer.borderWidth = 1.0;
+            [horiContentView addSubview:itemView];
             itemView.layer.cornerRadius = 3;
-            
+
             [itemView mas_makeConstraints:^(MASConstraintMaker *make) {
                 if (!lastView) {
-                    make.left.equalTo(self.horiContentView).offset(3);
+                    make.left.equalTo(horiContentView).offset(3);
                 } else {
                     make.left.equalTo(lastView.mas_right).offset(5);
                 }
-                make.width.height.equalTo(self.horiContentView.mas_height).multipliedBy(0.9);
-                make.centerY.equalTo(self.horiContentView.mas_centerY);
-                if (i == self.photoList.count - 1) {
-                    make.right.equalTo(self.horiContentView.mas_right).offset(-3);
+                make.width.height.equalTo(horiContentView.mas_height).multipliedBy(0.9);
+                make.centerY.equalTo(horiContentView.mas_centerY);
+                if (i == mediaList.count) {
+                    make.right.lessThanOrEqualTo(horiContentView.mas_right).offset(-3);
                 }
             }];
             lastView = itemView;
-            
-            UIButton *addImgBtn = [[UIButton alloc] init];
-            [itemView addSubview:addImgBtn];
-            [addImgBtn setBackgroundImage:[UIImage imageNamed:@"mine_apply_store"] forState:UIControlStateNormal];
-            [addImgBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.center.equalTo(itemView);
-            }];
+
+            if (i == 0) {
+                itemView.layer.borderColor = [UIColor whiteColor].CGColor;
+                itemView.layer.borderWidth = 1.0;
+                
+                UIButton *addImgBtn = [[UIButton alloc] init];
+                [itemView addSubview:addImgBtn];
+                [addImgBtn addTarget:self action:@selector(pickImageAction:) forControlEvents:UIControlEventTouchUpInside];
+                [addImgBtn setBackgroundImage:[UIImage imageNamed:@"mine_apply_store"] forState:UIControlStateNormal];
+                [addImgBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.width.and.height.equalTo(itemView).multipliedBy(0.8);
+                    make.center.equalTo(itemView);
+                }];
+            } else {
+                UIButton *addImgBtn = [[UIButton alloc] init];
+                [itemView addSubview:addImgBtn];
+                addImgBtn.layer.cornerRadius = 3;
+                [addImgBtn setImage:mediaList[i-1] forState:UIControlStateNormal];
+                [addImgBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.width.and.height.equalTo(itemView);
+                    make.center.equalTo(itemView);
+                }];
+            }
         }
     }
     return self;
+}
+
+#pragma mark - 事件
+
+- (void)pickImageAction:(UIButton *)btn {
+    CLog(@"-->> 上传图片");
+    if (self.pickImageCallback) {
+        self.pickImageCallback();
+    }
 }
 
 - (void)awakeFromNib {

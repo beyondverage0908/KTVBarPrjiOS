@@ -21,6 +21,16 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    
+    self.firstBtn.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.firstBtn.layer.borderWidth = 1.0;
+    self.firstBtn.layer.cornerRadius = 3;
+    self.secondBtn.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.secondBtn.layer.borderWidth = 1.0;
+    self.secondBtn.layer.cornerRadius = 3;
+    self.thirdBtn.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.thirdBtn.layer.borderWidth = 1.0;
+    self.thirdBtn.layer.cornerRadius = 3;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

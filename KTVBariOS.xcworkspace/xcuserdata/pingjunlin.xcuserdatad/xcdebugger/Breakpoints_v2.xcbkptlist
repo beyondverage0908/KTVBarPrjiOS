@@ -68,7 +68,7 @@
                   moduleName = "KTVBariOS"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/pingjunlin/Documents/KTVBariOS/KTVBariOS/Classes/Scenes/DatingFriend/Controller/KTVPublishDateController.m"
-                  timestampString = "530460340.30562"
+                  timestampString = "530548441.607564"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "175"
@@ -83,7 +83,7 @@
                   moduleName = "KTVBariOS"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/pingjunlin/Documents/KTVBariOS/KTVBariOS/Classes/Scenes/DatingFriend/Controller/KTVPublishDateController.m"
-                  timestampString = "530460340.309526"
+                  timestampString = "530548441.613108"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "176"
@@ -107,6 +107,20 @@
             endingLineNumber = "197"
             landmarkName = "-uploadRequestWithResquestMessage:success:failure:"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KTVBariOS/Classes/Scenes/Mine/View/KTVAddMediaCell.m"
+            timestampString = "530548441.290733"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "107"
+            endingLineNumber = "107">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

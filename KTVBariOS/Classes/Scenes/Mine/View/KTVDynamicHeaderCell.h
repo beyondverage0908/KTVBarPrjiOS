@@ -10,7 +10,8 @@
 
 @interface KTVDynamicHeaderCell : UITableViewCell
 
+@property (nonatomic, strong) UIImage * headerBgImage;
 
-
+@property (nonatomic, copy) void (^pickHeaderBgImageCallback)(void);
 
 @end

@@ -16,11 +16,17 @@
 
 #import "KTVTableHeaderView.h"
 
-@interface KTVPublishDynamicController ()<UITableViewDelegate, UITableViewDataSource>
+#import "UIImage+extension.h"
+
+@interface KTVPublishDynamicController ()<UITableViewDelegate, UITableViewDataSource, UINavigationControllerDelegate,UIImagePickerControllerDelegate, UIImagePickerControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (strong, nonatomic) NSMutableDictionary *userInfo;
+@property (strong, nonatomic) NSMutableArray *photoList; // 动态将上传的图片
+@property (strong, nonatomic) NSMutableArray *vedioList; // 动态将上传的图片
+@property (assign, nonatomic) NSInteger tapPickNumber; // 标志当前点击的是哪个section中的获取图片
+@property (strong, nonatomic) UIImage *daynamicHeaderBgImage;  // 动态头部背景图片
 
 @end
 
@@ -62,6 +68,9 @@
     if ([KTVCommon userInfo].phone) {
         [self.userInfo setObject:[KTVCommon userInfo].phone forKey:@"username"];
     }
+    
+    self.photoList = [NSMutableArray array];
+    self.vedioList = [NSMutableArray array];
 }
 
 #pragma mark - 网络
@@ -97,13 +106,25 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         KTVDynamicHeaderCell *cell = [tableView dequeueReusableCellWithIdentifier:KTVStringClass(KTVDynamicHeaderCell)];
+        cell.headerBgImage = self.daynamicHeaderBgImage;
+        cell.pickHeaderBgImageCallback = ^{
+            self.tapPickNumber = 0;
+            [self showAlterSheet];
+        };
         return cell;
     } else if (indexPath.section == 1) {
-        KTVAddMediaCell *cell = [[KTVAddMediaCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"KTVAddMediaCell"];
-        cell.photoList = [NSMutableArray arrayWithArray:@[@"1", @"2", @"3"]];
+        KTVAddMediaCell *cell = [[KTVAddMediaCell alloc] initWithMediaList:self.photoList style:UITableViewCellStyleDefault reuseIdentifier:@"KTVAddMediaCell"];
+        cell.pickImageCallback = ^{
+            self.tapPickNumber = 1;
+            [self showAlterSheet];
+        };
         return cell;
     } else if (indexPath.section == 2) {
-        KTVAddMediaCell *cell = [[KTVAddMediaCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"KTVAddMediaCell"];
+        KTVAddMediaCell *cell = [[KTVAddMediaCell alloc] initWithMediaList:self.vedioList style:UITableViewCellStyleDefault reuseIdentifier:@"KTVAddMediaCell"];
+        cell.pickImageCallback = ^{
+            self.tapPickNumber = 2;
+            [self showAlterSheet];
+        };
         return cell;
     } else if (indexPath.section == 3) {
         KTVDynamicPictureCell *cell = [tableView dequeueReusableCellWithIdentifier:KTVStringClass(KTVDynamicPictureCell)];
@@ -157,6 +178,74 @@
         return 30;
     }
     return 0;
+}
+
+#pragma mark - 显示AlertSheet
+
+- (void)showAlterSheet {
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    UIAlertAction *takePhotoAction = [UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self takePhotoAction];
+    }];
+    UIAlertAction *photoAction = [UIAlertAction actionWithTitle:@"相册" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self choosePhotoLibAction];
+    }];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {}];
+    [alertController addAction:takePhotoAction];
+    [alertController addAction:photoAction];
+    [alertController addAction:cancelAction];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+
+#pragma mark - 相机相册相关
+
+// 拍照处理
+- (void)takePhotoAction {
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        
+        UIImagePickerController *imagepicker = [[UIImagePickerController alloc] init];
+        imagepicker.delegate = self;
+        imagepicker.allowsEditing = YES;
+        imagepicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        
+        [self presentViewController:imagepicker animated:YES completion:^{}];
+    }
+}
+
+// 相册中选择图片
+- (void)choosePhotoLibAction {
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+        
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        picker.delegate = self;
+        picker.allowsEditing = YES;
+        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        
+        [self presentViewController:picker animated:YES completion:^{}];
+    }
+}
+
+#pragma mark - 图片处理
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    CLog(@"--->>> 相册回调");
+    [picker dismissViewControllerAnimated:YES completion:^{
+        // 设置照片按钮信息
+        UIImage *image = [KTVUtil scaleImage:info[UIImagePickerControllerOriginalImage] toSize:CGSizeMake(100, 100)];
+        image = [image resetSizeOfImageData:image maxSize:100];
+        if (self.tapPickNumber == 0) {
+            self.daynamicHeaderBgImage = image;
+            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
+        } else if (self.tapPickNumber == 1) {
+            [self.photoList insertObject:image atIndex:0];
+            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
+        } else if (self.tapPickNumber == 2) {
+            
+        }
+    }];
 }
 
 @end
