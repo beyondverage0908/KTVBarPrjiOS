@@ -75,6 +75,7 @@
 
 #pragma mark - 网络
 
+// 提交用户基本信息
 - (void)submitUserDetail {
     [KTVMainService postSaveUserDetail:self.userInfo result:^(NSDictionary *result) {
         if ([result[@"code"] isEqualToString:ktvCode]) {
@@ -83,6 +84,23 @@
             [KTVToast toast:result[@"detail"]];
         }
     }];
+}
+
+- (void)uploadUsePicture:(NSDictionary *)pickImageDict {
+    if (!pickImageDict) {
+        return;
+    }
+    NSString *key = pickImageDict.allKeys.firstObject;
+    NSDictionary *param = @{@"username" : [KTVCommon userInfo].phone,
+                             key : pickImageDict[key]};
+    [KTVMainService postUploadUserPicture:param result:^(NSDictionary *result) {
+        if ([result[@"code"] isEqualToString:ktvCode]) {
+            [KTVToast toast:TOAST_UPLOAD_SUCCESS];
+        } else {
+            [KTVToast toast:result[@"detail"]];
+        }
+    }];
+    
 }
 
 #pragma mark - 事件
@@ -234,14 +252,21 @@
     CLog(@"--->>> 相册回调");
     [picker dismissViewControllerAnimated:YES completion:^{
         // 设置照片按钮信息
-        UIImage *image = [KTVUtil scaleImage:info[UIImagePickerControllerOriginalImage] toSize:CGSizeMake(100, 100)];
-        image = [image resetSizeOfImageData:image maxSize:100];
+        UIImage *originImage = info[UIImagePickerControllerOriginalImage];
         if (self.tapPickNumber == 0) {
+            UIImage *image = [KTVUtil clipImage:originImage toRect:CGSizeMake(KtvScreenW, 140)];
+            image = [image resetSizeOfImageData:image maxSize:50];
             self.daynamicHeaderBgImage = image;
             [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
+            NSDictionary *param = @{@"headbackground" : image};
+            [self uploadUsePicture:param];
         } else if (self.tapPickNumber == 1) {
+            UIImage *image = [KTVUtil scaleImage:originImage toSize:CGSizeMake(100, 100)];
+            image = [image resetSizeOfImageData:image maxSize:100];
             [self.photoList insertObject:image atIndex:0];
             [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
+            NSDictionary *param = @{@"moment" : image};
+            [self uploadUsePicture:param];
         } else if (self.tapPickNumber == 2) {
             
         }

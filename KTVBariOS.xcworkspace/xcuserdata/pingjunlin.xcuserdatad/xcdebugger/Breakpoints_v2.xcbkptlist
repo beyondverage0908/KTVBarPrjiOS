@@ -68,7 +68,7 @@
                   moduleName = "KTVBariOS"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/pingjunlin/Documents/KTVBariOS/KTVBariOS/Classes/Scenes/DatingFriend/Controller/KTVPublishDateController.m"
-                  timestampString = "530548441.607564"
+                  timestampString = "530805795.385361"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "175"
@@ -83,7 +83,7 @@
                   moduleName = "KTVBariOS"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/pingjunlin/Documents/KTVBariOS/KTVBariOS/Classes/Scenes/DatingFriend/Controller/KTVPublishDateController.m"
-                  timestampString = "530548441.613108"
+                  timestampString = "530805795.397627"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "176"
@@ -99,24 +99,8 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "KTVBariOS/Classes/Network/KTVNetworkHelper.m"
-            timestampString = "530073768.711355"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "197"
-            endingLineNumber = "197"
-            landmarkName = "-uploadRequestWithResquestMessage:success:failure:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "KTVBariOS/Classes/Scenes/Mine/View/KTVAddMediaCell.m"
-            timestampString = "530548441.290733"
+            timestampString = "530633539.784778"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "107"

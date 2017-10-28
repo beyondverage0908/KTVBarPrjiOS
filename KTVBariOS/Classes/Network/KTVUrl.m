@@ -24,6 +24,20 @@
     return @"/api/login/saveUserDetail";
 }
 
++ (NSString *)getUploadUserPictureUrl {
+    return @"/api/login/uploadUserPicture";
+}
+
+#pragma mark - 用户动态
+
++ (NSString *)getUserDynamicStatementUrl {
+    return @"/api/dynamicStatement";
+}
+
++ (NSString *)getUserDynamicStatementListUrl {
+    return @"/api/dynamicStatement/18939865772?currentPage=0&size=2";
+}
+
 #pragma mark - 登陆
 
 + (NSString *)getIdentifyingCodeUrl {

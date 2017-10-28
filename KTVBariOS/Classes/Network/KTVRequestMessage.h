@@ -22,6 +22,7 @@ typedef NS_ENUM(NSInteger, KtvRequestType) {
 // 格式
 // imageMap = {@"imageName" : image}
 @property (nonatomic, copy)     NSDictionary        *imageMap;                  // 上传图片集合
+@property (nonatomic, copy)     NSArray             *imageList;                 // 图片数组集合
 @property (nonatomic, assign)   NSTimeInterval      timeout;                    // 请求服务器超时时间
 @property (nonatomic, strong)   id                  params;                     // body参数
 

@@ -20,4 +20,12 @@
     [super awakeFromNib];
 }
 
+- (void)setPicture:(KTVPicture *)picture {
+    if (_picture != picture) {
+        _picture = picture;
+        
+        [self.photoImgView sd_setImageWithURL:[NSURL URLWithString:_picture.pictureUrl] placeholderImage:[UIImage imageNamed:@"user_info_placeholder"]];
+    }
+}
+
 @end

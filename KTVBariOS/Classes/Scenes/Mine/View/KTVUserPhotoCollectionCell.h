@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+#import "KTVPicture.h"
+
 @interface KTVUserPhotoCollectionCell : UICollectionViewCell
+
+@property (nonatomic, strong) KTVPicture * picture;
 
 @end

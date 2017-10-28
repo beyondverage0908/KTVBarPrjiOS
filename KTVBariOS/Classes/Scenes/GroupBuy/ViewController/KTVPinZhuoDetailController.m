@@ -70,6 +70,7 @@
     }];
 }
 
+// 获取用户信息
 - (void)loadPinZhuoUserInfo {
     self.phone = self.phone ? self.phone : @"18516133629";
     [KTVLoginService getUserInfo:self.phone result:^(NSDictionary *result) {

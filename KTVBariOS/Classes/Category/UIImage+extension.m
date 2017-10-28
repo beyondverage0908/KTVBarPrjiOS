@@ -83,11 +83,11 @@
 
 - (NSData *)halfFuntion:(NSArray *)arr image:(UIImage *)image sourceData:(NSData *)finallImageData maxSize:(NSInteger)maxSize {
     NSData *tempData = [NSData data];
-    NSUInteger start = 0;
-    NSUInteger end = arr.count - 1;
-    NSUInteger index = 0;
+    NSInteger start = 0;
+    NSInteger end = arr.count - 1;
+    NSInteger index = 0;
     
-    NSUInteger difference = NSIntegerMax;
+    NSInteger difference = NSIntegerMax;
     while(start <= end) {
         index = start + (end - start)/2;
         

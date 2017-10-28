@@ -15,6 +15,7 @@
 #import "KTVApplyStoreController.h"
 #import "KTVPublishDynamicController.h"
 #import "KTVSettingController.h"
+#import "KTVDynamicController.h"
 
 #import "KTVUserHeaderCell.h"
 #import "KTVUserInfoCell.h"
@@ -90,7 +91,11 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 1) {
+    if (indexPath.section == 0) {
+        KTVUserInfoController *vc = (KTVUserInfoController *)[UIViewController storyboardName:@"MePage" storyboardId:@"KTVUserInfoController"];
+        vc.isMySelf = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+    } else if (indexPath.section == 1) {
         if (indexPath.row == 1) {
             KTVOrderStatusListController *vc = (KTVOrderStatusListController *)[UIViewController storyboardName:@"MePage" storyboardId:@"KTVOrderStatusListController"];
             [self.navigationController pushViewController:vc animated:YES];
@@ -108,7 +113,7 @@
             [self.navigationController pushViewController:vc animated:YES];
         } else if (indexPath.row == 4) {
             // 发布动态
-            KTVPublishDynamicController *vc = (KTVPublishDynamicController *)[UIViewController storyboardName:@"MePage" storyboardId:KTVStringClass(KTVPublishDynamicController)];
+            KTVDynamicController *vc = (KTVDynamicController *)[UIViewController storyboardName:@"MePage" storyboardId:KTVStringClass(KTVDynamicController)];
             [self.navigationController pushViewController:vc animated:YES];
         }
         else if (indexPath.row == 6) {
@@ -178,8 +183,6 @@
 
 - (void)toseeMineInfo:(NSDictionary *)info {
     CLog(@"-- 查看个人信息");
-//    KTVUserInfoController *vc = (KTVUserInfoController *)[UIViewController storyboardName:@"MePage" storyboardId:@"KTVUserInfoController"];
-//    [self.navigationController pushViewController:vc animated:YES];
     // 个人信息
     KTVPublishDynamicController *vc = (KTVPublishDynamicController *)[UIViewController storyboardName:@"MePage" storyboardId:KTVStringClass(KTVPublishDynamicController)];
     [self.navigationController pushViewController:vc animated:YES];

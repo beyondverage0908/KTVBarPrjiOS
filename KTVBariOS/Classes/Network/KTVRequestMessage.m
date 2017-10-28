@@ -26,6 +26,9 @@
             } else {
                 dic[key] = pa[key];
             }
+            if ([key isEqualToString:@"file"]) {
+                _imageList = pa[@"file"];
+            }
         }
         _params = dic;
         _imageMap = imageMap;

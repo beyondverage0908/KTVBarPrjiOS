@@ -185,6 +185,19 @@ static KTVNetworkHelper *_instance = nil;
             [formData appendPartWithFileData:imageData name:name fileName:fileName mimeType:@"image/jpeg"];
         }
         
+        for (NSInteger i = 0; i < message.imageList.count; i++) {
+            // 取出
+            UIImage *image = message.imageList[i];
+            // 转成二进制
+            NSData *imageData = UIImageJPEGRepresentation(image, 1.0);
+            // 上传的参数名
+            NSString *name = [NSString stringWithFormat:@"%@", @"file"];
+            // 上传fileName
+            NSString *fileName = [NSString stringWithFormat:@"%@.jpg", name];
+            
+            [formData appendPartWithFileData:imageData name:name fileName:fileName mimeType:@"image/jpeg"];
+        }
+        
     } progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable response) {

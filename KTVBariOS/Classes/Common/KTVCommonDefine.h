@@ -31,6 +31,9 @@
 #define RGBACOLOR(r,g,b,a) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a]
 #define COLORHex(x) [UIColor colorHex:x]
 
+#define KtvScreenW [UIScreen mainScreen].bounds.size.width
+#define KtvScreenH [UIScreen mainScreen].bounds.size.height
+
 // 系统方法
 // NSUsetDefault
 #define KtvDefaults                 [NSUserDefaults standardUserDefaults]

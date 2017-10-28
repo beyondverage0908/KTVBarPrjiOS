@@ -71,4 +71,11 @@ typedef void(^ResponseSuccess)(NSDictionary *result);
 
 /// 保存用户详情
 + (void)postSaveUserDetail:(NSDictionary *)params result:(ResponseSuccess)responseResult;
+
+/// 用户上传图片
++ (void)postUploadUserPicture:(NSDictionary *)params result:(ResponseSuccess)responseResult;
+
+/// 创建用户动态
++ (void)postUploadDynamic:(NSDictionary *)params result:(ResponseSuccess)responseResult;
+
 @end

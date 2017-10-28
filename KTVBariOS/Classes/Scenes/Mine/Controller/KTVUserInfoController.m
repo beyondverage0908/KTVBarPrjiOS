@@ -12,11 +12,15 @@
 #import "KTVUserPhontosCell.h"
 #import "KTVUserSenseCell.h"
 
+#import "KTVLoginService.h"
+
 #import "KTVTableHeaderView.h"
 
 @interface KTVUserInfoController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+
+@property (strong, nonatomic) KTVUser * user;
 
 @end
 
@@ -30,6 +34,8 @@
     self.tableView.dataSource = self;
     
     [self setupUi];
+    
+    [self loadUserInfo];
 }
 
 - (void)setupUi {
@@ -48,6 +54,24 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+#pragma mark - 网络
+
+// 获取用户详情
+- (void)loadUserInfo {
+    NSString *phone = [KTVCommon userInfo].phone;
+    [KTVLoginService getUserInfo:phone result:^(NSDictionary *result) {
+        if (![result[@"code"] isEqualToString:ktvCode]) {
+            [KTVToast toast:TOAST_USERINFO_FAIL];
+        } else {
+            NSDictionary *userInfo = result[@"data"];
+            KTVUser *user = [KTVUser yy_modelWithDictionary:userInfo];
+            self.user = user;
+            
+            [self.tableView reloadData];
+        }
+    }];
 }
 
 #pragma mark - UITableViewDelegate
@@ -106,9 +130,12 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         KTVUserBannerCell *cell = (KTVUserBannerCell *)[tableView dequeueReusableCellWithIdentifier:KTVStringClass(KTVUserBannerCell)];
+        cell.user = self.user;
+        cell.isSelf = self.isMySelf;
         return cell;
     } else if (indexPath.section == 1) {
         KTVUserPhontosCell *cell = (KTVUserPhontosCell *)[tableView dequeueReusableCellWithIdentifier:KTVStringClass(KTVUserPhontosCell)];
+        cell.pictureList = self.user.pictureList;
         return cell;
     } else if (indexPath.section == 2) {
         KTVUserSenseCell *cell = (KTVUserSenseCell *)[tableView dequeueReusableCellWithIdentifier:KTVStringClass(KTVUserSenseCell)];

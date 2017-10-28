@@ -10,4 +10,7 @@
 
 @interface KTVUserBannerCell : UITableViewCell
 
+@property (nonatomic, assign) BOOL isSelf;;
+@property (nonatomic, strong) KTVUser * user;
+
 @end

@@ -21,6 +21,15 @@
 /// 保存用户详情
 + (NSString *)getSaveUserDetailUrl;
 
+/// 用户上传图片
++ (NSString *)getUploadUserPictureUrl;
+
+#pragma mark - 用户动态
+
++ (NSString *)getUserDynamicStatementUrl;
+
++ (NSString *)getUserDynamicStatementListUrl;
+
 #pragma mark - 登陆
 
 /// 获取验证码

@@ -37,6 +37,14 @@ static NSInteger RowCount = 4;
     self.photosCollectionView.collectionViewLayout = [self setupFlowLayout];
 }
 
+- (void)setPictureList:(NSArray *)pictureList {
+    if (_pictureList != pictureList) {
+        _pictureList = pictureList;
+        
+        [self.photosCollectionView reloadData];
+    }
+}
+
 #pragma mark - CollectionView 布局
 
 - (UICollectionViewFlowLayout *)setupFlowLayout {
@@ -63,11 +71,13 @@ static NSInteger RowCount = 4;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 10;
+    return self.pictureList.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     KTVUserPhotoCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"KTVUserPhotoCollectionCell" forIndexPath:indexPath];
+    KTVPicture *pic = self.pictureList[indexPath.row];
+    cell.picture = pic;
     return cell;
 }
 

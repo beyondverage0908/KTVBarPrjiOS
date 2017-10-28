@@ -32,7 +32,10 @@ static NSString * const TOAST_COLLECT_SUCCESS                       = @"收藏�
 static NSString * const TOAST_COLLECT_FAIL                          = @"收藏失败";
 static NSString * const TOAST_NO_USEING_ORDER                       = @"没有未使用的订单，不能进行拼桌活动";
 static NSString * const TOAST_SAVE_USERINFO_SUCCESS                 = @"修改信息成功";
-
+static NSString * const TOAST_UPLOAD_SUCCESS                        = @"上传图片成功";
+static NSString * const TOAST_USERINFO_FAIL                         = @"获取个人信息失败";
+static NSString * const TOAST_DYNAMIC_UPLOAD_FAIL                   = @"发布动态失败";
+static NSString * const TOAST_DYNAMIC_UPLOAD_SUCC                   = @"发布动态成功";
 
 // MBProgressHUD定义
 
