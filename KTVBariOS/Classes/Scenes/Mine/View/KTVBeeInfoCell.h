@@ -1,15 +1,16 @@
 //
-//  KTVUserSenseCell.h
+//  KTVBeeInfoCell.h
 //  KTVBariOS
 //
-//  Created by pingjun lin on 2017/9/5.
+//  Created by pingjun lin on 2017/10/31.
 //  Copyright © 2017年 Lin. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 #import "KTVUser.h"
 
-@interface KTVUserSenseCell : UITableViewCell
+
+@interface KTVBeeInfoCell : UITableViewCell
 
 @property (nonatomic, strong) KTVUser *user;
 

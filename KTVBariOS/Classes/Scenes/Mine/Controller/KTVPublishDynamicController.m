@@ -258,14 +258,13 @@
             image = [image resetSizeOfImageData:image maxSize:50];
             self.daynamicHeaderBgImage = image;
             [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
-            NSDictionary *param = @{@"headbackground" : image};
+            NSDictionary *param = @{@"file" : image};
             [self uploadUsePicture:param];
         } else if (self.tapPickNumber == 1) {
-            UIImage *image = [KTVUtil scaleImage:originImage toSize:CGSizeMake(100, 100)];
-            image = [image resetSizeOfImageData:image maxSize:100];
-            [self.photoList insertObject:image atIndex:0];
+            originImage = [originImage resetSizeOfImageData:originImage maxSize:100];
+            [self.photoList insertObject:originImage atIndex:0];
             [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
-            NSDictionary *param = @{@"moment" : image};
+            NSDictionary *param = @{@"file" : originImage};
             [self uploadUsePicture:param];
         } else if (self.tapPickNumber == 2) {
             

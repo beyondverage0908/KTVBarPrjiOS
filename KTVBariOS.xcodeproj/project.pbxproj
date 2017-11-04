@@ -89,6 +89,10 @@
 		336A1FBA1F7F8DF60063F562 /* KTVCallOtherController.m in Sources */ = {isa = PBXBuildFile; fileRef = 336A1FB91F7F8DF60063F562 /* KTVCallOtherController.m */; };
 		336A1FBE1F7F92750063F562 /* KTVPhotoPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 336A1FBD1F7F92750063F562 /* KTVPhotoPicker.m */; };
 		336A8AE01F472D730064E068 /* UIFont+Ktv.m in Sources */ = {isa = PBXBuildFile; fileRef = 336A8ADF1F472D730064E068 /* UIFont+Ktv.m */; };
+		336FE84D1FA811360074719F /* KTVLittleBeeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 336FE84C1FA811360074719F /* KTVLittleBeeController.m */; };
+		336FE8501FA8129B0074719F /* KTVBeeHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 336FE84F1FA8129B0074719F /* KTVBeeHeaderCell.m */; };
+		336FE8531FA812F50074719F /* KTVBeeInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 336FE8521FA812F50074719F /* KTVBeeInfoCell.m */; };
+		336FE8561FA814D20074719F /* KTVBeeDescriptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 336FE8551FA814D20074719F /* KTVBeeDescriptionCell.m */; };
 		337779E91F3CA28400743B90 /* KTVPackageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 337779E81F3CA28400743B90 /* KTVPackageCell.m */; };
 		3377B6E31F4B1D9700B76B2C /* KTVGroupBuyHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3377B6E21F4B1D9700B76B2C /* KTVGroupBuyHeaderCell.m */; };
 		3377B6E61F4C1CF700B76B2C /* NSDate+Processing.m in Sources */ = {isa = PBXBuildFile; fileRef = 3377B6E51F4C1CF700B76B2C /* NSDate+Processing.m */; };
@@ -384,6 +388,14 @@
 		336A1FBD1F7F92750063F562 /* KTVPhotoPicker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KTVPhotoPicker.m; sourceTree = "<group>"; };
 		336A8ADE1F472D730064E068 /* UIFont+Ktv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+Ktv.h"; sourceTree = "<group>"; };
 		336A8ADF1F472D730064E068 /* UIFont+Ktv.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+Ktv.m"; sourceTree = "<group>"; };
+		336FE84B1FA811360074719F /* KTVLittleBeeController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KTVLittleBeeController.h; sourceTree = "<group>"; };
+		336FE84C1FA811360074719F /* KTVLittleBeeController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KTVLittleBeeController.m; sourceTree = "<group>"; };
+		336FE84E1FA8129B0074719F /* KTVBeeHeaderCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KTVBeeHeaderCell.h; sourceTree = "<group>"; };
+		336FE84F1FA8129B0074719F /* KTVBeeHeaderCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KTVBeeHeaderCell.m; sourceTree = "<group>"; };
+		336FE8511FA812F50074719F /* KTVBeeInfoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KTVBeeInfoCell.h; sourceTree = "<group>"; };
+		336FE8521FA812F50074719F /* KTVBeeInfoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KTVBeeInfoCell.m; sourceTree = "<group>"; };
+		336FE8541FA814D20074719F /* KTVBeeDescriptionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KTVBeeDescriptionCell.h; sourceTree = "<group>"; };
+		336FE8551FA814D20074719F /* KTVBeeDescriptionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KTVBeeDescriptionCell.m; sourceTree = "<group>"; };
 		337779E71F3CA28400743B90 /* KTVPackageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVPackageCell.h; sourceTree = "<group>"; };
 		337779E81F3CA28400743B90 /* KTVPackageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVPackageCell.m; sourceTree = "<group>"; };
 		3377B6E11F4B1D9700B76B2C /* KTVGroupBuyHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVGroupBuyHeaderCell.h; sourceTree = "<group>"; };
@@ -1430,6 +1442,8 @@
 				33DF0F8F1F9DE7C1003E5FFF /* KTVSettingController.m */,
 				33A25C211FA0D07C00D8E165 /* KTVDynamicController.h */,
 				33A25C221FA0D07C00D8E165 /* KTVDynamicController.m */,
+				336FE84B1FA811360074719F /* KTVLittleBeeController.h */,
+				336FE84C1FA811360074719F /* KTVLittleBeeController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1486,6 +1500,12 @@
 				3310D2F31F98A113008E9D69 /* KTVAddMediaCell.m */,
 				33DF0F911F9DE874003E5FFF /* KTVAppVersionCell.h */,
 				33DF0F921F9DE874003E5FFF /* KTVAppVersionCell.m */,
+				336FE84E1FA8129B0074719F /* KTVBeeHeaderCell.h */,
+				336FE84F1FA8129B0074719F /* KTVBeeHeaderCell.m */,
+				336FE8511FA812F50074719F /* KTVBeeInfoCell.h */,
+				336FE8521FA812F50074719F /* KTVBeeInfoCell.m */,
+				336FE8541FA814D20074719F /* KTVBeeDescriptionCell.h */,
+				336FE8551FA814D20074719F /* KTVBeeDescriptionCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1884,6 +1904,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				336FE8561FA814D20074719F /* KTVBeeDescriptionCell.m in Sources */,
 				33AEAC421F5E9FC1000003AE /* KTVUser.m in Sources */,
 				3395B5931F987EA20037AFED /* KTVPublishDynamicController.m in Sources */,
 				339AED4B1F528DCD00473C29 /* KTVDandianItemCollectionCell.m in Sources */,
@@ -1935,6 +1956,7 @@
 				33C850B61F44885F00F947B8 /* KTVIntroduceCell.m in Sources */,
 				33D776F41F301D9600077BE5 /* TAAnimatedDotView.m in Sources */,
 				33C4B74E1F3B46190080F54D /* KTVBarController.m in Sources */,
+				336FE8501FA8129B0074719F /* KTVBeeHeaderCell.m in Sources */,
 				33CD20BA1F4F055A0090DBEE /* KTVPackageDetailHeaderCell.m in Sources */,
 				33C483B51F6A860F00004FF6 /* KTVPicture.m in Sources */,
 				3329B7561F4023D000729FB6 /* KTVTableHeaderView.m in Sources */,
@@ -1959,9 +1981,11 @@
 				33CB83521F3F5E6C002E6F3B /* KTTimeFilterCell.m in Sources */,
 				338069BB1F681B4600E4DB90 /* KTVStoreOrderUseCell.m in Sources */,
 				331684921F5C39F8002C2AD2 /* KTVPinZhuoDetailController.m in Sources */,
+				336FE8531FA812F50074719F /* KTVBeeInfoCell.m in Sources */,
 				33DF0F901F9DE7C1003E5FFF /* KTVSettingController.m in Sources */,
 				33C305471F486BCE0064ECF8 /* KTVMineController.m in Sources */,
 				3308B1EA1F63C70000012F9A /* KTVStore.m in Sources */,
+				336FE84D1FA811360074719F /* KTVLittleBeeController.m in Sources */,
 				3357E9291F6CE9B400EDDA6F /* MBProgressHUD+KTV.m in Sources */,
 				33D776FF1F30498600077BE5 /* KTVUtil.m in Sources */,
 				3398565E1F3EF8F10085BD1A /* KTVKtvController.m in Sources */,

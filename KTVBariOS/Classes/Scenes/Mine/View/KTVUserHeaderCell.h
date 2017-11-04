@@ -22,4 +22,6 @@
 
 @property (weak, nonatomic)id<KTVUserHeaderCellDelegate> delegate;
 
+@property (nonatomic, strong) KTVUser *user;
+
 @end

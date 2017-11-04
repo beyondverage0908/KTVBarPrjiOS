@@ -10,6 +10,6 @@
 
 @interface KTVPublishDateController : KTVBaseViewController
 
-@property (nonatomic, assign) NSInteger type;
+@property (nonatomic, assign) NSInteger type; // 0: 酒吧 1: ktv
 
 @end

@@ -46,20 +46,22 @@
 #pragma mark - 网络
 
 - (void)loadStoresBySearch {
-    self.storeType = 0;
-    self.storeName = @"dd";
     
-    NSDictionary *params =@{@"storeType" : @(self.storeType), @"storeName" : self.storeName};
+    NSDictionary *params =@{@"storeType" : @(self.storeType), @"storeName" : self.storeName ? self.storeName : @"dd"};
     [KTVMainService postStoreSearch:params result:^(NSDictionary *result) {
         if (![result[@"code"] isEqualToString:ktvCode]) {
             [KTVToast toast:result[@"detail"]];
             return;
         }
-        for (NSDictionary *dict in result[@"data"]) {
-            KTVStore *store = [KTVStore yy_modelWithDictionary:dict];
-            [self.storeList addObject:store];
+        if ([result[@"data"] count]) {
+            for (NSDictionary *dict in result[@"data"]) {
+                KTVStore *store = [KTVStore yy_modelWithDictionary:dict];
+                [self.storeList addObject:store];
+            }
+            [self.tableView reloadData];
+        } else {
+            [KTVToast toast:TOAST_STORE_EMPTY];
         }
-        [self.tableView reloadData];
     }];
 }
 

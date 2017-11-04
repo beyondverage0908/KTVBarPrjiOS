@@ -9,6 +9,7 @@
 #import "KTVDateViewController.h"
 #import "KTVPublishDateController.h"
 #import "KTVPinZhuoDetailController.h"
+#import "KTVUserInfoController.h"
 
 #import "KTVYaoYueUserCell.h"
 #import "KTVFilterView.h"
@@ -116,6 +117,7 @@
             type = 1;
         }
         KTVPublishDateController *vc = (KTVPublishDateController *)[UIViewController storyboardName:@"DatingFriend" storyboardId:@"KTVPublishDateController"];
+        vc.type = type;
         [self.navigationController pushViewController:vc animated:YES];
     };
 }
@@ -137,6 +139,15 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 85.0f;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    KTVInvitedUser *invitedUser = self.inviteUserList[indexPath.row];
+    
+    KTVUserInfoController *vc = (KTVUserInfoController *)[UIViewController storyboardName:@"MePage" storyboardId:@"KTVUserInfoController"];
+    vc.isMySelf = NO;
+    vc.user = invitedUser.user;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - UITableViewDataSource

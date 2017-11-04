@@ -20,12 +20,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KTVBariOS/Classes/Scenes/GroupBuy/ViewController/KTVPayController.m"
-            timestampString = "529600429.040718"
+            timestampString = "531062751.373073"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "161"
             endingLineNumber = "161"
-            landmarkName = "-networkCreateOrder:"
+            landmarkName = "-networkConfirmPay:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -36,12 +36,60 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KTVBariOS/Classes/Scenes/GroupBuy/ViewController/KTVPayController.m"
-            timestampString = "529600429.04079"
+            timestampString = "531062751.37401"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "163"
             endingLineNumber = "163"
-            landmarkName = "-networkCreateOrder:"
+            landmarkName = "-networkConfirmPay:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KTVBariOS/Classes/Scenes/GroupBuy/ViewController/KTVPayController.m"
+            timestampString = "531062751.374683"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "232"
+            endingLineNumber = "232"
+            landmarkName = "-toggle:channel:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KTVBariOS/Classes/Scenes/GroupBuy/ViewController/KTVPayController.m"
+            timestampString = "531062751.375374"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "246"
+            endingLineNumber = "246"
+            landmarkName = "-getPayChannel"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KTVBariOS/Classes/Scenes/GroupBuy/ViewController/KTVPayController.m"
+            timestampString = "531062751.376136"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "138"
+            endingLineNumber = "138"
+            landmarkName = "-networkConfirmPay:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -52,45 +100,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KTVBariOS/Classes/Scenes/DatingFriend/Controller/KTVPublishDateController.m"
-            timestampString = "530348101.950747"
+            timestampString = "531238805.692877"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "174"
-            endingLineNumber = "174"
+            startingLineNumber = "187"
+            endingLineNumber = "187"
             landmarkName = "-publishYueAction:"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[KTVPublishDateController publishYueAction:]"
-                  moduleName = "KTVBariOS"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/pingjunlin/Documents/KTVBariOS/KTVBariOS/Classes/Scenes/DatingFriend/Controller/KTVPublishDateController.m"
-                  timestampString = "530805795.385361"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "175"
-                  endingLineNumber = "175"
-                  offsetFromSymbolStart = "816">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__45-[KTVPublishDateController publishYueAction:]_block_invoke"
-                  moduleName = "KTVBariOS"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/pingjunlin/Documents/KTVBariOS/KTVBariOS/Classes/Scenes/DatingFriend/Controller/KTVPublishDateController.m"
-                  timestampString = "530805795.397627"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "176"
-                  endingLineNumber = "176"
-                  offsetFromSymbolStart = "51">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -99,12 +115,46 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "KTVBariOS/Classes/Scenes/Mine/View/KTVAddMediaCell.m"
-            timestampString = "530633539.784778"
+            filePath = "KTVBariOS/Classes/Scenes/DatingFriend/Controller/KTVPublishDateController.m"
+            timestampString = "531238805.693795"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "107"
-            endingLineNumber = "107">
+            startingLineNumber = "207"
+            endingLineNumber = "207"
+            landmarkName = "-publishYueAction:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KTVBariOS/Classes/Scenes/DatingFriend/Controller/KTVPublishDateController.m"
+            timestampString = "531238805.694398"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "204"
+            endingLineNumber = "204"
+            landmarkName = "-publishYueAction:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KTVBariOS/Classes/Scenes/DatingFriend/Controller/KTVPublishDateController.m"
+            timestampString = "531238805.69495"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "372"
+            endingLineNumber = "372"
+            landmarkName = "KTVPublishDateController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

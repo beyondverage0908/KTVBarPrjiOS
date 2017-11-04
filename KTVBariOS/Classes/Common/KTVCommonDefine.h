@@ -55,4 +55,9 @@
 #define KTVInvalidateToken                  @"KTVInvalidateToken"
 
 
+#pragma mark - 对通知的定义
+
+#define KNotLoginSuccess                    @"KNotLoginSuccess"
+
+
 #endif /* KTVCommonDefine_h */

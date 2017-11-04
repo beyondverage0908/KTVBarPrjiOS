@@ -19,6 +19,7 @@
 #import "KTVShareFriendController.h"
 #import "KTVSelectedBeautyController.h"
 #import "KTVFriendDetailController.h"
+#import "KTVLittleBeeController.h"
 
 #import "KTVMainService.h"
 
@@ -312,6 +313,11 @@
     if (indexPath.section == 2) {
         // 套餐详情
         KTVPackageDetailController *vc = (KTVPackageDetailController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVPackageDetailController"];
+        [self.navigationController pushViewController:vc animated:YES];
+    } else if (indexPath.section == 3) {
+        KTVLittleBeeController *vc = (KTVLittleBeeController *)[UIViewController storyboardName:@"MePage" storyboardId:@"KTVLittleBeeController"];
+        KTVUser *user = self.activitorList[indexPath.row];
+        vc.user = user;
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

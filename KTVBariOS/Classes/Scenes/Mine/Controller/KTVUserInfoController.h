@@ -11,5 +11,6 @@
 @interface KTVUserInfoController : KTVBaseViewController
 
 @property (nonatomic, assign) BOOL isMySelf;
+@property (nonatomic, strong) KTVUser *user;
 
 @end

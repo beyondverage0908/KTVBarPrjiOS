@@ -21,7 +21,9 @@
 #import "KTVUserInfoCell.h"
 
 #import "KTVMainService.h"
+#import "KTVLoginService.h"
 #import "KTVStore.h"
+#import "KTVUser.h"
 
 
 @interface KTVMineController ()<UITableViewDelegate, UITableViewDataSource, KTVUserHeaderCellDelegate>
@@ -30,6 +32,7 @@
 
 @property (nonatomic, strong) NSArray *userInfoArray;
 @property (nonatomic, strong) NSMutableArray<KTVStore *> *storeList;
+@property (nonatomic, strong) KTVUser *user;
 
 @end
 
@@ -45,6 +48,7 @@
     self.tableView.dataSource = self;
     self.tableView.backgroundColor = [UIColor ktvBG];
     
+    [self loadUserInfo];
     [self loadSearchOrder];
 }
 
@@ -65,6 +69,9 @@
 - (void)loadSearchOrder {
     NSString *phone = [KTVCommon userInfo].phone;
     
+    if ([KTVUtil isNullString:phone]) {
+        return;
+    }
     NSDictionary *params = @{@"username" : phone, @"orderStatus" : @"1"};
     [KTVMainService postSearchOrder:params result:^(NSDictionary *result) {
         if (![result[@"code"] isEqualToString:ktvCode]) {
@@ -74,6 +81,22 @@
             NSDictionary *storeDic = dic[@"store"];
             KTVStore *store = [KTVStore yy_modelWithDictionary:storeDic];
             [self.storeList addObject:store];
+        }
+    }];
+}
+
+/// 获取用户信息
+- (void)loadUserInfo {
+    NSString *phone = [KTVCommon userInfo].phone;
+    [KTVLoginService getUserInfo:phone result:^(NSDictionary *result) {
+        if (![result[@"code"] isEqualToString:ktvCode]) {
+            [KTVToast toast:TOAST_USERINFO_FAIL];
+        } else {
+            NSDictionary *userInfo = result[@"data"];
+            KTVUser *user = [KTVUser yy_modelWithDictionary:userInfo];
+            self.user = user;
+            
+            [self.tableView reloadData];
         }
     }];
 }
@@ -163,6 +186,7 @@
     if (indexPath.section == 0) {
         KTVUserHeaderCell *cell = (KTVUserHeaderCell *)[tableView dequeueReusableCellWithIdentifier:KTVStringClass(KTVUserHeaderCell)];
         cell.delegate = self;
+        cell.user = self.user;
         return cell;
     } else if (indexPath.section == 1) {
         KTVUserInfoCell *cell = (KTVUserInfoCell *)[tableView dequeueReusableCellWithIdentifier:KTVStringClass(KTVUserInfoCell)];

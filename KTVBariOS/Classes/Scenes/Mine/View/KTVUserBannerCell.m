@@ -64,16 +64,18 @@
         ageLabel.frame = CGRectMake(0, 5, CGRectGetWidth(ageLabel.frame), CGRectGetHeight(ageLabel.frame));
         
         NSString *constellation = _user.userDetail.constellation;
-        UILabel *constellationLabel = [[UILabel alloc] init];
-        constellationLabel.text = [NSString stringWithFormat:@"%@", constellation];
-        constellationLabel.backgroundColor = [UIColor ktvRed];
-        constellationLabel.font = [UIFont bold13];
-        constellationLabel.textColor = [UIColor whiteColor];
-        [self.tipsView addSubview:constellationLabel];
-        [constellationLabel sizeToFit];
-        constellationLabel.layer.cornerRadius = 3;
-        constellationLabel.layer.masksToBounds = YES;
-        constellationLabel.frame = CGRectMake(CGRectGetMaxX(ageLabel.frame) + 20, CGRectGetMinY(ageLabel.frame), CGRectGetWidth(constellationLabel.frame), CGRectGetHeight(constellationLabel.frame));
+        if (constellation) {
+            UILabel *constellationLabel = [[UILabel alloc] init];
+            constellationLabel.text = [NSString stringWithFormat:@"%@", constellation];
+            constellationLabel.backgroundColor = [UIColor ktvRed];
+            constellationLabel.font = [UIFont bold13];
+            constellationLabel.textColor = [UIColor whiteColor];
+            [self.tipsView addSubview:constellationLabel];
+            [constellationLabel sizeToFit];
+            constellationLabel.layer.cornerRadius = 3;
+            constellationLabel.layer.masksToBounds = YES;
+            constellationLabel.frame = CGRectMake(CGRectGetMaxX(ageLabel.frame) + 20, CGRectGetMinY(ageLabel.frame), CGRectGetWidth(constellationLabel.frame), CGRectGetHeight(constellationLabel.frame));
+        }
         //
         //    NSString *hobby = _user.userDetail.hobby;
         //    UILabel *hobbyLabel = [[UILabel alloc] init];

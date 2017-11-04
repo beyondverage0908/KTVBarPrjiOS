@@ -321,7 +321,7 @@
             [KTVUtil setObject:ktvToken forKey:@"ktvToken"];
             [KTVCommon setUserInfoKey:@"phone" infoValue:self.loginAccountParams[@"phone"]];
             
-            [self dismissViewControllerAnimated:YES completion:nil];
+            [self dismissCurrentController];
         } else {
             [KTVToast toast:result[@"detail"]];
         }
@@ -339,10 +339,18 @@
             [KTVUtil setObject:ktvToken forKey:@"ktvToken"];
             [KTVCommon setUserInfoKey:@"phone" infoValue:self.loginAccountParams[@"phone"]];
             
-            [self dismissViewControllerAnimated:YES completion:nil];
+            [self dismissCurrentController];
         } else {
             [KTVToast toast:result[@"detail"]];
         }
+    }];
+}
+
+#pragma mark - Dissmiss Controller
+
+- (void)dismissCurrentController {
+    [self dismissViewControllerAnimated:YES completion:^{
+        [KtvNotiCenter postNotificationName:KNotLoginSuccess object:self];
     }];
 }
 

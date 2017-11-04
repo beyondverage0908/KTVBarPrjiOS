@@ -21,6 +21,9 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    
+    self.headerImageView.layer.cornerRadius = CGRectGetWidth(self.headerImageView.frame) / 2.0f;
+    self.headerImageView.layer.masksToBounds = YES;
 }
 
 - (IBAction)modifyUserInfoAction:(UIButton *)sender {
@@ -39,6 +42,22 @@
     
     if ([self.delegate respondsToSelector:@selector(gotoLogin)]) {
         [self.delegate gotoLogin];
+    }
+}
+
+#pragma mark - 设置
+
+- (void)setUser:(KTVUser *)user {
+    if (_user != user) {
+        _user = user;
+        
+        self.loginTypeBtn.hidden = YES;
+        self.nicknameLabel.text = _user.nickName ? _user.nickName : _user.username;
+    
+        [self.headerImageView sd_setImageWithURL:[NSURL URLWithString:_user.pictureList.firstObject.pictureUrl] placeholderImage:[UIImage imageNamed:@"bar_yuepao_user_placeholder"]];
+        if (_user.pictureList.count > 2) {
+            [self.headerBgImageView sd_setImageWithURL:[NSURL URLWithString:_user.pictureList[1].pictureUrl] placeholderImage:[UIImage imageNamed:@"mine_header_placeholder"]];
+        }
     }
 }
 

@@ -20,8 +20,6 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
-@property (strong, nonatomic) KTVUser * user;
-
 @end
 
 @implementation KTVUserInfoController
@@ -61,6 +59,9 @@
 // 获取用户详情
 - (void)loadUserInfo {
     NSString *phone = [KTVCommon userInfo].phone;
+    if (!self.isMySelf) {
+        phone = self.user.phone;
+    }
     [KTVLoginService getUserInfo:phone result:^(NSDictionary *result) {
         if (![result[@"code"] isEqualToString:ktvCode]) {
             [KTVToast toast:TOAST_USERINFO_FAIL];
@@ -139,6 +140,7 @@
         return cell;
     } else if (indexPath.section == 2) {
         KTVUserSenseCell *cell = (KTVUserSenseCell *)[tableView dequeueReusableCellWithIdentifier:KTVStringClass(KTVUserSenseCell)];
+        cell.user = self.user;
         return cell;
     }
     return nil;

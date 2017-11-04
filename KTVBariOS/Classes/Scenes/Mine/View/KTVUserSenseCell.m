@@ -34,4 +34,20 @@
 - (IBAction)toSeeAction:(id)sender {
     CLog(@"-- 去查看");
 }
+
+#pragma mark - 重制
+
+- (void)setUser:(KTVUser *)user {
+    if (_user != user) {
+        _user = user;
+        
+        self.xinzuoLabel.text = _user.userDetail.constellation;
+        self.zhiyeLabel.text = _user.userDetail.profession;
+        self.loveSenseLabel.text = _user.userDetail.viewForLove;
+        self.havesexLabel.text = _user.userDetail.viewForSex;
+        self.manyiLabel.text = _user.userDetail.hobby;
+        self.qianmingLabel.text = _user.des;
+    }
+}
+
 @end

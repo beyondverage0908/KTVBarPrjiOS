@@ -75,6 +75,7 @@
                 UIButton *addImgBtn = [[UIButton alloc] init];
                 [itemView addSubview:addImgBtn];
                 addImgBtn.layer.cornerRadius = 3;
+                addImgBtn.layer.masksToBounds = YES;
                 [addImgBtn setImage:mediaList[i-1] forState:UIControlStateNormal];
                 [addImgBtn mas_makeConstraints:^(MASConstraintMaker *make) {
                     make.width.and.height.equalTo(itemView);

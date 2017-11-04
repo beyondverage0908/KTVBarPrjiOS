@@ -26,7 +26,7 @@
             } else {
                 dic[key] = pa[key];
             }
-            if ([key isEqualToString:@"file"]) {
+            if ([key isEqualToString:@"file"] && [pa[@"file"] isKindOfClass:[NSArray class]]) {
                 _imageList = pa[@"file"];
             }
         }

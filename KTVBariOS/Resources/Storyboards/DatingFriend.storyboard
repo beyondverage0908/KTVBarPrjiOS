@@ -458,19 +458,19 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="app_add_img_icon" translatesAutoresizingMaskIntoConstraints="NO" id="4yQ-xW-r9m">
+                                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="app_add_img_icon" translatesAutoresizingMaskIntoConstraints="NO" id="4yQ-xW-r9m">
                                                 <rect key="frame" x="30" y="504" width="90" height="90"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="4yQ-xW-r9m" secondAttribute="height" multiplier="1:1" id="CXL-Wu-UMh"/>
                                                 </constraints>
                                             </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="app_add_img_icon" translatesAutoresizingMaskIntoConstraints="NO" id="chs-K7-WN1">
+                                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="app_add_img_icon" translatesAutoresizingMaskIntoConstraints="NO" id="chs-K7-WN1">
                                                 <rect key="frame" x="142.5" y="504" width="90" height="90"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="chs-K7-WN1" secondAttribute="height" multiplier="1:1" id="q5B-Ub-s8j"/>
                                                 </constraints>
                                             </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="app_add_img_icon" translatesAutoresizingMaskIntoConstraints="NO" id="1Gv-Jq-5Hh">
+                                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="app_add_img_icon" translatesAutoresizingMaskIntoConstraints="NO" id="1Gv-Jq-5Hh">
                                                 <rect key="frame" x="255" y="504" width="90" height="90"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="1Gv-Jq-5Hh" secondAttribute="height" multiplier="1:1" id="1jn-pI-wJa"/>

@@ -14,7 +14,9 @@
 
 #import "KTVMainService.h"
 
-@interface KTVPublishDateController ()
+#import "UIImage+extension.h"
+
+@interface KTVPublishDateController ()<UINavigationControllerDelegate,UIImagePickerControllerDelegate, UIImagePickerControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *barNameBtn;
 @property (weak, nonatomic) IBOutlet UIButton *yearBtn;
@@ -29,6 +31,9 @@
 
 @property (strong, nonatomic) NSMutableDictionary *params;
 
+@property (assign, nonatomic) NSInteger tapNumber; // 用于标示上传图片当前选中的是第几个
+@property (strong, nonatomic) NSMutableArray<UIImage *> *photoList; // 图片对象数组
+
 @end
 
 @implementation KTVPublishDateController
@@ -38,8 +43,10 @@
     
     if (self.type == 0) {
         self.title = @"酒吧";
+        [self.barNameBtn setTitle:@"点击选择酒吧" forState:UIControlStateNormal];
     } else {
         self.title = @"KTV";
+        [self.barNameBtn setTitle:@"点击选择KTV" forState:UIControlStateNormal];
     }
     
     [self initUI];
@@ -50,11 +57,29 @@
     [super didReceiveMemoryWarning];
 }
 
+#pragma mark - 重写
+
+- (NSMutableArray<UIImage *> *)photoList {
+    if (!_photoList) {
+        _photoList = [NSMutableArray arrayWithCapacity:3];
+    }
+    return _photoList;
+}
+
 #pragma mark - 初始化Ui
 
 - (void)initUI {
     self.explainTextView.backgroundColor = [UIColor ktvTextFieldBg];
     self.explainTextView.layer.cornerRadius = 5;
+    
+    UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(firstClick:)];
+    [self.firstimageView addGestureRecognizer:tap1];
+    
+    UITapGestureRecognizer *tap2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(secondClick:)];
+    [self.secondImageView addGestureRecognizer:tap2];
+    
+    UITapGestureRecognizer *tap3 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(thirdClick:)];
+    [self.thirdImageView addGestureRecognizer:tap3];
 }
 
 #pragma mark - 初始化
@@ -72,6 +97,7 @@
 - (IBAction)chooseBarAction:(UIButton *)sender {
     CLog(@"-->> 选择酒吧");
     KTVStoreViewController *vc = (KTVStoreViewController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVStoreViewController"];
+    vc.storeType = self.type;
     vc.selectedStoreCallback = ^(KTVStore *store) {
         [self.barNameBtn setTitle:store.storeName forState:UIControlStateNormal];
         [self.params setObject:store.storeId forKey:@"storeId"];
@@ -127,7 +153,7 @@
 
 - (IBAction)choosePayAction:(UIButton *)sender {
     CLog(@"-->> 选择付款方式");
-    NSArray *dataSource = @[@"AA制", @"我一个付", @"我付大部分"];
+    NSArray *dataSource = @[@"AA制", @"我买单"];
     KTVPickerView *pv = [[KTVPickerView alloc] initWithSelectedCallback:^(NSString *selectedTitle) {
         [sender setTitle:selectedTitle forState:UIControlStateNormal];
         for (NSInteger i = 0; i < dataSource.count; i++) {
@@ -171,6 +197,11 @@
     NSString *fullDate = [NSString stringWithFormat:@"%@-%@-%@", year, month, day];
     
     [self.params setObject:fullDate forKey:@"startTime"];
+    if (self.photoList.count) {
+        [self.params setObject:self.photoList forKey:@"file"];
+    }
+    
+    CLog(@"-->>> %@", @(self.params.allKeys.count));
     
     [KTVMainService postCreateInvite:self.params result:^(NSDictionary *result) {
         if (![result[@"code"] isEqualToString:ktvCode]) {
@@ -178,9 +209,8 @@
             return;
         }
         [KTVToast toast:TOAST_CREATE_SUCCESS];
+        [self showYaoYueSuccess:YES];
     }];
-    
-    [self showYaoYueSuccess:YES];
 }
 
 - (void)cancelAction:(UIButton *)btn {
@@ -192,6 +222,21 @@
     CLog(@"-->>> 喊人玩");
     KTVCallOtherController *vc = (KTVCallOtherController *)[UIViewController storyboardName:@"DatingFriend" storyboardId:@"KTVCallOtherController"];
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)firstClick:(UITapGestureRecognizer *)tap {
+    self.tapNumber = 1;
+    [self showAlterSheet];
+}
+
+- (void)secondClick:(UITapGestureRecognizer *)tap {
+    self.tapNumber = 2;
+    [self showAlterSheet];
+}
+
+- (void)thirdClick:(UITapGestureRecognizer *)tap {
+    self.tapNumber = 3;
+    [self showAlterSheet];
 }
 
 #pragma mark - 展示邀约成功弹出框
@@ -274,6 +319,78 @@
     // 添加按钮事件
     [cancelBtn addTarget:self action:@selector(cancelAction:) forControlEvents:UIControlEventTouchUpInside];
     [confirmBtn addTarget:self action:@selector(callOtherPlayAction:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+#pragma mark - 显示AlertSheet
+
+- (void)showAlterSheet {
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    UIAlertAction *takePhotoAction = [UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self takePhotoAction];
+    }];
+    UIAlertAction *photoAction = [UIAlertAction actionWithTitle:@"相册" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self choosePhotoLibAction];
+    }];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {}];
+    [alertController addAction:takePhotoAction];
+    [alertController addAction:photoAction];
+    [alertController addAction:cancelAction];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+
+#pragma mark - 相机相册相关
+
+// 拍照处理
+- (void)takePhotoAction {
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        
+        UIImagePickerController *imagepicker = [[UIImagePickerController alloc] init];
+        imagepicker.delegate = self;
+        imagepicker.allowsEditing = YES;
+        imagepicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        
+        [self presentViewController:imagepicker animated:YES completion:^{}];
+    }
+}
+
+// 相册中选择图片
+- (void)choosePhotoLibAction {
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+        
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        picker.delegate = self;
+        picker.allowsEditing = YES;
+        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        
+        [self presentViewController:picker animated:YES completion:^{}];
+    }
+}
+
+#pragma mark - 图片处理
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    CLog(@"--->>> 相册回调");
+    [picker dismissViewControllerAnimated:YES completion:^{
+        // 设置照片按钮信息
+        UIImage *originImage = info[UIImagePickerControllerEditedImage];
+        UIImage *image = [originImage resetSizeOfImageData:originImage maxSize:100];
+        
+        NSData * imageData = UIImageJPEGRepresentation(image,1);
+        NSInteger length = [imageData length]/1000;
+        CLog(@"--->> image size of %@kb", @(length));
+        
+        if (self.tapNumber == 1) {
+            [self.firstimageView setImage:image];
+        } else if (self.tapNumber == 2) {
+            [self.secondImageView setImage:image];
+        } else if (self.tapNumber == 3) {
+            [self.thirdImageView setImage:image];
+        }
+        [self.photoList addObject:image];
+    }];
 }
 
 @end
