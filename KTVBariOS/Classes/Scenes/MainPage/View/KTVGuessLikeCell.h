@@ -13,4 +13,6 @@
 
 @property (nonatomic, strong) KTVStoreContainer *storeContainer;
 
+@property (nonatomic, strong) KTVStore *storee;
+
 @end

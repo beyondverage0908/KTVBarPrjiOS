@@ -14,6 +14,8 @@
 
 /// 获取用户信息
 + (KTVUser *)userInfo;
+/// 删除用户信息
++ (void)resignUserInfo;
 /// 设置用户信息
 + (void)setUserInfoKey:(NSString *)infoKey infoValue:(NSString *)infoValue;
 /// 获取token

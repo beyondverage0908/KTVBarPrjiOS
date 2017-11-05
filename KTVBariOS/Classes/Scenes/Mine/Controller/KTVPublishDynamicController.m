@@ -27,6 +27,7 @@
 @property (strong, nonatomic) NSMutableArray *vedioList; // 动态将上传的图片
 @property (assign, nonatomic) NSInteger tapPickNumber; // 标志当前点击的是哪个section中的获取图片
 @property (strong, nonatomic) UIImage *daynamicHeaderBgImage;  // 动态头部背景图片
+@property (strong, nonatomic) UIImage *daynamicHeaderImage;  // 动态头部图片
 
 @end
 
@@ -100,7 +101,33 @@
             [KTVToast toast:result[@"detail"]];
         }
     }];
-    
+}
+
+- (void)uploadUserHeader:(NSDictionary *)pickDict {
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:pickDict];
+    [params setObject:[KTVCommon userInfo].phone forKey:@"username"];
+    [KTVMainService postUploadHeader:params result:^(NSDictionary *result) {
+        if ([result[@"code"] isEqualToString:ktvCode]) {
+            [KTVToast toast:TOAST_UPLOAD_SUCCESS];
+        } else {
+            [KTVToast toast:result[@"detail"]];
+        }
+    }];
+}
+
+- (void)uploadUserHeaderBg:(NSDictionary *)pickDict {
+    if (!pickDict) {
+        return;
+    }
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:pickDict];
+    [params setObject:[KTVCommon userInfo].phone forKey:@"username"];
+    [KTVMainService postUploadHeaderBg:params result:^(NSDictionary *result) {
+        if ([result[@"code"] isEqualToString:ktvCode]) {
+            [KTVToast toast:TOAST_UPLOAD_SUCCESS];
+        } else {
+            [KTVToast toast:result[@"detail"]];
+        }
+    }];
 }
 
 #pragma mark - 事件
@@ -127,6 +154,11 @@
         cell.headerBgImage = self.daynamicHeaderBgImage;
         cell.pickHeaderBgImageCallback = ^{
             self.tapPickNumber = 0;
+            [self showAlterSheet];
+        };
+        cell.headerImage = self.daynamicHeaderImage;
+        cell.pickHeaderImageCallback = ^{
+            self.tapPickNumber = 3;
             [self showAlterSheet];
         };
         return cell;
@@ -169,7 +201,7 @@
     } else if (indexPath.section == 3) {
         return 222;
     } else if (indexPath.section == 4) {
-        return 628;
+        return 746;
     }
     return 0;
 }
@@ -255,7 +287,7 @@
         UIImage *originImage = info[UIImagePickerControllerOriginalImage];
         if (self.tapPickNumber == 0) {
             UIImage *image = [KTVUtil clipImage:originImage toRect:CGSizeMake(KtvScreenW, 140)];
-            image = [image resetSizeOfImageData:image maxSize:50];
+            image = [image resetSizeOfImageData:image maxSize:100];
             self.daynamicHeaderBgImage = image;
             [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
             NSDictionary *param = @{@"file" : image};
@@ -268,6 +300,12 @@
             [self uploadUsePicture:param];
         } else if (self.tapPickNumber == 2) {
             
+        } else if (self.tapPickNumber == 3) {
+            UIImage *image = [KTVUtil clipImage:originImage toRect:CGSizeMake(130, 130)];
+            self.daynamicHeaderImage = image;
+            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
+            NSDictionary *param = @{@"file" : image};
+            [self uploadUsePicture:param];
         }
     }];
 }

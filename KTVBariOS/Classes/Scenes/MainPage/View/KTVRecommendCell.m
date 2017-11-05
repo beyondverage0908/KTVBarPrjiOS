@@ -27,4 +27,11 @@
     [super setSelected:selected animated:animated];
 }
 
+- (void)setActivity:(KTVActivity *)activity {
+    if (_activity != activity) {
+        _activity = activity;
+        self.timeLabel.text = _activity.toTime;
+    }
+}
+
 @end

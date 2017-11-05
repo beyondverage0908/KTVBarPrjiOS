@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *ageLabel;
 @property (weak, nonatomic) IBOutlet UILabel *tipLabel;
 @property (weak, nonatomic) IBOutlet UILabel *statusLabel;
+@property (weak, nonatomic) IBOutlet UILabel *inviteStatusLabel;
 
 @end
 
@@ -28,6 +29,8 @@
     self.statusLabel.userInteractionEnabled = YES;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(statusTapAction:)];
     [self.statusLabel addGestureRecognizer:tap];
+    
+    [self.headerImageView cornerRadius];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -52,11 +55,20 @@
     self.ageLabel.text = [NSString stringWithFormat:@"%@岁", @(_user.age)];
     self.tipLabel.text = _user.userDetail.todayMood;
     if (_user.inviteStatus == 2) {
-        self.statusLabel.text = @"他正在拼桌，点击查看";
+        self.inviteStatusLabel.text = @"我买单";
+        self.inviteStatusLabel.textColor = [UIColor ktvGold];
+    } else if (_user.inviteStatus == 1) {
+        self.inviteStatusLabel.text = @"AA制";
+        self.inviteStatusLabel.textColor = [UIColor ktvGold];
+    }
+    
+    if (_user.shareTableStatus == 1) {
+        self.statusLabel.text = @"正在拼桌点击查看";
+        self.statusLabel.textColor = [UIColor ktvRed];
+        [self.statusLabel addUnderlineStyle];
     } else {
         self.statusLabel.text = @"";
     }
-    [self.statusLabel addUnderlineStyle];
 }
 
 - (IBAction)btnAction:(UIButton *)sender {

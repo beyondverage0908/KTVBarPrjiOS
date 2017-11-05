@@ -9,6 +9,8 @@
 #import "KTVSettingController.h"
 #import "KTVAppVersionCell.h"
 
+#import "KTVMainService.h"
+
 @interface KTVSettingController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -31,6 +33,22 @@
 
 - (IBAction)exitAction:(id)sender {
     CLog(@"-->>>退出");
+    NSString *token = [KTVCommon ktvToken];
+    if (!token) {
+        [KTVToast toast:TOAST_OUT_OF_LOGIN];
+        return;
+    }
+    NSDictionary *params = @{@"token" : token};
+    [KTVMainService postAppExit:params result:^(NSDictionary *result) {
+        if ([result[@"code"] isEqualToString:ktvCode]) {
+            [KTVToast toast:TOAST_EXIT_SUCCESS];
+            [KTVCommon resignUserInfo];
+            [self.navigationController popViewControllerAnimated:YES];
+        } else {
+            [KTVToast toast:result[@"detail"]];
+        }
+    }];
+    
 }
 
 #pragma mark - UITableViewDelegate

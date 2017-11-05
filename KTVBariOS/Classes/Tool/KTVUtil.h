@@ -15,6 +15,7 @@
 + (BOOL)isNullString:(NSString *)string;
 /// 保存数据到UserDefault中
 + (void)setObject:(id)obj forKey:(NSString *)key;
++ (void)removeUserDefaultForKey:(NSString *)key;
 /// UserDefault中获取数据
 + (id)objectForKey:(NSString *)key;
 /// 打电话

@@ -11,7 +11,11 @@
 @interface KTVDynamicHeaderCell : UITableViewCell
 
 @property (nonatomic, strong) UIImage * headerBgImage;
+@property (nonatomic, strong) UIImage * headerImage;
 
+// 选择背景图
 @property (nonatomic, copy) void (^pickHeaderBgImageCallback)(void);
+// 选择头像
+@property (nonatomic, copy) void (^pickHeaderImageCallback)(void);
 
 @end

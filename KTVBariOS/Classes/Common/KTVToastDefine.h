@@ -36,7 +36,10 @@ static NSString * const TOAST_UPLOAD_SUCCESS                        = @"上传�
 static NSString * const TOAST_USERINFO_FAIL                         = @"获取个人信息失败";
 static NSString * const TOAST_DYNAMIC_UPLOAD_FAIL                   = @"发布动态失败";
 static NSString * const TOAST_DYNAMIC_UPLOAD_SUCC                   = @"发布动态成功";
-static NSString * const TOAST_STORE_EMPTY                           = @"没有可查询门店";
+static NSString * const TOAST_STORE_EMPTY                           = @"附近没有门店";
+static NSString * const TOAST_NICKNAME_EDITED                       = @"昵称修改成功";
+static NSString * const TOAST_EXIT_SUCCESS                          = @"注销成功";
+static NSString * const TOAST_OUT_OF_LOGIN                          = @"您还未登陆";
 
 // MBProgressHUD定义
 

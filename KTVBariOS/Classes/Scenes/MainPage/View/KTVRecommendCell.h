@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "KTVActivity.h"
 
 @interface KTVRecommendCell : UITableViewCell
+
+@property (nonatomic, strong) KTVActivity  *activity;
 
 @end

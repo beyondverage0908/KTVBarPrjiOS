@@ -19,6 +19,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *aihaoTF;
 @property (weak, nonatomic) IBOutlet UITextView *thinkLoveTextView;
 @property (weak, nonatomic) IBOutlet UITextView *thinkSexTextView;
+@property (weak, nonatomic) IBOutlet UITextField *signTF;
+@property (weak, nonatomic) IBOutlet UITextField *satisfiedTF;
 
 @property (strong, nonatomic) NSMutableDictionary *userInfoDict;
 
@@ -85,6 +87,12 @@
     }
     if (self.thinkLoveTextView.text.length) {
         [self.userInfoDict setObject:self.thinkSexTextView.text forKey:@"viewForSex"];
+    }
+    if (self.signTF.text.length) {
+        [self.userInfoDict setObject:self.signTF.text forKey:@"sign"];
+    }
+    if (self.satisfiedTF.text.length) {
+        [self.userInfoDict setObject:self.satisfiedTF.text forKey:@"satisfiedFigure"];
     }
 }
 

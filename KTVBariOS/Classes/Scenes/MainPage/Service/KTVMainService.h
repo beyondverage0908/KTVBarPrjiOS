@@ -75,7 +75,31 @@ typedef void(^ResponseSuccess)(NSDictionary *result);
 /// 用户上传图片
 + (void)postUploadUserPicture:(NSDictionary *)params result:(ResponseSuccess)responseResult;
 
+/// 用户上传头像，背景图
++ (void)postUploadHeader:(NSDictionary *)params result:(ResponseSuccess)responseResult;
+
+/// 上传用户头像背景图片
++ (void)postUploadHeaderBg:(NSDictionary *)params result:(ResponseSuccess)responseResult;
+
+/// 编辑昵称
++ (void)postEditNickname:(NSDictionary *)params result:(ResponseSuccess)responseResult;
+
 /// 创建用户动态
 + (void)postUploadDynamic:(NSDictionary *)params result:(ResponseSuccess)responseResult;
+
+/// 根据距离查询门店
++ (void)postLocalStore:(NSDictionary *)params result:(ResponseSuccess)responseResult;
+
+/// 退出注销
++ (void)postAppExit:(NSDictionary *)params result:(ResponseSuccess)responseResult;
+
+/// 门店猜你喜欢
++ (void)postStoreLike:(NSDictionary *)params result:(ResponseSuccess)responseResult;
+
+/// 门店附近的活动
++ (void)postStoreNearActivity:(NSDictionary *)params result:(ResponseSuccess)responseResult;
+
+/// 首页轮播图
++ (void)getMainBanner:(NSString *)params result:(ResponseSuccess)responseResult;
 
 @end

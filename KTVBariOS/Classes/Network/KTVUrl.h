@@ -24,6 +24,15 @@
 /// 用户上传图片
 + (NSString *)getUploadUserPictureUrl;
 
+/// 用户上传头像
++ (NSString *)getUploadHeaderUrl;
+
+/// 用户背景图
++ (NSString *)getUploadHeaderBgUrl;
+
+/// 修改昵称
++ (NSString *)getEditNicknameUrl;
+
 #pragma mark - 用户动态
 
 + (NSString *)getUserDynamicStatementUrl;
@@ -59,8 +68,15 @@
 /// 更改密码
 + (NSString *)getChangePasswordUrl;
 
+/// 退出
++ (NSString *)getExitUrl;
+
+#pragma mark - 地理位置
+
 /// 登录成功之后更新用户的位置和最后一次登录的时间
 + (NSString *)getLocationRecentStatusUrl;
+
+#pragma mark - 支付
 
 /// ping++支付
 + (NSString *)getPingPayUrl;
@@ -68,8 +84,13 @@
 /// ping++退款 
 + (NSString *)getRefundUrl;
 
+#pragma mark - 首页
+
 /// 首页数据
 + (NSString *)getMainUrl;
+
+/// 首页轮播图
++ (NSString *)getMainBannerUrl;
 
 #pragma mark - 门店
 
@@ -94,6 +115,9 @@
 /// 获取门店附近的活动
 + (NSString *)getStoreNearActivityUrl;
 
+/// 门店-猜你喜欢
++ (NSString *)getStoreLikeUrl;
+
 /// 获取单个团购信息
 + (NSString *)getGroupBuyUrl;
 
@@ -110,6 +134,9 @@
 
 /// 查询订单 
 + (NSString *)getSearchOrderUrl;
+
+/// 根据距离查询门店
++ (NSString *)getLocalOrderUrl;
 
 #pragma mark - 评论
 

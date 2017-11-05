@@ -24,6 +24,7 @@
 #import "NSDate+Processing.h"
 #import "UILabel+Ktv.h"
 #import "MBProgressHUD+KTV.h"
+#import "UIView+extension.h"
 
 // Common
 #import "KTVCommonDefine.h"

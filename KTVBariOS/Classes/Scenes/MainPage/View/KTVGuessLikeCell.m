@@ -63,7 +63,18 @@
     self.store.text = _storeContainer.store.storeName;
     self.starView.stars = _storeContainer.store.star;
     self.location.text = [NSString stringWithFormat:@"%@ %@km", _storeContainer.store.address.addressName, @(_storeContainer.distance)];
-    self.appointment.text = [NSString stringWithFormat:@"在约的小伙伴%@人", @([_storeContainer.userList count])];;
+    self.appointment.text = [NSString stringWithFormat:@"在约的小伙伴%@人", @([_storeContainer.userList count])];
+}
+
+- (void)setStoree:(KTVStore *)storee {
+    if (_storee != storee) {
+        _storee = storee;
+        
+        self.store.text = _storee.storeName;
+        self.starView.stars = _storee.star;
+        self.location.text = [NSString stringWithFormat:@"%@ %@km", _storee.address.addressName, @(_storeContainer.distance)];
+        self.appointment.text = [NSString stringWithFormat:@"在约的小伙伴%@人", @([_storee.activitorList count])];
+    }
 }
 
 

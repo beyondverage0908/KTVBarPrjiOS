@@ -17,6 +17,11 @@
     return user;
 }
 
++ (void)resignUserInfo {
+    [KTVUtil removeUserDefaultForKey:@"ktvUserInfo"];
+    [KTVUtil removeUserDefaultForKey:@"ktvToken"];
+}
+
 + (void)setUserInfoKey:(NSString *)infoKey infoValue:(NSString *)infoValue {
     NSDictionary *info = [KTVUtil objectForKey:@"ktvUserInfo"];
     if (!info) {

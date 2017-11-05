@@ -48,6 +48,10 @@
         self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     }
     [self customRightBarItems];
+    
+    [self initData];
+    
+    [self loadStoreInvitators];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

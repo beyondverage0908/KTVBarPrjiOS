@@ -10,4 +10,6 @@
 
 @interface KTVPublishDynamicController : KTVBaseViewController
 
+@property (nonatomic, strong) KTVUser * user;
+
 @end

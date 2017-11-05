@@ -47,8 +47,12 @@
 
 - (void)loadStoresBySearch {
     
-    NSDictionary *params =@{@"storeType" : @(self.storeType), @"storeName" : self.storeName ? self.storeName : @"dd"};
-    [KTVMainService postStoreSearch:params result:^(NSDictionary *result) {
+    KTVAddress *address = [KTVCommon getUserLocation];
+    NSDictionary *params =@{@"storeType" : @(self.storeType),
+                            @"distance" :@(1000.0),
+                            @"latitude" : @(address.latitude),
+                            @"longitude" : @(address.longitude)};
+    [KTVMainService postLocalStore:params result:^(NSDictionary *result) {
         if (![result[@"code"] isEqualToString:ktvCode]) {
             [KTVToast toast:result[@"detail"]];
             return;

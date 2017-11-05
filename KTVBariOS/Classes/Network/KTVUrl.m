@@ -28,6 +28,19 @@
     return @"/api/login/uploadUserPicture";
 }
 
+/// 用户上传头像，背景图   0: 头像 1: 背景图
++ (NSString *)getUploadHeaderUrl {
+    return @"/api/login/uploadPicture/0";
+}
+
++ (NSString *)getUploadHeaderBgUrl {
+    return @"/api/login/uploadPicture/1";
+}
+
++ (NSString *)getEditNicknameUrl {
+    return @"/api/login/user/editNickname";
+}
+
 #pragma mark - 用户动态
 
 + (NSString *)getUserDynamicStatementUrl {
@@ -76,6 +89,12 @@
     return @"/api/password/user/changePassword";
 }
 
++ (NSString *)getExitUrl {
+    return @"/api/login/user/logout";
+}
+
+#pragma mark --
+
 + (NSString *)getLocationRecentStatusUrl {
     return @"/api/login/user/recentStatus";
 }
@@ -90,6 +109,10 @@
 
 + (NSString *)getMainUrl {
     return @"/api/main/data";
+}
+
++ (NSString *)getMainBannerUrl {
+    return @"/api/store/banner";
 }
 
 + (NSString *)getAtivitorsUrl {
@@ -116,6 +139,10 @@
     return @"/api/nearActivity";
 }
 
++ (NSString *)getStoreLikeUrl {
+    return @"/api/store/like";
+}
+
 + (NSString *)getGroupBuyUrl {
     return @"/api/groupBuy/";
 }
@@ -135,6 +162,12 @@
 + (NSString *)getSearchOrderUrl {
     return @"/api/order/searchOrder";
 }
+
++ (NSString *)getLocalOrderUrl {
+    return @"/api/userInvite/store";
+}
+
+#pragma mark - 评论
 
 + (NSString *)getRecentStatusUrl {
     return @"/api/user/recentStatus";

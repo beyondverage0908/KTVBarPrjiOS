@@ -29,6 +29,8 @@
     self.statusLabel.userInteractionEnabled = YES;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pinZhuoAction:)];
     [self.statusLabel addGestureRecognizer:tap];
+    
+    [self.headerImageView cornerRadius];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

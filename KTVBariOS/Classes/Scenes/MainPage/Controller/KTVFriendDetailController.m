@@ -70,6 +70,7 @@
 
 #pragma mark - 网络
 
+/// 获取门店在约人数
 - (void)loadFriendDetailList {
     NSString *storeId = self.store.storeId ? self.store.storeId : @"4";
     if (!storeId) return;

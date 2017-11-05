@@ -53,6 +53,10 @@
     return NO;
 }
 
++ (void)removeUserDefaultForKey:(NSString *)key {
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:key];
+}
+
 + (void)setObject:(id)obj forKey:(NSString *)key {
     if (!obj || !key || ![obj isKindOfClass:[NSObject class]] || ![key isKindOfClass:[NSString class]]) return;
     

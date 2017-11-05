@@ -18,6 +18,9 @@
 #import "KTVMainService.h"
 #import "KTVLoginService.h"
 
+#import "KTVActivity.h"
+#import "KTVBanner.h"
+
 @interface KTVMainController ()<UITableViewDelegate, UITableViewDataSource, SDCycleScrollViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -26,7 +29,9 @@
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UIButton *scanQRbtn;
 
-@property (strong, nonatomic) KTVStore *store;
+@property (strong, nonatomic) NSMutableArray<KTVStore *> *storeLikeList;
+@property (strong, nonatomic) NSMutableArray<KTVActivity *> *activityList;
+@property (strong, nonatomic) NSMutableArray<KTVBanner *> *bannerList;
 
 @end
 
@@ -44,11 +49,10 @@
     self.tableView.tableFooterView = [[UIView alloc] init];
     
     // 获取暖场人
-    [self loadStoreActivitors];
-    [self loadStoreGoods];
-    [self loadStore];
-    [self loadStoreInvitators];
     [self loadUserInfo];
+    [self loadStoreLike];
+    [self loadNearActivity];
+    [self loadMianBanner];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -67,41 +71,12 @@
 
 // 初始化
 - (void)initData {
-    
+    self.storeLikeList = [NSMutableArray array];
+    self.activityList = [NSMutableArray array];
+    self.bannerList = [NSMutableArray array];
 }
 
 #pragma mark - 网络
-
-// 获取门店暖场人
-- (void)loadStoreActivitors {
-    [KTVMainService getStoreActivitors:@"4" result:^(NSDictionary *result) {
-        //CLog(@"-->> %@", result);
-    }];
-}
-
-- (void)loadStoreGoods {
-    [KTVMainService getStoreGoods:@"4" result:^(NSDictionary *result) {
-        //CLog(@"-->> %@", result);
-    }];
-}
-
-// 获取门店
-- (void)loadStore {
-    [KTVMainService getStore:@"4" result:^(NSDictionary *result) {
-        if ([result[@"code"] isEqualToString:ktvCode]) {
-            KTVStore *store = [KTVStore yy_modelWithDictionary:result[@"data"]];
-            self.store = store;
-            
-            [self.tableView reloadData];
-        }
-    }];
-}
-
-- (void)loadStoreInvitators {
-    [KTVMainService getStoreInvitators:@"4" result:^(NSDictionary *result) {
-        //CLog(@"-->> %@", result);
-    }];
-}
 
 - (void)loadUserInfo {
     KTVUser *user = [KTVCommon userInfo];
@@ -117,6 +92,55 @@
                     }
                 }
             }
+        }
+    }];
+}
+
+/// 猜你喜欢
+- (void)loadStoreLike {
+    NSString *username = [KTVCommon userInfo].phone;
+    NSDictionary *params = @{@"storeType" : @(0),
+                             @"username" : @"18939865772"};
+    [KTVMainService postStoreLike:params result:^(NSDictionary *result) {
+        if (![result[@"code"] isEqualToString:ktvCode]) {
+            
+        } else {
+            for (NSDictionary *dic in result[@"data"]) {
+                KTVStore *store = [KTVStore yy_modelWithDictionary:dic];
+                [self.storeLikeList addObject:store];
+            }
+            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationNone];
+        }
+    }];
+}
+
+- (void)loadNearActivity {
+    KTVAddress *address = [KTVCommon getUserLocation];
+//    NSDictionary *params = @{@"storeType" : @0,
+//                             @"latitude" : @(address.latitude),
+//                             @"longitude" : @(address.longitude)};
+    NSDictionary *params = @{@"storeType" : @0,
+                             @"latitude" : @(121.48789949),
+                             @"longitude" : @(31.24916171)};
+    [KTVMainService postStoreNearActivity:params result:^(NSDictionary *result) {
+        if ([result[@"code"] isEqualToString:ktvCode]) {
+            for (NSDictionary *dic in result[@"data"]) {
+                KTVActivity *activity = [KTVActivity yy_modelWithDictionary:dic];
+                [self.activityList addObject:activity];
+            }
+            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:3] withRowAnimation:UITableViewRowAnimationNone];
+        }
+    }];
+}
+
+- (void)loadMianBanner {
+    [KTVMainService getMainBanner:nil result:^(NSDictionary *result) {
+        if ([result[@"code"] isEqualToString:ktvCode]) {
+            for (NSDictionary *dic in result[@"data"]) {
+                KTVBanner *banner = [KTVBanner yy_modelWithDictionary:dic];
+                [self.bannerList addObject:banner];
+            }
+            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
         }
     }];
 }
@@ -229,7 +253,8 @@
     if (indexPath.section == 2) {
         CLog(@"-- 酒吧详情");
         KTVBarKtvDetailController *vc = (KTVBarKtvDetailController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVBarKtvDetailController"];
-        vc.store = self.store;
+        KTVStore *store = self.storeLikeList[indexPath.row];
+        vc.store = store;;
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
@@ -244,7 +269,11 @@
     switch (section) {
         case 0:
         {
-            return 1;
+            if ([self.bannerList count]) {
+                return 1;
+            } else {
+                return 0;
+            }
         }
             break;
         case 1:
@@ -254,12 +283,12 @@
             break;
         case 2:
         {
-            return 1;
+            return [self.storeLikeList count];
         }
             break;
         case 3:
         {
-            return 1;
+            return [self.activityList count];
         }
         default:
         {
@@ -277,9 +306,15 @@
             NSArray *imgUrls = @[@"https://4.bp.blogspot.com/-cSkCJRk_MXM/U5yaVSt2JJI/AAAAAAAA-S0/KSLqYLNoiyw/s0/Girl+fashion+beauty.jpg",
                                  @"https://s10.favim.com/orig/160322/beauty-girl-hair-makeup-Favim.com-4104900.jpg",
                                  @"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1501749823122&di=b250a8c94d39c217440391f9e6696af2&imgtype=0&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F15%2F24%2F50%2F43Q58PICkj4_1024.jpg"];
+            
+            NSMutableArray *imgurlList = [NSMutableArray array];
+            for (KTVBanner *banner in self.bannerList) {
+                [imgurlList addObject:banner.picture.pictureUrl];
+            }
+            
             KTVBannerCell *cell = (KTVBannerCell *)[tableView dequeueReusableCellWithIdentifier:KTVStringClass(KTVBannerCell)];
             cell.sdBannerView.delegate = self;
-            cell.sdBannerView.imageURLStringsGroup = imgUrls;
+            cell.sdBannerView.imageURLStringsGroup = imgurlList;
             return cell;
         }
             break;
@@ -292,12 +327,16 @@
         case 2:
         {
             KTVGuessLikeCell *cell = (KTVGuessLikeCell *)[tableView dequeueReusableCellWithIdentifier:KTVStringClass(KTVGuessLikeCell)];
+            KTVStore *store = self.storeLikeList[indexPath.row];
+            cell.storee = store;
             return cell;
         }
             break;
         case 3:
         {
             KTVRecommendCell *cell = (KTVRecommendCell *)[tableView dequeueReusableCellWithIdentifier:KTVStringClass(KTVRecommendCell)];
+            KTVActivity *activity = self.activityList[indexPath.row];
+            cell.activity = activity;
             return cell;
         }
         default:
