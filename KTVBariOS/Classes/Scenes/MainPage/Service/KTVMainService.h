@@ -102,4 +102,7 @@ typedef void(^ResponseSuccess)(NSDictionary *result);
 /// 首页轮播图
 + (void)getMainBanner:(NSString *)params result:(ResponseSuccess)responseResult;
 
+/// 获取最新的版本号
++ (void)getAppVersion:(NSDictionary *)params result:(ResponseSuccess)responseResult;
+
 @end

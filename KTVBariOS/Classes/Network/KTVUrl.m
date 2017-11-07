@@ -238,4 +238,11 @@
     return @"/api/userCollect/";
 }
 
+#pragma mark - 版本号管理
+
+/// 获取最新的版本号
++ (NSString *)getAppVersionUrl {
+    return @"/api/version";
+}
+
 @end

@@ -187,4 +187,9 @@
 /// 获取收藏
 + (NSString *)getAlreadyCollectUrl;
 
+#pragma mark - 版本号管理
+
+/// 获取最新的版本号
++ (NSString *)getAppVersionUrl;
+
 @end

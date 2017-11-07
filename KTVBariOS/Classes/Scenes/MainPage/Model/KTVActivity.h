@@ -29,6 +29,7 @@
 @property (nonatomic, strong) NSString *price;
 @property (nonatomic, strong) NSString *totalTime;
 @property (nonatomic, strong) NSString *storeId;
+@property (nonatomic, strong) KTVPicture * picture;
 
 
 @end

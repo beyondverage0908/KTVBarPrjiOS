@@ -53,6 +53,7 @@
     [self loadStoreLike];
     [self loadNearActivity];
     [self loadMianBanner];
+    [self loadAppVersion];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -141,6 +142,20 @@
                 [self.bannerList addObject:banner];
             }
             [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
+        }
+    }];
+}
+
+- (void)loadAppVersion {
+    NSDictionary *params = @{@"version" : [KTVUtil appVersion]};
+    
+    [KTVMainService getAppVersion:params result:^(NSDictionary *result) {
+        if (![result[@"code"] isEqualToString:ktvCode]) {
+            return;
+        }
+        BOOL needUpdate = [result[@"data"][@"needUpdate"] boolValue];
+        if (needUpdate) {
+            [KTVToast toast:@"Alert提示框，需要更新"];
         }
     }];
 }

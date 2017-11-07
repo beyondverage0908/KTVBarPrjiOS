@@ -30,7 +30,9 @@
 - (void)setActivity:(KTVActivity *)activity {
     if (_activity != activity) {
         _activity = activity;
+        
         self.timeLabel.text = _activity.toTime;
+        [self.toastImageView sd_setImageWithURL:[NSURL URLWithString:_activity.picture.pictureUrl] placeholderImage:[UIImage imageNamed:@"bar_detail_beauty_placeholder"]];
     }
 }
 
