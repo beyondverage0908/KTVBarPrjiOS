@@ -17,7 +17,7 @@ typedef NS_ENUM(NSInteger, HUDShowType)
 @implementation MBProgressHUD (KTV)
 
 + (UIWindow *)window {
-    return [[[UIApplication sharedApplication] windows] lastObject];
+    return [UIApplication sharedApplication].keyWindow;
 }
 
 + (void)show {
@@ -47,7 +47,7 @@ typedef NS_ENUM(NSInteger, HUDShowType)
 + (void)hideHUDForView:(UIView *)view{
     
     if (view == nil)
-        view = [[UIApplication sharedApplication].windows lastObject];
+        view = [self window];
     
     [self hideHUDForView:view animated:YES];
 }

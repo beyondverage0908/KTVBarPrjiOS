@@ -50,6 +50,9 @@
     
     [self loadUserInfo];
     [self loadSearchOrder];
+    
+    [KtvNotiCenter addObserver:self selector:@selector(loginedSucess) name:KNotLoginSuccess object:nil];
+    [KtvNotiCenter addObserver:self selector:@selector(resignLogin) name:KNotLoginOutOf object:nil];
 }
 
 - (void)setupData {
@@ -63,12 +66,22 @@
     return _storeList;
 }
 
+#pragma mark - 监听
+
+- (void)loginedSucess {
+    [self loadUserInfo];
+}
+
+- (void)resignLogin {
+    self.user = nil;
+    [self.tableView reloadData];
+}
+
 #pragma mark - 网络
 
 /// 查询订单
 - (void)loadSearchOrder {
     NSString *phone = [KTVCommon userInfo].phone;
-    
     if ([KTVUtil isNullString:phone]) {
         return;
     }
@@ -114,6 +127,10 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (![KTVCommon isLogin]) {
+        [self requestToLogin];
+        return;
+    }
     if (indexPath.section == 0) {
         KTVUserInfoController *vc = (KTVUserInfoController *)[UIViewController storyboardName:@"MePage" storyboardId:@"KTVUserInfoController"];
         vc.isMySelf = YES;
@@ -206,10 +223,14 @@
 }
 
 - (void)toseeMineInfo:(NSDictionary *)info {
-    CLog(@"-- 查看个人信息");
     // 个人信息
-    KTVPublishDynamicController *vc = (KTVPublishDynamicController *)[UIViewController storyboardName:@"MePage" storyboardId:KTVStringClass(KTVPublishDynamicController)];
-    [self.navigationController pushViewController:vc animated:YES];
+    if ([KTVCommon isLogin]) {
+        KTVPublishDynamicController *vc = (KTVPublishDynamicController *)[UIViewController storyboardName:@"MePage" storyboardId:KTVStringClass(KTVPublishDynamicController)];
+        vc.user = self.user;
+        [self.navigationController pushViewController:vc animated:YES];
+    } else {
+        [self requestToLogin];
+    }
 }
 
 @end

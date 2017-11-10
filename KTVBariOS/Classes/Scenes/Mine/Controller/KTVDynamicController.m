@@ -79,7 +79,7 @@
     }
     [self.params setObject:[KTVCommon userInfo].phone forKey:@"username"];
 
-    [MBProgressHUD showMessage:@"发布中..."];
+    [MBProgressHUD showMessage:@"正在发布中..."];
     [KTVMainService postUploadDynamic:self.params result:^(NSDictionary *result) {
         [MBProgressHUD hiddenHUD];
         if (![result[@"code"] isEqualToString:ktvCode]) {

@@ -26,6 +26,7 @@
     self.headerImageView.layer.masksToBounds = YES;
 }
 
+
 - (IBAction)modifyUserInfoAction:(UIButton *)sender {
     CLog(@"-- 查看修改个人信息");
     if ([self.delegate respondsToSelector:@selector(toseeMineInfo:)]) {
@@ -51,7 +52,12 @@
     if (_user != user) {
         _user = user;
         
-        self.loginTypeBtn.hidden = YES;
+        if (_user) {
+            self.loginTypeBtn.hidden = YES;
+        } else {
+            self.loginTypeBtn.hidden = NO;
+        }
+        
         self.nicknameLabel.text = _user.nickName ? _user.nickName : _user.username;
     
         [self.headerImageView sd_setImageWithURL:[NSURL URLWithString:_user.pictureList.firstObject.pictureUrl] placeholderImage:[UIImage imageNamed:@"bar_yuepao_user_placeholder"]];

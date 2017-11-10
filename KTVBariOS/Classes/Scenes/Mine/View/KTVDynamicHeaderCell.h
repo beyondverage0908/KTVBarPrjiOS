@@ -10,6 +10,8 @@
 
 @interface KTVDynamicHeaderCell : UITableViewCell
 
+@property (nonatomic, strong) KTVUser *user;
+
 @property (nonatomic, strong) UIImage * headerBgImage;
 @property (nonatomic, strong) UIImage * headerImage;
 

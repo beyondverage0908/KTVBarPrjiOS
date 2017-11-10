@@ -48,6 +48,8 @@
     self.tableView.backgroundColor = [UIColor ktvBG];
     self.tableView.tableFooterView = [[UIView alloc] init];
     
+    // 利用订单查询，获取是否为登陆状态
+    [self loadSearchOrderToJudgeLoginStatus];
     // 获取暖场人
     [self loadUserInfo];
     [self loadStoreLike];
@@ -78,6 +80,17 @@
 }
 
 #pragma mark - 网络
+
+/// 查询订单 - 用来判断当前状态是否是登陆状态
+/// 查询订单
+- (void)loadSearchOrderToJudgeLoginStatus {
+    NSString *phone = [KTVCommon userInfo].phone;
+    if ([KTVUtil isNullString:phone]) {
+        return;
+    }
+    NSDictionary *params = @{@"username" : phone, @"orderStatus" : @"1"};
+    [KTVMainService postSearchOrder:params result:^(NSDictionary *result) {}];
+}
 
 - (void)loadUserInfo {
     KTVUser *user = [KTVCommon userInfo];
@@ -366,9 +379,11 @@
 
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index {
     CLog(@"--%@--main page banner click", @(index));
-    KTVLoginGuideController *guideVC = [[KTVLoginGuideController alloc] init];
-    KTVBaseNavigationViewController *nav = [[KTVBaseNavigationViewController alloc] initWithRootViewController:guideVC];
-    [self presentViewController:nav animated:YES completion:nil];
+//    KTVLoginGuideController *guideVC = [[KTVLoginGuideController alloc] init];
+//    KTVBaseNavigationViewController *nav = [[KTVBaseNavigationViewController alloc] initWithRootViewController:guideVC];
+//    [self presentViewController:nav animated:YES completion:nil];
+    
+    [MBProgressHUD showMessage:@"加载中..."];
 }
 
 @end

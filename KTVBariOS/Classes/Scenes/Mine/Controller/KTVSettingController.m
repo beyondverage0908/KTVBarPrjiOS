@@ -31,24 +31,34 @@
     [super didReceiveMemoryWarning];
 }
 
+#pragma mark - 事件
+
 - (IBAction)exitAction:(id)sender {
     CLog(@"-->>>退出");
+    [self logoutAccount];
+}
+
+#pragma mark - 网络
+
+- (void)logoutAccount {
     NSString *token = [KTVCommon ktvToken];
     if (!token) {
         [KTVToast toast:TOAST_OUT_OF_LOGIN];
         return;
     }
     NSDictionary *params = @{@"token" : token};
+    [MBProgressHUD showMessage:@"注销中..."];
     [KTVMainService postAppExit:params result:^(NSDictionary *result) {
+        [MBProgressHUD hiddenHUD];
         if ([result[@"code"] isEqualToString:ktvCode]) {
             [KTVToast toast:TOAST_EXIT_SUCCESS];
             [KTVCommon resignUserInfo];
             [self.navigationController popViewControllerAnimated:YES];
+            [KtvNotiCenter postNotificationName:KNotLoginOutOf object:nil];
         } else {
             [KTVToast toast:result[@"detail"]];
         }
     }];
-    
 }
 
 #pragma mark - UITableViewDelegate

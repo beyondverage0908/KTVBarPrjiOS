@@ -116,9 +116,13 @@
             CLog(@"-- ktv邀约");
             type = 1;
         }
-        KTVPublishDateController *vc = (KTVPublishDateController *)[UIViewController storyboardName:@"DatingFriend" storyboardId:@"KTVPublishDateController"];
-        vc.type = type;
-        [self.navigationController pushViewController:vc animated:YES];
+        if ([KTVCommon isLogin]) {
+            KTVPublishDateController *vc = (KTVPublishDateController *)[UIViewController storyboardName:@"DatingFriend" storyboardId:@"KTVPublishDateController"];
+            vc.type = type;
+            [self.navigationController pushViewController:vc animated:YES];
+        } else {
+            [self requestToLogin];
+        }
     };
 }
 

@@ -11,7 +11,7 @@
 @interface KTVBeeHeaderCell()
 
 @property (weak, nonatomic) IBOutlet UIImageView *bigBgImageView;
-@property (weak, nonatomic) IBOutlet UIView *photoLibraryBgView;
+@property (weak, nonatomic) IBOutlet UIView *photoLibraryBgView; // 相册
 @property (weak, nonatomic) IBOutlet UILabel *addressLabel;
 @property (weak, nonatomic) IBOutlet UILabel *distanseLabel;
 @property (weak, nonatomic) IBOutlet UILabel *statusLabel; // 今晚是否有约

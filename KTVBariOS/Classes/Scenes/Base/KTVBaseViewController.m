@@ -8,6 +8,7 @@
 
 #import "KTVBaseViewController.h"
 #import "UINavigationBar+background.h"
+#import "KTVLoginGuideController.h"
 
 @interface KTVBaseViewController ()
 
@@ -101,6 +102,22 @@
 
 - (void)navigationBackAction:(id)action {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+
+- (void)requestToLogin {
+    UIAlertController *alertControler = [UIAlertController alertControllerWithTitle:@"提醒" message:@"您还未登陆，请先登陆后操作" preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:@"登陆" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        KTVLoginGuideController *guideVC = [[KTVLoginGuideController alloc] init];
+        KTVBaseNavigationViewController *nav = [[KTVBaseNavigationViewController alloc] initWithRootViewController:guideVC];
+        [self presentViewController:nav animated:YES completion:nil];
+    }];
+    [alertControler addAction:confirmAction];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
+    [alertControler addAction:cancelAction];
+    
+    [self presentViewController:alertControler animated:YES completion:nil];
 }
 
 @end

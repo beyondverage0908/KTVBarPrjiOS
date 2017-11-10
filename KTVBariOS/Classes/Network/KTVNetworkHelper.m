@@ -290,15 +290,13 @@ static KTVNetworkHelper *_instance = nil;
 #pragma mark - 封装请求返回数据
 
 - (void)requestResponse:(NSDictionary *)responese success:(RequestSuccess)success {
-    if ([responese[@"code"] isEqualToString:ktvInvalidateToken]) {
+    if ([responese[@"code"] isEqualToString:ktvInvalidateToken] || [responese[@"code"] isEqualToString:ktvHeaderTokenNull]) {
         [KtvNotiCenter postNotificationName:ktvInvalidateToken object:nil];
-        return;
+        // 移除token
+        [KTVCommon removeKtvToken];
+    } else {
+        if (success) success(responese);
     }
-    if ([responese[@"code"] isEqualToString:ktvHeaderTokenNull]) {
-        [KtvNotiCenter postNotificationName:ktvInvalidateToken object:nil];
-        return;
-    }
-    if (success) success(responese);
 }
 
 @end

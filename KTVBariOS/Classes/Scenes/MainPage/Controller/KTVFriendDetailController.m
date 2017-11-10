@@ -79,12 +79,16 @@
             [KTVToast toast:TOAST_GET_DATA_FAIL];
             return;
         }
-        
-        for (NSDictionary *dic in result[@"data"]) {
-            KTVUser *user = [KTVUser yy_modelWithDictionary:dic];
-            [self.yueUserList addObject:user];
+        NSArray *activityList = result[@"data"];
+        if ([activityList count]) {
+            for (NSDictionary *dic in result[@"data"]) {
+                KTVUser *user = [KTVUser yy_modelWithDictionary:dic];
+                [self.yueUserList addObject:user];
+            }
+            [self.tableView reloadData];
+        } else {
+            [KTVToast toast:TOAST_NOMORE_ACTIVITORS];
         }
-        [self.tableView reloadData];
     }];
 }
 

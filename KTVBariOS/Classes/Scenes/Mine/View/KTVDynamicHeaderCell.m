@@ -37,6 +37,24 @@
     self.nicknameTextfield.delegate = self;
 }
 
+#pragma mark - 设置
+
+- (void)setUser:(KTVUser *)user {
+    if (_user != user) {
+        _user = user;
+        
+        if (_user.pictureList.count > 1) {
+            KTVPicture *pic = _user.pictureList[1];
+            [self.headerImageView sd_setImageWithURL:[NSURL URLWithString:pic.pictureUrl] placeholderImage:[UIImage imageNamed:@"mine_header_placeholder"]];
+        }
+        KTVPicture *picture = _user.pictureList.firstObject;
+        [self.userHeaderImageView sd_setImageWithURL:[NSURL URLWithString:picture.pictureUrl] placeholderImage:[UIImage imageNamed:@"bar_yuepao_user_placeholder"]];
+        
+        self.nicknameTextfield.text = _user.nickName;
+        self.addressLabel.text = @"地址一";
+    }
+}
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 }
@@ -68,7 +86,6 @@
 }
 - (IBAction)editNicknameAction:(id)sender {
     [self.nicknameTextfield becomeFirstResponder];
-    
 }
 
 

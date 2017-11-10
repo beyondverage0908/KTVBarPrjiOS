@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BcD-co-utR">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BcD-co-utR">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -33,9 +33,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="115"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="mainpage_all_bg_line" translatesAutoresizingMaskIntoConstraints="NO" id="ekF-sq-J9x">
+                                                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mainpage_all_bg_line" translatesAutoresizingMaskIntoConstraints="NO" id="ekF-sq-J9x">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="115"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mainpage_bar_placeholder_img" translatesAutoresizingMaskIntoConstraints="NO" id="n1V-zJ-GtM">
                                                     <rect key="frame" x="12" y="18" width="137.5" height="78.5"/>
@@ -124,10 +123,13 @@
                                                 </view>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="ekF-sq-J9x" firstAttribute="top" secondItem="gHy-RG-SBe" secondAttribute="top" id="0MQ-eJ-yru"/>
                                                 <constraint firstItem="lei-iz-Zzu" firstAttribute="top" secondItem="tve-Na-E8Y" secondAttribute="bottom" constant="3" id="9W5-Ks-cew"/>
                                                 <constraint firstAttribute="trailing" secondItem="0Js-Q8-4JZ" secondAttribute="trailing" constant="12" id="GJb-fI-Gk4"/>
+                                                <constraint firstAttribute="trailing" secondItem="ekF-sq-J9x" secondAttribute="trailing" id="IBS-ya-9Aj"/>
                                                 <constraint firstItem="tve-Na-E8Y" firstAttribute="leading" secondItem="n1V-zJ-GtM" secondAttribute="trailing" constant="18" id="Iec-yk-i5w"/>
                                                 <constraint firstItem="tve-Na-E8Y" firstAttribute="top" secondItem="YdI-6i-uRW" secondAttribute="bottom" constant="2" id="KIh-7l-wWu"/>
+                                                <constraint firstItem="ekF-sq-J9x" firstAttribute="leading" secondItem="gHy-RG-SBe" secondAttribute="leading" id="M7D-hl-bIE"/>
                                                 <constraint firstAttribute="bottom" secondItem="n1V-zJ-GtM" secondAttribute="bottom" constant="18" id="OE2-NL-O4j"/>
                                                 <constraint firstItem="n1V-zJ-GtM" firstAttribute="leading" secondItem="gHy-RG-SBe" secondAttribute="leading" constant="12" id="OZb-Qe-dBf"/>
                                                 <constraint firstItem="0Js-Q8-4JZ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="nOO-Pm-Bog" secondAttribute="trailing" constant="5" id="Pgd-b4-bRr"/>
@@ -135,6 +137,7 @@
                                                 <constraint firstItem="YdI-6i-uRW" firstAttribute="leading" secondItem="n1V-zJ-GtM" secondAttribute="trailing" constant="18" id="TDL-yH-Ygh"/>
                                                 <constraint firstItem="nOO-Pm-Bog" firstAttribute="top" secondItem="gHy-RG-SBe" secondAttribute="top" constant="18" id="VRQ-iu-Xl9"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="T1t-gG-9Zb" secondAttribute="trailing" constant="5" id="Vhd-ui-QA4"/>
+                                                <constraint firstAttribute="bottom" secondItem="ekF-sq-J9x" secondAttribute="bottom" id="XuM-jl-GZP"/>
                                                 <constraint firstAttribute="trailing" secondItem="C0n-Qw-Ebc" secondAttribute="trailing" constant="12" id="ZD0-Hf-X32"/>
                                                 <constraint firstItem="0Js-Q8-4JZ" firstAttribute="top" secondItem="gHy-RG-SBe" secondAttribute="top" constant="18" id="g2A-Js-ooS"/>
                                                 <constraint firstItem="C0n-Qw-Ebc" firstAttribute="top" secondItem="0Js-Q8-4JZ" secondAttribute="bottom" constant="25" id="gQk-FO-LqW"/>
@@ -184,7 +187,7 @@
                 <navigationController storyboardIdentifier="KTVNearbyPageSBId" id="BcD-co-utR" customClass="KTVBaseNavigationViewController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="附近" id="Yrj-SM-7Ao"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="qZi-Lm-OhO">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -197,7 +200,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="mainpage_all_bg_line" width="375" height="115"/>
+        <image name="mainpage_all_bg_line" width="375" height="200"/>
         <image name="mainpage_bar_placeholder_img" width="141" height="82"/>
         <image name="mainpage_list_bar_detail" width="51" height="18"/>
         <image name="mainpage_list_dingzuo" width="51" height="18"/>

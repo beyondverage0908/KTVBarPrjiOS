@@ -58,6 +58,7 @@
 #pragma mark - 对通知的定义
 
 #define KNotLoginSuccess                    @"KNotLoginSuccess"
+#define KNotLoginOutOf                      @"KNotLoginOutOf"
 
 
 #endif /* KTVCommonDefine_h */

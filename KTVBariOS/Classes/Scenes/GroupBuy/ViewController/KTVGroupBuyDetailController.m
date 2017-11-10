@@ -22,6 +22,7 @@
 #import "KTVSelectedBeautyController.h"
 #import "KTVOrderUploadController.h"
 #import "KTVFriendDetailController.h"
+#import "KTVLittleBeeController.h"
 
 #import "KTVMainService.h"
 #import "KTVStore.h"
@@ -192,6 +193,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 2) {
         KTVDandianController *vc = (KTVDandianController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVDandianController"];
+        [self.navigationController pushViewController:vc animated:YES];
+    } else if (indexPath.section == 3) {
+        KTVLittleBeeController *vc = (KTVLittleBeeController *)[UIViewController storyboardName:@"MePage" storyboardId:@"KTVLittleBeeController"];
+        KTVUser *user = self.activitorList[indexPath.row];
+        vc.user = user;
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

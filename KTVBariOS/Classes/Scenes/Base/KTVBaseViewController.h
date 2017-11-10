@@ -18,8 +18,9 @@
 - (void)setNavigationBarColor:(UIColor *)color;
 /// 导航条透明色
 - (void)clearNavigationbar:(BOOL)isClear;
-
 // 系统返回按钮触发方法
 - (void)navigationBackAction:(id)action;
+/// 请求登陆
+- (void)requestToLogin;
 
 @end

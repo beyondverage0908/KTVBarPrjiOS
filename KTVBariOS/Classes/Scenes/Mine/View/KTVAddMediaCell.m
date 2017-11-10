@@ -72,12 +72,20 @@
                     make.center.equalTo(itemView);
                 }];
             } else {
-                UIButton *addImgBtn = [[UIButton alloc] init];
-                [itemView addSubview:addImgBtn];
-                addImgBtn.layer.cornerRadius = 3;
-                addImgBtn.layer.masksToBounds = YES;
-                [addImgBtn setImage:mediaList[i-1] forState:UIControlStateNormal];
-                [addImgBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+                UIImageView *imageHolder = [[UIImageView alloc] init];
+                [itemView addSubview:imageHolder];
+                imageHolder.layer.cornerRadius = 3;
+                imageHolder.layer.masksToBounds = YES;
+            
+                id img = mediaList[i-1];
+                if ([img isKindOfClass:[NSString class]]) {
+                    NSString *imgStr = (NSString *)img;
+                    [imageHolder sd_setImageWithURL:[NSURL URLWithString:imgStr] placeholderImage:[UIImage imageNamed:imgStr]];
+                } else if ([img isKindOfClass:[UIImage class]]) {
+                    UIImage *image = (UIImage *)img;
+                    imageHolder.image = image;
+                }
+                [imageHolder mas_makeConstraints:^(MASConstraintMaker *make) {
                     make.width.and.height.equalTo(itemView);
                     make.center.equalTo(itemView);
                 }];

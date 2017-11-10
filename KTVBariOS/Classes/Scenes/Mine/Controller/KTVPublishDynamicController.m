@@ -161,8 +161,13 @@
             self.tapPickNumber = 3;
             [self showAlterSheet];
         };
+        cell.user = self.user;
         return cell;
     } else if (indexPath.section == 1) {
+        NSInteger imgCount = self.user.pictureList.count;
+        for (NSInteger i = imgCount - 1; i > 1; i--) {
+            [self.photoList addObject:self.user.pictureList[i].pictureUrl];
+        }
         KTVAddMediaCell *cell = [[KTVAddMediaCell alloc] initWithMediaList:self.photoList style:UITableViewCellStyleDefault reuseIdentifier:@"KTVAddMediaCell"];
         cell.pickImageCallback = ^{
             self.tapPickNumber = 1;
@@ -199,7 +204,7 @@
     } else if (indexPath.section == 2) {
         return 90;
     } else if (indexPath.section == 3) {
-        return 222;
+        return 163;
     } else if (indexPath.section == 4) {
         return 746;
     }

@@ -10,4 +10,6 @@
 
 @interface KTVDynamicPictureCell : UITableViewCell
 
+@property (nonatomic, copy) void (^seeDynaicCallback)(void);
+
 @end

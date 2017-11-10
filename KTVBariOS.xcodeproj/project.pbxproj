@@ -111,6 +111,8 @@
 		338FD35D1F62719200A81FA7 /* KTVThirdRightTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 338FD3591F62719200A81FA7 /* KTVThirdRightTableViewCell.m */; };
 		338FD35E1F62719200A81FA7 /* this_bg_ssj@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 338FD35A1F62719200A81FA7 /* this_bg_ssj@2x.png */; };
 		338FD35F1F62719200A81FA7 /* KTVThreeRightView.m in Sources */ = {isa = PBXBuildFile; fileRef = 338FD35C1F62719200A81FA7 /* KTVThreeRightView.m */; };
+		3393DFA21FB3407E00E0D059 /* PgyUpdate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3393DFA01FB33F6200E0D059 /* PgyUpdate.framework */; };
+		3393DFA31FB3408300E0D059 /* PgySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3393DFA11FB33F6200E0D059 /* PgySDK.framework */; };
 		3395B5901F984C560037AFED /* UIImage+extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3395B58F1F984C560037AFED /* UIImage+extension.m */; };
 		3395B5931F987EA20037AFED /* KTVPublishDynamicController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3395B5921F987EA20037AFED /* KTVPublishDynamicController.m */; };
 		3398266D1F55750F00EAB238 /* KTVOrderConfirmController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3398266C1F55750F00EAB238 /* KTVOrderConfirmController.m */; };
@@ -333,6 +335,7 @@
 		332A63EF1F03B14D007EF65F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		332D9AFD1F6BA9EC00B6B622 /* KTVPackage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVPackage.h; sourceTree = "<group>"; };
 		332D9AFE1F6BA9EC00B6B622 /* KTVPackage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVPackage.m; sourceTree = "<group>"; };
+		3335CCDB1FB1F78B00486AF9 /* KTVBariOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KTVBariOS.entitlements; sourceTree = "<group>"; };
 		333694A81F925D6A00D73E95 /* KTVInvitedUser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KTVInvitedUser.h; sourceTree = "<group>"; };
 		333694A91F925D6A00D73E95 /* KTVInvitedUser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KTVInvitedUser.m; sourceTree = "<group>"; };
 		334214E11F49456800D7D5D0 /* KTVUrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVUrl.h; sourceTree = "<group>"; };
@@ -434,6 +437,8 @@
 		338FD35A1F62719200A81FA7 /* this_bg_ssj@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "this_bg_ssj@2x.png"; sourceTree = "<group>"; };
 		338FD35B1F62719200A81FA7 /* KTVThreeRightView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVThreeRightView.h; sourceTree = "<group>"; };
 		338FD35C1F62719200A81FA7 /* KTVThreeRightView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVThreeRightView.m; sourceTree = "<group>"; };
+		3393DFA01FB33F6200E0D059 /* PgyUpdate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PgyUpdate.framework; sourceTree = "<group>"; };
+		3393DFA11FB33F6200E0D059 /* PgySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PgySDK.framework; sourceTree = "<group>"; };
 		3395B58E1F984C550037AFED /* UIImage+extension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+extension.h"; sourceTree = "<group>"; };
 		3395B58F1F984C560037AFED /* UIImage+extension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+extension.m"; sourceTree = "<group>"; };
 		3395B5911F987EA20037AFED /* KTVPublishDynamicController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KTVPublishDynamicController.h; sourceTree = "<group>"; };
@@ -670,6 +675,8 @@
 				3343E4FF1F28DAC800752AC5 /* ShareSDKExtension.framework in Frameworks */,
 				3343E5031F28DAC800752AC5 /* SinaWeiboConnector.framework in Frameworks */,
 				5AF3C095AA9B925E58BECDE4 /* libPods-KTVBariOS.a in Frameworks */,
+				3393DFA21FB3407E00E0D059 /* PgyUpdate.framework in Frameworks */,
+				3393DFA31FB3408300E0D059 /* PgySDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -853,6 +860,7 @@
 		332A63C71F03B14D007EF65F /* KTVBariOS */ = {
 			isa = PBXGroup;
 			children = (
+				3335CCDB1FB1F78B00486AF9 /* KTVBariOS.entitlements */,
 				330A93811F03ECAA001B320A /* App */,
 				332A63FB1F03B290007EF65F /* Resources */,
 				332A63FC1F03B297007EF65F /* Classes */,
@@ -1264,6 +1272,15 @@
 			path = ArrowPick;
 			sourceTree = "<group>";
 		};
+		3393DF9F1FB33F6200E0D059 /* Pgyer */ = {
+			isa = PBXGroup;
+			children = (
+				3393DFA01FB33F6200E0D059 /* PgyUpdate.framework */,
+				3393DFA11FB33F6200E0D059 /* PgySDK.framework */,
+			);
+			path = Pgyer;
+			sourceTree = "<group>";
+		};
 		339856571F3EE5360085BD1A /* Global */ = {
 			isa = PBXGroup;
 			children = (
@@ -1652,6 +1669,7 @@
 		33DC05431F26DFC400AEB5C4 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				3393DF9F1FB33F6200E0D059 /* Pgyer */,
 				33D776EA1F301D9600077BE5 /* PageControl */,
 				33D776D31F30109400077BE5 /* SDCycleScrollView */,
 				3343E4D71F28DAC800752AC5 /* ShareSDK */,
@@ -1787,6 +1805,9 @@
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
 								enabled = 1;
 							};
 						};
@@ -2216,6 +2237,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = KTVBariOS/KTVBariOS.entitlements;
 				DEVELOPMENT_TEAM = C76485U944;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2225,6 +2247,7 @@
 					"$(PROJECT_DIR)/KTVBariOS/Classes/ThirdParty/ShareSDK/ShareSDK/Support/PlatformConnector",
 					"$(PROJECT_DIR)/KTVBariOS/Classes/ThirdParty/ShareSDK/ShareSDK/Support/PlatformSDK/QQSDK",
 					"$(PROJECT_DIR)/KTVBariOS/Classes/ThirdParty/ShareSDK/ShareSDK/Support/Required",
+					"$(PROJECT_DIR)/KTVBariOS/Classes/ThirdParty/Pgyer",
 				);
 				GCC_PREFIX_HEADER = /Users/pingjunlin/Documents/KTVBariOS/KTVBariOS/Classes/Common/KTVPrefixHeader.pch;
 				INFOPLIST_FILE = "KTVBariOS/Supporting Files/Info.plist";
@@ -2235,7 +2258,7 @@
 					"$(PROJECT_DIR)/KTVBariOS/Classes/ThirdParty/ShareSDK/ShareSDK/Support/PlatformSDK/SinaWeiboSDK",
 					"$(PROJECT_DIR)/KTVBariOS/Classes/ThirdParty/ShareSDK/ShareSDK/Support/PlatformSDK/WeChatSDK",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.vhs.vhealth.kldf;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vhs.comp.healthrun;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -2247,6 +2270,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = KTVBariOS/KTVBariOS.entitlements;
 				DEVELOPMENT_TEAM = C76485U944;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2256,6 +2280,7 @@
 					"$(PROJECT_DIR)/KTVBariOS/Classes/ThirdParty/ShareSDK/ShareSDK/Support/PlatformConnector",
 					"$(PROJECT_DIR)/KTVBariOS/Classes/ThirdParty/ShareSDK/ShareSDK/Support/PlatformSDK/QQSDK",
 					"$(PROJECT_DIR)/KTVBariOS/Classes/ThirdParty/ShareSDK/ShareSDK/Support/Required",
+					"$(PROJECT_DIR)/KTVBariOS/Classes/ThirdParty/Pgyer",
 				);
 				GCC_PREFIX_HEADER = /Users/pingjunlin/Documents/KTVBariOS/KTVBariOS/Classes/Common/KTVPrefixHeader.pch;
 				INFOPLIST_FILE = "KTVBariOS/Supporting Files/Info.plist";
@@ -2266,7 +2291,7 @@
 					"$(PROJECT_DIR)/KTVBariOS/Classes/ThirdParty/ShareSDK/ShareSDK/Support/PlatformSDK/SinaWeiboSDK",
 					"$(PROJECT_DIR)/KTVBariOS/Classes/ThirdParty/ShareSDK/ShareSDK/Support/PlatformSDK/WeChatSDK",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.vhs.vhealth.kldf;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vhs.comp.healthrun;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};

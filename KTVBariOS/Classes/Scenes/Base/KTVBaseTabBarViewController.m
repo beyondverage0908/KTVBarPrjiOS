@@ -82,7 +82,10 @@
 #pragma mark - 通知
 
 - (void)notiInvalidateToken {
-    UIAlertController *alertControler = [UIAlertController alertControllerWithTitle:@"提醒" message:@"您还未登陆，请登陆进行预订" preferredStyle:UIAlertControllerStyleAlert];
+    // 移除本地的token
+    [KTVCommon removeKtvToken];
+    
+    UIAlertController *alertControler = [UIAlertController alertControllerWithTitle:@"提醒" message:@"您还未登陆，请先登陆后操作" preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:@"登陆" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         KTVLoginGuideController *guideVC = [[KTVLoginGuideController alloc] init];

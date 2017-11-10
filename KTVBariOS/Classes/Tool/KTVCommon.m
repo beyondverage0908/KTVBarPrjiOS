@@ -11,6 +11,14 @@
 
 @implementation KTVCommon
 
++ (BOOL)isLogin {
+    if ([KTVCommon userInfo].phone && [KTVCommon ktvToken]) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
 + (KTVUser *)userInfo {
     NSDictionary *userInfo = [KTVUtil objectForKey:@"ktvUserInfo"];
     KTVUser *user = [KTVUser yy_modelWithDictionary:userInfo];
@@ -19,6 +27,10 @@
 
 + (void)resignUserInfo {
     [KTVUtil removeUserDefaultForKey:@"ktvUserInfo"];
+    [self removeKtvToken];
+}
+
++ (void)removeKtvToken {
     [KTVUtil removeUserDefaultForKey:@"ktvToken"];
 }
 

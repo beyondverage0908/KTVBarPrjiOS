@@ -44,7 +44,7 @@ static NSString * const TOAST_OUT_OF_LOGIN                          = @"您还�
 // MBProgressHUD定义
 
 static NSString * const MB_CREATE_ORDER                             = @"创建订单中...";
-static NSString * const MB_ORDER_PAYING                             = @"支付中...";
+static NSString * const MB_ORDER_PAYING                             = @"准备支付...";
 static NSString * const MB_START_PINZHUO                            = @"发起拼桌中...";
 
 

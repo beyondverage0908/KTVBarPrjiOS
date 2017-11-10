@@ -141,7 +141,7 @@
             return;
         }
         NSDictionary *charge = result[@"data"];
-        if ([channel isEqualToString:@"alippay"]) {
+        if ([channel isEqualToString:@"alipay"]) {
             [KTVPayManager ktvPay:AlipayType payment:charge contoller:nil completion:^(NSString *result) {
                 if ([result isEqualToString:@"success"]) {
                     // 支付成功
@@ -268,6 +268,7 @@
         [self.orderUploadDictionary setObject:@(2) forKey:@"payType"];
     }
     
+    // 创建订单
     [self networkCreateOrder:^(NSDictionary *orderDict) {
         NSString *orderNo = orderDict[@"orderId"];
         [self networkConfirmPay:orderNo];
