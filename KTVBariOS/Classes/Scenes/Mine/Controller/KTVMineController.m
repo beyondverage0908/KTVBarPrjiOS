@@ -127,10 +127,10 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (![KTVCommon isLogin]) {
-        [self requestToLogin];
-        return;
-    }
+//    if (![KTVCommon isLogin]) {
+//        [self requestToLogin];
+//        return;
+//    }
     if (indexPath.section == 0) {
         KTVUserInfoController *vc = (KTVUserInfoController *)[UIViewController storyboardName:@"MePage" storyboardId:@"KTVUserInfoController"];
         vc.isMySelf = YES;

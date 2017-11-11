@@ -10,8 +10,9 @@
 
 @interface KTVFilterView : UIView
 
-@property (nonatomic, copy) void (^filterCallback)(NSString *filterKey);
+@property (nonatomic, copy) void (^filterCallback)(NSDictionary *filterMap);
+@property (nonatomic, copy) void (^filterDitailCallback)(NSString *filterDetailKey);
 
-- (instancetype)initWithFilter:(NSArray<NSString *> *)filters;
+- (instancetype)initWithFilter:(NSArray<NSDictionary<NSString *, NSArray *> *> *)filters;
 
 @end
