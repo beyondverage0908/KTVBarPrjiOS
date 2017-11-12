@@ -66,4 +66,24 @@
                                 placeholderImage:ktvUserHeaderDefaultImg];
 }
 
+- (void)setUserType:(KTVUserType)userType {
+    if (_userType != userType) {
+        _userType = userType;
+        
+        switch (_userType) {
+            case KTVUserCommon:
+                self.moneyLabel.hidden = YES;
+                break;
+            case KTVUserActivity:
+                self.moneyLabel.hidden = NO;
+                break;
+            case KTVUserInvitate:
+                self.moneyLabel.hidden = YES;
+                break;
+            default:
+                break;
+        }
+    }
+}
+
 @end

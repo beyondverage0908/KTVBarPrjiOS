@@ -107,9 +107,8 @@
         
         UIImageView *photoImageView = [[UIImageView alloc] init];
         [itemView addSubview:photoImageView];
-        photoImageView.layer.cornerRadius = 3;
-        photoImageView.layer.masksToBounds = YES;
         [photoImageView sd_setImageWithURL:[NSURL URLWithString:pictureUrl] placeholderImage:[UIImage imageNamed:@"bar_yuepao_user_placeholder"]];
+        [photoImageView cornerRadius];
         [photoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.width.and.height.equalTo(itemView);
             make.center.equalTo(itemView);

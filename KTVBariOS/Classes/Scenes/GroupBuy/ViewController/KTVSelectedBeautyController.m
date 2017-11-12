@@ -100,11 +100,22 @@ static NSInteger RowCount = 2;
 }
 
 - (void)layoutCollectionHeader {
-    KTVFilterView *filterView = [[KTVFilterView alloc] initWithFilter:@[@"智能排序", @"性别"]];
+    NSArray *dataS = @[@{@"智能排序" : @[@"北京", @"上海", @"南昌", @"合肥", @"宁波", @"杭州", @"石家庄"]},
+                       @{@"性别": @[@"男", @"女", @"不限"]}];
+    KTVFilterView *filterView = [[KTVFilterView alloc] initWithFilter:dataS];
     [self.collectionHeaderView addSubview:filterView];
+    
     [filterView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.collectionHeaderView);
     }];
+
+    filterView.filterCallback = ^(NSDictionary *filterMap) {
+        NSInteger idx = [dataS indexOfObject:filterMap];
+        CLog(@"--->>> %@", filterMap);
+    };
+    filterView.filterDitailCallback = ^(NSString *filterDetailKey) {
+        CLog(@"--->>> %@", filterDetailKey);
+    };
 }
 
 #pragma mark - 事件

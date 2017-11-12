@@ -105,4 +105,7 @@ typedef void(^ResponseSuccess)(NSDictionary *result);
 /// 获取最新的版本号
 + (void)getAppVersion:(NSDictionary *)params result:(ResponseSuccess)responseResult;
 
+/// 获取附近的普通用户
++ (void)getCommonNearUser:(NSDictionary *)params result:(ResponseSuccess)responseResult;
+
 @end

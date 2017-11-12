@@ -45,7 +45,7 @@
     
     // 默认获取全部
     self.currentOrderStatus = 99;
-//    [self loadOrderByOrderStatus:self.currentOrderStatus];
+    [self loadOrderByOrderStatus:self.currentOrderStatus];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -162,44 +162,14 @@
 #pragma mark - UITableViewDelegate
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    NSArray *dataS = @[@{@"全国" : @[@"北京", @"上海", @"南昌", @"合肥", @"宁波", @"杭州", @"石家庄"]},
-                       @{@"店铺类型" : @[@"酒吧", @"KTV"]},
-                       @{@"距离": @[@"200m", @"500m", @"1000m", @"5km", @"10km"]},
-                       @{@"性别": @[@"男", @"女", @"不限"]}];
-    KTVFilterView *filterView = [[KTVFilterView alloc] initWithFilter:dataS];
-
-    filterView.filterCallback = ^(NSDictionary *filterMap) {
-        NSInteger idx = [dataS indexOfObject:filterMap];
-        if (idx == 0) {
-            self.currentOrderStatus = 99;
-        } else if (idx == 1) {
-            self.currentOrderStatus = -1;
-        } else if (idx == 2) {
-            self.currentOrderStatus = 2;
-        } else if (idx == 3) {
-            self.currentOrderStatus = 5;
-        }
-        //        [self loadOrderByOrderStatus:self.currentOrderStatus];
-    };
-    
-    filterView.filterDitailCallback = ^(NSString *filterDetailKey) {
-        CLog(@"--->>> %@", filterDetailKey);
-    };
-
-    return filterView;
-    
-//    NSArray *dataSource = @[@"全部", @"待付款", @"待使用", @"待评价"];
-//    NSMutableArray<KTVStatus *> *statusList = [NSMutableArray arrayWithCapacity:4];
-//    for (NSInteger i = 0; i < 4; i++) {
-//        KTVStatus *status = [[KTVStatus alloc] init];
-//        status.isSelect = NO;
-//        status.title = dataSource[i];
-//        [statusList addObject:status];
-//    }
-//    KTVStatusView *statusView = [[KTVStatusView alloc] initWithStatusList:statusList];
+//    NSArray *dataS = @[@{@"全国" : @[@"北京", @"上海", @"南昌", @"合肥", @"宁波", @"杭州", @"石家庄"]},
+//                       @{@"店铺类型" : @[@"酒吧", @"KTV"]},
+//                       @{@"距离": @[@"200m", @"500m", @"1000m", @"5km", @"10km"]},
+//                       @{@"性别": @[@"男", @"女", @"不限"]}];
+//    KTVFilterView *filterView = [[KTVFilterView alloc] initWithFilter:dataS];
 //
-//    statusView.selectedStatusCallback = ^(KTVStatus *selectedStatus) {
-//        NSInteger idx = [statusList indexOfObject:selectedStatus];
+//    filterView.filterCallback = ^(NSDictionary *filterMap) {
+//        NSInteger idx = [dataS indexOfObject:filterMap];
 //        if (idx == 0) {
 //            self.currentOrderStatus = 99;
 //        } else if (idx == 1) {
@@ -209,10 +179,39 @@
 //        } else if (idx == 3) {
 //            self.currentOrderStatus = 5;
 //        }
-////        [self loadOrderByOrderStatus:self.currentOrderStatus];
+//        //        [self loadOrderByOrderStatus:self.currentOrderStatus];
 //    };
 //
-//    return statusView;
+//    filterView.filterDitailCallback = ^(NSString *filterDetailKey) {
+//        CLog(@"--->>> %@", filterDetailKey);
+//    };
+//    return filterView;
+    
+    NSArray *dataSource = @[@"全部", @"待付款", @"待使用", @"待评价"];
+    NSMutableArray<KTVStatus *> *statusList = [NSMutableArray arrayWithCapacity:4];
+    for (NSInteger i = 0; i < 4; i++) {
+        KTVStatus *status = [[KTVStatus alloc] init];
+        status.isSelect = NO;
+        status.title = dataSource[i];
+        [statusList addObject:status];
+    }
+    KTVStatusView *statusView = [[KTVStatusView alloc] initWithStatusList:statusList];
+
+    statusView.selectedStatusCallback = ^(KTVStatus *selectedStatus) {
+        NSInteger idx = [statusList indexOfObject:selectedStatus];
+        if (idx == 0) {
+            self.currentOrderStatus = 99;
+        } else if (idx == 1) {
+            self.currentOrderStatus = -1;
+        } else if (idx == 2) {
+            self.currentOrderStatus = 2;
+        } else if (idx == 3) {
+            self.currentOrderStatus = 5;
+        }
+        [self loadOrderByOrderStatus:self.currentOrderStatus];
+    };
+
+    return statusView;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {

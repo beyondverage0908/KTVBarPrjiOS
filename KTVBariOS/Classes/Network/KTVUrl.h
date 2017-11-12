@@ -33,6 +33,9 @@
 /// 修改昵称
 + (NSString *)getEditNicknameUrl;
 
+/// 获取附近的普通用户
++ (NSString *)getCommonNearUserUrl;
+
 #pragma mark - 用户动态
 
 + (NSString *)getUserDynamicStatementUrl;

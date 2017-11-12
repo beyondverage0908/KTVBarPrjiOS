@@ -54,9 +54,29 @@
 }
 
 - (void)setInvitorList:(NSArray<KTVUser *> *)invitorList {
-    _invitorList = invitorList;
-    self.yuepaoNumber.text = [NSString stringWithFormat:@"在约的小伙伴%@人，点击查看",@([_invitorList count])];
-    [self.yuepaoNumber addUnderlineStyle];
+    if (_invitorList != invitorList) {
+        _invitorList = invitorList;
+        
+        self.yuepaoNumber.text = [NSString stringWithFormat:@"在约小伙伴%@人，点击查看",@([_invitorList count])];
+        [self.yuepaoNumber addUnderlineStyle];
+        
+        NSInteger i = 0;
+        for (UIView *subView in self.yuepaoHeaderView.subviews) {
+            if (i < invitorList.count) {
+                if ([subView isKindOfClass:[UIImageView class]]) {
+                    UIImageView *headImageView = (UIImageView *)subView;
+                    headImageView.layer.cornerRadius = CGRectGetWidth(headImageView.frame) / 2.0f;
+                    headImageView.layer.masksToBounds = YES;
+                    
+                    KTVUser *user = _invitorList[i];
+                    [headImageView sd_setImageWithURL:[NSURL URLWithString:user.pictureList.firstObject.pictureUrl] placeholderImage:[UIImage imageNamed:@"bar_yuepao_user_placeholder"]];
+                }
+                i++;
+            } else {
+                break;
+            }
+        }
+    }
 }
 
 #pragma mark - 事件

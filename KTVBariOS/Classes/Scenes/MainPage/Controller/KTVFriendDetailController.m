@@ -8,6 +8,7 @@
 
 #import "KTVFriendDetailController.h"
 #import "KTVPinZhuoDetailController.h"
+#import "KTVUserInfoController.h"
 #import "KTVFriendCell.h"
 
 #import "KTVMainService.h"
@@ -72,8 +73,9 @@
 
 /// 获取门店在约人数
 - (void)loadFriendDetailList {
-    NSString *storeId = self.store.storeId ? self.store.storeId : @"4";
+    NSString *storeId = self.store.storeId;
     if (!storeId) return;
+    
     [KTVMainService getStoreInvitators:storeId result:^(NSDictionary *result) {
         if (![result[@"code"] isEqualToString:ktvCode]) {
             [KTVToast toast:TOAST_GET_DATA_FAIL];
@@ -104,6 +106,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 1) {
         CLog(@"-- 查看好友信息");
+        KTVUser *user = self.yueUserList[indexPath.row];
+        KTVUserInfoController *vc = (KTVUserInfoController *)[UIViewController storyboardName:@"MePage" storyboardId:@"KTVUserInfoController"];
+        vc.isMySelf = NO;
+        vc.user = user;
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 

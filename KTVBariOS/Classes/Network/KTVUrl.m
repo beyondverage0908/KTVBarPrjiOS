@@ -41,6 +41,11 @@
     return @"/api/login/user/editNickname";
 }
 
+/// 获取附近的普通用户
++ (NSString *)getCommonNearUserUrl {
+    return @"/api/login/user/near";
+}
+
 #pragma mark - 用户动态
 
 + (NSString *)getUserDynamicStatementUrl {

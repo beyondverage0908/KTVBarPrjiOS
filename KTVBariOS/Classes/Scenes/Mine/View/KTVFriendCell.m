@@ -54,6 +54,7 @@
     self.nicknameLabel.text = _user.nickName ? _user.nickName : _user.username;
     self.ageLabel.text = [NSString stringWithFormat:@"%@岁", @(_user.age)];
     self.tipLabel.text = _user.userDetail.todayMood;
+    [self.headerImageView sd_setImageWithURL:[NSURL URLWithString:_user.pictureList.firstObject.pictureUrl] placeholderImage:[UIImage imageNamed:@"bar_yuepao_user_placeholder"]];
     if (_user.inviteStatus == 2) {
         self.inviteStatusLabel.text = @"我买单";
         self.inviteStatusLabel.textColor = [UIColor ktvGold];

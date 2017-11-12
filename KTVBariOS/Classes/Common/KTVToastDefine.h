@@ -40,6 +40,7 @@ static NSString * const TOAST_STORE_EMPTY                           = @"附近�
 static NSString * const TOAST_NICKNAME_EDITED                       = @"昵称修改成功";
 static NSString * const TOAST_EXIT_SUCCESS                          = @"注销成功";
 static NSString * const TOAST_OUT_OF_LOGIN                          = @"您还未登陆";
+static NSString * const TOAST_NEAR_NO_INVITEER                      = @"附近暂无邀约";
 
 // MBProgressHUD定义
 

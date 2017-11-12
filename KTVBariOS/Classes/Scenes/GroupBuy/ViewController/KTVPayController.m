@@ -89,7 +89,7 @@
     self.payChannelDict = [NSMutableDictionary dictionaryWithCapacity:3];
     [self.payChannelDict setObject:[NSNumber numberWithBool:NO] forKey:@"unionpay"];
     [self.payChannelDict setObject:[NSNumber numberWithBool:NO] forKey:@"alipay"];
-    [self.payChannelDict setObject:[NSNumber numberWithBool:NO] forKey:@"wechatpay"];
+    [self.payChannelDict setObject:[NSNumber numberWithBool:NO] forKey:@"wx"];
     
     self.orderUploadDictionary = [NSMutableDictionary dictionary];
 }
@@ -120,14 +120,13 @@
 // 订单支付流程
 // 获取订单需要参数 -> 创建订单(获取到订单号) -> 获取支付的charge -> 调用支付接口
 
-// 支付宝支付
+// 第三方支付
 - (void)networkConfirmPay:(NSString *)orderNo {
     NSString *channel = [self getPayChannel];
     if (!channel) {
         [KTVToast toast:TOAST_SELECTED_PAYCHANNEL];
         return;
     }
-    
     NSDictionary *payParams = @{@"channel" : channel,
                                 @"amount" : @"1",
                                 @"subject" : @"aaaa",
@@ -153,7 +152,7 @@
                     [KTVToast toast:TOAST_PAY_FAIL];
                 }
             }];
-        } else if ([channel isEqualToString:@"wechatpay"]) {
+        } else if ([channel isEqualToString:@"wx"]) {
             [KTVPayManager ktvPay:WeChatType payment:charge contoller:nil completion:^(NSString *result) {
                 if ([result isEqualToString:@"success"]) {
                     // 支付成功
@@ -183,6 +182,11 @@
 
 // 创建订单
 - (void)networkCreateOrder:(void (^)(NSDictionary *success))createSuccessBlock {
+    NSString *channel = [self getPayChannel];
+    if (!channel) {
+        [KTVToast toast:TOAST_SELECTED_PAYCHANNEL];
+        return;
+    }
     
     [MBProgressHUD showMessage:MB_CREATE_ORDER];
     [KTVBuyService postCreateOrder:self.orderUploadDictionary result:^(NSDictionary *result) {
@@ -194,7 +198,6 @@
         } else {
             [KTVToast toast:result[@"detail"]];
         }
-        CLog(@"--->>> %@", result);
     }];
 }
 
@@ -211,7 +214,7 @@
 }
 
 - (IBAction)wechatPayAction:(UIButton *)sender {
-    [self toggle:sender channel:@"wechatpay"];
+    [self toggle:sender channel:@"wx"];
     CLog(@"-->> 微信支付");
 }
 
@@ -226,7 +229,7 @@
                 [self.bankPayBtn setImage:[UIImage imageNamed:@"app_radius_unselect"] forState:UIControlStateNormal];
             } else if ([cl isEqualToString:@"alipay"]) {
                 [self.alipayBtn setImage:[UIImage imageNamed:@"app_radius_unselect"] forState:UIControlStateNormal];
-            } else if ([cl isEqualToString:@"wechatpay"]) {
+            } else if ([cl isEqualToString:@"wx"]) {
                 [self.wechatPayBtn setImage:[UIImage imageNamed:@"app_radius_unselect"] forState:UIControlStateNormal];
             }
         } else {
@@ -264,9 +267,10 @@
         [self.orderUploadDictionary setObject:@(3) forKey:@"payType"];
     } else if ([paychannel isEqualToString:@"alipay"]) {
         [self.orderUploadDictionary setObject:@(1) forKey:@"payType"];
-    } else if ([paychannel isEqualToString:@"wechatpay"]) {
+    } else if ([paychannel isEqualToString:@"wx"]) {
         [self.orderUploadDictionary setObject:@(2) forKey:@"payType"];
     }
+    
     
     // 创建订单
     [self networkCreateOrder:^(NSDictionary *orderDict) {
