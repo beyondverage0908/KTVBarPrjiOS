@@ -41,6 +41,8 @@ static NSString * const TOAST_NICKNAME_EDITED                       = @"昵称�
 static NSString * const TOAST_EXIT_SUCCESS                          = @"注销成功";
 static NSString * const TOAST_OUT_OF_LOGIN                          = @"您还未登陆";
 static NSString * const TOAST_NEAR_NO_INVITEER                      = @"附近暂无邀约";
+static NSString * const TOAST_VIDEO_CANT_PLAY                       = @"小视频不能播放";
+static NSString * const TOAST_VIDEO_CANT_MORETHAN_FIVE              = @"小视频不能超过五个";
 
 // MBProgressHUD定义
 

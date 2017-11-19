@@ -108,4 +108,7 @@ typedef void(^ResponseSuccess)(NSDictionary *result);
 /// 获取附近的普通用户
 + (void)getCommonNearUser:(NSDictionary *)params result:(ResponseSuccess)responseResult;
 
+/// 用户上传视频
++ (void)uploadVideo:(NSDictionary *)params result:(ResponseSuccess)responseResult;
+
 @end

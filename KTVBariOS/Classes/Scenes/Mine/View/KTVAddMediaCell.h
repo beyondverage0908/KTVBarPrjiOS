@@ -8,9 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+typedef enum : NSUInteger {
+    KTVMediaPhotoType,
+    KTVMediaVideoType,
+} KTVMediaType;
+
 @interface KTVAddMediaCell : UITableViewCell
 
-@property (nonatomic, copy) void (^pickImageCallback)(void);
+@property (nonatomic, assign) KTVMediaType mediaType;
+
+@property (nonatomic, copy) void (^pickImageCallback)(KTVMediaType mediaType);
+@property (nonatomic, copy) void (^showMediaCallback)(id media);
 
 - (instancetype)initWithMediaList:(NSArray *)mediaList style:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier;
 

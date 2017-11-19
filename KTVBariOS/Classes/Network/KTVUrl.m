@@ -46,6 +46,11 @@
     return @"/api/login/user/near";
 }
 
+/// 上传视频
++ (NSString *)getUploadVideoUrl {
+    return @"/api/login/uploadVideo";
+}
+
 #pragma mark - 用户动态
 
 + (NSString *)getUserDynamicStatementUrl {

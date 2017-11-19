@@ -11,10 +11,10 @@
 #import "KTVUserBannerCell.h"
 #import "KTVUserPhontosCell.h"
 #import "KTVUserSenseCell.h"
-
+#import "KTVMediaCell.h"
 #import "KTVLoginService.h"
-
 #import "KTVTableHeaderView.h"
+#import <AVKit/AVKit.h>
 
 @interface KTVUserInfoController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -83,6 +83,8 @@
     } else if (indexPath.section == 1) {
         return 280.0f;
     } else if (indexPath.section == 2) {
+        return 90.0f;
+    } else if (indexPath.section == 3) {
         return 122.0f;
     }
     return 0;
@@ -93,7 +95,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if (section == 1 || section == 2) {
+    if (section == 1 || section == 2 || section == 3) {
         return 29.0f;
     }
     return 0;
@@ -104,6 +106,9 @@
         KTVTableHeaderView *headerView = [[KTVTableHeaderView alloc] initWithImageUrl:nil title:@"个人相册" remark:nil];
         return headerView;
     } else if (section == 2) {
+        KTVTableHeaderView *headerView = [[KTVTableHeaderView alloc] initWithImageUrl:nil title:@"我的视频" remark:nil];
+        return headerView;
+    } else if (section == 3) {
         KTVTableHeaderView *headerView = [[KTVTableHeaderView alloc] initWithImageUrl:nil title:@"关于TA" remark:nil];
         return headerView;
     }
@@ -114,7 +119,7 @@
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -123,6 +128,8 @@
     } else if (section == 1) {
         return 1;
     } else if (section == 2) {
+        return 1;
+    } else if (section == 3) {
         return 1;
     }
     return 0;
@@ -139,11 +146,39 @@
         cell.pictureList = self.user.pictureList;
         return cell;
     } else if (indexPath.section == 2) {
+        KTVMediaCell *cell = [[KTVMediaCell alloc] initWithMediaList:self.user.videoList style:UITableViewCellStyleDefault reuseIdentifier:@"KTVMediaCell"];
+        cell.showMediaCallback = ^(id media) {
+            if ([media isKindOfClass:[KTVVideo class]]) {
+                KTVVideo *video = (KTVVideo *)media;
+                [self playVideaUrl:video.url];
+            }
+        };
+        return cell;
+    } else if (indexPath.section == 3) {
         KTVUserSenseCell *cell = (KTVUserSenseCell *)[tableView dequeueReusableCellWithIdentifier:KTVStringClass(KTVUserSenseCell)];
         cell.user = self.user;
         return cell;
     }
     return nil;
+}
+
+#pragma mark - 播放视频
+
+- (void)playVideaUrl:(NSString *)videaUrl {
+    //    NSURL *url = [[NSBundle mainBundle] URLForResource:@"Alladin" withExtension:@"mp4"];
+    if (videaUrl) {
+        NSURL *url = [NSURL URLWithString:videaUrl];
+        AVAsset *asset = [AVURLAsset URLAssetWithURL:url options:nil];
+        AVPlayerItem *item = [AVPlayerItem playerItemWithAsset:asset];
+        AVPlayer *player = [AVPlayer playerWithPlayerItem:item];
+        
+        AVPlayerViewController *playController = [[AVPlayerViewController alloc] init];
+        playController.player = player;
+        [playController.player play];
+        [self presentViewController:playController animated:YES completion:nil];
+    } else {
+        [KTVToast toast:TOAST_VIDEO_CANT_PLAY];
+    }
 }
 
 @end

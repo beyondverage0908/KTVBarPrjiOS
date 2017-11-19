@@ -25,6 +25,7 @@
 #import "UILabel+Ktv.h"
 #import "MBProgressHUD+KTV.h"
 #import "UIView+extension.h"
+#import "UIImageView+extension.h"
 
 // Common
 #import "KTVCommonDefine.h"

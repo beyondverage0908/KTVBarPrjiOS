@@ -10,6 +10,6 @@
 
 @interface KTVUserPhontosCell : UITableViewCell
 
-@property (nonatomic, strong) NSArray * pictureList;
+@property (nonatomic, strong) NSArray<KTVPicture *> * pictureList;
 
 @end

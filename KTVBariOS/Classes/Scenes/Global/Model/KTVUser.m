@@ -30,7 +30,8 @@
 // 容器类转换
 + (NSDictionary *)modelContainerPropertyGenericClass {
     // value should be Class or Class name.
-    return @{@"pictureList" : [KTVPicture class]};
+    return @{@"pictureList" : [KTVPicture class],
+             @"videoList" : [KTVVideo class]};
 }
 
 @end

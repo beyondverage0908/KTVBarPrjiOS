@@ -57,7 +57,11 @@
                 [btn addSubview:titleLabel];
                 titleLabel.tag = 2000 + i;
                 titleLabel.text = status.title;
-                titleLabel.textColor = [UIColor whiteColor];
+                if (status.isSelect) {
+                    titleLabel.textColor = [UIColor ktvRed];
+                } else {
+                    titleLabel.textColor = [UIColor whiteColor];
+                }
                 titleLabel.font = [UIFont boldSystemFontOfSize:14];
                 [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
                     make.centerY.equalTo(btn);
@@ -67,7 +71,11 @@
                 UIView *bottomLine = [[UIView alloc] init];
                 [btn addSubview:bottomLine];
                 bottomLine.tag = 3000 + i;
-                bottomLine.backgroundColor = [UIColor clearColor];
+                if (status.isSelect) {
+                    bottomLine.backgroundColor = [UIColor ktvRed];
+                } else {
+                    bottomLine.backgroundColor = [UIColor clearColor];
+                }
                 [bottomLine mas_makeConstraints:^(MASConstraintMaker *make) {
                     make.bottom.equalTo(btn);
                     make.height.mas_equalTo(@3.0);
@@ -101,7 +109,7 @@
     
     for (NSInteger i = 0; i < self.statusList.count; i++) {
         if (i != idx) {
-            KTVStatus *status = self.statusList[idx];
+            KTVStatus *status = self.statusList[i];
             status.isSelect = NO;
             
             NSInteger tag = 1000 + i;

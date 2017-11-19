@@ -10,6 +10,7 @@
 #import <SystemConfiguration/SystemConfiguration.h>
 #include <netdb.h>
 #import <sys/utsname.h>
+#import <AVKit/AVKit.h>
 //#include <sys/types.h>
 //#include <sys/sysctl.h>
 //#import <CommonCrypto/CommonDigest.h>
@@ -203,6 +204,8 @@
     return dataSource;
 }
 
+#pragma mark - 图片相关
+
 /**
  *将图片缩放到指定的CGSize大小
  * UIImage image 原始的图片
@@ -272,6 +275,18 @@
         return [self imageFromImage:image inRect:CGRectMake((image.size.width -width)/2, 0, width, height)];
     }
     return nil;
+}
+
++ (UIImage *)thumbnailFromVideoUrl:(NSString *)videoUrl {
+    NSURL *url = [NSURL URLWithString:videoUrl];
+    AVAsset *asset = [AVAsset assetWithURL:url];
+    AVAssetImageGenerator *imageGenerator = [[AVAssetImageGenerator alloc] initWithAsset:asset];
+    CMTime time = [asset duration];
+    time.value = 0;
+    CGImageRef imageRef = [imageGenerator copyCGImageAtTime:time actualTime:NULL error:NULL];
+    UIImage *thumbnail = [UIImage imageWithCGImage:imageRef];
+    CGImageRelease(imageRef);
+    return thumbnail;
 }
 
 #pragma mark - 版本相关

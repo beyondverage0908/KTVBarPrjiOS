@@ -56,11 +56,11 @@
     
     //  启动SDK
     //  设置三指拖动激活摇一摇需在此调用之前
-    [[PgyUpdateManager sharedPgyManager] startManagerWithAppId:PGY_APPKEY];
-    [[PgyManager sharedPgyManager] startManagerWithAppId:PGY_APPKEY];
+//    [[PgyUpdateManager sharedPgyManager] startManagerWithAppId:PGY_APPKEY];
+//    [[PgyManager sharedPgyManager] startManagerWithAppId:PGY_APPKEY];
     
     //  是否显示蒲公英SDK的Debug Log，如果遇到SDK无法正常工作的情况可以开启此标志以确认原因，默认为关闭。
-    [[PgyManager sharedPgyManager] setEnableDebugLog:YES];
+//    [[PgyManager sharedPgyManager] setEnableDebugLog:YES];
 }
 
 

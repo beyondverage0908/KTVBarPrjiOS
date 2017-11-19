@@ -212,6 +212,29 @@ static KTVNetworkHelper *_instance = nil;
     }];
 }
 
+- (void)uploadStreamWithRequestMessage:(KTVRequestMessage *)message success:(RequestSuccess)success failure:(RequestFailure)failure {
+    
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    NSString *urlString = [NSString stringWithFormat:@"%@%@", [KTVUrl getDomainUrl], message.path];
+    
+    [_manager POST:urlString parameters:message.params constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        if ([fileManager fileExistsAtPath:message.videoUrl.path]) {
+            NSData *videoData = [NSData dataWithContentsOfURL:message.videoUrl];
+            [formData appendPartWithFileData:videoData name:@"file" fileName:@"file.mp4" mimeType:@"video/quicktime"];
+        }
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        NSDictionary *result = [self sessionWithNetResponse:responseObject message:message];
+        [self requestResponse:result success:success];
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        if (failure) failure(error);
+    }];
+}
+
 - (void)send:(KTVRequestMessage*)message success:(RequestSuccess)successBlock fail:(RequestFailure)failBlock {
     
     if (![KTVUtil isNetworkAvailable]) {
@@ -233,6 +256,8 @@ static KTVNetworkHelper *_instance = nil;
         [self uploadRequestWithResquestMessage:message success:successBlock failure:failBlock];
     } else if (message.httpType == KtvPUT) {
         [self putRequestWithResquestMessage:message success:successBlock failure:failBlock];
+    } else if (message.httpType == KtvUploadStream) {
+        [self uploadStreamWithRequestMessage:message success:successBlock failure:failBlock];
     } else {
         [self getRequestWithResquestMessage:message success:successBlock failure:failBlock];
     }

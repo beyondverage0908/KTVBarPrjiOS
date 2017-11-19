@@ -12,7 +12,8 @@ typedef NS_ENUM(NSInteger, KtvRequestType) {
     KtvGET = 0,      // get
     KtvPOST,         // post
     KtvPUT,          // Put
-    KtvUpload        // 上传文件
+    KtvUpload,        // 上传文件
+    KtvUploadStream     // 上传流视频
 };
 
 @interface KTVRequestMessage : NSObject
@@ -25,6 +26,7 @@ typedef NS_ENUM(NSInteger, KtvRequestType) {
 @property (nonatomic, copy)     NSArray             *imageList;                 // 图片数组集合
 @property (nonatomic, assign)   NSTimeInterval      timeout;                    // 请求服务器超时时间
 @property (nonatomic, strong)   id                  params;                     // body参数
+@property (nonatomic, strong)   NSURL               * videoUrl;                 // 视频地址
 
 @property (nonatomic, strong)   NSString            *sign;                      // 加密，关键参数签名
 @property (nonatomic, strong)   NSString            *aesKey;                    // 用于解密服务器返回已经加密的数据

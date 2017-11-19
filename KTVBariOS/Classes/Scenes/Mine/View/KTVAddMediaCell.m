@@ -10,6 +10,8 @@
 
 @interface KTVAddMediaCell()
 
+@property (nonatomic, strong) NSArray *mediaList;
+
 @end
 
 @implementation KTVAddMediaCell
@@ -17,6 +19,8 @@
 
 - (instancetype)initWithMediaList:(NSArray *)mediaList style:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        
+        self.mediaList = mediaList;
         
         UIImageView *bgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"mainpage_all_bg_line"]];
         [self.contentView addSubview:bgView];
@@ -76,6 +80,11 @@
                 [itemView addSubview:imageHolder];
                 imageHolder.layer.cornerRadius = 3;
                 imageHolder.layer.masksToBounds = YES;
+                imageHolder.userInteractionEnabled = YES;
+                imageHolder.tag = 1000 + i - 1;
+                
+                UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageTap:)];
+                [imageHolder addGestureRecognizer:tap];
             
                 id img = mediaList[i-1];
                 if ([img isKindOfClass:[NSString class]]) {
@@ -84,6 +93,10 @@
                 } else if ([img isKindOfClass:[UIImage class]]) {
                     UIImage *image = (UIImage *)img;
                     imageHolder.image = image;
+                } else if ([img isKindOfClass:[KTVVideo class]]) {
+                    KTVVideo *video = (KTVVideo *)img;
+//                    imageHolder.image = [KTVUtil thumbnailFromVideoUrl:video.url];
+                    [imageHolder thumbnailFromVideoUrl:video.url];
                 }
                 [imageHolder mas_makeConstraints:^(MASConstraintMaker *make) {
                     make.width.and.height.equalTo(itemView);
@@ -100,8 +113,19 @@
 - (void)pickImageAction:(UIButton *)btn {
     CLog(@"-->> 上传图片");
     if (self.pickImageCallback) {
-        self.pickImageCallback();
+        self.pickImageCallback(self.mediaType);
     }
+}
+
+- (void)imageTap:(UITapGestureRecognizer *)tap {
+    NSInteger tag = tap.view.tag - 1000;
+    
+    if (self.showMediaCallback) {
+        id media = self.mediaList[tag];
+        self.showMediaCallback(media);
+    }
+    
+    CLog(@"--->> 点击图片 %@", @(tag));
 }
 
 - (void)awakeFromNib {

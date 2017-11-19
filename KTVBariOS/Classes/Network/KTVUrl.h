@@ -36,6 +36,9 @@
 /// 获取附近的普通用户
 + (NSString *)getCommonNearUserUrl;
 
+/// 上传视频
++ (NSString *)getUploadVideoUrl;
+
 #pragma mark - 用户动态
 
 + (NSString *)getUserDynamicStatementUrl;

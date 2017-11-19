@@ -9,6 +9,7 @@
 #import "KTVUserPhontosCell.h"
 
 #import "KTVUserPhotoCollectionCell.h"
+#import "KTVPhotoBrowerView.h"
 
 @interface KTVUserPhontosCell ()<UICollectionViewDelegate, UICollectionViewDataSource>
 
@@ -37,7 +38,7 @@ static NSInteger RowCount = 4;
     self.photosCollectionView.collectionViewLayout = [self setupFlowLayout];
 }
 
-- (void)setPictureList:(NSArray *)pictureList {
+- (void)setPictureList:(NSArray<KTVPicture *> *)pictureList {
     if (_pictureList != pictureList) {
         _pictureList = pictureList;
         
@@ -62,6 +63,10 @@ static NSInteger RowCount = 4;
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     CLog(@"-- 点击用户了图片");
+    
+    KTVPhotoBrowerView *brower = [[KTVPhotoBrowerView alloc] init];
+    brower.opType = kTVSeeType;
+    [brower showPhotoBrowerConfig:self.pictureList andDefaultIndex:indexPath.row];
 }
 
 #pragma mark - UICollectionViewDataSource

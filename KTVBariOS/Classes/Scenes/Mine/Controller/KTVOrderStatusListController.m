@@ -29,6 +29,8 @@
 
 @property (assign, nonatomic) NSInteger currentOrderStatus;
 
+@property (strong, nonatomic) NSMutableArray<KTVStatus *> *statusList; // 状态列表
+
 @end
 
 @implementation KTVOrderStatusListController
@@ -50,6 +52,26 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+- (NSMutableArray<KTVStatus *> *)statusList {
+    if (!_statusList) {
+        NSArray *dataSource = @[@"全部", @"待付款", @"待使用", @"待评价"];
+        _statusList = [NSMutableArray arrayWithCapacity:4];
+        for (NSInteger i = 0; i < 4; i++) {
+            KTVStatus *status = [[KTVStatus alloc] init];
+            if (i == 0) {
+                // default first selected
+                status.isSelect = YES;
+            } else {
+                status.isSelect = NO;
+            }
+            
+            status.title = dataSource[i];
+            [_statusList addObject:status];
+        }
+    }
+    return _statusList;
 }
 
 #pragma mark - 初始化
@@ -187,18 +209,10 @@
 //    };
 //    return filterView;
     
-    NSArray *dataSource = @[@"全部", @"待付款", @"待使用", @"待评价"];
-    NSMutableArray<KTVStatus *> *statusList = [NSMutableArray arrayWithCapacity:4];
-    for (NSInteger i = 0; i < 4; i++) {
-        KTVStatus *status = [[KTVStatus alloc] init];
-        status.isSelect = NO;
-        status.title = dataSource[i];
-        [statusList addObject:status];
-    }
-    KTVStatusView *statusView = [[KTVStatusView alloc] initWithStatusList:statusList];
+    KTVStatusView *statusView = [[KTVStatusView alloc] initWithStatusList:self.statusList];
 
     statusView.selectedStatusCallback = ^(KTVStatus *selectedStatus) {
-        NSInteger idx = [statusList indexOfObject:selectedStatus];
+        NSInteger idx = [self.statusList indexOfObject:selectedStatus];
         if (idx == 0) {
             self.currentOrderStatus = 99;
         } else if (idx == 1) {

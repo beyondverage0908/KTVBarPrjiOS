@@ -40,6 +40,8 @@
 /// 获取指定月份的日的天数列表
 + (NSArray *)dayListByMonth:(NSInteger)month;
 
+#pragma mark - 图片相关
+
 /**
  * 将图片缩放到指定的CGSize大小
  * UIImage image 原始的图片
@@ -52,6 +54,9 @@
  * CGSize size 截取图片的size
  */
 + (UIImage *)clipImage:(UIImage *)image toRect:(CGSize)size;
+
+/// 根据videoUrl获取视频缩略图
++ (UIImage *)thumbnailFromVideoUrl:(NSString *)videoUrl;
 
 #pragma mark - 版本相关
 

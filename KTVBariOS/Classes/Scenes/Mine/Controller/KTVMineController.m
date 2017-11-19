@@ -48,11 +48,15 @@
     self.tableView.dataSource = self;
     self.tableView.backgroundColor = [UIColor ktvBG];
     
-    [self loadUserInfo];
-    [self loadSearchOrder];
-    
     [KtvNotiCenter addObserver:self selector:@selector(loginedSucess) name:KNotLoginSuccess object:nil];
     [KtvNotiCenter addObserver:self selector:@selector(resignLogin) name:KNotLoginOutOf object:nil];
+    
+    if (![KTVCommon isLogin]) {
+        [self login];
+    } else {
+        [self loadUserInfo];
+        [self loadSearchOrder]; // 查询订单，用于拼拼桌
+    }
 }
 
 - (void)setupData {
@@ -70,6 +74,7 @@
 
 - (void)loginedSucess {
     [self loadUserInfo];
+    [self loadSearchOrder];
 }
 
 - (void)resignLogin {
@@ -217,9 +222,7 @@
 
 // login
 - (void)gotoLogin {
-    KTVLoginGuideController *guideVC = [[KTVLoginGuideController alloc] init];
-    KTVBaseNavigationViewController *nav = [[KTVBaseNavigationViewController alloc] initWithRootViewController:guideVC];
-    [self presentViewController:nav animated:YES completion:nil];
+    [self login];
 }
 
 - (void)toseeMineInfo:(NSDictionary *)info {
@@ -231,6 +234,14 @@
     } else {
         [self requestToLogin];
     }
+}
+
+#pragma mark - Login
+
+- (void)login {
+    KTVLoginGuideController *guideVC = [[KTVLoginGuideController alloc] init];
+    KTVBaseNavigationViewController *nav = [[KTVBaseNavigationViewController alloc] initWithRootViewController:guideVC];
+    [self presentViewController:nav animated:YES completion:nil];
 }
 
 @end

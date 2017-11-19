@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "KTVUserDetail.h"
 #import "KTVPicture.h"
+#import "KTVVideo.h"
 
 @interface KTVUser : NSObject
 
@@ -34,5 +35,6 @@
 @property (nonatomic, strong) NSString * gender;    // 自定义属性
 @property (nonatomic, strong) KTVUserDetail *userDetail;
 @property (nonatomic, strong) NSArray<KTVPicture *> * pictureList;
+@property (nonatomic, strong) NSArray<KTVVideo *> * videoList;
 
 @end

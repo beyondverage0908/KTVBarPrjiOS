@@ -168,7 +168,15 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     if (section == 0) {
-        KTVFilterView *filterView = [[KTVFilterView alloc] initWithFilter:@[@"KTV", @"附近", @"智能排序", @"筛选"]];
+        NSArray *dataS = @[@{@"酒吧" : @[@"酒吧", @"KTV"]},
+                           @{@"附近" : @[@"200m", @"500m", @"1000m", @"5km", @"10km"]},
+                           @{@"性别": @[@"男", @"女", @"不限"]},
+                           @{@"智能排序": @[@"男", @"女", @"不限"]}];
+        KTVFilterView *filterView = [[KTVFilterView alloc] initWithFilter:dataS];
+        filterView.filterCallback = ^(NSDictionary *filterMap) {
+            NSInteger idx = [dataS indexOfObject:filterMap];
+            CLog(@"--->>> %@", @(idx));
+        };
         return filterView;
     }
     
