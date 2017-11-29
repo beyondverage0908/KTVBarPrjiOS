@@ -7,6 +7,8 @@
 //
 
 #import "KTVAddMediaCell.h"
+#import "KTVAlertController.h"
+#import "KTVMainService.h"
 
 @interface KTVAddMediaCell()
 
@@ -95,8 +97,15 @@
                     imageHolder.image = image;
                 } else if ([img isKindOfClass:[KTVVideo class]]) {
                     KTVVideo *video = (KTVVideo *)img;
-//                    imageHolder.image = [KTVUtil thumbnailFromVideoUrl:video.url];
                     [imageHolder thumbnailFromVideoUrl:video.url];
+                    
+                    //初始化一个长按手势
+                    UILongPressGestureRecognizer *longPressGest = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressView:)];
+                    //长按等待时间
+                    longPressGest.minimumPressDuration = 1.5;
+                    //长按时候,手指头可以移动的距离
+                    longPressGest.allowableMovement = 30;
+                    [imageHolder addGestureRecognizer:longPressGest];
                 }
                 [imageHolder mas_makeConstraints:^(MASConstraintMaker *make) {
                     make.width.and.height.equalTo(itemView);
@@ -119,13 +128,22 @@
 
 - (void)imageTap:(UITapGestureRecognizer *)tap {
     NSInteger tag = tap.view.tag - 1000;
-    
     if (self.showMediaCallback) {
         id media = self.mediaList[tag];
         self.showMediaCallback(media);
     }
-    
     CLog(@"--->> 点击图片 %@", @(tag));
+}
+
+- (void)longPressView:(UILongPressGestureRecognizer *)longPressGest{
+    UIView *longView = longPressGest.view;
+    NSInteger idx = longView.tag - 1000;
+    if (longPressGest.state==UIGestureRecognizerStateBegan) {
+        if (self.longPressMediaCallback) {
+            KTVVideo *video = self.mediaList[idx];
+            self.longPressMediaCallback(video);
+        }
+    }
 }
 
 - (void)awakeFromNib {

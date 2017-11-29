@@ -7,15 +7,16 @@
 //
 
 #import "KTVPublishDynamicController.h"
+#import "KTVAlertController.h"
 #import "KTVDynamicHeaderCell.h"
 #import "KTVDynamicPictureCell.h"
 #import "KTVDynamicUserBaseCell.h"
 #import "KTVAddMediaCell.h"
 
 #import "KTVMainService.h"
+#import "KTVLoginService.h"
 
 #import "KTVTableHeaderView.h"
-
 #import "UIImage+extension.h"
 #import <AVKit/AVKit.h>
 #import "KTVVideo.h"
@@ -84,6 +85,22 @@
 }
 
 #pragma mark - 网络
+
+/// 获取用户信息
+- (void)loadUserInfo {
+    NSString *phone = [KTVCommon userInfo].phone;
+    [KTVLoginService getUserInfo:phone result:^(NSDictionary *result) {
+        if (![result[@"code"] isEqualToString:ktvCode]) {
+            [KTVToast toast:TOAST_USERINFO_FAIL];
+        } else {
+            NSDictionary *userInfo = result[@"data"];
+            KTVUser *user = [KTVUser yy_modelWithDictionary:userInfo];
+            self.user = user;
+            
+            [self.tableView reloadData];
+        }
+    }];
+}
 
 // 提交用户基本信息
 - (void)submitUserDetail {
@@ -159,6 +176,22 @@
     }];
 }
 
+- (void)deleteVideo:(KTVVideo *)video {
+    NSString *phone = [KTVCommon userInfo].username;
+    if (![KTVUtil isNullString:phone]) {
+        NSDictionary *params = @{@"username" : phone, @"videoId" : video.videoId};
+        [KTVMainService postDeleteUserVideo:params result:^(NSDictionary *result) {
+            if ([result[@"code"] isEqualToString:ktvCode]) {
+                [self.videoList removeObject:video];
+                [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationNone];
+                [KTVToast toast:TOAST_DELETE_SUCC];
+            } else {
+                [KTVToast toast:TOAST_DELETE_FAIL];
+            }
+        }];
+    }
+}
+
 #pragma mark - 事件
 
 - (IBAction)submitAction:(UIButton *)sender {
@@ -197,14 +230,22 @@
         for (NSInteger i = imgCount - 1; i > 1; i--) {
             [self.photoList addObject:self.user.pictureList[i].pictureUrl];
         }
-        KTVAddMediaCell *cell = [[KTVAddMediaCell alloc] initWithMediaList:self.photoList style:UITableViewCellStyleDefault reuseIdentifier:@"KTVAddMediaCell"];
+        NSString *identifier = @"KTVAddMediaCell";
+        KTVAddMediaCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        if (!cell) {
+            cell = [[KTVAddMediaCell alloc] initWithMediaList:self.photoList style:UITableViewCellStyleDefault reuseIdentifier:@"KTVAddMediaCell"];
+        }
         cell.pickImageCallback = ^(KTVMediaType mediaType) {
             self.tapPickNumber = 1;
             [self showAlterSheet];
         };
         return cell;
     } else if (indexPath.section == 2) {
-        KTVAddMediaCell *cell = [[KTVAddMediaCell alloc] initWithMediaList:self.videoList style:UITableViewCellStyleDefault reuseIdentifier:@"KTVAddMediaCell"];
+        NSString *identifier = @"KTVAddMediaCell";
+        KTVAddMediaCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        if (!cell) {
+            cell = [[KTVAddMediaCell alloc] initWithMediaList:self.videoList style:UITableViewCellStyleDefault reuseIdentifier:@"KTVAddMediaCell"];
+        }
         cell.pickImageCallback = ^(KTVMediaType mediaType) {
             self.tapPickNumber = 2;
             if ([self.videoList count] >= 5) {
@@ -218,6 +259,13 @@
                 KTVVideo *video = (KTVVideo *)media;
                 [self playVideaUrl:video.url];
             }
+        };
+        cell.longPressMediaCallback = ^(KTVVideo *video) {
+            [KTVAlertController alertMessage:@"确定要删除选中的视频吗" confirmHandler:^(UIAlertAction *action) {
+                [self deleteVideo:video];
+            } cancleHandler:^(UIAlertAction *action) {
+                
+            }];
         };
         return cell;
     } else if (indexPath.section == 3) {

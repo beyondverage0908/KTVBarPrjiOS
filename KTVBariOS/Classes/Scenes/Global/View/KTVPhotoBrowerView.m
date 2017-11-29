@@ -7,14 +7,20 @@
 //
 
 #import "KTVPhotoBrowerView.h"
+#import "KTVMainService.h"
 
-@interface KTVPhotoBrowerView()
+@interface KTVPhotoBrowerView()<UIScrollViewDelegate>
+
+@property (nonatomic, assign) NSInteger currentPageIndex;
+@property (strong, nonatomic) NSMutableArray<KTVPicture *> *photoList;
 
 @end
 
 @implementation KTVPhotoBrowerView
 
 - (void)showPhotoBrowerConfig:(NSArray<KTVPicture *> *)photoUrlList andDefaultIndex:(NSInteger)index {
+    
+    self.photoList = photoUrlList;
     
     UIWindow *superView = [UIApplication sharedApplication].keyWindow;
     [superView addSubview:self];
@@ -30,6 +36,7 @@
 
     UIScrollView *scrollView = [[UIScrollView alloc] init];
     [bgView addSubview:scrollView];
+    scrollView.delegate = self;
     scrollView.pagingEnabled = YES;
     scrollView.bounces = YES;
     scrollView.showsHorizontalScrollIndicator = NO;
@@ -82,19 +89,19 @@
         [dismissBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.equalTo(imgView);
         }];
-        
-        if (self.opType == KTVEidtType) {
-            UIButton *removePhotoBtn = [[UIButton alloc] init];
-            [bgView addSubview:removePhotoBtn];
-            removePhotoBtn.backgroundColor = [UIColor ktvRed];
-            [removePhotoBtn addTarget:self action:@selector(removePhotoClick:) forControlEvents:UIControlEventTouchUpInside];
-            [removePhotoBtn setTitle:@"删除" forState:UIControlStateNormal];
-            [removePhotoBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.bottom.equalTo(bgView);
-                make.left.and.right.equalTo(bgView);
-                make.height.equalTo(@44);
-            }];
-        }
+    }
+    
+    if (self.opType == KTVEditType) {
+        UIButton *removePhotoBtn = [[UIButton alloc] init];
+        [bgView addSubview:removePhotoBtn];
+        [removePhotoBtn setImage:[UIImage imageNamed:@"app_photo_delete"] forState:UIControlStateNormal];
+        [removePhotoBtn addTarget:self action:@selector(removePhotoClick:) forControlEvents:UIControlEventTouchUpInside];
+        [removePhotoBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(bgView).offset(20);
+            make.right.equalTo(bgView).offset(-10);
+            make.width.equalTo(@80);
+            make.height.equalTo(@80);
+        }];
     }
 
     [horizontalContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -111,7 +118,26 @@
 }
 
 - (void)removePhotoClick:(UIButton *)btn {
-    [KTVToast toast:@"移除中"];
+    NSString *phone = [KTVCommon userInfo].username;
+    if (![KTVUtil isNullString:phone]) {
+        KTVPicture *pic = self.photoList[self.currentPageIndex];
+        
+        NSDictionary *params = @{@"username" : phone, @"pictureId" : pic.pictureId};
+        [KTVMainService postDeleteUserPhoto:params result:^(NSDictionary *result) {
+            if ([result[@"code"] isEqualToString:ktvCode]) {
+                [KTVToast toast:TOAST_DELETE_SUCC];
+            } else {
+                [KTVToast toast:TOAST_DELETE_FAIL];
+            }
+        }];
+    }
+}
+
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    CGFloat offsetX = scrollView.contentOffset.x;
+    self.currentPageIndex = offsetX / SCREENW;
 }
 
 @end

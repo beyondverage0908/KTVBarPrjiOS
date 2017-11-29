@@ -111,4 +111,10 @@ typedef void(^ResponseSuccess)(NSDictionary *result);
 /// 用户上传视频
 + (void)uploadVideo:(NSDictionary *)params result:(ResponseSuccess)responseResult;
 
+/// 删除相册
++ (void)postDeleteUserPhoto:(NSDictionary *)params result:(ResponseSuccess)responseResult;
+
+/// 删除图片
++ (void)postDeleteUserVideo:(NSDictionary *)params result:(ResponseSuccess)responseResult;
+
 @end

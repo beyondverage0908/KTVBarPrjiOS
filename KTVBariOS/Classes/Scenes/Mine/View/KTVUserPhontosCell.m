@@ -65,7 +65,7 @@ static NSInteger RowCount = 4;
     CLog(@"-- 点击用户了图片");
     
     KTVPhotoBrowerView *brower = [[KTVPhotoBrowerView alloc] init];
-    brower.opType = kTVSeeType;
+    brower.opType = KTVEditType;
     [brower showPhotoBrowerConfig:self.pictureList andDefaultIndex:indexPath.row];
 }
 

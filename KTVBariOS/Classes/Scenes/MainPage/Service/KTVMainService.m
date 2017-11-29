@@ -473,4 +473,34 @@
     }];
 }
 
+/// 删除相册图片
++ (void)postDeleteUserPhoto:(NSDictionary *)params result:(ResponseSuccess)responseResult {
+    KTVRequestMessage *msg = [[KTVRequestMessage alloc] init];
+    msg.path = [KTVUrl getDeletePictureUrl];
+    msg.httpType = KtvPOST;
+    msg.params = params;
+    
+    [[KTVNetworkHelper sharedInstance] send:msg success:^(NSDictionary *result) {
+        // 数据接口解析
+        responseResult(result);
+    } fail:^(NSError *error) {
+        CLog(@"--->>>%@", error);
+    }];
+}
+
+/// 删除相册
++ (void)postDeleteUserVideo:(NSDictionary *)params result:(ResponseSuccess)responseResult {
+    KTVRequestMessage *msg = [[KTVRequestMessage alloc] init];
+    msg.path = [KTVUrl getDeleteVideoUrl];
+    msg.httpType = KtvPOST;
+    msg.params = params;
+    
+    [[KTVNetworkHelper sharedInstance] send:msg success:^(NSDictionary *result) {
+        // 数据接口解析
+        responseResult(result);
+    } fail:^(NSError *error) {
+        CLog(@"--->>>%@", error);
+    }];
+}
+
 @end

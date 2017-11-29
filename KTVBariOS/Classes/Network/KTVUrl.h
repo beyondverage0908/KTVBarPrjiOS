@@ -39,6 +39,12 @@
 /// 上传视频
 + (NSString *)getUploadVideoUrl;
 
+/// 删除用户图片
++ (NSString *)getDeletePictureUrl;
+
+/// 删除视频
++ (NSString *)getDeleteVideoUrl;
+
 #pragma mark - 用户动态
 
 + (NSString *)getUserDynamicStatementUrl;

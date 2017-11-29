@@ -171,6 +171,7 @@
 		33AEAC3B1F5E7D05000003AE /* KTVUserPhotoCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33AEAC3A1F5E7D05000003AE /* KTVUserPhotoCollectionCell.m */; };
 		33AEAC3E1F5E9E28000003AE /* KTVCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 33AEAC3D1F5E9E28000003AE /* KTVCommon.m */; };
 		33AEAC421F5E9FC1000003AE /* KTVUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 33AEAC411F5E9FC1000003AE /* KTVUser.m */; };
+		33B7868E1FC4667900154AA3 /* KTVAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B7868D1FC4667900154AA3 /* KTVAlertController.m */; };
 		33C138ED1F56EB43000F8C37 /* KTVSelectedBeautyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33C138EC1F56EB43000F8C37 /* KTVSelectedBeautyController.m */; };
 		33C138F01F56F3CB000F8C37 /* KTVBeautyGirlCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33C138EF1F56F3CB000F8C37 /* KTVBeautyGirlCollectionCell.m */; };
 		33C138F31F56FBFA000F8C37 /* KTVOrderUploadController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33C138F21F56FBFA000F8C37 /* KTVOrderUploadController.m */; };
@@ -542,6 +543,8 @@
 		33AEAC3D1F5E9E28000003AE /* KTVCommon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVCommon.m; sourceTree = "<group>"; };
 		33AEAC401F5E9FC1000003AE /* KTVUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVUser.h; sourceTree = "<group>"; };
 		33AEAC411F5E9FC1000003AE /* KTVUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVUser.m; sourceTree = "<group>"; };
+		33B7868C1FC4667900154AA3 /* KTVAlertController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVAlertController.h; sourceTree = "<group>"; };
+		33B7868D1FC4667900154AA3 /* KTVAlertController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVAlertController.m; sourceTree = "<group>"; };
 		33C138EB1F56EB43000F8C37 /* KTVSelectedBeautyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVSelectedBeautyController.h; sourceTree = "<group>"; };
 		33C138EC1F56EB43000F8C37 /* KTVSelectedBeautyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVSelectedBeautyController.m; sourceTree = "<group>"; };
 		33C138EE1F56F3CB000F8C37 /* KTVBeautyGirlCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVBeautyGirlCollectionCell.h; sourceTree = "<group>"; };
@@ -804,6 +807,8 @@
 		330A93801F03EC70001B320A /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				33B7868C1FC4667900154AA3 /* KTVAlertController.h */,
+				33B7868D1FC4667900154AA3 /* KTVAlertController.m */,
 				33D777011F305CD100077BE5 /* KTVToast.h */,
 				33D777021F305CD100077BE5 /* KTVToast.m */,
 				33D776FD1F30498600077BE5 /* KTVUtil.h */,
@@ -1844,7 +1849,7 @@
 				TargetAttributes = {
 					332A63C41F03B14D007EF65F = {
 						CreatedOnToolsVersion = 8.3.1;
-						DevelopmentTeam = C76485U944;
+						DevelopmentTeam = HFH9E69Y5K;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -2005,6 +2010,7 @@
 				3319C1011F65170B0008E897 /* KTVStoreContainer.m in Sources */,
 				3329B75C1F4085DB00729FB6 /* KTVOtherDianpuCell.m in Sources */,
 				3329B7531F401E1500729FB6 /* KTVCommentCell.m in Sources */,
+				33B7868E1FC4667900154AA3 /* KTVAlertController.m in Sources */,
 				331684981F5C3A54002C2AD2 /* KTVPZStoreCell.m in Sources */,
 				334214E31F49456800D7D5D0 /* KTVUrl.m in Sources */,
 				3329B74D1F400C9400729FB6 /* KTVBarKtvReserveCell.m in Sources */,
@@ -2288,7 +2294,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = KTVBariOS/KTVBariOS.entitlements;
-				DEVELOPMENT_TEAM = C76485U944;
+				DEVELOPMENT_TEAM = HFH9E69Y5K;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/KTVBariOS/Classes/ThirdParty/ShareSDK/Required",
@@ -2308,7 +2314,7 @@
 					"$(PROJECT_DIR)/KTVBariOS/Classes/ThirdParty/ShareSDK/ShareSDK/Support/PlatformSDK/SinaWeiboSDK",
 					"$(PROJECT_DIR)/KTVBariOS/Classes/ThirdParty/ShareSDK/ShareSDK/Support/PlatformSDK/WeChatSDK",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.vhs.comp.healthrun;
+				PRODUCT_BUNDLE_IDENTIFIER = com.weixinzhifu.jiuba;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -2321,7 +2327,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = KTVBariOS/KTVBariOS.entitlements;
-				DEVELOPMENT_TEAM = C76485U944;
+				DEVELOPMENT_TEAM = HFH9E69Y5K;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/KTVBariOS/Classes/ThirdParty/ShareSDK/Required",
@@ -2341,7 +2347,7 @@
 					"$(PROJECT_DIR)/KTVBariOS/Classes/ThirdParty/ShareSDK/ShareSDK/Support/PlatformSDK/SinaWeiboSDK",
 					"$(PROJECT_DIR)/KTVBariOS/Classes/ThirdParty/ShareSDK/ShareSDK/Support/PlatformSDK/WeChatSDK",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.vhs.comp.healthrun;
+				PRODUCT_BUNDLE_IDENTIFIER = com.weixinzhifu.jiuba;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};

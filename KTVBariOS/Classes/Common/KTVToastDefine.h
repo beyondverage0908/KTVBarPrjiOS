@@ -43,6 +43,8 @@ static NSString * const TOAST_OUT_OF_LOGIN                          = @"您还�
 static NSString * const TOAST_NEAR_NO_INVITEER                      = @"附近暂无邀约";
 static NSString * const TOAST_VIDEO_CANT_PLAY                       = @"小视频不能播放";
 static NSString * const TOAST_VIDEO_CANT_MORETHAN_FIVE              = @"小视频不能超过五个";
+static NSString * const TOAST_DELETE_SUCC                           = @"删除成功";
+static NSString * const TOAST_DELETE_FAIL                           = @"无法删除";
 
 // MBProgressHUD定义
 

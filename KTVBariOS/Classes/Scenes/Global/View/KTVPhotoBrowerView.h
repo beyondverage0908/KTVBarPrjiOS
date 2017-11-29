@@ -10,7 +10,7 @@
 
 typedef enum : NSUInteger {
     kTVSeeType,
-    KTVEidtType
+    KTVEditType
 } KTVOpType;
 
 @interface KTVPhotoBrowerView : UIView

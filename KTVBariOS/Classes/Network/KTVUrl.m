@@ -51,6 +51,16 @@
     return @"/api/login/uploadVideo";
 }
 
+/// 删除用户图片
++ (NSString *)getDeletePictureUrl {
+    return @"/api/login/picture/deletePicture";
+}
+
+/// 删除视频
++ (NSString *)getDeleteVideoUrl {
+    return @"/api/login/video/deleteVideo";
+}
+
 #pragma mark - 用户动态
 
 + (NSString *)getUserDynamicStatementUrl {
