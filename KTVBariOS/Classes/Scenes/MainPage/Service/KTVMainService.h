@@ -117,4 +117,13 @@ typedef void(^ResponseSuccess)(NSDictionary *result);
 /// 删除图片
 + (void)postDeleteUserVideo:(NSDictionary *)params result:(ResponseSuccess)responseResult;
 
+/// 获取用户融云的token
++ (void)getRongCloudToken:(NSDictionary *)params result:(ResponseSuccess)responseResult;
+
+/// 获取好友
++ (void)getMyFriend:(NSString *)phone result:(ResponseSuccess)responseResult;
+
+/// 添加好友
++ (void)postAddFriend:(NSDictionary *)params result:(ResponseSuccess)responseResult;
+
 @end

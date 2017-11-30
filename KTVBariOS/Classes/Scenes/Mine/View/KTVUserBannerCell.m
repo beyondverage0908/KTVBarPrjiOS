@@ -105,5 +105,8 @@
 
 - (IBAction)addFriendAction:(UIButton *)sender {
     CLog(@"-- 添加好友");
+    if (self.addFriendCallback) {
+        self.addFriendCallback(self.user);
+    }
 }
 @end

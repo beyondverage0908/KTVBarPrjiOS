@@ -75,8 +75,14 @@
 - (IBAction)btnAction:(UIButton *)sender {
     if (_friendType == FriendChatType) {
         CLog(@"-->> 聊天");
+        if (self.chatCallback) {
+            self.chatCallback(_user);
+        }
     } else if (_friendType == FriendAddType) {
         CLog(@"-->> 添加好友");
+        if (self.addFriendCallback) {
+            self.addFriendCallback(_user);
+        }
     }
 }
 

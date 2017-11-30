@@ -53,6 +53,10 @@
     [KTVUtil setObject:userInfo forKey:@"ktvUserInfo"];
 }
 
++ (void)saveUserInfo:(NSDictionary *)userInfo {
+    [KTVUtil setObject:userInfo forKey:@"ktvUserInfo"];
+}
+
 + (NSString *)ktvToken {
     return [KTVUtil objectForKey:@"ktvToken"];
 }

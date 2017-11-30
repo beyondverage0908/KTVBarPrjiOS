@@ -61,6 +61,21 @@
     return @"/api/login/video/deleteVideo";
 }
 
+/// 获取用户融云的token
++ (NSString *)getRongCloudTokenUrl {
+    return @"/api/rongcloud/getToken";
+}
+
+/// 添加好友
++ (NSString *)getAddFriendUrl {
+    return @"/api/friend/add";
+}
+
+/// 我的好友
++ (NSString *)getMyFriendUrl {
+    return @"/api/friend/";
+}
+
 #pragma mark - 用户动态
 
 + (NSString *)getUserDynamicStatementUrl {

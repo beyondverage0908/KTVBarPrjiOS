@@ -8,9 +8,10 @@
 
 #import "KTVBaseViewController.h"
 #import "KTVUser.h"
+#import <RongIMKit/RongIMKit.h>
 
 @interface KTVMineFriendController : KTVBaseViewController
 
-@property (nonatomic, strong) NSArray<KTVUser *> * userList;
+@property (nonatomic, strong) NSMutableArray<KTVUser *> *userList;
 
 @end

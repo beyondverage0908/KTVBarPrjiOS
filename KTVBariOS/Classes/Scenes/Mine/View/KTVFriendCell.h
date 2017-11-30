@@ -20,6 +20,11 @@ typedef NS_ENUM(NSUInteger, FriendType) {
 @property (nonatomic, assign) FriendType friendType;
 @property (nonatomic, strong) KTVUser *user;
 
+// 拼桌回调
 @property (nonatomic, copy) void (^pinzuoCallback)(KTVUser *user);
+// 添加好友回调
+@property (nonatomic, copy) void (^addFriendCallback)(KTVUser *user);
+// 聊天回调
+@property (nonatomic, copy) void (^chatCallback)(KTVUser *user);
 
 @end

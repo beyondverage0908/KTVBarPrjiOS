@@ -7,14 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
-//#import <RongIMKit/RongIMKit.h>
+#import <RongIMKit/RongIMKit.h>
 
 @interface KTVRongCloudManager : NSObject
 
++ (KTVRongCloudManager *)shareManager;
+
 /// 初始化融云SDK
-+ (void)rongInit;
+- (void)rongInit;
 
 /// 链接融云服务器-token：通过向自己服务器获取
-+ (void)connectWithToken:(NSString *)token;
+- (void)connectWithRongCloud;
 
 @end

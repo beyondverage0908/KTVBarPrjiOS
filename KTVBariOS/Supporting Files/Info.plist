@@ -143,5 +143,7 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+    <key>RCAPPDEVKEY</key>
+    <string>mgb7ka1nmw23g</string>
 </dict>
 </plist>

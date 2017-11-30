@@ -138,6 +138,19 @@
             vc.phone = user.phone;
             [self.navigationController pushViewController:vc animated:YES];
         };
+        cell.addFriendCallback = ^(KTVUser *user) {
+            NSString *phone = [KTVCommon userInfo].phone;
+            if (phone) {
+                NSDictionary *params = @{@"sourceUsername" : phone, @"targetUsername" : user.phone};
+                [KTVMainService postAddFriend:params result:^(NSDictionary *result) {
+                    if ([result[@"code"] isEqualToString:ktvCode]) {
+                        [KTVToast toast:TOAST_ADD_FRIEND_SUCC];
+                    } else {
+                        [KTVToast toast:result[@"detail"]];
+                    }
+                }];
+            }
+        };
         return cell;
     }
     return nil;

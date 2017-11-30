@@ -364,4 +364,10 @@
     return deviceModel;
 }
 
++ (NSString *)plistForKey:(NSString *)key {
+    NSString *value = [[[[NSBundle mainBundle] infoDictionary] objectForKey:key] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    return value;
+}
+
+
 @end

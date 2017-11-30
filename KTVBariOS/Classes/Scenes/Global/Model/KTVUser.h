@@ -30,6 +30,7 @@
 @property (nonatomic, strong) NSString * phone;
 @property (nonatomic, assign) NSInteger shareTableStatus; // 拼桌状态
 @property (nonatomic, assign) NSInteger inviteStatus;   // 邀约状态
+@property (nonatomic, strong) NSString *rongCloudToken;   // 融云token
 
 
 @property (nonatomic, strong) NSString * gender;    // 自定义属性

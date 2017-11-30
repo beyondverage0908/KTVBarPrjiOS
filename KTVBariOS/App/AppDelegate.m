@@ -1,3 +1,5 @@
+
+
 //
 //  AppDelegate.m
 //  KTVBariOS
@@ -9,9 +11,12 @@
 #import "AppDelegate.h"
 #import "KTVShareSDKManager.h"
 #import "KTVGaodeManager.h"
+#import "KTVRongCloudManager.h"
 #import <Pingpp/Pingpp.h>
 #import <PgySDK/PgyManager.h>
 #import <PgyUpdate/PgyUpdateManager.h>
+#import "KTVMainService.h"
+#import <UserNotifications/UserNotifications.h>
 
 #define PGY_APPKEY @"3f0e42defab8bb12abb3f6298c93a7c2"
 
@@ -37,6 +42,9 @@
     [[KTVGaodeManager defaultGaode] startReGeocodeWithLocation:address completionBlock:^(AMapReGeocode *reGencode) {
         CLog(@"--->>> %@", reGencode);
     }];
+    
+    [self registerRemoteNotificationType:application];
+    [self getRongCloudToken];
     
     return YES;
 }
@@ -90,6 +98,44 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+#pragma mark - 推送
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    if (completionHandler) {
+        completionHandler(UIBackgroundFetchResultNewData);
+    }
+}
+
+- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings {
+    [application registerForRemoteNotifications];
+}
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    NSString *token = [[[[deviceToken description]
+                         stringByReplacingOccurrencesOfString:@"<" withString:@""]
+                        stringByReplacingOccurrencesOfString:@">" withString:@""]
+                       stringByReplacingOccurrencesOfString:@" " withString:@""];
+    [[RCIMClient sharedRCIMClient] setDeviceToken:token];
+}
+
+/// 推送通知类型注册
+- (void)registerRemoteNotificationType:(UIApplication *)application {
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 10.0) {
+        UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+        [center requestAuthorizationWithOptions:(UNAuthorizationOptionAlert + UNAuthorizationOptionSound + UNAuthorizationOptionBadge) completionHandler:^(BOOL granted, NSError * _Nullable error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (granted) {
+                    [application registerForRemoteNotifications];
+                }
+            });
+        }];
+    } else {
+        UIUserNotificationType myTypes = UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:myTypes categories:nil];
+        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+    }
+}
+
 
 #pragma mark - 用于APP之间调用的回调
 
@@ -109,5 +155,32 @@
     return canHandleURL;
 }
 
+
+#pragma mark - 获取融云token
+
+- (void)getRongCloudToken {
+    NSString *username = [KTVCommon userInfo].phone;
+    if (username) {
+        NSMutableDictionary *params = [NSMutableDictionary dictionary];
+        [params setObject:username forKey:@"userId"];
+        
+        NSString *nickName = [KTVCommon userInfo].nickName;
+        if(nickName) {
+            [params setObject:nickName forKey:@"name"];
+        }
+        
+        KTVPicture *pic = [KTVCommon userInfo].pictureList.firstObject;
+        if (pic) {
+            [params setObject:pic.pictureUrl forKey:@"portraitUri"];
+        }
+        [KTVMainService getRongCloudToken:params result:^(NSDictionary *result) {
+            if ([result[@"code"] isEqualToString:ktvCode]) {
+                [KTVCommon setUserInfoKey:@"rongCloudToken" infoValue:result[@"data"][@"token"]];
+                [[KTVRongCloudManager shareManager] rongInit];
+            }
+        }];
+    }
+    //    http://119.23.148.104/api/rongcloud/getToken?userId=18939865731&name=nickname&portraitUri=http://127.0.0.1/image/914397208705499136.jpg
+}
 
 @end

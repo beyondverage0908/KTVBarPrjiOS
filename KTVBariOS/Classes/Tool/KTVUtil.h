@@ -76,5 +76,7 @@
 + (NSString *)phoneModel;
 /// App Bundle identifier
 + (NSString *)bundleIdentifier;
+/// 通过plist中获取值
++ (NSString *)plistForKey:(NSString *)key;
 
 @end

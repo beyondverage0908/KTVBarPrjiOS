@@ -45,6 +45,15 @@
 /// 删除视频
 + (NSString *)getDeleteVideoUrl;
 
+/// 获取用户融云的token
++ (NSString *)getRongCloudTokenUrl;
+
+/// 添加好友
++ (NSString *)getAddFriendUrl;
+
+/// 我的好友
++ (NSString *)getMyFriendUrl;
+
 #pragma mark - 用户动态
 
 + (NSString *)getUserDynamicStatementUrl;

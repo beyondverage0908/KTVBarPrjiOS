@@ -51,7 +51,6 @@
     // 利用订单查询，获取是否为登陆状态
     [self loadSearchOrderToJudgeLoginStatus];
     // 获取暖场人
-    [self loadUserInfo];
     [self loadStoreLike];
     [self loadNearActivity];
     [self loadMianBanner];
@@ -92,24 +91,7 @@
     [KTVMainService postSearchOrder:params result:^(NSDictionary *result) {}];
 }
 
-- (void)loadUserInfo {
-    KTVUser *user = [KTVCommon userInfo];
-    [KTVLoginService getUserInfo:user.phone result:^(NSDictionary *result) {
-        if ([result[@"code"] isEqualToString:ktvCode]) {
-            NSDictionary *userinfo = result[@"data"];
-            
-            if (![userinfo isKindOfClass:[NSNull class]]) {
-                for (NSString *key in userinfo.allKeys) {
-                    NSString *value = [NSString stringWithFormat:@"%@", userinfo[key]];
-                    if (value && value.length) {
-                        [KTVCommon setUserInfoKey:key infoValue:value];
-                    }
-                }
-            }
-        }
-    }];
-}
-
+#warning 需要修改
 /// 猜你喜欢
 - (void)loadStoreLike {
     NSString *username = [KTVCommon userInfo].phone;

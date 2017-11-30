@@ -16,6 +16,7 @@
 #import "KTVPublishDynamicController.h"
 #import "KTVSettingController.h"
 #import "KTVDynamicController.h"
+#import "KTVChatSessionController.h"
 
 #import "KTVUserHeaderCell.h"
 #import "KTVUserInfoCell.h"
@@ -111,6 +112,9 @@
             [KTVToast toast:TOAST_USERINFO_FAIL];
         } else {
             NSDictionary *userInfo = result[@"data"];
+            if (userInfo.allKeys.count > 0) {
+                [KTVCommon saveUserInfo:userInfo];
+            }
             KTVUser *user = [KTVUser yy_modelWithDictionary:userInfo];
             self.user = user;
             
@@ -141,7 +145,11 @@
         vc.isMySelf = YES;
         [self.navigationController pushViewController:vc animated:YES];
     } else if (indexPath.section == 1) {
-        if (indexPath.row == 1) {
+        if (indexPath.row == 0) {
+            KTVChatSessionController *vc = [[KTVChatSessionController alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+        } else if (indexPath.row == 1) {
             KTVOrderStatusListController *vc = (KTVOrderStatusListController *)[UIViewController storyboardName:@"MePage" storyboardId:@"KTVOrderStatusListController"];
             [self.navigationController pushViewController:vc animated:YES];
         } else if (indexPath.row == 2) {

@@ -13,6 +13,7 @@
 #import "KTVUserSenseCell.h"
 #import "KTVMediaCell.h"
 #import "KTVLoginService.h"
+#import "KTVMainService.h"
 #import "KTVTableHeaderView.h"
 #import <AVKit/AVKit.h>
 
@@ -140,6 +141,19 @@
         KTVUserBannerCell *cell = (KTVUserBannerCell *)[tableView dequeueReusableCellWithIdentifier:KTVStringClass(KTVUserBannerCell)];
         cell.user = self.user;
         cell.isSelf = self.isMySelf;
+        cell.addFriendCallback = ^(KTVUser *user) {
+            NSString *phone = [KTVCommon userInfo].phone;
+            if (phone) {
+                NSDictionary *params = @{@"sourceUsername" : phone, @"targetUsername" : user.phone};
+                [KTVMainService postAddFriend:params result:^(NSDictionary *result) {
+                    if ([result[@"code"] isEqualToString:ktvCode]) {
+                        [KTVToast toast:TOAST_ADD_FRIEND_SUCC];
+                    } else {
+                        [KTVToast toast:result[@"detail"]];
+                    }
+                }];
+            }
+        };
         return cell;
     } else if (indexPath.section == 1) {
         KTVUserPhontosCell *cell = (KTVUserPhontosCell *)[tableView dequeueReusableCellWithIdentifier:KTVStringClass(KTVUserPhontosCell)];

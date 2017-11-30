@@ -13,4 +13,7 @@
 @property (nonatomic, assign) BOOL isSelf;;
 @property (nonatomic, strong) KTVUser * user;
 
+// 添加好友回调
+@property (nonatomic, copy) void (^addFriendCallback)(KTVUser *user);
+
 @end
