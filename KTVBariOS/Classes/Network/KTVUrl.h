@@ -54,6 +54,9 @@
 /// 我的好友
 + (NSString *)getMyFriendUrl;
 
+/// 及时更新用户的地址
++ (NSString *)getRecentUserAddressUrl;
+
 #pragma mark - 用户动态
 
 + (NSString *)getUserDynamicStatementUrl;
@@ -91,11 +94,6 @@
 
 /// 退出
 + (NSString *)getExitUrl;
-
-#pragma mark - 地理位置
-
-/// 登录成功之后更新用户的位置和最后一次登录的时间
-+ (NSString *)getLocationRecentStatusUrl;
 
 #pragma mark - 支付
 

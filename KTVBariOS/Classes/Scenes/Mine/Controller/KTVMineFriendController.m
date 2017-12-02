@@ -8,6 +8,8 @@
 
 #import "KTVMineFriendController.h"
 #import "KTVAddFriendController.h"
+#import "KTVUserInfoController.h"
+#import "KTVConversationController.h"
 #import "KTVFriendCell.h"
 #import "KTVMainService.h"
 
@@ -105,8 +107,13 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 1) {
-        CLog(@"-- 查看好友信息");
+    if (indexPath.section == 0) {
+        // 用户详情
+        KTVUser *user = self.userList[indexPath.row];
+        KTVUserInfoController *vc = (KTVUserInfoController *)[UIViewController storyboardName:@"MePage" storyboardId:@"KTVUserInfoController"];
+        vc.isMySelf = NO;
+        vc.user = user;
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 
@@ -131,10 +138,10 @@
         cell.user = user;
         cell.chatCallback = ^(KTVUser *user) {
             CLog(@"-->>> 去聊天");
-            RCConversationViewController *conversationVC = [[RCConversationViewController alloc] init];
+            KTVConversationController *conversationVC = [[KTVConversationController alloc] init];
             conversationVC.conversationType = ConversationType_PRIVATE;
             conversationVC.targetId = user.phone;
-            conversationVC.title = user.phone;
+            conversationVC.title = user.nickName ? user.nickName : user.phone;
             [self.navigationController pushViewController:conversationVC animated:YES];
         };
         return cell;

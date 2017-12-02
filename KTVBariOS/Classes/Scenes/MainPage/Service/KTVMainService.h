@@ -126,4 +126,7 @@ typedef void(^ResponseSuccess)(NSDictionary *result);
 /// 添加好友
 + (void)postAddFriend:(NSDictionary *)params result:(ResponseSuccess)responseResult;
 
+/// 更新用户最新的地理位置
++ (void)postRecentUserAddress:(NSDictionary *)params result:(ResponseSuccess)responseResult;
+
 @end

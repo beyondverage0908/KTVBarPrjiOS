@@ -101,7 +101,7 @@
         if ([result[@"code"] isEqualToString:ktvCode]) {
             [KTVToast toast:TOAST_COLLECT_SUCCESS];
         } else {
-            [KTVToast toast:TOAST_COLLECT_FAIL];
+            [KTVToast toast:result[@"detail"]];
         }
     }];
 }

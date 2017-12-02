@@ -78,7 +78,8 @@ static KTVNetworkHelper *_instance = nil;
             for (NSInteger i = 0; i < params.allKeys.count; i++) {
                 NSString *key = params.allKeys[i];
                 NSString *value = params[key];
-                [urlString appendString:[NSString stringWithFormat:@"%@=%@", key, value]];
+                NSString *appendString = [[NSString stringWithFormat:@"%@=%@", key, value] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+                [urlString appendString:appendString];
                 if (i < params.allKeys.count - 1) {
                     [urlString appendString:@"&"];
                 }

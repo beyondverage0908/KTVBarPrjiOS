@@ -56,6 +56,7 @@
 
 + (void)removeUserDefaultForKey:(NSString *)key {
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:key];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 + (void)setObject:(id)obj forKey:(NSString *)key {

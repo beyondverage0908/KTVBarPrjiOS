@@ -1,5 +1,3 @@
-
-
 //
 //  AppDelegate.m
 //  KTVBariOS
@@ -18,7 +16,7 @@
 #import "KTVMainService.h"
 #import <UserNotifications/UserNotifications.h>
 
-#define PGY_APPKEY @"3f0e42defab8bb12abb3f6298c93a7c2"
+#define PGY_APPKEY @"1f835f0df5780f24a8a1846fe72b91e3"
 
 @interface AppDelegate ()
 
@@ -46,29 +44,30 @@
     [self registerRemoteNotificationType:application];
     [self getRongCloudToken];
     
+    [KtvNotiCenter addObserver:self selector:@selector(updateUserLocation:) name:KNotUserLocationUpdate object:nil];
     return YES;
 }
 
 - (void)startPgy {
     //  关闭用户手势反馈，默认为开启。
-    //  [[PgyManager sharedPgyManager] setEnableFeedback:NO];
+      [[PgyManager sharedPgyManager] setEnableFeedback:NO];
     
     //  设置用户反馈激活模式为三指拖动，默认为摇一摇。
-    //  [[PgyManager sharedPgyManager] setFeedbackActiveType:kPGYFeedbackActiveTypeThreeFingersPan];
+      [[PgyManager sharedPgyManager] setFeedbackActiveType:kPGYFeedbackActiveTypeThreeFingersPan];
     
     //  设置用户反馈界面的颜色，会影响到Title的背景颜色和录音按钮的边框颜色，默认为0x37C5A1(绿色)。
-    //  [[PgyManager sharedPgyManager] setThemeColor:[UIColor blackColor]];
+      [[PgyManager sharedPgyManager] setThemeColor:[UIColor blackColor]];
     
     //  设置摇一摇灵敏度，数字越小，灵敏度越高，默认为2.3。
-    //  [[PgyManager sharedPgyManager] setShakingThreshold:3.0];
+      [[PgyManager sharedPgyManager] setShakingThreshold:3.0];
     
     //  启动SDK
     //  设置三指拖动激活摇一摇需在此调用之前
-//    [[PgyUpdateManager sharedPgyManager] startManagerWithAppId:PGY_APPKEY];
-//    [[PgyManager sharedPgyManager] startManagerWithAppId:PGY_APPKEY];
-    
+    [[PgyUpdateManager sharedPgyManager] startManagerWithAppId:PGY_APPKEY];
+    [[PgyManager sharedPgyManager] startManagerWithAppId:PGY_APPKEY];
+
     //  是否显示蒲公英SDK的Debug Log，如果遇到SDK无法正常工作的情况可以开启此标志以确认原因，默认为关闭。
-//    [[PgyManager sharedPgyManager] setEnableDebugLog:YES];
+    [[PgyManager sharedPgyManager] setEnableDebugLog:YES];
 }
 
 
@@ -91,6 +90,7 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [application setApplicationIconBadgeNumber:0];
 }
 
 
@@ -140,39 +140,33 @@
 #pragma mark - 用于APP之间调用的回调
 
 // iOS8
-- (BOOL)application:(UIApplication *)application
-            openURL:(NSURL *)url
-  sourceApplication:(NSString *)sourceApplication
-         annotation:(id)annotation {
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
     BOOL canHandleURL = [Pingpp handleOpenURL:url withCompletion:nil];
     return canHandleURL;
 }
 // >= iOS9
-- (BOOL)application:(UIApplication *)app
-            openURL:(NSURL *)url
-            options:(NSDictionary *)options {
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary *)options {
     BOOL canHandleURL = [Pingpp handleOpenURL:url withCompletion:nil];
     return canHandleURL;
 }
 
 
-#pragma mark - 获取融云token
+#pragma mark - 网络
 
+// 获取融云的token
 - (void)getRongCloudToken {
     NSString *username = [KTVCommon userInfo].phone;
-    if (username) {
+    NSString *rcToken = [KTVUtil objectForKey:@"rongCloudToken"];
+    if (username && !rcToken) {
         NSMutableDictionary *params = [NSMutableDictionary dictionary];
         [params setObject:username forKey:@"userId"];
         
         NSString *nickName = [KTVCommon userInfo].nickName;
-        if(nickName) {
-            [params setObject:nickName forKey:@"name"];
-        }
+        [params setObject:nickName ? nickName : @"" forKey:@"name"];
         
         KTVPicture *pic = [KTVCommon userInfo].pictureList.firstObject;
-        if (pic) {
-            [params setObject:pic.pictureUrl forKey:@"portraitUri"];
-        }
+        [params setObject:pic.pictureUrl ? pic.pictureUrl : @"" forKey:@"portraitUri"];
+        
         [KTVMainService getRongCloudToken:params result:^(NSDictionary *result) {
             if ([result[@"code"] isEqualToString:ktvCode]) {
                 [KTVCommon setUserInfoKey:@"rongCloudToken" infoValue:result[@"data"][@"token"]];
@@ -180,7 +174,16 @@
             }
         }];
     }
-    //    http://119.23.148.104/api/rongcloud/getToken?userId=18939865731&name=nickname&portraitUri=http://127.0.0.1/image/914397208705499136.jpg
+}
+
+// 更新用户的地理位置
+- (void)updateUserLocation:(NSNotification *)noti {
+    KTVAddress *location = noti.object;
+    if ([KTVCommon userInfo].phone && location) {
+        NSDictionary *params = @{@"username" : [KTVCommon userInfo].phone,
+                                 @"address" : @{@"latitude" : @(location.latitude).stringValue, @"longitude" : @(location.longitude).stringValue}};
+        [KTVMainService postRecentUserAddress:params result:^(NSDictionary *result) {}];
+    }
 }
 
 @end

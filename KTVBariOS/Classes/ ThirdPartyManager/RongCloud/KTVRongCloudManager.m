@@ -25,6 +25,10 @@
 
 - (void)rongInit {
     [[RCIM sharedRCIM] initWithAppKey:[KTVUtil plistForKey:@"RCAPPDEVKEY"]];
+    [RCIM sharedRCIM].enableTypingStatus = YES;
+    [RCIM sharedRCIM].enablePersistentUserInfoCache = YES;
+    [RCIM sharedRCIM].enableSyncReadStatus = YES;
+    [RCIM sharedRCIM].enableMessageAttachUserInfo = YES;
     [self connectWithRongCloud];
 }
 
@@ -50,13 +54,19 @@
 // 代理用户信息 - 自定义聊天用户信息显示
 - (void)getUserInfoWithUserId:(NSString *)userId completion:(void (^)(RCUserInfo *userInfo))completion {
     NSArray *rcUserList = [KTVUtil objectForKey:@"RCUserList"];
-    for (NSDictionary *dic in rcUserList) {
-        RCUserInfo *info = [[RCUserInfo alloc] init];
-        info.name = dic[@"name"];
-        info.userId = dic[@"userId"];
-        info.portraitUri = dic[@"portraitUri"];
-        
-        completion(info);
+    if (rcUserList.count > 0) {
+        for (NSDictionary *dic in rcUserList) {
+            if ([userId isEqualToString:dic[@"userId"]]) {
+                RCUserInfo *info = [[RCUserInfo alloc] init];
+                info.name = dic[@"name"];
+                info.userId = dic[@"userId"];
+                info.portraitUri = dic[@"portraitUri"];
+                
+                completion(info);
+            }
+        }
+    } else {
+        completion(nil);
     }
 }
 

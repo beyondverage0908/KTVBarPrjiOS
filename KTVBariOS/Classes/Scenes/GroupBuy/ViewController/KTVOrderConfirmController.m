@@ -58,6 +58,7 @@
 
 #pragma mark - 网络
 
+/// 获取附近的用户
 - (void)loadCommonNearUser {
     //?latitude=121.48789949&longitude=31.24916171&sex=0&distance=1000&currentPage=1&pageSize=5
     NSMutableDictionary *params = [NSMutableDictionary dictionary];

@@ -25,6 +25,7 @@
 #import "KTVLoginService.h"
 #import "KTVStore.h"
 #import "KTVUser.h"
+#import "KTVRongCloudManager.h"
 
 
 @interface KTVMineController ()<UITableViewDelegate, UITableViewDataSource, KTVUserHeaderCellDelegate>
@@ -76,11 +77,21 @@
 - (void)loginedSucess {
     [self loadUserInfo];
     [self loadSearchOrder];
+    [self getRongCloudToken];
+    [self updateUserLocation];
 }
 
 - (void)resignLogin {
     self.user = nil;
     [self.tableView reloadData];
+    // 注销移除融云的token
+    [KTVUtil removeUserDefaultForKey:@"rongCloudToken"];
+}
+
+// 更新用户地理位置
+- (void)updateUserLocation {
+    KTVAddress *userAddress = [KTVCommon getUserLocation];
+    [KtvNotiCenter postNotificationName:KNotUserLocationUpdate object:userAddress];
 }
 
 #pragma mark - 网络
@@ -123,6 +134,27 @@
     }];
 }
 
+- (void)getRongCloudToken {
+    NSString *username = [KTVCommon userInfo].phone;
+    NSString *rcToken = [KTVUtil objectForKey:@"rongCloudToken"];
+    if (username && !rcToken) {
+        NSMutableDictionary *params = [NSMutableDictionary dictionary];
+        [params setObject:username forKey:@"userId"];
+        
+        NSString *nickName = [KTVCommon userInfo].nickName;
+        [params setObject:nickName ? nickName : @"" forKey:@"name"];
+        
+        KTVPicture *pic = [KTVCommon userInfo].pictureList.firstObject;
+        [params setObject:pic.pictureUrl ? pic.pictureUrl : @"" forKey:@"portraitUri"];
+        
+        [KTVMainService getRongCloudToken:params result:^(NSDictionary *result) {
+            if ([result[@"code"] isEqualToString:ktvCode]) {
+                [KTVCommon setUserInfoKey:@"rongCloudToken" infoValue:result[@"data"][@"token"]];
+                [[KTVRongCloudManager shareManager] rongInit];
+            }
+        }];
+    }
+}
 
 #pragma mark - UITableViewDelegate
 

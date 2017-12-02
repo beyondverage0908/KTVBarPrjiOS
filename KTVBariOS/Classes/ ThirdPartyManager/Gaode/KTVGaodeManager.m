@@ -73,6 +73,8 @@ static KTVGaodeManager *_instance = nil;
     [KTVCommon saveUserLocation:loc];
     // 停止定位
     if(location) {
+        KTVAddress *userAddress = [KTVCommon getUserLocation];
+        [KtvNotiCenter postNotificationName:KNotUserLocationUpdate object:userAddress];
         [self.locationManager stopUpdatingLocation];
     }
 }

@@ -59,6 +59,7 @@
 
 #define KNotLoginSuccess                    @"KNotLoginSuccess"
 #define KNotLoginOutOf                      @"KNotLoginOutOf"
+#define KNotUserLocationUpdate              @"KNotUserLocationUpdate"
 
 
 #endif /* KTVCommonDefine_h */

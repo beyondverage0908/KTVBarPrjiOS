@@ -76,6 +76,11 @@
     return @"/api/friend/";
 }
 
+/// 及时更新用户的地址
++ (NSString *)getRecentUserAddressUrl {
+    return @"/api/login/user/recentStatus";
+}
+
 #pragma mark - 用户动态
 
 + (NSString *)getUserDynamicStatementUrl {
@@ -129,10 +134,6 @@
 }
 
 #pragma mark --
-
-+ (NSString *)getLocationRecentStatusUrl {
-    return @"/api/login/user/recentStatus";
-}
 
 + (NSString *)getPingPayUrl {
     return @"/api/pay";

@@ -46,6 +46,7 @@ static NSString * const TOAST_VIDEO_CANT_MORETHAN_FIVE              = @"小视�
 static NSString * const TOAST_DELETE_SUCC                           = @"删除成功";
 static NSString * const TOAST_DELETE_FAIL                           = @"无法删除";
 static NSString * const TOAST_ADD_FRIEND_SUCC                       = @"添加好友成功";
+static NSString * const TOAST_NEAR_NO_FRIEND                        = @"附近暂无好友";
 
 // MBProgressHUD定义
 

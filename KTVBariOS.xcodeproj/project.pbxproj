@@ -32,6 +32,7 @@
 		331684951F5C3A3A002C2AD2 /* KTVPZUserHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 331684941F5C3A3A002C2AD2 /* KTVPZUserHeaderCell.m */; };
 		331684981F5C3A54002C2AD2 /* KTVPZStoreCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 331684971F5C3A54002C2AD2 /* KTVPZStoreCell.m */; };
 		33170BE51F5F9264003D6FA8 /* KTVBuyService.m in Sources */ = {isa = PBXBuildFile; fileRef = 33170BE41F5F9264003D6FA8 /* KTVBuyService.m */; };
+		3318F7321FD14DDC00F42374 /* KTVConversationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3318F7311FD14DDC00F42374 /* KTVConversationController.m */; };
 		3319C0FE1F6513A00008E897 /* KTVMainLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = 3319C0FD1F6513A00008E897 /* KTVMainLogic.m */; };
 		3319C1011F65170B0008E897 /* KTVStoreContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3319C1001F65170B0008E897 /* KTVStoreContainer.m */; };
 		331CC3BC1FC1B5950070B7A0 /* UIImageView+extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 331CC3BB1FC1B5950070B7A0 /* UIImageView+extension.m */; };
@@ -299,6 +300,8 @@
 		331684971F5C3A54002C2AD2 /* KTVPZStoreCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVPZStoreCell.m; sourceTree = "<group>"; };
 		33170BE31F5F9264003D6FA8 /* KTVBuyService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVBuyService.h; sourceTree = "<group>"; };
 		33170BE41F5F9264003D6FA8 /* KTVBuyService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVBuyService.m; sourceTree = "<group>"; };
+		3318F7301FD14DDC00F42374 /* KTVConversationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KTVConversationController.h; sourceTree = "<group>"; };
+		3318F7311FD14DDC00F42374 /* KTVConversationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KTVConversationController.m; sourceTree = "<group>"; };
 		3319C0FC1F6513A00008E897 /* KTVMainLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVMainLogic.h; sourceTree = "<group>"; };
 		3319C0FD1F6513A00008E897 /* KTVMainLogic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVMainLogic.m; sourceTree = "<group>"; };
 		3319C0FF1F65170B0008E897 /* KTVStoreContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVStoreContainer.h; sourceTree = "<group>"; };
@@ -1524,6 +1527,8 @@
 				336FE84C1FA811360074719F /* KTVLittleBeeController.m */,
 				3364CAE01FCEAC180063904A /* KTVChatSessionController.h */,
 				3364CAE11FCEAC180063904A /* KTVChatSessionController.m */,
+				3318F7301FD14DDC00F42374 /* KTVConversationController.h */,
+				3318F7311FD14DDC00F42374 /* KTVConversationController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2153,6 +2158,7 @@
 				33D776DE1F30109400077BE5 /* UIView+SDExtension.m in Sources */,
 				3325D2501F1273350022AE9A /* UIColor+KTVExtension.m in Sources */,
 				33A74CB11F331EEE00D32F14 /* KTVGaodeManager.m in Sources */,
+				3318F7321FD14DDC00F42374 /* KTVConversationController.m in Sources */,
 				33D776E61F3011AD00077BE5 /* KTVMainController.m in Sources */,
 				3315D31B1F5E7227008DA8EB /* KTVUserBannerCell.m in Sources */,
 				338872C51F5D41EC00DAB247 /* KTVYaoYueUserCell.m in Sources */,
@@ -2300,7 +2306,7 @@
 			baseConfigurationReference = D87AF57E102945EE24953FF1 /* Pods-KTVBariOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-new";
 				CODE_SIGN_ENTITLEMENTS = KTVBariOS/KTVBariOS.entitlements;
 				DEVELOPMENT_TEAM = HFH9E69Y5K;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2333,7 +2339,7 @@
 			baseConfigurationReference = E315085E6F16DA9EAEEB71DE /* Pods-KTVBariOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-new";
 				CODE_SIGN_ENTITLEMENTS = KTVBariOS/KTVBariOS.entitlements;
 				DEVELOPMENT_TEAM = HFH9E69Y5K;
 				FRAMEWORK_SEARCH_PATHS = (
