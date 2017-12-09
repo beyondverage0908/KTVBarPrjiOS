@@ -23,6 +23,8 @@
 #define iOS8 ([[UIDevice currentDevice].systemVersion doubleValue] >= 8.0)
 #define iOS9 ([[UIDevice currentDevice].systemVersion doubleValue] >= 9.0)
 
+#define iPhoneX ([UIScreen mainScreen].bounds.size.height==812.0f && [UIScreen mainScreen].bounds.size.width==375.0f)
+
 #define SCREENW [UIScreen mainScreen].bounds.size.width
 #define SCREENH [UIScreen mainScreen].bounds.size.height
 

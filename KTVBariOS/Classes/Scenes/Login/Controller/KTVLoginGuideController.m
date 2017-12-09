@@ -38,8 +38,13 @@
     [self.view addSubview:closeLoginBtn];
     [closeLoginBtn addTarget:self action:@selector(closeLoginAction) forControlEvents:UIControlEventTouchUpInside];
     [closeLoginBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view).offset(30);
-        make.left.equalTo(self.view).offset(18);
+        make.left.equalTo(self.view).offset(10);
+        make.size.mas_equalTo(CGSizeMake(64, 66));
+        if (@available(iOS 11.0, *)) {
+            make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop).offset(10);
+        } else {
+            make.top.equalTo(self.view.mas_top).offset(30);
+        }
     }];
     
     UIImageView *logoImageView = [[UIImageView alloc] init];
