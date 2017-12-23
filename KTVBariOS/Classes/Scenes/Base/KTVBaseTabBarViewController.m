@@ -9,6 +9,8 @@
 #import "KTVBaseTabBarViewController.h"
 #import "KTVBaseNavigationViewController.h"
 #import "KTVLoginGuideController.h"
+#import "KTVChatSessionController.h"
+#import "UINavigationBar+background.h"
 
 @interface KTVBaseTabBarViewController ()
 
@@ -31,11 +33,16 @@
                                          image:@"app_nearby_icon_unselect"
                                 andSelectImage:@"app_nearby_icon_select"];
     
-    [self addChildViewControllerWithStoryboard:@"DatingFriend"
-                          storyboardIdentifier:@"KTVDateViewController"
-                               tabBarItemTitle:@"邀约"
-                                         image:@"app_tab_yuepao_unselect"
-                                andSelectImage:@"app_tab_yuepao_select"];
+    KTVChatSessionController *chatSessionVC = [[KTVChatSessionController alloc] init];
+    [self addChildViewController:chatSessionVC
+                           title:@"消息"
+                           image:@"app_tab_yuepao_unselect"
+                     selectImage:@"app_tab_mine_select"];
+//    [self addChildViewControllerWithStoryboard:@"DatingFriend"
+//                          storyboardIdentifier:@"KTVDateViewController"
+//                               tabBarItemTitle:@"邀约"
+//                                         image:@"app_tab_yuepao_unselect"
+//                                andSelectImage:@"app_tab_yuepao_select"];
     
     [self addChildViewControllerWithStoryboard:@"MePage"
                           storyboardIdentifier:@"KTVMineController"
@@ -77,6 +84,23 @@
     KTVBaseNavigationViewController *nav = [[KTVBaseNavigationViewController alloc] initWithRootViewController:targetvc];
     [self addChildViewController:nav];
     
+}
+
+- (void)addChildViewController:(UIViewController *)childController
+                         title:(NSString *)title
+                         image:(NSString *)imageName
+                   selectImage:(NSString *)selectImageName {
+    childController.tabBarItem = [[UITabBarItem alloc] initWithTitle:title
+                                                               image:[[UIImage imageNamed:imageName] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
+                                                       selectedImage:[[UIImage imageNamed:selectImageName] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+    //设置字体
+    [childController.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor ktvGray]} forState:UIControlStateNormal];
+    [childController.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor ktvRed]} forState:UIControlStateSelected];
+    
+    KTVBaseNavigationViewController *nav = [[KTVBaseNavigationViewController alloc] initWithRootViewController:childController];
+    [nav.navigationBar setColor:[UIColor ktvBG]];
+    [nav.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    [self addChildViewController:nav];
 }
 
 #pragma mark - 通知
