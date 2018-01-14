@@ -8,6 +8,8 @@
 
 #import "KTVChatSessionController.h"
 #import "KTVConversationController.h"
+#import "KTVLoginGuideController.h"
+#import "KTVAlertController.h"
 
 @interface KTVChatSessionController ()
 
@@ -19,10 +21,27 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"我的消息";
+    self.title = @"聊天";
     
     //设置需要显示哪些类型的会话
     [self setDisplayConversationTypes:@[@(ConversationType_PRIVATE)]];
+    
+    // 会话列表没有会话的时候显示
+    if (!self.conversationListDataSource.count) {
+        [self.conversationListTableView setBackgroundColor:[UIColor ktvBG]];
+        self.conversationListTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    }
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    if (![KTVCommon isLogin]) {
+        [KTVAlertController alertMessage:@"您尚未登陆，请登录后才能看到消息" confirmHandler:^(UIAlertAction *action) {
+            [self login];
+        } cancleHandler:^(UIAlertAction *action) {}];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -38,6 +57,14 @@
     ktvConversationVC.targetId = model.targetId;
     ktvConversationVC.title = model.conversationTitle ? model.conversationTitle : model.senderUserId;
     [self.navigationController pushViewController:ktvConversationVC animated:YES];
+}
+
+#pragma mark - goto login
+
+- (void)login {
+    KTVLoginGuideController *guideVC = [[KTVLoginGuideController alloc] init];
+    KTVBaseNavigationViewController *nav = [[KTVBaseNavigationViewController alloc] initWithRootViewController:guideVC];
+    [self presentViewController:nav animated:YES completion:nil];
 }
 
 @end

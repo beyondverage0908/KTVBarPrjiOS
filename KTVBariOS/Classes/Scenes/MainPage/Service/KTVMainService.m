@@ -261,6 +261,20 @@
     }];
 }
 
++ (void)postUserCollectCancel:(NSDictionary *)params result:(ResponseSuccess)responseResult {
+    KTVRequestMessage *msg = [[KTVRequestMessage alloc] init];
+    msg.path = [KTVUrl getCancelCollectUrl];
+    msg.httpType = KtvPOST;
+    msg.params = params;
+    
+    [[KTVNetworkHelper sharedInstance] send:msg success:^(NSDictionary *result) {
+        // 数据接口解析
+        responseResult(result);
+    } fail:^(NSError *error) {
+        CLog(@"--->>>%@", error);
+    }];
+}
+
 // 加入拼桌
 + (void)postShareTableEnroll:(NSDictionary *)params result:(ResponseSuccess)responseResult {
     KTVRequestMessage *msg = [[KTVRequestMessage alloc] init];

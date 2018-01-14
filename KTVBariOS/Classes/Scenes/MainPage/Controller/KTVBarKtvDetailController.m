@@ -31,6 +31,8 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (strong, nonatomic) NSMutableArray<KTVUser *> *invitatorList;
+@property (strong, nonatomic) UIBarButtonItem *userCollectionBtnItem;
+@property (assign, nonatomic) BOOL isCollection; // 店铺是否被收藏 yes or no
 
 @end
 
@@ -52,6 +54,7 @@
     [self initData];
     
     [self loadStoreInvitators];
+    [self getAlreadyUserCollection];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -76,11 +79,12 @@
                                                                   style:UIBarButtonItemStylePlain
                                                                  target:self
                                                                  action:@selector(firstRightBarItemAction:)];
-    UIBarButtonItem *secondItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"app_order_shouchang"]
+    // store_collection
+    self.userCollectionBtnItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"app_order_shouchang"]
                                                                   style:UIBarButtonItemStylePlain
                                                                  target:self
                                                                  action:@selector(secondRightBarItemAction:)];
-    self.navigationItem.rightBarButtonItems = @[firstItem, secondItem];
+    self.navigationItem.rightBarButtonItems = @[firstItem, self.userCollectionBtnItem];
 }
 
 // 分享
@@ -91,19 +95,11 @@
 // 收藏
 - (void)secondRightBarItemAction:(id)sender {
     CLog(@"-->> 订单收藏");
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    NSString *phone = [KTVCommon userInfo].phone;
-    if (phone && self.store.storeId) {
-        [params setObject:phone forKey:@"username"];
-        [params setObject:self.store.storeId forKey:@"storeId"];
+    if (!self.isCollection) {
+        [self userCollectionStore];
+    } else {
+        [self cancelUserCollectStore];
     }
-    [KTVMainService postUserCollect:params result:^(NSDictionary *result) {
-        if ([result[@"code"] isEqualToString:ktvCode]) {
-            [KTVToast toast:TOAST_COLLECT_SUCCESS];
-        } else {
-            [KTVToast toast:result[@"detail"]];
-        }
-    }];
 }
 
 #pragma mark - 初始化
@@ -128,6 +124,58 @@
             [self.invitatorList addObject:user];
         }
         [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
+    }];
+}
+
+// 用户收藏门店
+- (void)userCollectionStore {
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    NSString *phone = [KTVCommon userInfo].phone;
+    if (phone && self.store.storeId) {
+        [params setObject:phone forKey:@"username"];
+        [params setObject:self.store.storeId forKey:@"storeId"];
+    }
+    @WeakObj(self);
+    [KTVMainService postUserCollect:params result:^(NSDictionary *result) {
+        if ([result[@"code"] isEqualToString:ktvCode]) {
+            [KTVToast toast:TOAST_COLLECT_SUCCESS];
+            weakself.isCollection = YES;
+            [weakself.userCollectionBtnItem setImage:[UIImage imageNamed:@"store_collection"]];
+        } else {
+            [KTVToast toast:result[@"detail"]];
+        }
+    }];
+}
+
+// 获取店铺是否收藏
+- (void)getAlreadyUserCollection {
+    NSString *phone = [KTVCommon userInfo].phone;
+    safetyString(phone);
+    @WeakObj(self);
+    [KTVMainService getUserCollect:phone result:^(NSDictionary *result) {
+        if ([result[@"code"] isEqualToString:ktvCode]) {
+            for (NSDictionary *dic in result[@"data"]) {
+                if ([dic[@"storeModel"][@"id"] integerValue] == weakself.store.storeId.integerValue) {
+                    weakself.isCollection = YES;
+                    [weakself.userCollectionBtnItem setImage:[UIImage imageNamed:@"store_collection"]];
+                    return;
+                }
+            }
+        }
+    }];
+}
+
+- (void)cancelUserCollectStore {
+    NSString *phone = [KTVCommon userInfo].phone;
+    safetyString(phone);
+    NSDictionary *params = @{@"username" : phone, @"storeId" : self.store.storeId};
+    @WeakObj(self);
+    [KTVMainService postUserCollectCancel:params result:^(NSDictionary *result) {
+        if ([result[@"code"] isEqualToString:ktvCode]) {
+            [weakself.userCollectionBtnItem setImage:[UIImage imageNamed:@"app_order_shouchang"]];
+            weakself.isCollection = NO;
+            [KTVToast toast:@"已经取消收藏"];
+        }
     }];
 }
 

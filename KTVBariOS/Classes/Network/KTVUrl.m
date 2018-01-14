@@ -274,6 +274,11 @@
     return @"/api/userCollect/";
 }
 
+/// 取消店铺收藏
++ (NSString *)getCancelCollectUrl {
+    return @"/api/userCollect/cancel";
+}
+
 #pragma mark - 版本号管理
 
 /// 获取最新的版本号

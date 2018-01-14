@@ -16,6 +16,13 @@
 # define CLog(...);
 #endif
 
+// 判断字符串是否nil
+#define safetyString(var) (var = (var) ? (var) : @"")
+#define safetyNumber(var) (var = var ? var : [])
+#define safetyArray(var) (var = var ? var : [NSMutableArray array])
+#define safetyDictionary(var) (var = var ? var : [NSMutableDictionary dictionary])
+#define formatString(var) [NSString stringWithFormat:@"%@", var ? var : @""]
+
 // weakSelf
 #define WeakObj(o) autoreleasepool{} __weak typeof(o) weak##o = o
 

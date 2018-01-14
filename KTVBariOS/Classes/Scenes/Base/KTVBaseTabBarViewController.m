@@ -35,7 +35,7 @@
     
     KTVChatSessionController *chatSessionVC = [[KTVChatSessionController alloc] init];
     [self addChildViewController:chatSessionVC
-                           title:@"消息"
+                           title:@"聊天"
                            image:@"app_tab_yuepao_unselect"
                      selectImage:@"app_tab_mine_select"];
 //    [self addChildViewControllerWithStoryboard:@"DatingFriend"

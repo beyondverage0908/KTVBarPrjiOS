@@ -206,6 +206,9 @@
 /// 获取收藏
 + (NSString *)getAlreadyCollectUrl;
 
+/// 取消收藏
++ (NSString *)getCancelCollectUrl;
+
 #pragma mark - 版本号管理
 
 /// 获取最新的版本号

@@ -91,16 +91,14 @@
     [KTVMainService postSearchOrder:params result:^(NSDictionary *result) {}];
 }
 
-#warning 需要修改
 /// 猜你喜欢
 - (void)loadStoreLike {
     NSString *username = [KTVCommon userInfo].phone;
+    safetyString(username);
     NSDictionary *params = @{@"storeType" : @(0),
-                             @"username" : @"18939865772"};
+                             @"username" : username};
     [KTVMainService postStoreLike:params result:^(NSDictionary *result) {
-        if (![result[@"code"] isEqualToString:ktvCode]) {
-            
-        } else {
+        if ([result[@"code"] isEqualToString:ktvCode]) {
             for (NSDictionary *dic in result[@"data"]) {
                 KTVStore *store = [KTVStore yy_modelWithDictionary:dic];
                 [self.storeLikeList addObject:store];
@@ -112,12 +110,12 @@
 
 - (void)loadNearActivity {
     KTVAddress *address = [KTVCommon getUserLocation];
-//    NSDictionary *params = @{@"storeType" : @0,
-//                             @"latitude" : @(address.latitude),
-//                             @"longitude" : @(address.longitude)};
     NSDictionary *params = @{@"storeType" : @0,
-                             @"latitude" : @(121.48789949),
-                             @"longitude" : @(31.24916171)};
+                             @"latitude" : @(address.latitude),
+                             @"longitude" : @(address.longitude)};
+//    NSDictionary *params = @{@"storeType" : @0,
+//                             @"latitude" : @(121.48789949),
+//                             @"longitude" : @(31.24916171)};
     [KTVMainService postStoreNearActivity:params result:^(NSDictionary *result) {
         if ([result[@"code"] isEqualToString:ktvCode]) {
             for (NSDictionary *dic in result[@"data"]) {

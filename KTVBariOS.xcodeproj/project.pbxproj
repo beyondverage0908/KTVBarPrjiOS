@@ -80,6 +80,7 @@
 		3343E50C1F28DAC800752AC5 /* ShareSDKConnector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3343E4FA1F28DAC800752AC5 /* ShareSDKConnector.framework */; };
 		334474B21F4D8B6C00A86A80 /* UINavigationBar+background.m in Sources */ = {isa = PBXBuildFile; fileRef = 334474B11F4D8B6C00A86A80 /* UINavigationBar+background.m */; };
 		3345F9D61F3F392000164D9C /* KTVBarKtvDetailHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3345F9D51F3F392000164D9C /* KTVBarKtvDetailHeaderCell.m */; };
+		334A236E200A2FA400CADF2E /* KTVStoreCollectController.m in Sources */ = {isa = PBXBuildFile; fileRef = 334A236D200A2FA400CADF2E /* KTVStoreCollectController.m */; };
 		334E53301F15FA9800D83901 /* MainPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 334E532F1F15FA9800D83901 /* MainPage.storyboard */; };
 		334E53321F15FAB000D83901 /* NearPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 334E53311F15FAB000D83901 /* NearPage.storyboard */; };
 		334E53341F15FACF00D83901 /* DatingFriend.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 334E53331F15FACF00D83901 /* DatingFriend.storyboard */; };
@@ -390,6 +391,8 @@
 		334474B11F4D8B6C00A86A80 /* UINavigationBar+background.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+background.m"; sourceTree = "<group>"; };
 		3345F9D41F3F392000164D9C /* KTVBarKtvDetailHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVBarKtvDetailHeaderCell.h; sourceTree = "<group>"; };
 		3345F9D51F3F392000164D9C /* KTVBarKtvDetailHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVBarKtvDetailHeaderCell.m; sourceTree = "<group>"; };
+		334A236C200A2FA400CADF2E /* KTVStoreCollectController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KTVStoreCollectController.h; sourceTree = "<group>"; };
+		334A236D200A2FA400CADF2E /* KTVStoreCollectController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KTVStoreCollectController.m; sourceTree = "<group>"; };
 		334E532F1F15FA9800D83901 /* MainPage.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainPage.storyboard; sourceTree = "<group>"; };
 		334E53311F15FAB000D83901 /* NearPage.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = NearPage.storyboard; sourceTree = "<group>"; };
 		334E53331F15FACF00D83901 /* DatingFriend.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DatingFriend.storyboard; sourceTree = "<group>"; };
@@ -1626,6 +1629,8 @@
 				338D23751F41E194000608B1 /* KTVPackageController.m */,
 				33099C9E1F95F88A004171C8 /* KTVFriendDetailController.h */,
 				33099C9F1F95F88A004171C8 /* KTVFriendDetailController.m */,
+				334A236C200A2FA400CADF2E /* KTVStoreCollectController.h */,
+				334A236D200A2FA400CADF2E /* KTVStoreCollectController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1861,7 +1866,7 @@
 					332A63C41F03B14D007EF65F = {
 						CreatedOnToolsVersion = 8.3.1;
 						DevelopmentTeam = HFH9E69Y5K;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -2133,6 +2138,7 @@
 				3310D2F11F989881008E9D69 /* KTVDynamicUserBaseCell.m in Sources */,
 				33AEAC3B1F5E7D05000003AE /* KTVUserPhotoCollectionCell.m in Sources */,
 				33D776DC1F30109400077BE5 /* SDCollectionViewCell.m in Sources */,
+				334A236E200A2FA400CADF2E /* KTVStoreCollectController.m in Sources */,
 				3377B6E61F4C1CF700B76B2C /* NSDate+Processing.m in Sources */,
 				33831F5F1FBB1FD800D00BFD /* KTVStarView.m in Sources */,
 				3308B1ED1F63C89E00012F9A /* KTVAddress.m in Sources */,
@@ -2308,8 +2314,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = KTVBariOS/KTVBariOS.entitlements;
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = HFH9E69Y5K;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/KTVBariOS/Classes/ThirdParty/ShareSDK/Required",
@@ -2331,8 +2338,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.weixinzhifu.jiuba;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "d3157b41-5a9e-4822-a53d-76cb23ed50f7";
-				PROVISIONING_PROFILE_SPECIFIER = dev_ktv_pp_20171207;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -2344,9 +2351,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = KTVBariOS/KTVBariOS.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = HFH9E69Y5K;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/KTVBariOS/Classes/ThirdParty/ShareSDK/Required",
@@ -2368,8 +2375,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.weixinzhifu.jiuba;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "02d68d30-d68b-46a2-927b-b0bb2d16bce5";
-				PROVISIONING_PROFILE_SPECIFIER = ad_ktv_pp_20171207;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

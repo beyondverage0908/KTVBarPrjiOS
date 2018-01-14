@@ -66,6 +66,9 @@ typedef void(^ResponseSuccess)(NSDictionary *result);
 /// 获取收藏
 + (void)getUserCollect:(NSString *)mobile result:(ResponseSuccess)responseResult;
 
+/// 取消收藏;
++ (void)postUserCollectCancel:(NSDictionary *)params result:(ResponseSuccess)responseResult;
+
 /// 加入拼桌
 + (void)postShareTableEnroll:(NSDictionary *)params result:(ResponseSuccess)responseResult;
 

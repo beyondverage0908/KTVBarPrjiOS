@@ -123,16 +123,18 @@
 #pragma mark - 网络
 
 - (void)loadMainData {
+    KTVAddress *address = [KTVCommon getUserLocation];
     
-    [self.mainParams setObject:@"0" forKey:@"storeType"];
-    [self.mainParams setObject:@"500.0" forKey:@"distance"];
-    [self.mainParams setObject:@"121.48789949" forKey:@"latitude"];
-    [self.mainParams setObject:@"31.24916171" forKey:@"longitude"];
+    // storeType: 0 酒吧   storeType: 1 KTV
+    [self.mainParams setObject:@"1" forKey:@"storeType"];
+    [self.mainParams setObject:@"1500.0" forKey:@"distance"];
+    [self.mainParams setObject:@(address.latitude) forKey:@"latitude"];
+    [self.mainParams setObject:@(address.longitude) forKey:@"longitude"];
     [self.mainParams setObject:[NSNumber numberWithBool:YES] forKey:@"sortByDistance"];
     [self.mainParams setObject:[NSNumber numberWithBool:NO] forKey:@"sortByStar"];
     
     [KTVMainService postMainPage:self.mainParams result:^(NSDictionary *result) {
-        if ([result[@"code"] isEqualToString:ktvCode]) {
+        if ([result[@"code"] isEqualToString:ktvCode] && [result[@"data"] count]) {
             for (NSDictionary *dict in result[@"data"]) {
                 KTVStoreContainer *storeContainer = [KTVStoreContainer yy_modelWithDictionary:dict];
                 [self.storeContainerList addObject:storeContainer];
@@ -140,6 +142,7 @@
             
             [self.tableView reloadData];
         } else {
+            [KTVToast toast:@"附近暂无商家入驻"];
             CLog(@"-- >> filure");
         }
     }];
