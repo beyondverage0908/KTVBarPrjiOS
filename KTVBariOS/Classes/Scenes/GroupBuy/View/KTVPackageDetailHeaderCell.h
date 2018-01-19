@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "KTVPackage.h"
 
 @interface KTVPackageDetailHeaderCell : UITableViewCell
+
+@property (nonatomic, strong) KTVPackage * package;
 
 @end

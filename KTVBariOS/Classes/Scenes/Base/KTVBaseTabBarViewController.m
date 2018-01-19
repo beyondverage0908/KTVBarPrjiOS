@@ -37,7 +37,7 @@
     [self addChildViewController:chatSessionVC
                            title:@"聊天"
                            image:@"app_tab_yuepao_unselect"
-                     selectImage:@"app_tab_mine_select"];
+                     selectImage:@"app_tab_yuepao_select"];
 //    [self addChildViewControllerWithStoryboard:@"DatingFriend"
 //                          storyboardIdentifier:@"KTVDateViewController"
 //                               tabBarItemTitle:@"邀约"

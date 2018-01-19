@@ -38,7 +38,14 @@
     self.buyValidtime.text = _groupbuy.buyNotice;
     self.buyRuleLabel.text = _groupbuy.remark;
     self.buynotesLabel.text = _groupbuy.notice;
+}
+
+- (void)setPackage:(KTVPackage *)package {
+    _package = package;
     
+    self.buyValidtime.text = _package.buyTime;
+    self.buyRuleLabel.text = _package.belong;
+    self.buynotesLabel.text = _package.notice;
 }
 
 @end

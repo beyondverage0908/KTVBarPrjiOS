@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BcD-co-utR">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BcD-co-utR">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Nearby Controller-->
+        <!--View Controller-->
         <scene sceneID="6kb-i1-eTm">
             <objects>
-                <viewController storyboardIdentifier="KTVNearbyController" id="wXW-B1-il6" customClass="KTVNearbyController" sceneMemberID="viewController">
+                <viewController id="wXW-B1-il6" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="xZa-uU-MGz"/>
                         <viewControllerLayoutGuide type="bottom" id="5b7-kR-fJZ"/>
@@ -179,7 +179,26 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rtX-ue-qaK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="120.8" y="-1293.1034482758621"/>
+            <point key="canvasLocation" x="766" y="-1293"/>
+        </scene>
+        <!--Nearby Controller-->
+        <scene sceneID="1oP-SQ-KU2">
+            <objects>
+                <viewController storyboardIdentifier="KTVNearbyController" id="C6W-t2-Qbg" customClass="KTVNearbyController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="2ch-a2-lsv"/>
+                        <viewControllerLayoutGuide type="bottom" id="hdD-I9-OAA"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="xSs-b5-u33">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="AF1-kd-9bs"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="um1-kc-lAo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="70" y="-1293"/>
         </scene>
         <!--附近-->
         <scene sceneID="mwP-gm-Tjc">
@@ -191,7 +210,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="wXW-B1-il6" kind="relationship" relationship="rootViewController" id="DSe-sA-X2F"/>
+                        <segue destination="C6W-t2-Qbg" kind="relationship" relationship="rootViewController" id="o75-CF-W2S"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IJo-k5-z5A" userLabel="First Responder" sceneMemberID="firstResponder"/>

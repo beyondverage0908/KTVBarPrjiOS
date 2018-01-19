@@ -64,7 +64,7 @@
         if (i == 0) {
             [btn setTitleColor:[UIColor ktvRed] forState:UIControlStateNormal];
         }
-        btn.titleLabel.font = [UIFont bold14];
+        btn.titleLabel.font = [UIFont bold17];
         [btn addTarget:self action:@selector(filterAction:) forControlEvents:UIControlEventTouchUpInside];
         [btn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.left.right.equalTo(itemBgView);

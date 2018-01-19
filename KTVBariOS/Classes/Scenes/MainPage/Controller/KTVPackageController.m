@@ -313,6 +313,8 @@
     if (indexPath.section == 2) {
         // 套餐详情
         KTVPackageDetailController *vc = (KTVPackageDetailController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVPackageDetailController"];
+        KTVPackage *package = self.store.packageList[indexPath.row];
+        vc.package = package;
         [self.navigationController pushViewController:vc animated:YES];
     } else if (indexPath.section == 3) {
         KTVLittleBeeController *vc = (KTVLittleBeeController *)[UIViewController storyboardName:@"MePage" storyboardId:@"KTVLittleBeeController"];

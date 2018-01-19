@@ -10,10 +10,12 @@
 
 #import "KTVStore.h"
 #import "KTVGroupbuy.h"
+#import "KTVPackage.h"
 
 @interface KTVBuyNotesCell : UITableViewCell
 
 @property (strong, nonatomic) KTVStore *store;
 @property (strong, nonatomic) KTVGroupbuy *groupbuy;
+@property (nonatomic, strong) KTVPackage * package;
 
 @end

@@ -7,7 +7,10 @@
 //
 
 #import "KTVBaseViewController.h"
+#import "KTVPackage.h"
 
 @interface KTVPackageDetailController : KTVBaseViewController
+
+@property (nonatomic, strong) KTVPackage * package;
 
 @end

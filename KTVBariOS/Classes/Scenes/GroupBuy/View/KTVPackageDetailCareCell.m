@@ -10,8 +10,8 @@
 
 @interface KTVPackageDetailCareCell ()
 
-@property (weak, nonatomic) IBOutlet UILabel *carefulNameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *carefulDetailLabel;
+@property (weak, nonatomic) IBOutlet UILabel *carefulNameLabel; // 有效期
+@property (weak, nonatomic) IBOutlet UILabel *carefulDetailLabel; //
 
 @end
 
@@ -23,6 +23,13 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
+}
+
+- (void)setPackage:(KTVPackage *)package {
+    _package = package;
+    
+    self.carefulNameLabel.text = @"套餐使用时长";
+    self.carefulDetailLabel.text = _package.belong;
 }
 
 @end

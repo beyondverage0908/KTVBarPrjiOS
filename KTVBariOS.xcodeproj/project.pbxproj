@@ -18,6 +18,8 @@
 		330A93871F03ED2A001B320A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 330A93831F03ED2A001B320A /* AppDelegate.m */; };
 		330A938C1F03ED7E001B320A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 330A938B1F03ED7E001B320A /* main.m */; };
 		330A938F1F03EE47001B320A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 330A938E1F03EE47001B320A /* Main.storyboard */; };
+		330E9DBE200B03BD00B01627 /* KTVNearStoreController.m in Sources */ = {isa = PBXBuildFile; fileRef = 330E9DBD200B03BD00B01627 /* KTVNearStoreController.m */; };
+		330E9DC1200B040700B01627 /* KTVNearPersonController.m in Sources */ = {isa = PBXBuildFile; fileRef = 330E9DC0200B040700B01627 /* KTVNearPersonController.m */; };
 		3310D2EB1F9897E9008E9D69 /* KTVDynamicHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3310D2EA1F9897E9008E9D69 /* KTVDynamicHeaderCell.m */; };
 		3310D2EE1F989847008E9D69 /* KTVDynamicPictureCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3310D2ED1F989847008E9D69 /* KTVDynamicPictureCell.m */; };
 		3310D2F11F989881008E9D69 /* KTVDynamicUserBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3310D2F01F989881008E9D69 /* KTVDynamicUserBaseCell.m */; };
@@ -273,6 +275,10 @@
 		330A93831F03ED2A001B320A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		330A938B1F03ED7E001B320A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		330A938E1F03EE47001B320A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		330E9DBC200B03BD00B01627 /* KTVNearStoreController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KTVNearStoreController.h; sourceTree = "<group>"; };
+		330E9DBD200B03BD00B01627 /* KTVNearStoreController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KTVNearStoreController.m; sourceTree = "<group>"; };
+		330E9DBF200B040700B01627 /* KTVNearPersonController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KTVNearPersonController.h; sourceTree = "<group>"; };
+		330E9DC0200B040700B01627 /* KTVNearPersonController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KTVNearPersonController.m; sourceTree = "<group>"; };
 		3310D2E91F9897E9008E9D69 /* KTVDynamicHeaderCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KTVDynamicHeaderCell.h; sourceTree = "<group>"; };
 		3310D2EA1F9897E9008E9D69 /* KTVDynamicHeaderCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KTVDynamicHeaderCell.m; sourceTree = "<group>"; };
 		3310D2EC1F989847008E9D69 /* KTVDynamicPictureCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KTVDynamicPictureCell.h; sourceTree = "<group>"; };
@@ -1232,11 +1238,11 @@
 		337DA0631F2F744F000EF331 /* Nearby */ = {
 			isa = PBXGroup;
 			children = (
+				339AED5E1F52C98900473C29 /* ViewController */,
 				339AED5A1F52C98900473C29 /* Logic */,
 				339AED5B1F52C98900473C29 /* Model */,
 				339AED5C1F52C98900473C29 /* Service */,
 				339AED5D1F52C98900473C29 /* View */,
-				339AED5E1F52C98900473C29 /* ViewController */,
 			);
 			path = Nearby;
 			sourceTree = "<group>";
@@ -1396,6 +1402,10 @@
 			children = (
 				339AED5F1F52C98900473C29 /* KTVNearbyController.h */,
 				339AED601F52C98900473C29 /* KTVNearbyController.m */,
+				330E9DBC200B03BD00B01627 /* KTVNearStoreController.h */,
+				330E9DBD200B03BD00B01627 /* KTVNearStoreController.m */,
+				330E9DBF200B040700B01627 /* KTVNearPersonController.h */,
+				330E9DC0200B040700B01627 /* KTVNearPersonController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -2077,6 +2087,7 @@
 				3377B6E91F4C769100B76B2C /* KTVBuyNotesCell.m in Sources */,
 				338FD35F1F62719200A81FA7 /* KTVThreeRightView.m in Sources */,
 				3395B5901F984C560037AFED /* UIImage+extension.m in Sources */,
+				330E9DC1200B040700B01627 /* KTVNearPersonController.m in Sources */,
 				339AED611F52C98900473C29 /* KTVNearbyController.m in Sources */,
 				3310D2EE1F989847008E9D69 /* KTVDynamicPictureCell.m in Sources */,
 				33C138ED1F56EB43000F8C37 /* KTVSelectedBeautyController.m in Sources */,
@@ -2110,6 +2121,7 @@
 				339826701F557AB900EAB238 /* KTVOrderConfirmCell.m in Sources */,
 				33D776F61F301D9600077BE5 /* TAPageControl.m in Sources */,
 				336A8AE01F472D730064E068 /* UIFont+Ktv.m in Sources */,
+				330E9DBE200B03BD00B01627 /* KTVNearStoreController.m in Sources */,
 				333694AA1F925D6A00D73E95 /* KTVInvitedUser.m in Sources */,
 				339D8AA51F1A048F00D41152 /* KTVLoginBaseController.m in Sources */,
 				334474B21F4D8B6C00A86A80 /* UINavigationBar+background.m in Sources */,

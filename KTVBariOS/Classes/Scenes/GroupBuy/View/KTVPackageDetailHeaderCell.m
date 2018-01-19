@@ -27,4 +27,14 @@
     [super setSelected:selected animated:animated];
 }
 
+- (void)setPackage:(KTVPackage *)package {
+    if (_package != package) {
+        _package = package;
+        
+        self.packageNameLabel.text = _package.packageName;
+        self.packageMoneyLabel.text = [NSString stringWithFormat:@"¥%@", _package.price];
+        self.oldMoneyLabel.text = [NSString stringWithFormat:@"门市价:%@", _package.realPrice];
+    }
+}
+
 @end

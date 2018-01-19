@@ -29,6 +29,9 @@
     
     self.tableview.delegate = self;
     self.tableview.dataSource = self;
+    
+    self.view.backgroundColor = [UIColor ktvBG];
+    self.tableview.backgroundColor = [UIColor ktvBG];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -85,6 +88,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         KTVPackageDetailHeaderCell *cell = [tableView dequeueReusableCellWithIdentifier:@"KTVPackageDetailHeaderCell"];
+        cell.package = self.package;
         return cell;
     } else if (indexPath.section == 1) {
         static NSString *identifier = @"KTVPackageUserSelectedCell";
@@ -108,9 +112,11 @@
         return cell;
     } else if (indexPath.section == 2) {
         KTVPackageDetailCareCell *cell = [tableView dequeueReusableCellWithIdentifier:@"KTVPackageDetailCareCell"];
+        cell.package = self.package;
         return cell;
     } else if (indexPath.section == 3) {
         KTVBuyNotesCell *cell = [tableView dequeueReusableCellWithIdentifier:@"KTVBuyNotesCell"];
+        cell.package = self.package;
         return cell;
     }
     return [UITableViewCell new];
