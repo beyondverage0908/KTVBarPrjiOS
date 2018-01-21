@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Near Store Controller-->
         <scene sceneID="6kb-i1-eTm">
             <objects>
-                <viewController id="wXW-B1-il6" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="KTVNearStoreController" id="wXW-B1-il6" customClass="KTVNearStoreController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="xZa-uU-MGz"/>
                         <viewControllerLayoutGuide type="bottom" id="5b7-kR-fJZ"/>
@@ -22,8 +22,38 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HDV-yf-sUp">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mainpage_all_bg_line" translatesAutoresizingMaskIntoConstraints="NO" id="3YU-ks-5yo">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    </imageView>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="tpA-J8-qM2">
+                                        <rect key="frame" x="30" y="8" width="315" height="29"/>
+                                        <segments>
+                                            <segment title="酒吧"/>
+                                            <segment title="KTV"/>
+                                        </segments>
+                                        <color key="tintColor" red="0.94901960780000005" green="0.094117647060000004" blue="0.52941176469999995" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <action selector="eventChangeAction:" destination="wXW-B1-il6" eventType="valueChanged" id="ofN-ln-otJ"/>
+                                        </connections>
+                                    </segmentedControl>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="tpA-J8-qM2" firstAttribute="leading" secondItem="HDV-yf-sUp" secondAttribute="leading" constant="30" id="1Oa-21-qlv"/>
+                                    <constraint firstAttribute="height" constant="44" id="P84-qG-hvg"/>
+                                    <constraint firstItem="3YU-ks-5yo" firstAttribute="top" secondItem="HDV-yf-sUp" secondAttribute="top" id="QLZ-fd-e3e"/>
+                                    <constraint firstItem="tpA-J8-qM2" firstAttribute="centerY" secondItem="HDV-yf-sUp" secondAttribute="centerY" id="QSZ-QO-88A"/>
+                                    <constraint firstAttribute="trailing" secondItem="tpA-J8-qM2" secondAttribute="trailing" constant="30" id="WVD-lT-STi"/>
+                                    <constraint firstAttribute="trailing" secondItem="3YU-ks-5yo" secondAttribute="trailing" id="gRm-NM-ItC"/>
+                                    <constraint firstAttribute="bottom" secondItem="3YU-ks-5yo" secondAttribute="bottom" id="jfR-78-VOH"/>
+                                    <constraint firstItem="3YU-ks-5yo" firstAttribute="leading" secondItem="HDV-yf-sUp" secondAttribute="leading" id="tgR-Kh-sIn"/>
+                                </constraints>
+                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="125" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4jB-di-uMc">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="623"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="KTVGuessLikeCell" rowHeight="115" id="yRN-pb-cz7" customClass="KTVGuessLikeCell">
@@ -166,20 +196,24 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="4jB-di-uMc" secondAttribute="bottom" id="1OO-8V-nNV"/>
+                            <constraint firstItem="HDV-yf-sUp" firstAttribute="leading" secondItem="mWU-fa-fet" secondAttribute="leading" id="7SG-FQ-dvR"/>
                             <constraint firstAttribute="trailing" secondItem="4jB-di-uMc" secondAttribute="trailing" id="8Rl-mH-mRg"/>
+                            <constraint firstItem="HDV-yf-sUp" firstAttribute="top" secondItem="mWU-fa-fet" secondAttribute="top" id="EmT-4C-rdW"/>
                             <constraint firstItem="4jB-di-uMc" firstAttribute="leading" secondItem="mWU-fa-fet" secondAttribute="leading" id="dSs-0m-5gb"/>
-                            <constraint firstItem="4jB-di-uMc" firstAttribute="top" secondItem="mWU-fa-fet" secondAttribute="top" id="kQc-L9-OMs"/>
+                            <constraint firstAttribute="trailing" secondItem="HDV-yf-sUp" secondAttribute="trailing" id="dr7-GY-dYt"/>
+                            <constraint firstItem="4jB-di-uMc" firstAttribute="top" secondItem="HDV-yf-sUp" secondAttribute="bottom" id="ll8-HK-vBl"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="sEZ-Jd-gZZ"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
-                        <outlet property="tableView" destination="4jB-di-uMc" id="UPn-UO-2qJ"/>
+                        <outlet property="segment" destination="tpA-J8-qM2" id="hpm-rN-RfT"/>
+                        <outlet property="tableView" destination="4jB-di-uMc" id="A3E-Gl-Jne"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rtX-ue-qaK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="766" y="-1293"/>
+            <point key="canvasLocation" x="765.60000000000002" y="-1293.1034482758621"/>
         </scene>
         <!--Nearby Controller-->
         <scene sceneID="1oP-SQ-KU2">

@@ -104,6 +104,11 @@
     [self changeActionLayer:btn];
     NSInteger idx = btn.tag - 2000;
     CLog(@"--->>> %@", self.filters[idx]);
+    
+    @WeakObj(self);
+    if (self.filterCallfback) {
+        weakself.filterCallfback(idx);
+    }
 }
 
 - (void)changeActionLayer:(UIButton *)btn {

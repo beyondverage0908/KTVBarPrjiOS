@@ -24,10 +24,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"附近";
-    //115
-//    self.tableView.delegate = self;
-//    self.tableView.dataSource = self;
-//    self.tableView.backgroundColor = [UIColor ktvBG];
+
     self.view.backgroundColor = [UIColor ktvBG];
     
     KTVSimpleFilter *filterView = [[KTVSimpleFilter alloc] init];
@@ -38,46 +35,58 @@
         make.top.equalTo(self.view).offset(64);
         make.height.equalTo(@44.0f);
     }];
+    // 默认初始化一个子视图
+    KTVNearStoreController *vc = (KTVNearStoreController *)[UIViewController storyboardName:@"NearPage" storyboardId:@"KTVNearStoreController"];
+    [self displayContentController:vc];
+    filterView.filterCallfback = ^(NSInteger index) {
+        if (index == 0) {
+            if (![self isContainerViewController:KTVNearStoreController.class]) {
+                KTVNearStoreController *vc = (KTVNearStoreController *)[UIViewController storyboardName:@"NearPage" storyboardId:@"KTVNearStoreController"];
+                [self displayContentController:vc];
+                [self displayContentController:vc];
+            }
+        } else if (index == 1) {
+            if (![self isContainerViewController:KTVNearPersonController.class]) {
+                KTVNearPersonController *vc = [[KTVNearPersonController alloc] init];
+                [self displayContentController:vc];
+            }
+        }
+    };
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
-//#pragma mark - UITableViewDelegate
-//
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    return 115.0f;
-//}
-//
-//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-//    return 44.0f;
-//}
-//
-//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-//    KTVSimpleFilter *filterView = [[KTVSimpleFilter alloc] init];
-//    filterView.filters = @[@"附近的商家", @"附近的人"];
-//    return filterView;
-//}
-//
-//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    KTVBarKtvDetailController *vc = (KTVBarKtvDetailController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVBarKtvDetailController"];
-//    [self.navigationController pushViewController:vc animated:YES];
-//}
-//
-//#pragma mark - UITableViewDataSource
-//
-//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-//    return 1;
-//}
-//
-//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//    return 5;
-//}
-//
-//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    KTVGuessLikeCell *cell = (KTVGuessLikeCell *)[tableView dequeueReusableCellWithIdentifier:@"KTVGuessLikeCell"];
-//    return cell;
-//}
+#pragma mark - 添加子视图控制器
+
+- (BOOL)isContainerViewController:(Class)VC {
+    for (UIViewController *vc in self.childViewControllers) {
+        if ([[vc class] isEqual:VC]) {
+            return YES;
+        }
+    }
+    return NO;
+}
+
+- (void)displayContentController:(UIViewController*)content {
+    if (self.childViewControllers.count) {
+        UIViewController *childVc = self.childViewControllers[0];
+        [self hideContentController:childVc];
+    }
+    [self addChildViewController:content];
+    CGRect frame = self.view.frame;
+    frame.origin.y = 108;
+    frame.size.height = frame.size.height - 108;
+    content.view.frame = frame;
+    [self.view addSubview:content.view];
+    [content didMoveToParentViewController:self];
+}
+
+- (void)hideContentController:(UIViewController*) content {
+    [content willMoveToParentViewController:nil];
+    [content.view removeFromSuperview];
+    [content removeFromParentViewController];
+}
 
 @end

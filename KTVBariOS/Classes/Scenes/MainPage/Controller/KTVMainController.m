@@ -21,6 +21,8 @@
 #import "KTVActivity.h"
 #import "KTVBanner.h"
 
+#import "KTVPaySuccessController.h"
+
 @interface KTVMainController ()<UITableViewDelegate, UITableViewDataSource, SDCycleScrollViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -55,6 +57,8 @@
     [self loadNearActivity];
     [self loadMianBanner];
     [self loadAppVersion];
+    
+    [self testCode];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -364,6 +368,11 @@
 //    [self presentViewController:nav animated:YES completion:nil];
     
     [MBProgressHUD showMessage:@"加载中..."];
+}
+
+- (void)testCode {
+    KTVPaySuccessController *vc = (KTVPaySuccessController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVPaySuccessController"];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end

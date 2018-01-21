@@ -7,8 +7,11 @@
 //
 
 #import "KTVBaseViewController.h"
+#import "KTVStore.h"
 
 @interface KTVPaySuccessController : KTVBaseViewController
+
+@property (nonatomic, strong) KTVStore * store;
 
 @property (nonatomic, strong) NSString *payedMoney;
 

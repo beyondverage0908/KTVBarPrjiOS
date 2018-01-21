@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="KTVBeeCell" rowHeight="99" id="KGk-i7-Jjw" customClass="KTVBeeCell">
+            <rect key="frame" x="0.0" y="0.0" width="373" height="99"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="373" height="98.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mainpage_all_bg_line" translatesAutoresizingMaskIntoConstraints="NO" id="qAp-No-lq8">
+                        <rect key="frame" x="0.0" y="0.0" width="373" height="98.5"/>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bar_yuepao_user_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="yW8-LG-w59">
+                        <rect key="frame" x="10" y="19.5" width="60" height="60"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="60" id="Ui8-Ba-RQ9"/>
+                            <constraint firstAttribute="width" constant="60" id="uzm-WT-9PR"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="可爱小猫" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HJc-55-Ps4">
+                        <rect key="frame" x="85" y="10" width="65.5" height="19.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="500米以内" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ekc-Js-5PO">
+                        <rect key="frame" x="187.5" y="11.5" width="69" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="app_user_woman" translatesAutoresizingMaskIntoConstraints="NO" id="TDr-Dj-u7d">
+                        <rect key="frame" x="85" y="42" width="18" height="15"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="18岁" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gxE-Md-AbB">
+                        <rect key="frame" x="118" y="41" width="31.5" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Sn-vJ-3uL">
+                        <rect key="frame" x="293" y="37" width="70" height="25"/>
+                        <color key="backgroundColor" red="0.94901960780000005" green="0.094117647060000004" blue="0.52941176469999995" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="70" id="fQu-UK-4kQ"/>
+                            <constraint firstAttribute="height" constant="25" id="mgC-aC-RcG"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <state key="normal" title="进店看看">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </state>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="4"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                        <connections>
+                            <action selector="enterStoreAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="dqU-9v-gQF"/>
+                        </connections>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="今晚一起嗨啊，搞起来" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r36-Nz-0N8">
+                        <rect key="frame" x="85" y="71.5" width="143" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.53333333329999999" green="0.23137254900000001" blue="0.69019607839999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mainpage_list_location" translatesAutoresizingMaskIntoConstraints="NO" id="L6G-5O-rgX">
+                        <rect key="frame" x="165.5" y="12.5" width="12" height="15"/>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="yW8-LG-w59" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="2fD-fZ-J2b"/>
+                    <constraint firstItem="ekc-Js-5PO" firstAttribute="centerY" secondItem="HJc-55-Ps4" secondAttribute="centerY" id="Axk-53-Kex"/>
+                    <constraint firstItem="L6G-5O-rgX" firstAttribute="centerY" secondItem="HJc-55-Ps4" secondAttribute="centerY" id="B2u-NN-AnY"/>
+                    <constraint firstAttribute="trailing" secondItem="8Sn-vJ-3uL" secondAttribute="trailing" constant="10" id="CD4-Wx-VKA"/>
+                    <constraint firstItem="ekc-Js-5PO" firstAttribute="leading" secondItem="L6G-5O-rgX" secondAttribute="trailing" constant="10" id="CgH-kM-ruG"/>
+                    <constraint firstItem="8Sn-vJ-3uL" firstAttribute="centerY" secondItem="TDr-Dj-u7d" secondAttribute="centerY" id="E1M-b1-v0B"/>
+                    <constraint firstItem="r36-Nz-0N8" firstAttribute="leading" secondItem="yW8-LG-w59" secondAttribute="trailing" constant="15" id="OEu-ZV-CnZ"/>
+                    <constraint firstItem="qAp-No-lq8" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="RGv-bD-wuI"/>
+                    <constraint firstAttribute="bottom" secondItem="qAp-No-lq8" secondAttribute="bottom" id="WF6-nd-8ZV"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="r36-Nz-0N8" secondAttribute="trailing" constant="10" id="Yvo-1L-5Ga"/>
+                    <constraint firstItem="HJc-55-Ps4" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="aaQ-3h-OQ2"/>
+                    <constraint firstItem="gxE-Md-AbB" firstAttribute="leading" secondItem="TDr-Dj-u7d" secondAttribute="trailing" constant="15" id="dPZ-ee-SDV"/>
+                    <constraint firstItem="gxE-Md-AbB" firstAttribute="centerY" secondItem="TDr-Dj-u7d" secondAttribute="centerY" id="eaN-84-Z0R"/>
+                    <constraint firstItem="L6G-5O-rgX" firstAttribute="leading" secondItem="HJc-55-Ps4" secondAttribute="trailing" constant="15" id="ejV-R4-SGm"/>
+                    <constraint firstItem="qAp-No-lq8" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="ioJ-7J-RXZ"/>
+                    <constraint firstItem="HJc-55-Ps4" firstAttribute="leading" secondItem="yW8-LG-w59" secondAttribute="trailing" constant="15" id="iqJ-Gl-yML"/>
+                    <constraint firstItem="yW8-LG-w59" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="ogZ-PI-xku"/>
+                    <constraint firstAttribute="bottom" secondItem="r36-Nz-0N8" secondAttribute="bottom" constant="10" id="rhx-ji-kEx"/>
+                    <constraint firstItem="TDr-Dj-u7d" firstAttribute="leading" secondItem="yW8-LG-w59" secondAttribute="trailing" constant="15" id="sp8-Pj-Co2"/>
+                    <constraint firstAttribute="trailing" secondItem="qAp-No-lq8" secondAttribute="trailing" id="yt3-4e-OI6"/>
+                    <constraint firstItem="TDr-Dj-u7d" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="zdL-n9-99m"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="activityLabel" destination="r36-Nz-0N8" id="pcT-4e-U6Z"/>
+                <outlet property="addressLabel" destination="ekc-Js-5PO" id="kQ8-hJ-bbt"/>
+                <outlet property="ageLabel" destination="gxE-Md-AbB" id="Q2o-eq-n53"/>
+                <outlet property="enterBtn" destination="8Sn-vJ-3uL" id="tNC-fP-nUp"/>
+                <outlet property="genderImageView" destination="TDr-Dj-u7d" id="XzE-Nq-gQZ"/>
+                <outlet property="headImageview" destination="yW8-LG-w59" id="hN0-U8-cg2"/>
+                <outlet property="nickLabel" destination="HJc-55-Ps4" id="RTg-Si-oMZ"/>
+            </connections>
+            <point key="canvasLocation" x="-44.5" y="125.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="app_user_woman" width="18" height="15"/>
+        <image name="bar_yuepao_user_placeholder" width="43" height="43"/>
+        <image name="mainpage_all_bg_line" width="375" height="200"/>
+        <image name="mainpage_list_location" width="12" height="15"/>
+    </resources>
+</document>

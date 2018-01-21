@@ -11,5 +11,6 @@
 @interface KTVSimpleFilter : UIView
 
 @property (strong, nonatomic) NSArray<NSString *> *filters;
+@property (nonatomic, copy) void (^filterCallfback)(NSInteger index);
 
 @end

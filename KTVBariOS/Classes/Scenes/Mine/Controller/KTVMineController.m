@@ -18,6 +18,7 @@
 #import "KTVDynamicController.h"
 #import "KTVChatSessionController.h"
 #import "KTVStoreCollectController.h"
+#import "KTVMyInvitationController.h"
 
 #import "KTVUserHeaderCell.h"
 #import "KTVUserInfoCell.h"
@@ -63,7 +64,8 @@
 }
 
 - (void)setupData {
-    self.userInfoArray = @[@"发起拼桌活动", @"暖场人邀约", @"发布动态", @"我的收藏", @"申请入驻成为商家", @"设置"];
+//    self.userInfoArray = @[@"发起拼桌活动", @"暖场人邀约", @"发布动态", @"我的收藏", @"申请入驻成为商家", @"设置"];
+    self.userInfoArray = @[@"我的拼桌活动", @"暖场人邀约", @"发布动态", @"我的收藏", @"申请入驻成为商家", @"申请成为暖场人", @"设置"];
 }
 
 - (NSMutableArray<KTVStore *> *)storeList {
@@ -186,7 +188,7 @@
 //            KTVOrderStatusListController *vc = (KTVOrderStatusListController *)[UIViewController storyboardName:@"MePage" storyboardId:@"KTVOrderStatusListController"];
 //            [self.navigationController pushViewController:vc animated:YES];
 //        }
-        // @[@"发起拼桌活动", @"暖场人邀约", @"发布动态", @"我的收藏", @"申请入驻成为商家", @"设置"]
+        // @[@"我的拼桌活动", @"暖场人邀约", @"发布动态", @"我的收藏", @"申请入驻成为商家", @"申请成为暖场人", @"设置"]
         if (indexPath.row == 0) {
             // 发起拼桌活动
             if (![self.storeList count]) {
@@ -196,9 +198,9 @@
             KTVStartYueController *vc = (KTVStartYueController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVStartYueController"];
             [self.navigationController pushViewController:vc animated:YES];
         } else if (indexPath.row == 1) {
-            CLog(@"-- 查看个人信息 下一页");
-//            KTVMineFriendController *vc = (KTVMineFriendController *)[UIViewController storyboardName:@"MePage" storyboardId:@"KTVMineFriendController"];
-//            [self.navigationController pushViewController:vc animated:YES];
+            CLog(@"-- 暖场人邀约");
+            KTVMyInvitationController *vc = (KTVMyInvitationController *)[UIViewController storyboardName:@"MePage" storyboardId:@"KTVMyInvitationController"];
+            [self.navigationController pushViewController:vc animated:YES];
         } else if (indexPath.row == 2) {
             // 发布动态
             KTVDynamicController *vc = (KTVDynamicController *)[UIViewController storyboardName:@"MePage" storyboardId:KTVStringClass(KTVDynamicController)];
@@ -214,6 +216,8 @@
             KTVApplyStoreController *vc = (KTVApplyStoreController *)[UIViewController storyboardName:@"MePage" storyboardId:KTVStringClass(KTVApplyStoreController)];
             [self.navigationController pushViewController:vc animated:YES];
         } else if (indexPath.row == 5) {
+            // 申请成为暖场人
+        } else if (indexPath.row == 6) {
             KTVSettingController *vc = (KTVSettingController *)[UIViewController storyboardName:@"MePage" storyboardId:KTVStringClass(KTVSettingController)];
             [self.navigationController pushViewController:vc animated:YES];
         }
