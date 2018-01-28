@@ -8,12 +8,11 @@
 
 #import "KTVSelectedBeautyController.h"
 #import "KTVOrderUploadController.h"
-
 #import "KTVBeautyGirlCollectionCell.h"
 #import "KTVFilterView.h"
-
+#import "KTVBeeCollectionHeaderView.h"
+#import "KTVBeeCollectionFooterView.h"
 #import "KTVMainService.h"
-
 #import "KTVUser.h"
 
 @interface KTVSelectedBeautyController ()<UICollectionViewDelegate, UICollectionViewDataSource>
@@ -29,7 +28,7 @@
 
 @end
 
-static NSInteger RowCount = 2;
+static NSInteger RowCount = 3;
 
 @implementation KTVSelectedBeautyController
 
@@ -41,6 +40,7 @@ static NSInteger RowCount = 2;
     self.collectionView.dataSource = self;
     self.collectionView.backgroundColor = [UIColor ktvBG];
     self.collectionView.collectionViewLayout = [self setupFlowLayout];
+    self.view.backgroundColor = [UIColor ktvBG];
     
     [self layoutCollectionHeader];
     
@@ -91,16 +91,18 @@ static NSInteger RowCount = 2;
 - (UICollectionViewFlowLayout *)setupFlowLayout {
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     
-    CGFloat iWith = (SCREENW / RowCount) - 2.5;
-    flowLayout.itemSize = CGSizeMake(iWith, iWith * 1.27f);
-    flowLayout.minimumLineSpacing = 5.0f;
-    flowLayout.minimumInteritemSpacing = 5.0f;
+    CGFloat iWith = (SCREENW / RowCount) - 0.1;
+    flowLayout.itemSize = CGSizeMake(iWith, iWith * 1.33f);
+    flowLayout.minimumLineSpacing = 0.0f;
+    flowLayout.minimumInteritemSpacing = 0.0f;
     
+    flowLayout.headerReferenceSize = CGSizeMake(self.collectionView.frame.size.width, 35);
+    flowLayout.footerReferenceSize = CGSizeMake(self.collectionView.frame.size.width, 40);
     return flowLayout;
 }
 
 - (void)layoutCollectionHeader {
-    NSArray *dataS = @[@{@"智能排序" : @[@"北京", @"上海", @"南昌", @"合肥", @"宁波", @"杭州", @"石家庄"]},
+    NSArray *dataS = @[@{@"暖场人类型" : @[@"可爱", @"清纯", @"淑女", @"熟女"]},
                        @{@"性别": @[@"男", @"女", @"不限"]}];
     KTVFilterView *filterView = [[KTVFilterView alloc] initWithFilter:dataS];
     [self.collectionHeaderView addSubview:filterView];
@@ -125,17 +127,6 @@ static NSInteger RowCount = 2;
 
 - (IBAction)popAction:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
-}
-
-- (IBAction)resetAction:(UIButton *)sender {
-    CLog(@"选美女--重置");
-    [self.selActivitorList removeAllObjects];
-    [self resetBtnYueNumber:[self.selActivitorList count]];
-    [self.collectionView reloadData];
-}
-
-- (IBAction)yueTaAction:(UIButton *)sender {
-    CLog(@"选美女--约她");
 }
 
 - (IBAction)nextStepAction:(UIButton *)sender {
@@ -170,17 +161,25 @@ static NSInteger RowCount = 2;
 #pragma mark - UICollectionViewDataSource
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 1;
+    return 3;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return [self.activitorList count];
+//    return [self.activitorList count];
+    if (section == 0) {
+        return 7;
+    } else if (section == 1) {
+        return 5;
+    } else if (section == 2) {
+        return 11;
+    }
+    return 0;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     KTVBeautyGirlCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"KTVBeautyGirlCollectionCell" forIndexPath:indexPath];
-    KTVUser *user = self.activitorList[indexPath.row];
-    cell.user = user;
+//    KTVUser *user = self.activitorList[indexPath.row];
+//    cell.user = user;
     
     cell.callback = ^(KTVUser *user, BOOL isSelected) {
         if (isSelected) {
@@ -195,6 +194,27 @@ static NSInteger RowCount = 2;
         [self resetBtnYueNumber:[self.selActivitorList count]];
     };
     return cell;
+}
+
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
+    
+    UICollectionReusableView *reusableView = nil;
+    if (kind == UICollectionElementKindSectionHeader) {
+        KTVBeeCollectionHeaderView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"KTVBeeCollectionHeaderView" forIndexPath:indexPath];
+        reusableView = headerView;
+        headerView.type = indexPath.section;
+    }
+    
+    if (kind == UICollectionElementKindSectionFooter) {
+        KTVBeeCollectionFooterView *footerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"KTVBeeCollectionFooterView" forIndexPath:indexPath];
+        @WeakObj(self);
+        footerView.findMoreCallback = ^(NSInteger type) {
+            KTVSelectedBeautyController *vc = (KTVSelectedBeautyController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVSelectedBeautyController"];
+            [weakself.navigationController pushViewController:vc animated:YES];
+        };
+        reusableView = footerView;
+    }
+    return reusableView;
 }
 
 @end

@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "KTVUser.h"
 
 @interface KTVBeeCateCell : UITableViewCell
 
-@property (nonatomic, copy) void (^callback)(BOOL isSelected);
+@property (nonatomic, copy) void (^callback)(KTVUser *user, BOOL isSelected);
+@property (nonatomic, strong) KTVUser * user;
 
 @end

@@ -16,10 +16,16 @@
 #import "KTVPayEndCell.h"
 #import "KTVPayMoneyCell.h"
 #import "KTVSelectedBeautyController.h"
+#import "KTVMainService.h"
+#import "KTVBuyService.h"
+#import "KTVPayManager.h"
 
 @interface KTVPaySuccessController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (assign, nonatomic) NSInteger activitorPage;
+@property (strong, nonatomic) NSMutableArray *activitorList;
+@property (strong, nonatomic) NSMutableArray *selectedActivitorList;
 
 @end
 
@@ -35,11 +41,164 @@
     self.view.backgroundColor = [UIColor ktvBG];
     
     [self.tableView registerNib:[UINib nibWithNibName:@"KTVBeeCateCell" bundle:nil] forCellReuseIdentifier:@"KTVBeeCateCell"];
+    
+    self.activitorList = [NSMutableArray array];
+    self.selectedActivitorList = [NSMutableArray array];
+    
+    [self loadPageStoreActivitors];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 
+}
+
+#pragma mark - 自定义方法
+
+- (double)activitySelectedMoney {
+    double money = 0;
+    for (KTVUser *ur in self.selectedActivitorList) {
+        money += ur.userDetail.price;
+    }
+    return money;
+}
+
+- (NSMutableDictionary *)mergeOrderInfo {
+    NSMutableDictionary *orderDict = [NSMutableDictionary dictionary];
+    
+    [orderDict setObject:@(self.store.storeId.integerValue) forKey:@"storeId"];
+    [orderDict setObject:@(self.store.user.userId.integerValue) forKey:@"userId"];
+    NSString *currentDate = [NSDate dateStringWithDate:[NSDate date] andFormatString:@"yyyy-MM-dd HH:mm:ss"];
+    [orderDict setObject:currentDate forKey:@"startDate"];
+    [orderDict setObject:@(4) forKey:@"orderType"];
+    [orderDict setObject:@(self.payType) forKey:@"payType"];
+    if (self.isHiddenActivity) {
+        [orderDict setObject:@(1) forKey:@"userHide"];
+    } else {
+        [orderDict setObject:@(0) forKey:@"userHide"];
+    }
+    [orderDict setObject:@"nothing" forKey:@"description"];
+    
+    NSMutableArray *userOrderDetails = [NSMutableArray array];
+    for (KTVUser *user in self.selectedActivitorList) {
+        NSDictionary *dict = @{@"sourceId" : @(user.userId.integerValue),
+                               @"price" : @(user.userDetail.price),
+                               @"orderType" : @(user.userDetail.type),
+                               @"count" : @(1),
+                               @"discount" : @(100)};
+        [userOrderDetails addObject:dict];
+    }
+    [orderDict setObject:userOrderDetails forKey:@"userOrderDetails"];
+    return orderDict;
+}
+
+- (void)createOrder {
+    NSDictionary *orderInfo = [self mergeOrderInfo];
+    NSArray *userOrderDetails = orderInfo[@"userOrderDetails"];
+    if (![userOrderDetails count]) {
+        [KTVToast toast:@"请先选择小蜜蜂"];
+        return;
+    }
+    
+    [MBProgressHUD showMessage:MB_CREATE_ORDER];
+    [KTVBuyService postCreateOrder:orderInfo result:^(NSDictionary *result) {
+        [MBProgressHUD hiddenHUD];
+        if ([result[@"code"] isEqualToString:ktvCode]) {
+            NSString *orderId = result[@"data"][@"orderId"];
+            [self networkConfirmPay:orderId];
+        } else {
+            [KTVToast toast:result[@"detail"]];
+        }
+    }];
+}
+
+// 第三方支付
+- (void)networkConfirmPay:(NSString *)orderNo {
+    NSString *channel = @"alipay";
+    if (self.payType == 3) {
+        channel = @"unionpay";
+    } else if (self.payType == 1) {
+        channel = @"alipay";
+    } else if (self.payType == 2) {
+        channel = @"wx";
+    }
+    
+    NSDictionary *payParams = @{@"channel" : channel,
+                                @"amount" : @"1",
+                                @"subject" : @"aaaa",
+                                @"body" : @"bbbb",
+                                @"orderNo" : orderNo};
+    [MBProgressHUD showMessage:MB_ORDER_PAYING];
+    [KTVBuyService postPayParams:payParams result:^(NSDictionary *result) {
+        [MBProgressHUD hiddenHUD];
+        if (![result[@"code"] isEqualToString:ktvCode]) {
+            [KTVToast toast:result[@"detail"]];
+            return;
+        }
+        NSDictionary *charge = result[@"data"];
+        if ([channel isEqualToString:@"alipay"]) {
+            [KTVPayManager ktvPay:AlipayType payment:charge contoller:nil completion:^(NSString *result) {
+                if ([result isEqualToString:@"success"]) {
+                    [KTVToast toast:@"支付成功"];
+                    [self backToRootController];
+                } else {
+                    // 支付失败或取消
+                    [KTVToast toast:TOAST_PAY_FAIL];
+                }
+            }];
+        } else if ([channel isEqualToString:@"wx"]) {
+            [KTVPayManager ktvPay:WeChatType payment:charge contoller:nil completion:^(NSString *result) {
+                if ([result isEqualToString:@"success"]) {
+                    [KTVToast toast:@"支付成功"];
+                    [self backToRootController];
+                } else {
+                    // 支付失败或取消
+                    [KTVToast toast:TOAST_PAY_FAIL];
+                }
+            }];
+        } else if ([channel isEqualToString:@"unionpay"]) {
+            [KTVPayManager ktvPay:UnionPayType payment:charge contoller:nil completion:^(NSString *result) {
+                if ([result isEqualToString:@"success"]) {
+                    [KTVToast toast:@"支付成功"];
+                    [self backToRootController];
+                } else {
+                    // 支付失败或取消
+                    [KTVToast toast:TOAST_PAY_FAIL];
+                }
+            }];
+        }
+    }];
+}
+
+- (void)backToRootController {
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
+#pragma mark - 网络
+
+/// 分页获取门店暖场人
+- (void)loadPageStoreActivitors {
+    NSDictionary *params = @{@"storeId" : self.store.storeId,
+                             @"size" : @"8",
+                             @"currentPage" : @(self.activitorPage)};
+    [KTVMainService getStorePageActivitors:params result:^(NSDictionary *result) {
+        if (![result[@"code"] isEqualToString:ktvCode]) {
+            [KTVToast toast:result[@"detail"]];
+            return;
+        }
+        NSArray *activitorList = result[@"data"][@"activitorList"];
+        if ([activitorList count]) {
+            [self.activitorList removeAllObjects];
+            ++self.activitorPage;
+        } else {
+            [KTVToast toast:TOAST_NOMORE_ACTIVITORS];
+        }
+        for (NSDictionary *dict in activitorList) {
+            KTVUser *user = [KTVUser yy_modelWithDictionary:dict];
+            [self.activitorList addObject:user];
+        }
+        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
+    }];
 }
 
 #pragma mark - 事件
@@ -71,18 +230,20 @@
         return headerView;
     } else if (section == 1) {
         KTVTableHeaderView *headerView = [[KTVTableHeaderView alloc] initWithImageUrl:nil title:@"邀约TA暖场" headerImgUrl:@"app_change_batch" remarkUrl:@"app_arrow_right_hui" remark:nil];
+        @WeakObj(self);
         headerView.headerActionBlock = ^(KTVHeaderType type) {
             if (type == HeaderType) {
                 CLog(@"--->>> 邀约TA暖床");
-                //[self loadPageStoreActivitors];
+                [weakself loadPageStoreActivitors];
             }
         };
         headerView.bgActionBlock = ^(KTVHeaderType headerType) {
             if (headerType == BGType) {
                 // 跳转邀约暖场人列表
+                @WeakObj(self);
                 KTVSelectedBeautyController *vc = (KTVSelectedBeautyController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVSelectedBeautyController"];
                 vc.store = self.store;
-                [self.navigationController pushViewController:vc animated:YES];
+                [weakself.navigationController pushViewController:vc animated:YES];
             }
         };
         return headerView;
@@ -118,7 +279,7 @@
     if (section == 0) {
         return 3;
     } else if (section == 1) {
-        return 5;
+        return [self.activitorList count];
     } else if (section == 2) {
         return 1;
     }
@@ -156,14 +317,28 @@
         if (!cell) {
             cell = [[[NSBundle mainBundle] loadNibNamed:@"KTVBeeCateCell" owner:self options:nil] lastObject];
         }
+        KTVUser *user = self.activitorList[indexPath.row];
+        cell.user = user;
+        @WeakObj(self);
+        cell.callback = ^(KTVUser *user, BOOL isSelected) {
+            if (isSelected) {
+                [weakself.selectedActivitorList addObject:user];
+            } else {
+                [weakself.selectedActivitorList removeObject:user];
+            }
+            [weakself.tableView reloadSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationNone];
+        };
         return cell;
     } else if (indexPath.section == 2) {
         KTVPayMoneyCell *cell = [tableView dequeueReusableCellWithIdentifier:@"KTVPayMoneyCell"];
         if (!cell) {
             cell = [[[NSBundle mainBundle] loadNibNamed:@"KTVPayMoneyCell" owner:self options:nil] lastObject];
         }
+        cell.money = [self activitySelectedMoney];
+        @WeakObj(self);
         cell.payMoneyAction = ^(double money) {
             CLog(@"-- >> 付款");
+            [weakself createOrder];
         };
         return cell;
     }

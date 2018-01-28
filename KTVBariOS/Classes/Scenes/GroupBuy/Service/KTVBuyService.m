@@ -18,7 +18,9 @@
     
     [[KTVNetworkHelper sharedInstance] send:msg success:^(NSDictionary *result) {
         responseResult(result);
-    } fail:^(NSError *error) {}];
+    } fail:^(NSError *error) {
+        CLog(@"%@", error);
+    }];
 }
 
 + (void)postCreateOrder:(NSDictionary *)params result:(ResponseSuccess)responseResult {
@@ -29,7 +31,9 @@
     
     [[KTVNetworkHelper sharedInstance] send:msg success:^(NSDictionary *result) {
         responseResult(result);
-    } fail:^(NSError *error) {}];
+    } fail:^(NSError *error) {
+        CLog(@"%@", error);
+    }];
 }
 
 @end

@@ -26,8 +26,8 @@
 
 @property (strong, nonatomic) NSMutableDictionary *payChannelDict; // 支付渠道
 @property (assign, nonatomic) BOOL isHiddenActivity;
-
 @property (strong, nonatomic) NSMutableDictionary *orderUploadDictionary;
+@property (assign, nonatomic) NSInteger payType;
 
 @end
 
@@ -146,6 +146,9 @@
                     // 支付成功
                     KTVPaySuccessController *vc = (KTVPaySuccessController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVPaySuccessController"];
                     vc.payedMoney = [self getOrderAllMoney];
+                    vc.store = self.store;
+                    vc.payType = self.payType;
+                    vc.isHiddenActivity = self.isHiddenActivity;
                     [self.navigationController pushViewController:vc animated:YES];
                 } else {
                     // 支付失败或取消
@@ -263,14 +266,16 @@
     [self mergeUploadParam];
     
     NSString *paychannel = [self getPayChannel];
+    NSInteger payType = 1;
     if ([paychannel isEqualToString:@"unionpay"]) {
-        [self.orderUploadDictionary setObject:@(3) forKey:@"payType"];
+        payType = 3;
     } else if ([paychannel isEqualToString:@"alipay"]) {
-        [self.orderUploadDictionary setObject:@(1) forKey:@"payType"];
+        payType = 1;
     } else if ([paychannel isEqualToString:@"wx"]) {
-        [self.orderUploadDictionary setObject:@(2) forKey:@"payType"];
+        payType = 2;
     }
-    
+    self.payType = payType;
+    [self.orderUploadDictionary setObject:@(payType) forKey:@"payType"];
     
     // 创建订单
     [self networkCreateOrder:^(NSDictionary *orderDict) {

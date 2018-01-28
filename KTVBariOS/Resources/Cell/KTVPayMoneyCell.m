@@ -29,4 +29,12 @@
     }
 }
 
+- (void)setMoney:(double)money {
+    if (_money != money) {
+        _money = money;
+        
+        self.moneyLabel.text = [NSString stringWithFormat:@"¥ %@", @(_money)];
+    }
+}
+
 @end

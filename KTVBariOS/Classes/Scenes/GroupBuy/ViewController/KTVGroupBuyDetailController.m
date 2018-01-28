@@ -54,7 +54,7 @@
     
     //[self loadStore];
     [self loadStoreInvitators];
-    [self loadPageStoreActivitors];
+//    [self loadPageStoreActivitors];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -147,7 +147,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if (section == 1 || section == 2 || section == 3 || section == 4 || section == 5) {
+    if (section == 1 || section == 2 || section == 4 || section == 5) {
         return 29.0f;
     }
     return 0;

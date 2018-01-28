@@ -22,6 +22,7 @@
 #import "KTVBanner.h"
 
 #import "KTVPaySuccessController.h"
+#import "KTVSelectedBeautyController.h"
 
 @interface KTVMainController ()<UITableViewDelegate, UITableViewDataSource, SDCycleScrollViewDelegate>
 
@@ -371,8 +372,11 @@
 }
 
 - (void)testCode {
-    KTVPaySuccessController *vc = (KTVPaySuccessController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVPaySuccessController"];
-    [self.navigationController pushViewController:vc animated:YES];
+//    KTVPaySuccessController *vc = (KTVPaySuccessController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVPaySuccessController"];
+//    [self.navigationController pushViewController:vc animated:YES];
+    
+//    KTVSelectedBeautyController *vc = (KTVSelectedBeautyController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVSelectedBeautyController"];
+//    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end

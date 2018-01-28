@@ -10,7 +10,7 @@
 
 @implementation UIViewController (StoryboardHelper)
 
-+ (UIViewController *)storyboardName:(NSString *)name storyboardId:(NSString *)sbid {
++ (id)storyboardName:(NSString *)name storyboardId:(NSString *)sbid {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:name bundle:[NSBundle mainBundle]];
     UIViewController *vc = [storyboard instantiateViewControllerWithIdentifier:sbid];
     return vc;

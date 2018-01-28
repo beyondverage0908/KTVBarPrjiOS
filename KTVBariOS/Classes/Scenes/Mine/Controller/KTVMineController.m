@@ -19,6 +19,7 @@
 #import "KTVChatSessionController.h"
 #import "KTVStoreCollectController.h"
 #import "KTVMyInvitationController.h"
+#import "KTVApplyWarmerPartOneController.h"
 
 #import "KTVUserHeaderCell.h"
 #import "KTVUserInfoCell.h"
@@ -217,6 +218,9 @@
             [self.navigationController pushViewController:vc animated:YES];
         } else if (indexPath.row == 5) {
             // 申请成为暖场人
+            KTVApplyWarmerPartOneController *vc = [[KTVApplyWarmerPartOneController alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
         } else if (indexPath.row == 6) {
             KTVSettingController *vc = (KTVSettingController *)[UIViewController storyboardName:@"MePage" storyboardId:KTVStringClass(KTVSettingController)];
             [self.navigationController pushViewController:vc animated:YES];

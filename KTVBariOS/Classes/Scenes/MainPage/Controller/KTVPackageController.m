@@ -51,8 +51,6 @@
     [self initUI];
     
     [self loadStoreInvitators];
-    // 下载暖场人
-    [self loadPageStoreActivitors];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -99,31 +97,6 @@
             [self.invitatorList addObject:user];
         }
         [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
-    }];
-}
-
-/// 分页获取门店暖场人
-- (void)loadPageStoreActivitors {
-    NSDictionary *params = @{@"storeId" : self.store.storeId,
-                             @"size" : @"4",
-                             @"currentPage" : @(self.activitorPage)};
-    [KTVMainService getStorePageActivitors:params result:^(NSDictionary *result) {
-        if (![result[@"code"] isEqualToString:ktvCode]) {
-            [KTVToast toast:result[@"detail"]];
-            return;
-        }
-        NSArray *activitorList = result[@"data"][@"activitorList"];
-        if ([activitorList count]) {
-            [self.activitorList removeAllObjects];
-            ++self.activitorPage;
-        } else {
-            [KTVToast toast:TOAST_NOMORE_ACTIVITORS];
-        }
-        for (NSDictionary *dict in activitorList) {
-            KTVUser *user = [KTVUser yy_modelWithDictionary:dict];
-            [self.activitorList addObject:user];
-        }
-        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:3] withRowAnimation:UITableViewRowAnimationNone];
     }];
 }
 
@@ -267,8 +240,6 @@
         return 70;
     } else if (indexPath.section == 2) {
         return 50;
-    } else if (indexPath.section == 3) {
-        return 90;
     }
     return 0;
 }
@@ -280,30 +251,12 @@
     } else if (section == 2) {
         KTVTableHeaderView *headerView = [[KTVTableHeaderView alloc] initWithImageUrl:nil title:@"套餐详情" remark:nil];
         return headerView;
-    } else if (section == 3) {
-        KTVTableHeaderView *headerView = [[KTVTableHeaderView alloc] initWithImageUrl:nil title:@"邀约TA暖场" headerImgUrl:@"app_change_batch" remarkUrl:@"app_arrow_right_hui" remark:nil];
-        headerView.headerActionBlock = ^(KTVHeaderType type) {
-            if (type == HeaderType) {
-                CLog(@"--->>> 邀约TA暖床");
-                [self loadPageStoreActivitors];
-            }
-        };
-        headerView.bgActionBlock = ^(KTVHeaderType headerType) {
-            if (headerType == BGType) {
-                // 跳转邀约暖场人列表
-                KTVSelectedBeautyController *vc = (KTVSelectedBeautyController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVSelectedBeautyController"];
-                vc.store = self.store;
-                vc.selectedActivitorList = self.selectedActivitorList;
-                [self.navigationController pushViewController:vc animated:YES];
-            }
-        };
-        return headerView;
     }
     return nil;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if (section == 1 || section == 2 || section == 3) {
+    if (section == 1 || section == 2) {
         return 28;
     }
     return 0;
@@ -316,18 +269,13 @@
         KTVPackage *package = self.store.packageList[indexPath.row];
         vc.package = package;
         [self.navigationController pushViewController:vc animated:YES];
-    } else if (indexPath.section == 3) {
-        KTVLittleBeeController *vc = (KTVLittleBeeController *)[UIViewController storyboardName:@"MePage" storyboardId:@"KTVLittleBeeController"];
-        KTVUser *user = self.activitorList[indexPath.row];
-        vc.user = user;
-        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 4;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -337,8 +285,6 @@
         return 1;
     } else if (section == 2) {
         return [self.store.packageList count];
-    } else if (section == 3) {
-        return [self.activitorList count];
     }
     return 0;
 }
@@ -362,21 +308,6 @@
         KTVPackage *package = self.store.packageList[indexPath.row];
         cell.package = package;
         cell.selectCallback = ^(KTVPackage *package, BOOL isSelected) {
-            self.moneyLabel.text = [NSString stringWithFormat:@"¥%@", [self getOrderMoney]];
-        };
-        return cell;
-    } else if (indexPath.section == 3) {
-        KTVYuePaoUserCell *cell = (KTVYuePaoUserCell *)[tableView dequeueReusableCellWithIdentifier:KTVStringClass(KTVYuePaoUserCell)];
-        KTVUser *user = self.activitorList[indexPath.row];
-        cell.user = user;
-        cell.yueCallback = ^(KTVUser *user, BOOL isSelected) {
-            if (isSelected) {
-                CLog(@"--->>> 约了%@", user.nickName);
-                [self.selectedActivitorList addObject:user];
-            } else {
-                CLog(@"--->>> 不约%@", user.nickName);
-                [self.selectedActivitorList removeObject:user];
-            }
             self.moneyLabel.text = [NSString stringWithFormat:@"¥%@", [self getOrderMoney]];
         };
         return cell;

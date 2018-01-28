@@ -10,6 +10,7 @@
 
 #import "KTVInvitatingCell.h"
 #import "KTVInvitationAcceptCell.h"
+#import "KTVChooseParttimeView.h"
 
 @interface KTVMyInvitationController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -69,6 +70,15 @@
 
 - (IBAction)setPartTimeJobAction:(UIButton *)sender {
     CLog(@"-->> 设置我的兼职时间");
+    
+    KTVChooseParttimeView *parttimeView = [[[NSBundle mainBundle] loadNibNamed:@"KTVChooseParttimeView" owner:self options:nil] lastObject];
+    UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
+    [keyWindow addSubview:parttimeView];
+    parttimeView.frame = keyWindow.frame;
+    
+    parttimeView.confirmBackBack = ^(NSDictionary *params) {
+        CLog(@"兼职时间-->> %@", params);
+    };
 }
 
 #pragma mark - 逻辑

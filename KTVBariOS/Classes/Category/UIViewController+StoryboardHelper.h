@@ -10,6 +10,6 @@
 
 @interface UIViewController (StoryboardHelper)
 
-+ (UIViewController *)storyboardName:(NSString *)name storyboardId:(NSString *)sbid;
++ (id)storyboardName:(NSString *)name storyboardId:(NSString *)sbid;
 
 @end
