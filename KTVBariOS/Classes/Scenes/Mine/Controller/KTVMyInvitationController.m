@@ -12,6 +12,8 @@
 #import "KTVInvitationAcceptCell.h"
 #import "KTVChooseParttimeView.h"
 
+#import "KTVMainService.h"
+
 @interface KTVMyInvitationController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -76,9 +78,33 @@
     [keyWindow addSubview:parttimeView];
     parttimeView.frame = keyWindow.frame;
     
+    @WeakObj(self);
     parttimeView.confirmBackBack = ^(NSDictionary *params) {
         CLog(@"兼职时间-->> %@", params);
+        NSMutableArray *parttimeArr = [NSMutableArray arrayWithCapacity:7];
+        for (NSInteger i = 0; i < params.allKeys.count; i++) {
+            NSString *key = params.allKeys[i];
+            if ([params[key] boolValue]) {
+                [parttimeArr addObject:key];
+            }
+        }
+        [weakself upgradeParttime:parttimeArr];
     };
+}
+
+#pragma mark - 网络
+
+- (void)upgradeParttime:(NSArray *)parttimeArr {
+    NSString *parttimeStr = [parttimeArr componentsJoinedByString:@","];
+    
+    NSDictionary *params = @{@"username" : [KTVCommon userInfo].username, @"time" : parttimeStr};
+    [KTVMainService postUpdateWarmerWorkTime:params result:^(NSDictionary *result) {
+        if ([result[@"code"] isEqualToString:ktvCode]) {
+            [KTVToast toast:@"修改成功"];
+        } else {
+            [KTVToast toast:@"暂时无法修改兼职时间"];
+        }
+    }];
 }
 
 #pragma mark - 逻辑

@@ -132,4 +132,12 @@ typedef void(^ResponseSuccess)(NSDictionary *result);
 /// 更新用户最新的地理位置
 + (void)postRecentUserAddress:(NSDictionary *)params result:(ResponseSuccess)responseResult;
 
+/// 申请暖场人
++ (void)postApplyWarmer:(NSDictionary *)params result:(ResponseSuccess)responseResult;
+
+/// 申请付款后获取的暖场人
++ (void)postPayAfterWarmer:(NSDictionary *)params result:(ResponseSuccess)responseResult;
+
+/// 修改暖场人兼职的时间
++ (void)postUpdateWarmerWorkTime:(NSDictionary *)params result:(ResponseSuccess)responseResult;
 @end

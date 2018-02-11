@@ -62,56 +62,56 @@
 //app_gou_red
 
 - (void)mondayTap {
-    [self.parttimeDic setObject:[NSNumber numberWithBool:![self.parttimeDic[@"monday"] boolValue]] forKey:@"monday"];
+    [self.parttimeDic setObject:[NSNumber numberWithBool:![self.parttimeDic[@"1"] boolValue]] forKey:@"1"];
     [self changeParttimeStatus];
 }
 
 - (void)tuesdayTap {
-    [self.parttimeDic setObject:[NSNumber numberWithBool:![self.parttimeDic[@"tuesday"] boolValue]] forKey:@"tuesday"];
+    [self.parttimeDic setObject:[NSNumber numberWithBool:![self.parttimeDic[@"2"] boolValue]] forKey:@"2"];
     [self changeParttimeStatus];
 }
 
 - (void)wednesdayTap {
-    [self.parttimeDic setObject:[NSNumber numberWithBool:![self.parttimeDic[@"wednesday"] boolValue]] forKey:@"wednesday"];
+    [self.parttimeDic setObject:[NSNumber numberWithBool:![self.parttimeDic[@"3"] boolValue]] forKey:@"3"];
     [self changeParttimeStatus];
 }
 
 - (void)thursdayTap {
-    [self.parttimeDic setObject:[NSNumber numberWithBool:![self.parttimeDic[@"thursday"] boolValue]] forKey:@"thursday"];
+    [self.parttimeDic setObject:[NSNumber numberWithBool:![self.parttimeDic[@"4"] boolValue]] forKey:@"4"];
     [self changeParttimeStatus];
 }
 
 - (void)fridayTap {
-    [self.parttimeDic setObject:[NSNumber numberWithBool:![self.parttimeDic[@"friday"] boolValue]] forKey:@"friday"];
+    [self.parttimeDic setObject:[NSNumber numberWithBool:![self.parttimeDic[@"5"] boolValue]] forKey:@"5"];
     [self changeParttimeStatus];
 }
 
 - (void)saturdayTap {
-    [self.parttimeDic setObject:[NSNumber numberWithBool:![self.parttimeDic[@"saturday"] boolValue]] forKey:@"saturday"];
+    [self.parttimeDic setObject:[NSNumber numberWithBool:![self.parttimeDic[@"6"] boolValue]] forKey:@"6"];
     [self changeParttimeStatus];
 }
 
 - (void)sundayTap {
-    [self.parttimeDic setObject:[NSNumber numberWithBool:![self.parttimeDic[@"sunday"] boolValue]] forKey:@"sunday"];
+    [self.parttimeDic setObject:[NSNumber numberWithBool:![self.parttimeDic[@"7"] boolValue]] forKey:@"7"];
     [self changeParttimeStatus];
 }
 
 - (void)changeParttimeStatus {
     for (NSString *key in self.parttimeDic.allKeys) {
         BOOL isSel = [self.parttimeDic[key] boolValue];
-        if ([key isEqualToString:@"monday"]) {
+        if ([key isEqualToString:@"1"]) {
             self.mondayIg.image = isSel ? [UIImage imageNamed:@"app_gou_red"] : [UIImage imageNamed:@"app_kuang_red"];
-        } else if ([key isEqualToString:@"tuesday"]) {
+        } else if ([key isEqualToString:@"2"]) {
              self.tuesdayIg.image = isSel ? [UIImage imageNamed:@"app_gou_red"] : [UIImage imageNamed:@"app_kuang_red"];
-        } else if ([key isEqualToString:@"wednesday"]) {
+        } else if ([key isEqualToString:@"3"]) {
              self.wednesdayIg.image = isSel ? [UIImage imageNamed:@"app_gou_red"] : [UIImage imageNamed:@"app_kuang_red"];
-        } else if ([key isEqualToString:@"thursday"]) {
+        } else if ([key isEqualToString:@"4"]) {
              self.thursdayIg.image = isSel ? [UIImage imageNamed:@"app_gou_red"] : [UIImage imageNamed:@"app_kuang_red"];
-        } else if ([key isEqualToString:@"friday"]) {
+        } else if ([key isEqualToString:@"5"]) {
              self.fridayIg.image = isSel ? [UIImage imageNamed:@"app_gou_red"] : [UIImage imageNamed:@"app_kuang_red"];
-        } else if ([key isEqualToString:@"saturday"]) {
+        } else if ([key isEqualToString:@"6"]) {
              self.saturdayIg.image = isSel ? [UIImage imageNamed:@"app_gou_red"] : [UIImage imageNamed:@"app_kuang_red"];
-        } else if ([key isEqualToString:@"sunday"]) {
+        } else if ([key isEqualToString:@"7"]) {
              self.sundayIg.image = isSel ? [UIImage imageNamed:@"app_gou_red"] : [UIImage imageNamed:@"app_kuang_red"];
         }
     }

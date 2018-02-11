@@ -131,6 +131,7 @@
                 <outlet property="genderImageView" destination="kxI-85-k4i" id="AmY-Md-Ezh"/>
                 <outlet property="nicknameLabel" destination="fPy-qs-SLM" id="XSE-2d-p7b"/>
                 <outlet property="priceLabel" destination="Czc-DI-BH1" id="zDs-RX-8lR"/>
+                <outlet property="selectedBtn" destination="auS-sV-eLn" id="ZgY-99-nVq"/>
                 <outlet property="siteTypeLabel" destination="3hK-WP-Sdt" id="N04-2A-2NR"/>
             </connections>
             <point key="canvasLocation" x="-44.5" y="125.5"/>

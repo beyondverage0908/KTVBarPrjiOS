@@ -13,7 +13,8 @@ typedef NS_ENUM(NSInteger, KtvRequestType) {
     KtvPOST,         // post
     KtvPUT,          // Put
     KtvUpload,        // 上传文件
-    KtvUploadStream     // 上传流视频
+    KtvUploadStream,     // 上传流视频
+    KtvHybridStream, // 包含图片和视频，以及其他
 };
 
 @interface KTVRequestMessage : NSObject

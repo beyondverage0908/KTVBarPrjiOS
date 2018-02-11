@@ -35,7 +35,7 @@
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yzs-ly-D0t">
+                                        <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yzs-ly-D0t">
                                             <rect key="frame" x="0.0" y="0.0" width="358" height="125"/>
                                         </imageView>
                                     </subviews>
@@ -65,7 +65,7 @@
                                             <rect key="frame" x="153" y="15" width="53" height="53"/>
                                             <state key="normal" image="mine_apply_store"/>
                                         </button>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qeL-Ty-guw">
+                                        <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qeL-Ty-guw">
                                             <rect key="frame" x="0.0" y="0.0" width="358" height="125"/>
                                         </imageView>
                                     </subviews>

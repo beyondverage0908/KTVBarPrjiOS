@@ -434,9 +434,13 @@
     UIImagePickerController *ipc = [[UIImagePickerController alloc] init];
     ipc.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;//sourcetype有三种分别是camera，photoLibrary和photoAlbum
     NSArray *availableMedia = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypeCamera];//Camera所支持的Media格式都有哪些,共有两个分别是@"public.image",@"public.movie"
-    ipc.mediaTypes = [NSArray arrayWithObject:availableMedia[1]];//设置媒体类型为public.movie
-    [self presentViewController:ipc animated:YES completion:nil];
-    ipc.delegate = self;//设置委托
+    if ([availableMedia count]) {
+        ipc.mediaTypes = [NSArray arrayWithObject:availableMedia[1]];//设置媒体类型为public.movie
+        [self presentViewController:ipc animated:YES completion:nil];
+        ipc.delegate = self;//设置委托
+    } else {
+        [KTVToast toast:@"手机中暂无符合格式的视频"];
+    }
 }
 
 //录制视频

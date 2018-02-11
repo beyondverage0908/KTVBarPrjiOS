@@ -11,7 +11,7 @@
 
 @interface KTVBeeCateCell : UITableViewCell
 
-@property (nonatomic, copy) void (^callback)(KTVUser *user, BOOL isSelected);
+@property (nonatomic, copy) void (^callback)(KTVUser *user);
 @property (nonatomic, strong) KTVUser * user;
 
 @end

@@ -10,4 +10,6 @@
 
 @interface KTVApplyWarmerPartTwoController : KTVBaseViewController
 
+@property (nonatomic, strong) NSMutableDictionary *warmerParams;
+
 @end

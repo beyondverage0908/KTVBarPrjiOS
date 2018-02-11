@@ -286,4 +286,19 @@
     return @"/api/version";
 }
 
+#pragma mark - 暖场人
+
++ (NSString *)getApplyWarmerUrl {
+    return @"/api/warmerUser";
+}
+
++ (NSString *)getPayAfterWarmerUrl {
+    return @"/api/warmerUser/orderAfter";
+}
+
+/// 修改暖场人兼职的时间
++ (NSString *)getUpdateWarmerTimeUrl {
+    return @"/api/warmerUser/update";
+}
+
 @end

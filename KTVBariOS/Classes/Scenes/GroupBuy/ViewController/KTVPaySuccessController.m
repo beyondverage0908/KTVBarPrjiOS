@@ -243,6 +243,17 @@
                 @WeakObj(self);
                 KTVSelectedBeautyController *vc = (KTVSelectedBeautyController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVSelectedBeautyController"];
                 vc.store = self.store;
+                vc.selectedWarmerCallback = ^(NSArray *selActivitorList) {
+                    for (KTVUser *selUser in selActivitorList) {
+                        for (KTVUser *user in self.activitorList) {
+                            if ([selUser.userId isEqualToString:user.userId]) {
+                                user.isSelected = YES;
+                            }
+                        }
+                    }
+                    [weakself.tableView reloadData];
+                };
+                vc.selectedActivitorList = self.selectedActivitorList;
                 [weakself.navigationController pushViewController:vc animated:YES];
             }
         };
@@ -320,8 +331,8 @@
         KTVUser *user = self.activitorList[indexPath.row];
         cell.user = user;
         @WeakObj(self);
-        cell.callback = ^(KTVUser *user, BOOL isSelected) {
-            if (isSelected) {
+        cell.callback = ^(KTVUser *user) {
+            if (user.isSelected) {
                 [weakself.selectedActivitorList addObject:user];
             } else {
                 [weakself.selectedActivitorList removeObject:user];

@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *descriLabel;
 @property (weak, nonatomic) IBOutlet UILabel *siteTypeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
+@property (weak, nonatomic) IBOutlet UIButton *selectedBtn;
 
 @end
 
@@ -36,9 +37,11 @@
         [sender setImage:[UIImage imageNamed:@"app_selected_kuang"] forState:UIControlStateNormal];
     }
     
+    _user.isSelected = sender.isSelected;
+    
     @WeakObj(self);
     if (self.callback) {
-        weakself.callback(weakself.user,sender.isSelected);
+        weakself.callback(weakself.user);
     }
 }
 
@@ -54,6 +57,12 @@
         self.ageLabel.text = [NSString stringWithFormat:@"%@岁", @(_user.age)];
         self.descriLabel.text = _user.userDetail.todayMood;
         self.priceLabel.text = [NSString stringWithFormat:@"%@元/场", @(_user.userDetail.price)];
+        
+        if (_user.isSelected) {
+            [self.selectedBtn setImage:[UIImage imageNamed:@"app_gou_red"] forState:UIControlStateNormal];
+        } else {
+            [self.selectedBtn setImage:[UIImage imageNamed:@"app_selected_kuang"] forState:UIControlStateNormal];
+        }
     }
 }
 

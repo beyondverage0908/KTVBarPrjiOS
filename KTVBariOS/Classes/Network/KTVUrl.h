@@ -214,4 +214,15 @@
 /// 获取最新的版本号
 + (NSString *)getAppVersionUrl;
 
+#pragma mark - 暖场人
+
+/// 申请成为暖场人
++ (NSString *)getApplyWarmerUrl;
+
+/// 获取付款后-所有的暖场人 - 包括兼职和常驻
++ (NSString *)getPayAfterWarmerUrl;
+
+/// 修改暖场人兼职的时间
++ (NSString *)getUpdateWarmerTimeUrl;
+
 @end

@@ -236,6 +236,44 @@ static KTVNetworkHelper *_instance = nil;
     }];
 }
 
+- (void)uploadHybridStreamWithRequestMessage:(KTVRequestMessage *)message success:(RequestSuccess)success failure:(RequestFailure)failure {
+    
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    NSString *urlString = [NSString stringWithFormat:@"%@%@", [KTVUrl getDomainUrl], message.path];
+    
+    [_manager POST:urlString parameters:message.params constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        if ([fileManager fileExistsAtPath:message.videoUrl.path]) {
+            NSData *videoData = [NSData dataWithContentsOfURL:message.params[@"video"]];
+            [formData appendPartWithFileData:videoData name:@"video" fileName:@"video" mimeType:@"video/quicktime"];
+        }
+        
+        for (NSInteger i = 0; i < message.imageList.count; i++) {
+            // 取出
+            UIImage *image = message.imageList[i];
+            // 转成二进制
+            NSData *imageData = UIImageJPEGRepresentation(image, 1.0);
+            // 上传的参数名
+            NSString *name = [NSString stringWithFormat:@"%@", @"shz"];
+            // 上传fileName
+            NSString *fileName = [NSString stringWithFormat:@"%@.jpg", name];
+            
+            [formData appendPartWithFileData:imageData name:name fileName:fileName mimeType:@"image/jpeg"];
+        }
+        
+        
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        NSDictionary *result = [self sessionWithNetResponse:responseObject message:message];
+        [self requestResponse:result success:success];
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        if (failure) failure(error);
+    }];
+}
+
 - (void)send:(KTVRequestMessage*)message success:(RequestSuccess)successBlock fail:(RequestFailure)failBlock {
     
     if (![KTVUtil isNetworkAvailable]) {
@@ -259,6 +297,8 @@ static KTVNetworkHelper *_instance = nil;
         [self putRequestWithResquestMessage:message success:successBlock failure:failBlock];
     } else if (message.httpType == KtvUploadStream) {
         [self uploadStreamWithRequestMessage:message success:successBlock failure:failBlock];
+    } else if (message.httpType == KtvHybridStream) {
+        [self uploadHybridStreamWithRequestMessage:message success:successBlock failure:failBlock];
     } else {
         [self getRequestWithResquestMessage:message success:successBlock failure:failBlock];
     }

@@ -23,8 +23,7 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UIButton *yueTaBtn;
 
-@property (strong, nonatomic) NSMutableArray *activitorList;    // 暖场人列表
-@property (strong, nonatomic) NSMutableArray *selActivitorList; // 已约的暖场人列表
+@property (strong, nonatomic) NSMutableDictionary *typeActivitorDic;
 
 @end
 
@@ -47,12 +46,13 @@ static NSInteger RowCount = 3;
     [self initData];
     
     // 获取暖场人
-    [self loadStoreActivitors];
+    if (self.warmerType == MultipleWarmerType) {
+        [self loadPayAfterWarmer];
+    }
 }
 
 - (void)initData {
-    self.activitorList = [NSMutableArray array];
-    self.selActivitorList = [NSMutableArray array];
+    self.typeActivitorDic = [NSMutableDictionary dictionary];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -69,20 +69,63 @@ static NSInteger RowCount = 3;
 
 #pragma mark - 网络
 
-// 获取暖场人
-- (void)loadStoreActivitors {
-    [KTVMainService getStoreActivitors:self.store.storeId result:^(NSDictionary *result) {
-        if (![result[@"msg"] isEqualToString:ktvSuccess]) {
-            return;
+- (void)loadPayAfterWarmer {
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:7];
+    [params setObject:@([KTVCommon getUserLocation].latitude) forKey:@"latitude"];
+    [params setObject:@([KTVCommon getUserLocation].longitude) forKey:@"longitude"];
+    [params setObject:self.store.storeId forKey:@"storeId"];
+    [params setObject:@"" forKey:@"warmerName"];
+    [params setObject:@1000 forKey:@"distance"];
+    [params setObject:@"0" forKey:@"sex"];
+    
+    NSMutableArray *fixedActivitorList  = [NSMutableArray arrayWithCapacity:30];
+    NSMutableArray *longtimeActivitorList  = [NSMutableArray arrayWithCapacity:30];
+    NSMutableArray *parttimeActivitorList  = [NSMutableArray arrayWithCapacity:30];
+    
+    [KTVMainService postPayAfterWarmer:params result:^(NSDictionary *result) {
+        if ([result[@"code"] isEqualToString:ktvCode]) {
+            for (NSDictionary *warmerDic in result[@"data"]) {
+                KTVUser *warmer = [KTVUser yy_modelWithDictionary:warmerDic];
+                if (warmer.userType == 3) {
+                    [fixedActivitorList addObject:warmer];
+                } else if (warmer.userType == 4) {
+                    [longtimeActivitorList addObject:warmer];
+                } else if (warmer.userType == 5) {
+                    [parttimeActivitorList addObject:warmer];
+                }
+            }
+            
+            // 已经选中的重新赋值
+            for (KTVUser *fixedUser in fixedActivitorList) {
+                for (KTVUser *selectedUser in self.selectedActivitorList) {
+                    if (selectedUser.userType == fixedUser.userType && [selectedUser.userId isEqualToString:fixedUser.userId] && selectedUser.isSelected ) {
+                        fixedUser.isSelected = YES;
+                    }
+                }
+            }
+            
+            for (KTVUser *longtimeUser in longtimeActivitorList) {
+                for (KTVUser *selectedUser in self.selectedActivitorList) {
+                    if (selectedUser.userType == longtimeUser.userType && [selectedUser.userId isEqualToString:longtimeUser.userId] && selectedUser.isSelected ) {
+                        longtimeUser.isSelected = YES;
+                    }
+                }
+            }
+            
+            for (KTVUser *parttimeUser in parttimeActivitorList) {
+                for (KTVUser *selectedUser in self.selectedActivitorList) {
+                    if (selectedUser.userType == parttimeUser.userType && [selectedUser.userId isEqualToString:parttimeUser.userId] && selectedUser.isSelected ) {
+                        parttimeUser.isSelected = YES;
+                    }
+                }
+            }
+            
+            [self.typeActivitorDic setObject:fixedActivitorList forKey:@"fixed"];
+            [self.typeActivitorDic setObject:longtimeActivitorList forKey:@"longtime"];
+            [self.typeActivitorDic setObject:parttimeActivitorList forKey:@"parttime"];
+            
+            [self.collectionView reloadData];
         }
-        
-        NSArray *activitorList = result[@"data"][@"activitorList"];
-        for (NSDictionary *dict in activitorList) {
-            KTVUser *user = [KTVUser yy_modelWithDictionary:dict];
-            [self.activitorList addObject:user];
-        }
-        
-        [self.collectionView reloadData];
     }];
 }
 
@@ -102,22 +145,26 @@ static NSInteger RowCount = 3;
 }
 
 - (void)layoutCollectionHeader {
-    NSArray *dataS = @[@{@"暖场人类型" : @[@"可爱", @"清纯", @"淑女", @"熟女"]},
-                       @{@"性别": @[@"男", @"女", @"不限"]}];
-    KTVFilterView *filterView = [[KTVFilterView alloc] initWithFilter:dataS];
-    [self.collectionHeaderView addSubview:filterView];
-    
-    [filterView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.collectionHeaderView);
-    }];
-
-    filterView.filterCallback = ^(NSDictionary *filterMap) {
-        NSInteger idx = [dataS indexOfObject:filterMap];
-        CLog(@"--->>> %@", filterMap);
-    };
-    filterView.filterDitailCallback = ^(NSString *filterDetailKey) {
-        CLog(@"--->>> %@", filterDetailKey);
-    };
+    if (self.warmerType == MultipleWarmerType) {
+        NSArray *dataS = @[@{@"暖场人类型" : @[@"可爱", @"清纯", @"淑女", @"熟女"]},
+                           @{@"性别": @[@"男", @"女", @"不限"]}];
+        KTVFilterView *filterView = [[KTVFilterView alloc] initWithFilter:dataS];
+        [self.collectionHeaderView addSubview:filterView];
+        
+        [filterView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(self.collectionHeaderView);
+        }];
+        
+        filterView.filterCallback = ^(NSDictionary *filterMap) {
+            NSInteger idx = [dataS indexOfObject:filterMap];
+            CLog(@"--->>> %@", filterMap);
+        };
+        filterView.filterDitailCallback = ^(NSString *filterDetailKey) {
+            CLog(@"--->>> %@", filterDetailKey);
+        };
+    } else {
+        self.collectionHeaderView.hidden = YES;
+    }
 }
 
 #pragma mark - 事件
@@ -125,26 +172,18 @@ static NSInteger RowCount = 3;
     CLog(@"选择城市");
 }
 
-- (IBAction)popAction:(id)sender {
+- (IBAction)confirmSelectedAction:(id)sender {
+    CLog(@"-- 确定");
+    if (self.selectedWarmerCallback) {
+        self.selectedWarmerCallback(self.selectedActivitorList);
+    }
+    if (self.warmerType == MultipleWarmerType) {
+        
+    } else {
+        
+    }
     [self.navigationController popViewControllerAnimated:YES];
 }
-
-- (IBAction)nextStepAction:(UIButton *)sender {
-    CLog(@"选美女--下一步");
-    
-    for (KTVUser *user in self.selActivitorList) {
-        if (![self.selectedActivitorList containsObject:user]) {
-            [self.selectedActivitorList addObject:user];
-        }
-    }
-    
-    KTVOrderUploadController *vc = (KTVOrderUploadController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVOrderUploadController"];
-    vc.store = self.store;
-    vc.groupbuy = self.groupbuy;
-    vc.selectedActivitorList = self.selectedActivitorList;
-    [self.navigationController pushViewController:vc animated:YES];
-}
-
 #pragma mark - 封装
 
 - (void)resetBtnYueNumber:(NSInteger)yueNumber {
@@ -155,43 +194,78 @@ static NSInteger RowCount = 3;
 #pragma mark - UICollectionViewDelegate
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-   
+    
 }
 
 #pragma mark - UICollectionViewDataSource
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 3;
+    if (self.warmerType == MultipleWarmerType) {
+        return self.typeActivitorDic.allKeys.count;
+    } else {
+        return 1;
+    }
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-//    return [self.activitorList count];
-    if (section == 0) {
-        return 7;
-    } else if (section == 1) {
-        return 5;
-    } else if (section == 2) {
-        return 11;
+    if (self.warmerType == MultipleWarmerType) {
+        if (section == 0) {
+            NSArray *fixedActivitorList = [self.typeActivitorDic objectForKey:@"fixed"];
+            return [fixedActivitorList count];
+        } else if (section == 1) {
+            NSArray *longtimeActivitorList = [self.typeActivitorDic objectForKey:@"longtime"];
+            return [longtimeActivitorList count];
+        } else if (section == 2) {
+            NSArray *parttimeActivitorList = [self.typeActivitorDic objectForKey:@"parttime"];
+            return [parttimeActivitorList count];
+        }
+    } else {
+        return [self.singleWarmerList count];
     }
     return 0;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     KTVBeautyGirlCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"KTVBeautyGirlCollectionCell" forIndexPath:indexPath];
-//    KTVUser *user = self.activitorList[indexPath.row];
-//    cell.user = user;
-    
-    cell.callback = ^(KTVUser *user, BOOL isSelected) {
-        if (isSelected) {
-            [self.selActivitorList addObject:user];
-        } else {
-            [self.selActivitorList removeObject:user];
-            if ([self.selectedActivitorList containsObject:user]) {
-                [self.selectedActivitorList removeObject:user];
-            }
+    if (self.warmerType == MultipleWarmerType) {
+        if (indexPath.section == 0) {
+            NSArray *fixedActivitorList = [self.typeActivitorDic objectForKey:@"fixed"];
+            KTVUser *user = fixedActivitorList[indexPath.row];
+            cell.user = user;
+        } else if (indexPath.section == 1) {
+            NSArray *longtimeActivitorList = [self.typeActivitorDic objectForKey:@"longtime"];
+            KTVUser *user = longtimeActivitorList[indexPath.row];
+            cell.user = user;
+        } else if (indexPath.section == 2) {
+            NSArray *parttimeActivitorList = [self.typeActivitorDic objectForKey:@"parttime"];
+            KTVUser *user = parttimeActivitorList[indexPath.row];
+            cell.user = user;
         }
-        
-        [self resetBtnYueNumber:[self.selActivitorList count]];
+    } else {
+        KTVUser *user = self.singleWarmerList[indexPath.row];
+        cell.user = user;
+    }
+    @WeakObj(self);
+    cell.callback = ^(KTVUser *user) {
+        if (user.isSelected) {
+            BOOL isContain = NO;
+            for (KTVUser *selUser in weakself.selectedActivitorList) {
+                if ([user.userId isEqualToString:selUser.userId]) {
+                    isContain = YES;
+                    break;
+                }
+            }
+            if (!isContain) [weakself.selectedActivitorList addObject:user];
+        } else {
+            KTVUser *targetUser = nil;
+            for (KTVUser *selUser in weakself.selectedActivitorList) {
+                if ([user.userId isEqualToString:selUser.userId]) {
+                    targetUser = selUser;
+                    break;
+                }
+            }
+            [weakself.selectedActivitorList removeObject:targetUser];
+        }
     };
     return cell;
 }
@@ -203,15 +277,32 @@ static NSInteger RowCount = 3;
         KTVBeeCollectionHeaderView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"KTVBeeCollectionHeaderView" forIndexPath:indexPath];
         reusableView = headerView;
         headerView.type = indexPath.section;
+        return reusableView;
     }
     
+
     if (kind == UICollectionElementKindSectionFooter) {
         KTVBeeCollectionFooterView *footerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"KTVBeeCollectionFooterView" forIndexPath:indexPath];
-        @WeakObj(self);
-        footerView.findMoreCallback = ^(NSInteger type) {
-            KTVSelectedBeautyController *vc = (KTVSelectedBeautyController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVSelectedBeautyController"];
-            [weakself.navigationController pushViewController:vc animated:YES];
-        };
+        if (self.warmerType == MultipleWarmerType) {
+            @WeakObj(self);
+            footerView.findMoreCallback = ^(NSInteger type) {
+                KTVSelectedBeautyController *vc = (KTVSelectedBeautyController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVSelectedBeautyController"];
+                vc.warmerType = SingleWarmerType;
+                NSArray *singleWarmerList = nil;
+                if (indexPath.section == 0) {
+                    singleWarmerList = [weakself.typeActivitorDic objectForKey:@"fixed"];
+                } else if (indexPath.section == 1) {
+                    singleWarmerList = [weakself.typeActivitorDic objectForKey:@"longtime"];
+                } else if (indexPath.section == 2) {
+                    singleWarmerList = [weakself.typeActivitorDic objectForKey:@"parttime"];
+                }
+                vc.singleWarmerList = singleWarmerList;
+                [weakself.navigationController pushViewController:vc animated:YES];
+            };
+            footerView.hidden = NO;
+        } else {
+            footerView.hidden = YES;
+        }
         reusableView = footerView;
     }
     return reusableView;

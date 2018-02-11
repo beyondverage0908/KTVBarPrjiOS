@@ -10,4 +10,11 @@
 
 @interface ApplyWarmerView : UIView
 
+@property (nonatomic, copy) void (^uploadIDCallback)(BOOL isTop);
+@property (nonatomic, copy) void (^uploadVedioCallback)(void);
+
+- (NSDictionary *)obtainWarmerInfo;
+// 设置用户的信息
+- (void)setUserIdentifier:(NSDictionary *)info;
+
 @end

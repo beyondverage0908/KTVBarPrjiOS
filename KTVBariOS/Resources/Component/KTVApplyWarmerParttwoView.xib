@@ -408,7 +408,9 @@
                 <outlet property="igweek5" destination="j0k-QM-2R7" id="8te-jk-0tg"/>
                 <outlet property="igweek6" destination="7kz-bG-xiZ" id="qjk-Yd-NCW"/>
                 <outlet property="igweek7" destination="IfB-nc-87w" id="jwq-Sp-pGx"/>
+                <outlet property="longtimeBtn" destination="Y7j-lT-Z9V" id="1N2-qW-RYc"/>
                 <outlet property="partMoneyTF" destination="3cb-ct-mRU" id="9t0-2V-wF1"/>
+                <outlet property="parttimeBtn" destination="5Qz-Pi-1aV" id="vNi-bE-2eQ"/>
                 <outlet property="week1" destination="3Sh-uc-2DW" id="44W-8P-3xj"/>
                 <outlet property="week2" destination="joM-Zj-ODP" id="Xla-z1-LcT"/>
                 <outlet property="week3" destination="l5t-R0-hfo" id="i5W-4i-fX9"/>

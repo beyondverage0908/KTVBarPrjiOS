@@ -33,8 +33,10 @@
         [sender setImage:[UIImage imageNamed:@"app_kuang_red"] forState:UIControlStateNormal];
     }
     
+    self.user.isSelected = sender.isSelected;
+    
     if (self.callback) {
-        self.callback(self.user, sender.isSelected);
+        self.callback(self.user);
     }
 }
 
@@ -52,6 +54,12 @@
         [self.genderBtn setImage:[UIImage imageNamed:@"app_user_man"] forState:UIControlStateNormal];
     }
     self.moneyLabel.text = [NSString stringWithFormat:@"%@/场", @(_user.userDetail.price)];
+    
+    if (_user.isSelected) {
+        [self.yuetaBtn setImage:[UIImage imageNamed:@"app_gou_red"] forState:UIControlStateNormal];
+    } else {
+        [self.yuetaBtn setImage:[UIImage imageNamed:@"app_selected_kuang"] forState:UIControlStateNormal];
+    }
 }
 
 

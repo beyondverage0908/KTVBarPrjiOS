@@ -31,11 +31,15 @@
 @property (nonatomic, assign) NSInteger shareTableStatus; // 拼桌状态
 @property (nonatomic, assign) NSInteger inviteStatus;   // 邀约状态
 @property (nonatomic, strong) NSString *rongCloudToken;   // 融云token
+@property (nonatomic, strong) NSString *qqId;
+@property (nonatomic, strong) NSString * wxId;
 
 
 @property (nonatomic, strong) NSString * gender;    // 自定义属性
 @property (nonatomic, strong) KTVUserDetail *userDetail;
 @property (nonatomic, strong) NSArray<KTVPicture *> * pictureList;
 @property (nonatomic, strong) NSArray<KTVVideo *> * videoList;
+
+@property (nonatomic, assign) BOOL isSelected; // 是否被选中 -- 作为暖场人 - 小蜜蜂的备用字段
 
 @end

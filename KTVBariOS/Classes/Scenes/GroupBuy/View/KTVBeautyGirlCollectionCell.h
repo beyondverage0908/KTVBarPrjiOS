@@ -14,6 +14,6 @@
 
 @property (nonatomic, strong) KTVUser *user;
 
-@property (nonatomic, copy) void (^callback)(KTVUser *user, BOOL isSelected);
+@property (nonatomic, copy) void (^callback)(KTVUser *user);
 
 @end
