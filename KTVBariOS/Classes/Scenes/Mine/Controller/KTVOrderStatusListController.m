@@ -123,7 +123,9 @@
             break;
     }
     NSDictionary *params = @{@"username" : [KTVCommon userInfo].phone,
-                             @"orderStatus" : [NSNumber numberWithInteger:orderStatus]};
+                             @"orderStatus" : [NSNumber numberWithInteger:orderStatus],
+                             @"pageSize": @100,
+                             @"currentPage": @0};
     [KTVMainService postSearchOrder:params result:^(NSDictionary *result) {
         if (![result[@"code"] isEqualToString:ktvCode]) {
             [KTVToast toast:TOAST_GET_ORDER_FAIL];

@@ -94,7 +94,7 @@ static KTVNetworkHelper *_instance = nil;
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         // 解密服务器返回值
         NSDictionary *result = [self sessionWithNetResponse:responseObject message:message];
-        [self requestResponse:result success:success];
+        [self requestResponse:result success:success path:urlString];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
@@ -120,7 +120,7 @@ static KTVNetworkHelper *_instance = nil;
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         // 解密服务器返回值
         NSDictionary *result = [self sessionWithNetResponse:responseObject message:message];
-        [self requestResponse:result success:success];
+        [self requestResponse:result success:success path:urlString];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
@@ -145,7 +145,7 @@ static KTVNetworkHelper *_instance = nil;
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         // 解密服务器返回值
         NSDictionary *result = [self sessionWithNetResponse:responseObject message:message];
-        [self requestResponse:result success:success];
+        [self requestResponse:result success:success path:urlString];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
@@ -214,7 +214,7 @@ static KTVNetworkHelper *_instance = nil;
         // 解密服务器返回值
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         NSDictionary *result = [self sessionWithNetResponse:response message:message];
-        [self requestResponse:result success:success];
+        [self requestResponse:result success:success path:urlString];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
@@ -241,7 +241,7 @@ static KTVNetworkHelper *_instance = nil;
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         NSDictionary *result = [self sessionWithNetResponse:responseObject message:message];
-        [self requestResponse:result success:success];
+        [self requestResponse:result success:success path:urlString];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         if (failure) failure(error);
@@ -293,7 +293,7 @@ static KTVNetworkHelper *_instance = nil;
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         NSDictionary *result = [self sessionWithNetResponse:responseObject message:message];
-        [self requestResponse:result success:success];
+        [self requestResponse:result success:success path:urlString];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         if (failure) failure(error);
@@ -309,23 +309,16 @@ static KTVNetworkHelper *_instance = nil;
     
     CLog(@"🐶🐶🐶 -- url path -->> %@", message.path);
     
+    // Default: AFJSONRequestSerializer
+    _manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    // 使用表单的方式提交图片和视频数据
+    if (message.httpType == KtvHybridStream) {
+        _manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+    }
     _manager.requestSerializer.timeoutInterval = message.timeout ? message.timeout : CONNECT_TIMEOUT;
     
     // 设置http的头部
     [self setHttpHeaderFieldWithMessage:message];
-    // 对数据包body，params加密
-    [self encryptedMessage:message];
-    
-    // 使用表单的方式提交图片和视频数据
-    if (message.httpType == KtvHybridStream) {
-        _manager.requestSerializer = [AFHTTPRequestSerializer serializer];
-    } else {
-        
-    }
-    
-    _manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    
-    
     
     // 正式版本
     if (message.httpType == KtvPOST) {
@@ -360,24 +353,7 @@ static KTVNetworkHelper *_instance = nil;
 //        [_manager.requestSerializer setValue:@"ios" forHTTPHeaderField:@"encrypt"];
 //    }
 //    
-    CLog(@"ktvtoken = %@", [KTVCommon ktvToken]);
-}
-
-#pragma mark - 加密和解密服务器数据
-
-/// 加密传输给服务器的数据
-- (void)encryptedMessage:(KTVRequestMessage *)message {
-//    if (!Switch_Encrypted_Is_Open) return;
-//    
-//    NSString *aesKey = [VHSUtils generateRandomStr16];
-//    message.aesKey = aesKey;
-//    
-//    VHSSecurityUtil *security = [VHSSecurityUtil share];
-//    if (!message.params || ![[message.params allKeys] count]) {
-//        message.params = @{@"key" : [security rsaGenerateKeyOfRandomStr16WithKey:aesKey]};
-//    } else {
-//        message.params = [security encryptWithRandomKey:aesKey data:message.params sign:message.sign];
-//    }
+    CLog(@"😊😊 -- ktvtoken = %@", [KTVCommon ktvToken]);
 }
 
 /// 解密服务器返回的加密数据
@@ -394,8 +370,9 @@ static KTVNetworkHelper *_instance = nil;
 
 #pragma mark - 封装请求返回数据
 
-- (void)requestResponse:(NSDictionary *)responese success:(RequestSuccess)success {
+- (void)requestResponse:(NSDictionary *)responese success:(RequestSuccess)success path:(NSString *)urlPath {
     if ([responese[@"code"] isEqualToString:ktvInvalidateToken] || [responese[@"code"] isEqualToString:ktvHeaderTokenNull]) {
+        CLog(@"☠️☠️ --->>> %@", urlPath);
         [KtvNotiCenter postNotificationName:ktvInvalidateToken object:nil];
         // 移除token
         [KTVCommon removeKtvToken];

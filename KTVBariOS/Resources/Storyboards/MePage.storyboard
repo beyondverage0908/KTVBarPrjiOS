@@ -170,6 +170,79 @@
                                             <outlet property="infoLabel" destination="NMB-4p-aM9" id="aKy-ur-fBO"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="KTVShortcutCell" rowHeight="70" id="nad-Yj-uKR" customClass="KTVShortcutCell">
+                                        <rect key="frame" x="0.0" y="210" width="375" height="70"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nad-Yj-uKR" id="2BI-Dv-0Vb">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mainpage_menu_split" translatesAutoresizingMaskIntoConstraints="NO" id="pt8-Sy-n5N">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
+                                                </imageView>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uIv-FX-zXo" userLabel="left">
+                                                    <rect key="frame" x="0.0" y="0.0" width="187.5" height="70"/>
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mine_dingdan" translatesAutoresizingMaskIntoConstraints="NO" id="vbW-Ek-O8Z">
+                                                            <rect key="frame" x="59" y="10" width="50" height="50"/>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="订单" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P4Y-6G-nIS">
+                                                            <rect key="frame" x="114" y="25" width="35" height="21"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" red="0.94901960780000005" green="0.094117647060000004" blue="0.52941176469999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstItem="P4Y-6G-nIS" firstAttribute="leading" secondItem="vbW-Ek-O8Z" secondAttribute="trailing" constant="5" id="FSa-Qg-irG"/>
+                                                        <constraint firstItem="vbW-Ek-O8Z" firstAttribute="centerX" secondItem="uIv-FX-zXo" secondAttribute="centerX" constant="-10" id="SDd-IS-pqu"/>
+                                                        <constraint firstItem="vbW-Ek-O8Z" firstAttribute="centerY" secondItem="uIv-FX-zXo" secondAttribute="centerY" id="m3h-h6-MdS"/>
+                                                        <constraint firstItem="P4Y-6G-nIS" firstAttribute="centerY" secondItem="uIv-FX-zXo" secondAttribute="centerY" id="pnh-rp-HNN"/>
+                                                    </constraints>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jTo-Ii-lkB" userLabel="right">
+                                                    <rect key="frame" x="187.5" y="0.0" width="187.5" height="70"/>
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mine_haoyou" translatesAutoresizingMaskIntoConstraints="NO" id="Dsk-Od-CgE">
+                                                            <rect key="frame" x="59" y="10" width="50" height="50"/>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="好友" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fco-DO-aAB">
+                                                            <rect key="frame" x="114" y="25" width="35" height="21"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" red="0.53333333329999999" green="0.23137254900000001" blue="0.69019607839999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstItem="Dsk-Od-CgE" firstAttribute="centerX" secondItem="jTo-Ii-lkB" secondAttribute="centerX" constant="-10" id="Kif-HF-7kX"/>
+                                                        <constraint firstItem="fco-DO-aAB" firstAttribute="centerY" secondItem="jTo-Ii-lkB" secondAttribute="centerY" id="OaG-uh-Ra2"/>
+                                                        <constraint firstItem="fco-DO-aAB" firstAttribute="leading" secondItem="Dsk-Od-CgE" secondAttribute="trailing" constant="5" id="ihi-Tv-dQZ"/>
+                                                        <constraint firstItem="Dsk-Od-CgE" firstAttribute="centerY" secondItem="jTo-Ii-lkB" secondAttribute="centerY" id="qLy-6U-i2b"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="jTo-Ii-lkB" firstAttribute="top" secondItem="2BI-Dv-0Vb" secondAttribute="top" id="0Z6-mP-99Z"/>
+                                                <constraint firstItem="jTo-Ii-lkB" firstAttribute="leading" secondItem="uIv-FX-zXo" secondAttribute="trailing" id="JhA-tk-PcX"/>
+                                                <constraint firstItem="pt8-Sy-n5N" firstAttribute="leading" secondItem="2BI-Dv-0Vb" secondAttribute="leading" id="ND7-j8-6j0"/>
+                                                <constraint firstAttribute="trailing" secondItem="jTo-Ii-lkB" secondAttribute="trailing" id="RUB-Ws-MZK"/>
+                                                <constraint firstAttribute="bottom" secondItem="pt8-Sy-n5N" secondAttribute="bottom" id="SDD-M6-yC7"/>
+                                                <constraint firstItem="pt8-Sy-n5N" firstAttribute="top" secondItem="2BI-Dv-0Vb" secondAttribute="top" id="SSx-9w-pOm"/>
+                                                <constraint firstItem="uIv-FX-zXo" firstAttribute="top" secondItem="2BI-Dv-0Vb" secondAttribute="top" id="aZH-rf-oz8"/>
+                                                <constraint firstItem="uIv-FX-zXo" firstAttribute="leading" secondItem="2BI-Dv-0Vb" secondAttribute="leading" id="bUG-Hf-CLL"/>
+                                                <constraint firstItem="uIv-FX-zXo" firstAttribute="width" secondItem="pt8-Sy-n5N" secondAttribute="width" multiplier="0.5" id="gUM-8q-MlJ"/>
+                                                <constraint firstAttribute="trailing" secondItem="pt8-Sy-n5N" secondAttribute="trailing" id="jEL-tD-rg8"/>
+                                                <constraint firstAttribute="bottom" secondItem="jTo-Ii-lkB" secondAttribute="bottom" id="nQu-h5-2XL"/>
+                                                <constraint firstAttribute="bottom" secondItem="uIv-FX-zXo" secondAttribute="bottom" id="t7g-oY-zrV"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="friendEntrance" destination="jTo-Ii-lkB" id="LCV-P1-fuk"/>
+                                            <outlet property="orderEntrance" destination="uIv-FX-zXo" id="isS-iv-fB3"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </prototypes>
                             </tableView>
                         </subviews>
@@ -189,7 +262,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ShJ-yc-roL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="103" y="-2006"/>
+            <point key="canvasLocation" x="101.59999999999999" y="-2006.4467766116943"/>
         </scene>
         <!--User Info Controller-->
         <scene sceneID="6XG-WI-gLB">
@@ -3812,7 +3885,10 @@
         <image name="mainpage_all_bg_line" width="375" height="200"/>
         <image name="mainpage_list_dingzuo" width="51" height="18"/>
         <image name="mainpage_list_location" width="12" height="15"/>
+        <image name="mainpage_menu_split" width="375" height="72"/>
         <image name="mine_apply_store" width="53" height="53"/>
+        <image name="mine_dingdan" width="50" height="50"/>
+        <image name="mine_haoyou" width="50" height="50"/>
         <image name="mine_header_placeholder" width="250" height="96"/>
         <image name="user_info_placeholder" width="90" height="90"/>
     </resources>

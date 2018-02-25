@@ -23,6 +23,7 @@
 
 #import "KTVUserHeaderCell.h"
 #import "KTVUserInfoCell.h"
+#import "KTVShortcutCell.h"
 
 #import "KTVMainService.h"
 #import "KTVLoginService.h"
@@ -164,7 +165,11 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        return 140;
+        if (indexPath.row == 0) {
+            return 140;
+        } else {
+            return 70;
+        }
     } else if (indexPath.section == 1) {
         return 40;
     }
@@ -177,9 +182,11 @@
         return;
     }
     if (indexPath.section == 0) {
-        KTVUserInfoController *vc = (KTVUserInfoController *)[UIViewController storyboardName:@"MePage" storyboardId:@"KTVUserInfoController"];
-        vc.isMySelf = YES;
-        [self.navigationController pushViewController:vc animated:YES];
+        if (indexPath.row == 0) {
+            KTVUserInfoController *vc = (KTVUserInfoController *)[UIViewController storyboardName:@"MePage" storyboardId:@"KTVUserInfoController"];
+            vc.isMySelf = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
     } else if (indexPath.section == 1) {
 //        if (indexPath.row == 0) {
 //            KTVChatSessionController *vc = [[KTVChatSessionController alloc] init];
@@ -254,7 +261,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
-        return 1;
+        return 2;
     } else if (section == 1) {
         return self.userInfoArray.count;
     }
@@ -263,10 +270,33 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        KTVUserHeaderCell *cell = (KTVUserHeaderCell *)[tableView dequeueReusableCellWithIdentifier:KTVStringClass(KTVUserHeaderCell)];
-        cell.delegate = self;
-        cell.user = self.user;
-        return cell;
+        if (indexPath.row == 0) {
+            // 个人信息
+            KTVUserHeaderCell *cell = (KTVUserHeaderCell *)[tableView dequeueReusableCellWithIdentifier:KTVStringClass(KTVUserHeaderCell)];
+            cell.delegate = self;
+            cell.user = self.user;
+            return cell;
+        } else {
+            // 订单 - 好友
+            KTVShortcutCell *cell = (KTVShortcutCell *)[tableView dequeueReusableCellWithIdentifier:KTVStringClass(KTVShortcutCell)];
+            @WeakObj(self);
+            cell.entranceCallback = ^(NSInteger tag) {
+                if ([KTVCommon isLogin]) {
+                    if (tag == 0) {
+                        KTVOrderStatusListController *vc = (KTVOrderStatusListController *)[UIViewController storyboardName:@"MePage" storyboardId:@"KTVOrderStatusListController"];
+                        [weakself.navigationController pushViewController:vc animated:YES];
+                    } else {
+                        KTVChatSessionController *vc = [[KTVChatSessionController alloc] init];
+                        vc.hidesBottomBarWhenPushed = YES;
+                        [weakself.navigationController pushViewController:vc animated:YES];
+                    }
+                } else {
+                    [weakself requestToLogin];
+                }
+            };
+            return cell;
+            
+        }
     } else if (indexPath.section == 1) {
         KTVUserInfoCell *cell = (KTVUserInfoCell *)[tableView dequeueReusableCellWithIdentifier:KTVStringClass(KTVUserInfoCell)];
         cell.info = self.userInfoArray[indexPath.row];
