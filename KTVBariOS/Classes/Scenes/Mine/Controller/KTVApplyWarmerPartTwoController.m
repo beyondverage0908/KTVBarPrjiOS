@@ -10,11 +10,14 @@
 #import "KTVApplyWarmerParttwoView.h"
 #import "KTVWarmerApplyWaittingController.h"
 #import "KTVMainService.h"
+#import "KTVWarmerPayDepositController.h"
 
 @interface KTVApplyWarmerPartTwoController ()
 
 @property (assign, nonatomic) BOOL isAgreeBecomeWarmer;
 @property (strong, nonatomic) NSMutableDictionary *warmerInfoSecondPart;
+
+@property (assign, nonatomic) BOOL isLongtime; // 是否是常驻 - 兼职 / 常驻
 
 @end
 
@@ -43,6 +46,7 @@
     // 0;管理员（ROLE_ADMIN） 1普通用户(ROLE_USER)，2:商家(ROLE_SELLER)，3:服务者(ROLE_SERVER)（暖场人  公主等,只是酒吧内部员工（也就是固定）） 4 常驻暖场人  5 兼职暖场人
     @WeakObj(self);
     applyTwoView.parttimeOrlongtimeCallback = ^(BOOL isLongtime) {
+        weakself.isLongtime = isLongtime;
         if (isLongtime) {
             CLog(@"-- 全职");
             [weakself.warmerInfoSecondPart setObject:@4 forKey:@"type"];
@@ -110,11 +114,15 @@
         [MBProgressHUD hiddenHUD];
         if ([result[@"code"] isEqualToString:ktvCode]) {
             [KTVToast toast:@"申请成功"];
-            KTVWarmerApplyWaittingController *vc = [UIViewController storyboardName:@"MePage" storyboardId:@"KTVWarmerApplyWaittingController"];
-            [weakself.navigationController pushViewController:vc animated:YES];
+            if (self.isLongtime) {
+                KTVWarmerPayDepositController *vc = [UIViewController storyboardName:@"MePage" storyboardId:@"KTVWarmerPayDepositController"];
+                [weakself.navigationController pushViewController:vc animated:YES];
+            } else {
+                KTVWarmerApplyWaittingController *vc = [UIViewController storyboardName:@"MePage" storyboardId:@"KTVWarmerApplyWaittingController"];
+                [weakself.navigationController pushViewController:vc animated:YES];
+            }
         } else {
-            CLog(@"-->> 失败")
-            [KTVToast toast:@"申请失败"];
+            [KTVToast toast:result[@"detail"]];
         }
     }];
 }

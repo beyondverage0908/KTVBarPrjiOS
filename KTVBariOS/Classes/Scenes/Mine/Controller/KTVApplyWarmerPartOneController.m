@@ -307,6 +307,7 @@
                 //                 UISaveVideoAtPathToSavedPhotosAlbum([outputURL path], self, nil, NULL);//这个是保存到手机相册
                 dispatch_async(dispatch_get_main_queue() , ^{
                     [MBProgressHUD hiddenHUD];
+                    [KTVToast toast:@"视频已经选中"];
                     [self alertUploadVideo:outputURL];
                 });
             }

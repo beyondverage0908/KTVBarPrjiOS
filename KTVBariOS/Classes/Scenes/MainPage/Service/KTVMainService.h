@@ -140,4 +140,7 @@ typedef void(^ResponseSuccess)(NSDictionary *result);
 
 /// 修改暖场人兼职的时间
 + (void)postUpdateWarmerWorkTime:(NSDictionary *)params result:(ResponseSuccess)responseResult;
+
+/// 附近的暖场人
++ (void)postNearWarmerUser:(NSDictionary *)params result:(ResponseSuccess)responseResult;
 @end

@@ -32,4 +32,6 @@ typedef NS_ENUM(NSInteger, KtvRequestType) {
 @property (nonatomic, strong)   NSString            *sign;                      // 加密，关键参数签名
 @property (nonatomic, strong)   NSString            *aesKey;                    // 用于解密服务器返回已经加密的数据
 
+@property (nonatomic, strong) NSString              *domainUrl;                 // 域名
+
 @end

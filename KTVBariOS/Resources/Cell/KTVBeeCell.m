@@ -31,21 +31,26 @@
 }
 
 - (void)setUser:(KTVUser *)user {
-    if (_user != user) {
-        _user = user;
+    KTVPicture *pic = user.pictureList.firstObject;
+    [self.headImageview sd_setImageWithURL:[NSURL URLWithString:pic.pictureUrl]
+                          placeholderImage:[UIImage imageNamed:@"bar_yuepao_user_placeholder"]];
+    self.nickLabel.text = user.nickName;
+    self.genderImageView.image = user.sex ? [UIImage imageNamed:@"app_user_man"] : [UIImage imageNamed:@"app_user_woman"];
+    self.ageLabel.text = [NSString stringWithFormat:@"%@岁", @(user.age)];
+    self.activityLabel.text = user.userDetail.todayMood;
+}
+
+- (void)setNearUser:(KTVNearUser *)nearUser {
+    if (_nearUser != nearUser) {
+        _nearUser = nearUser;
         
-        KTVPicture *pic = _user.pictureList.firstObject;
-        [self.headImageview sd_setImageWithURL:[NSURL URLWithString:pic.pictureUrl]
-                              placeholderImage:[UIImage imageNamed:@"bar_yuepao_user_placeholder"]];
-        self.nickLabel.text = _user.nickName;
-        self.addressLabel.text = [NSString stringWithFormat:@"480米以内"];
-        self.genderImageView.image = _user.sex ? [UIImage imageNamed:@"app_user_man"] : [UIImage imageNamed:@"app_user_woman"];
-        self.ageLabel.text = [NSString stringWithFormat:@"%@岁", @(_user.age)];
-        self.activityLabel.text = _user.userDetail.todayMood;
+        [self setUser:nearUser.userModel];
+        self.addressLabel.text = [NSString stringWithFormat:@"%@米以内", nearUser.distance];
     }
 }
 
 - (IBAction)enterStoreAction:(id)sender {
     CLog(@"-->> 进店查看");
+    if (self.enterStoreCallback) self.enterStoreCallback(self.nearUser);
 }
 @end

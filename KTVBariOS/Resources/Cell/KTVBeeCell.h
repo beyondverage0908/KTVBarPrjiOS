@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "KTVUser.h"
+#import "KTVNearUser.h"
 
 @interface KTVBeeCell : UITableViewCell
 
-@property (nonatomic, strong) KTVUser * user;
+@property (nonatomic, strong) KTVNearUser * nearUser;
+@property (nonatomic, copy) void (^enterStoreCallback)(KTVNearUser *user);
 
 @end

@@ -181,8 +181,11 @@
     KTVAddress *location = noti.object;
     if ([KTVCommon userInfo].phone && location) {
         NSDictionary *params = @{@"username" : [KTVCommon userInfo].phone,
-                                 @"address" : @{@"latitude" : @(location.latitude).stringValue, @"longitude" : @(location.longitude).stringValue}};
-        [KTVMainService postRecentUserAddress:params result:^(NSDictionary *result) {}];
+                                 @"address" : @{@"latitude" : @(location.latitude),
+                                                @"longitude" : @(location.longitude)}};
+        [KTVMainService postRecentUserAddress:params result:^(NSDictionary *result) {
+            
+        }];
     }
 }
 

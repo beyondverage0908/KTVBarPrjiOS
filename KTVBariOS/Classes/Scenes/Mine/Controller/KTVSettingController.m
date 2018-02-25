@@ -35,7 +35,10 @@
 
 - (IBAction)exitAction:(id)sender {
     CLog(@"-->>>退出");
-    [self logoutAccount];
+    [MBProgressHUD showMessage:@"注销中..."];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self logoutAccount];
+    });
 }
 
 #pragma mark - 网络
@@ -47,7 +50,6 @@
         return;
     }
     NSDictionary *params = @{@"token" : token};
-    [MBProgressHUD showMessage:@"注销中..."];
     [KTVMainService postAppExit:params result:^(NSDictionary *result) {
         [MBProgressHUD hiddenHUD];
         if ([result[@"code"] isEqualToString:ktvCode]) {

@@ -57,6 +57,9 @@
 /// 及时更新用户的地址
 + (NSString *)getRecentUserAddressUrl;
 
+/// 附近的人
++ (NSString *)getNearWarmerUserUrl;
+
 #pragma mark - 用户动态
 
 + (NSString *)getUserDynamicStatementUrl;

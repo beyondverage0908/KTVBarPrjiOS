@@ -52,7 +52,7 @@
     self.tableView.tableFooterView = [[UIView alloc] init];
     
     // 利用订单查询，获取是否为登陆状态
-    [self loadSearchOrderToJudgeLoginStatus];
+    //[self loadSearchOrderToJudgeLoginStatus];
     // 获取暖场人
     [self loadStoreLike];
     [self loadNearActivity];

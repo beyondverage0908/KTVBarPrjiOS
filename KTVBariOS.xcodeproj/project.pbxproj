@@ -18,6 +18,7 @@
 		330A93871F03ED2A001B320A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 330A93831F03ED2A001B320A /* AppDelegate.m */; };
 		330A938C1F03ED7E001B320A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 330A938B1F03ED7E001B320A /* main.m */; };
 		330A938F1F03EE47001B320A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 330A938E1F03EE47001B320A /* Main.storyboard */; };
+		330E93E920328C1F0068DAAA /* KTVNearUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 330E93E820328C1F0068DAAA /* KTVNearUser.m */; };
 		330E9DBE200B03BD00B01627 /* KTVNearStoreController.m in Sources */ = {isa = PBXBuildFile; fileRef = 330E9DBD200B03BD00B01627 /* KTVNearStoreController.m */; };
 		330E9DC1200B040700B01627 /* KTVNearPersonController.m in Sources */ = {isa = PBXBuildFile; fileRef = 330E9DC0200B040700B01627 /* KTVNearPersonController.m */; };
 		3310D2EB1F9897E9008E9D69 /* KTVDynamicHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3310D2EA1F9897E9008E9D69 /* KTVDynamicHeaderCell.m */; };
@@ -300,6 +301,8 @@
 		330A93831F03ED2A001B320A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		330A938B1F03ED7E001B320A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		330A938E1F03EE47001B320A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		330E93E720328C1F0068DAAA /* KTVNearUser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KTVNearUser.h; sourceTree = "<group>"; };
+		330E93E820328C1F0068DAAA /* KTVNearUser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KTVNearUser.m; sourceTree = "<group>"; };
 		330E9DBC200B03BD00B01627 /* KTVNearStoreController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KTVNearStoreController.h; sourceTree = "<group>"; };
 		330E9DBD200B03BD00B01627 /* KTVNearStoreController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KTVNearStoreController.m; sourceTree = "<group>"; };
 		330E9DBF200B040700B01627 /* KTVNearPersonController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KTVNearPersonController.h; sourceTree = "<group>"; };
@@ -1470,6 +1473,8 @@
 		339AED5B1F52C98900473C29 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				330E93E720328C1F0068DAAA /* KTVNearUser.h */,
+				330E93E820328C1F0068DAAA /* KTVNearUser.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2168,6 +2173,7 @@
 				3344326D2013748800A312EC /* KTVMyInvitationController.m in Sources */,
 				33CD20C31F4F0BBC0090DBEE /* KTVPackageUserSelectedCell.m in Sources */,
 				335BDEF3201DCBC0005E5F53 /* KTVWarmerPayDepositController.m in Sources */,
+				330E93E920328C1F0068DAAA /* KTVNearUser.m in Sources */,
 				339D8AA81F1A048F00D41152 /* KTVRegisterController.m in Sources */,
 				33C138F01F56F3CB000F8C37 /* KTVBeautyGirlCollectionCell.m in Sources */,
 				33D0E5A71F1F99A6009A45B3 /* UIViewController+StoryboardHelper.m in Sources */,

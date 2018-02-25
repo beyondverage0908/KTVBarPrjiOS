@@ -110,6 +110,9 @@ static KTVNetworkHelper *_instance = nil;
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:message.params];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     NSString *urlString = [NSString stringWithFormat:@"%@%@", [KTVUrl getDomainUrl], message.path];
+    if (message.domainUrl) {
+        urlString = [NSString stringWithFormat:@"%@%@", message.domainUrl, message.path];
+    }
     CLog(@"URL %@", urlString);
     
     [_manager POST:urlString parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -133,6 +136,9 @@ static KTVNetworkHelper *_instance = nil;
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:message.params];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     NSString *urlString = [NSString stringWithFormat:@"%@%@", [KTVUrl getDomainUrl], message.path];
+    if (message.domainUrl) {
+        urlString = [NSString stringWithFormat:@"%@%@", message.domainUrl, message.path];
+    }
     CLog(@"URL %@", urlString);
     
     [_manager PUT:urlString parameters:dict success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -155,6 +161,9 @@ static KTVNetworkHelper *_instance = nil;
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
     NSString *urlString = [NSString stringWithFormat:@"%@%@", [KTVUrl getDomainUrl], message.path];
+    if (message.domainUrl) {
+        urlString = [NSString stringWithFormat:@"%@%@", message.domainUrl, message.path];
+    }
     
     //2.上传文字时用到的拼接请求参数(如果只传图片，可不要此段）
     //NSMutableDictionary *params = [NSMutableDictionary dictionary];//创建一个名为params的可变字典
@@ -217,6 +226,9 @@ static KTVNetworkHelper *_instance = nil;
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     NSString *urlString = [NSString stringWithFormat:@"%@%@", [KTVUrl getDomainUrl], message.path];
+    if (message.domainUrl) {
+        urlString = [NSString stringWithFormat:@"%@%@", message.domainUrl, message.path];
+    }
     
     [_manager POST:urlString parameters:message.params constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         
@@ -239,14 +251,28 @@ static KTVNetworkHelper *_instance = nil;
 - (void)uploadHybridStreamWithRequestMessage:(KTVRequestMessage *)message success:(RequestSuccess)success failure:(RequestFailure)failure {
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-    NSString *urlString = [NSString stringWithFormat:@"%@%@", [KTVUrl getDomainUrl], message.path];
     
-    [_manager POST:urlString parameters:message.params constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+    NSString *urlString = [NSString stringWithFormat:@"%@%@", [KTVUrl getDomainUrl], message.path];
+    if (message.domainUrl) {
+        urlString = [NSString stringWithFormat:@"%@%@", message.domainUrl, message.path];
+    }
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+    // 设置请求以JSON格式接收
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/html", @"text/json", @"text/javascript", @"text/plain", nil];
+    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+    manager.requestSerializer.timeoutInterval = CONNECT_TIMEOUT;
+    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+    
+    
+    [manager POST:urlString parameters:message.params constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         
         NSFileManager *fileManager = [NSFileManager defaultManager];
         if ([fileManager fileExistsAtPath:message.videoUrl.path]) {
             NSData *videoData = [NSData dataWithContentsOfURL:message.params[@"video"]];
-            [formData appendPartWithFileData:videoData name:@"video" fileName:@"video" mimeType:@"video/quicktime"];
+            [formData appendPartWithFileData:videoData name:@"video" fileName:@"video.mp4" mimeType:@"video/mp4"];
         }
         
         for (NSInteger i = 0; i < message.imageList.count; i++) {
@@ -281,12 +307,25 @@ static KTVNetworkHelper *_instance = nil;
         return;
     }
     
+    CLog(@"🐶🐶🐶 -- url path -->> %@", message.path);
+    
     _manager.requestSerializer.timeoutInterval = message.timeout ? message.timeout : CONNECT_TIMEOUT;
     
     // 设置http的头部
     [self setHttpHeaderFieldWithMessage:message];
     // 对数据包body，params加密
     [self encryptedMessage:message];
+    
+    // 使用表单的方式提交图片和视频数据
+    if (message.httpType == KtvHybridStream) {
+        _manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+    } else {
+        
+    }
+    
+    _manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    
+    
     
     // 正式版本
     if (message.httpType == KtvPOST) {

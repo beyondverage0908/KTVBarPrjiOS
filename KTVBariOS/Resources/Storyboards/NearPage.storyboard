@@ -78,13 +78,6 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Js-Q8-4JZ">
-                                                    <rect key="frame" x="312" y="18" width="51" height="22"/>
-                                                    <state key="normal" image="mainpage_list_dingzuo"/>
-                                                    <connections>
-                                                        <action selector="placeOrderAction:" destination="yRN-pb-cz7" eventType="touchUpInside" id="3yc-Ed-4Hl"/>
-                                                    </connections>
-                                                </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="在约的小伙伴60人" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tve-Na-E8Y">
                                                     <rect key="frame" x="167.5" y="68" width="93" height="13.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
@@ -97,13 +90,6 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C0n-Qw-Ebc">
-                                                    <rect key="frame" x="312" y="65" width="51" height="22"/>
-                                                    <state key="normal" image="mainpage_list_bar_detail"/>
-                                                    <connections>
-                                                        <action selector="lookDetailAction:" destination="yRN-pb-cz7" eventType="touchUpInside" id="iZL-g6-mlE"/>
-                                                    </connections>
-                                                </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lei-iz-Zzu">
                                                     <rect key="frame" x="168" y="85" width="12" height="22"/>
                                                     <state key="normal" image="mainpage_list_location"/>
@@ -155,28 +141,22 @@
                                             <constraints>
                                                 <constraint firstItem="ekF-sq-J9x" firstAttribute="top" secondItem="gHy-RG-SBe" secondAttribute="top" id="0MQ-eJ-yru"/>
                                                 <constraint firstItem="lei-iz-Zzu" firstAttribute="top" secondItem="tve-Na-E8Y" secondAttribute="bottom" constant="3" id="9W5-Ks-cew"/>
-                                                <constraint firstAttribute="trailing" secondItem="0Js-Q8-4JZ" secondAttribute="trailing" constant="12" id="GJb-fI-Gk4"/>
                                                 <constraint firstAttribute="trailing" secondItem="ekF-sq-J9x" secondAttribute="trailing" id="IBS-ya-9Aj"/>
                                                 <constraint firstItem="tve-Na-E8Y" firstAttribute="leading" secondItem="n1V-zJ-GtM" secondAttribute="trailing" constant="18" id="Iec-yk-i5w"/>
                                                 <constraint firstItem="tve-Na-E8Y" firstAttribute="top" secondItem="YdI-6i-uRW" secondAttribute="bottom" constant="2" id="KIh-7l-wWu"/>
                                                 <constraint firstItem="ekF-sq-J9x" firstAttribute="leading" secondItem="gHy-RG-SBe" secondAttribute="leading" id="M7D-hl-bIE"/>
                                                 <constraint firstAttribute="bottom" secondItem="n1V-zJ-GtM" secondAttribute="bottom" constant="18" id="OE2-NL-O4j"/>
                                                 <constraint firstItem="n1V-zJ-GtM" firstAttribute="leading" secondItem="gHy-RG-SBe" secondAttribute="leading" constant="12" id="OZb-Qe-dBf"/>
-                                                <constraint firstItem="0Js-Q8-4JZ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="nOO-Pm-Bog" secondAttribute="trailing" constant="5" id="Pgd-b4-bRr"/>
                                                 <constraint firstItem="nOO-Pm-Bog" firstAttribute="leading" secondItem="n1V-zJ-GtM" secondAttribute="trailing" constant="18" id="T68-lM-qrt"/>
                                                 <constraint firstItem="YdI-6i-uRW" firstAttribute="leading" secondItem="n1V-zJ-GtM" secondAttribute="trailing" constant="18" id="TDL-yH-Ygh"/>
                                                 <constraint firstItem="nOO-Pm-Bog" firstAttribute="top" secondItem="gHy-RG-SBe" secondAttribute="top" constant="18" id="VRQ-iu-Xl9"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="T1t-gG-9Zb" secondAttribute="trailing" constant="5" id="Vhd-ui-QA4"/>
                                                 <constraint firstAttribute="bottom" secondItem="ekF-sq-J9x" secondAttribute="bottom" id="XuM-jl-GZP"/>
-                                                <constraint firstAttribute="trailing" secondItem="C0n-Qw-Ebc" secondAttribute="trailing" constant="12" id="ZD0-Hf-X32"/>
-                                                <constraint firstItem="0Js-Q8-4JZ" firstAttribute="top" secondItem="gHy-RG-SBe" secondAttribute="top" constant="18" id="g2A-Js-ooS"/>
-                                                <constraint firstItem="C0n-Qw-Ebc" firstAttribute="top" secondItem="0Js-Q8-4JZ" secondAttribute="bottom" constant="25" id="gQk-FO-LqW"/>
                                                 <constraint firstItem="YdI-6i-uRW" firstAttribute="top" secondItem="nOO-Pm-Bog" secondAttribute="bottom" constant="5" id="hH8-vf-bCs"/>
                                                 <constraint firstItem="T1t-gG-9Zb" firstAttribute="centerY" secondItem="lei-iz-Zzu" secondAttribute="centerY" id="hiG-ee-QdT"/>
                                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="lei-iz-Zzu" secondAttribute="bottom" id="kpG-zJ-NnJ"/>
                                                 <constraint firstItem="n1V-zJ-GtM" firstAttribute="top" secondItem="gHy-RG-SBe" secondAttribute="top" constant="18" id="lWy-9A-Gy0"/>
                                                 <constraint firstItem="T1t-gG-9Zb" firstAttribute="leading" secondItem="lei-iz-Zzu" secondAttribute="trailing" constant="5" id="nGD-cw-WoM"/>
-                                                <constraint firstItem="C0n-Qw-Ebc" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="tve-Na-E8Y" secondAttribute="trailing" constant="3" id="pt5-fS-ajs"/>
                                                 <constraint firstItem="lei-iz-Zzu" firstAttribute="leading" secondItem="n1V-zJ-GtM" secondAttribute="trailing" constant="18" id="rGi-bW-tDj"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -184,8 +164,6 @@
                                             <outlet property="appointment" destination="tve-Na-E8Y" id="xIU-g4-JSk"/>
                                             <outlet property="likeImageView" destination="n1V-zJ-GtM" id="pOi-yA-9xR"/>
                                             <outlet property="location" destination="T1t-gG-9Zb" id="dhS-wx-zW0"/>
-                                            <outlet property="lookDetailBtn" destination="C0n-Qw-Ebc" id="kgx-QN-zKR"/>
-                                            <outlet property="placeOrderBtn" destination="0Js-Q8-4JZ" id="1va-bn-JvP"/>
                                             <outlet property="starView" destination="YdI-6i-uRW" id="c5G-Sw-3He"/>
                                             <outlet property="store" destination="nOO-Pm-Bog" id="bUI-fE-wgn"/>
                                         </connections>
@@ -255,8 +233,6 @@
     <resources>
         <image name="mainpage_all_bg_line" width="375" height="200"/>
         <image name="mainpage_bar_placeholder_img" width="141" height="82"/>
-        <image name="mainpage_list_bar_detail" width="51" height="18"/>
-        <image name="mainpage_list_dingzuo" width="51" height="18"/>
         <image name="mainpage_list_location" width="12" height="15"/>
         <image name="mainpage_list_start" width="11" height="11"/>
     </resources>

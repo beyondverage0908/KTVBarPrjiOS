@@ -80,7 +80,7 @@
 
 - (void)loginedSucess {
     [self loadUserInfo];
-    [self loadSearchOrder];
+    //[self loadSearchOrder];
     [self getRongCloudToken];
     [self updateUserLocation];
 }

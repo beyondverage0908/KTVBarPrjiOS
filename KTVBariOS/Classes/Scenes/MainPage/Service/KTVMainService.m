@@ -580,6 +580,7 @@
     KTVRequestMessage *msg = [[KTVRequestMessage alloc] init];
     msg.path = [KTVUrl getApplyWarmerUrl];
     msg.httpType = KtvHybridStream;
+//    msg.domainUrl = @"http://humdeef.imwork.net";
     msg.params = params;
     msg.videoUrl = params[@"video"];
     msg.imageList = params[@"shz"];
@@ -610,6 +611,21 @@
 + (void)postUpdateWarmerWorkTime:(NSDictionary *)params result:(ResponseSuccess)responseResult {
     KTVRequestMessage *msg = [[KTVRequestMessage alloc] init];
     msg.path = [KTVUrl getUpdateWarmerTimeUrl];
+    msg.httpType = KtvPOST;
+    msg.params = params;
+    
+    [[KTVNetworkHelper sharedInstance] send:msg success:^(NSDictionary *result) {
+        // 数据接口解析
+        responseResult(result);
+    } fail:^(NSError *error) {
+        CLog(@"--->>>%@", error);
+    }];
+}
+
+/// 附近的暖场人
++ (void)postNearWarmerUser:(NSDictionary *)params result:(ResponseSuccess)responseResult {
+    KTVRequestMessage *msg = [[KTVRequestMessage alloc] init];
+    msg.path = [KTVUrl getNearWarmerUserUrl];
     msg.httpType = KtvPOST;
     msg.params = params;
     

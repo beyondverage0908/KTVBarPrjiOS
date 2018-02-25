@@ -81,6 +81,11 @@
     return @"/api/login/user/recentStatus";
 }
 
+/// 附近的人
++ (NSString *)getNearWarmerUserUrl {
+    return @"/api/warmerUser/near";
+}
+
 #pragma mark - 用户动态
 
 + (NSString *)getUserDynamicStatementUrl {
