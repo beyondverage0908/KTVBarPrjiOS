@@ -63,21 +63,14 @@
     return money;
 }
 
-- (NSMutableDictionary *)mergeOrderInfo {
+- (NSMutableDictionary *)configrationWarmerOrderInfo {
     NSMutableDictionary *orderDict = [NSMutableDictionary dictionary];
     
-    [orderDict setObject:@(self.store.storeId.integerValue) forKey:@"storeId"];
-    [orderDict setObject:@(self.store.user.userId.integerValue) forKey:@"userId"];
-    NSString *currentDate = [NSDate dateStringWithDate:[NSDate date] andFormatString:@"yyyy-MM-dd HH:mm:ss"];
-    [orderDict setObject:currentDate forKey:@"startDate"];
-    [orderDict setObject:@(4) forKey:@"orderType"];
     [orderDict setObject:@(self.payType) forKey:@"payType"];
-    if (self.isHiddenActivity) {
-        [orderDict setObject:@(1) forKey:@"userHide"];
-    } else {
-        [orderDict setObject:@(0) forKey:@"userHide"];
+    [orderDict setObject:@"暖场人订单" forKey:@"description"];
+    if (self.parentOrderNum) {
+        [orderDict setObject:self.parentOrderNum forKey:@"parentOrderNum"];
     }
-    [orderDict setObject:@"nothing" forKey:@"description"];
     
     NSMutableArray *userOrderDetails = [NSMutableArray array];
     for (KTVUser *user in self.selectedActivitorList) {
@@ -92,16 +85,16 @@
     return orderDict;
 }
 
-- (void)createOrder {
-    NSDictionary *orderInfo = [self mergeOrderInfo];
+// 创建暖场人订单
+- (void)createWarmerOrder {
+    NSDictionary *orderInfo = [self configrationWarmerOrderInfo];
     NSArray *userOrderDetails = orderInfo[@"userOrderDetails"];
     if (![userOrderDetails count]) {
         [KTVToast toast:@"请先选择小蜜蜂"];
         return;
     }
-    
     [MBProgressHUD showMessage:MB_CREATE_ORDER];
-    [KTVBuyService postCreateOrder:orderInfo result:^(NSDictionary *result) {
+    [KTVMainService postCreateWarmerOrder:orderInfo result:^(NSDictionary *result) {
         [MBProgressHUD hiddenHUD];
         if ([result[@"code"] isEqualToString:ktvCode]) {
             NSString *orderId = result[@"data"][@"orderId"];
@@ -245,7 +238,7 @@
                 vc.store = self.store;
                 vc.selectedWarmerCallback = ^(NSArray *selActivitorList) {
                     for (KTVUser *selUser in selActivitorList) {
-                        for (KTVUser *user in self.activitorList) {
+                        for (KTVUser *user in weakself.activitorList) {
                             if ([selUser.userId isEqualToString:user.userId]) {
                                 user.isSelected = YES;
                             }
@@ -349,7 +342,7 @@
         @WeakObj(self);
         cell.payMoneyAction = ^(double money) {
             CLog(@"-- >> 付款");
-            [weakself createOrder];
+            [weakself createWarmerOrder];
         };
         return cell;
     }

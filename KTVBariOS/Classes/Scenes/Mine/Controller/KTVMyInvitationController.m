@@ -13,6 +13,7 @@
 #import "KTVChooseParttimeView.h"
 
 #import "KTVMainService.h"
+#import "KTVWarmerOrder.h"
 
 @interface KTVMyInvitationController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -36,6 +37,7 @@
     
     // default -
     [self loadInvitatingService];
+    [self queryWarmerUserOrder];
 }
 
 #pragma mark - getter or setter
@@ -94,6 +96,51 @@
 
 #pragma mark - 网络
 
+- (void)queryWarmerUserOrder {
+    NSString *phone = [KTVCommon userInfo].phone;
+    phone = @"18939865771";
+    if (phone.length) {
+        if (self.invitatingList.count) {
+            [self.tableView reloadData];
+            return;
+        } else {
+            [KTVMainService postWarmerUserOrder:@{@"username" : phone} result:^(NSDictionary *result) {
+                if ([result[@"code"] isEqualToString:ktvCode]) {
+                    [self.invitatingList removeAllObjects];
+                    for (NSDictionary *dic in result[@"data"]) {
+                        KTVWarmerOrder *waittingOrder = [KTVWarmerOrder yy_modelWithDictionary:dic];
+                        [self.invitatingList addObject:waittingOrder];
+                    }
+                    [self.tableView reloadData];
+                }
+            }];
+        }
+    }
+}
+// actionType  2接受 1拒绝
+// 暖场人同意-拒绝
+- (void)updateWarmerAcceptStatus:(NSDictionary *)params {
+    [KTVMainService postUpdateRejectRecordOrder:params result:^(NSDictionary *result) {
+        if ([result[@"code"] isEqualToString:ktvSuccess]) {
+            
+        }
+    }];
+}
+
+// 获取查询兼职暖场人的拒绝和接受订单
+// actionType  2接受 1拒绝
+- (void)queryWarmerActionOrder:(NSString *)actionType {
+    NSString *username = [KTVCommon userInfo].phone;
+    if (username.length) {
+        NSDictionary *params = @{@"username" : username, @"actionType" : actionType};
+        [KTVMainService postQueryRejectRecordOrderUrl:params result:^(NSDictionary *result) {
+            if ([result[@"code"] isEqualToString:ktvSuccess]) {
+                
+            }
+        }];
+    }
+}
+
 - (void)upgradeParttime:(NSArray *)parttimeArr {
     NSString *parttimeStr = [parttimeArr componentsJoinedByString:@","];
     
@@ -110,19 +157,12 @@
 #pragma mark - 逻辑
 
 - (void)loadInvitatedService {
-    for (NSInteger i = 0; i < 10; i++) {
-        KTVUser *user = [[KTVUser alloc] init];
-        [self.invitatedList addObject:user];
-    }
     [self.tableView reloadData];
 }
 
 - (void)loadInvitatingService {
-    for (NSInteger i = 0; i < 5; i++) {
-        KTVUser *user = [[KTVUser alloc] init];
-        [self.invitatingList addObject:user];
-    }
-    [self.tableView reloadData];
+    // 待接受 - 订单
+    [self queryWarmerUserOrder];
 }
 
 #pragma mark - UITableViewDataSource
@@ -142,13 +182,23 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (self.segment.selectedSegmentIndex == 0) {
         KTVInvitatingCell *cell = [tableView dequeueReusableCellWithIdentifier:@"KTVInvitatingCell"];
-        KTVUser *user = self.invitatingList[indexPath.row];
-        cell.user = user;
+        KTVWarmerOrder *waittingOrder = self.invitatingList[indexPath.row];
+        cell.warmerOrder = waittingOrder;
+        @WeakObj(self);
+        // actionType  2接受 1拒绝
+        cell.agreeCallback = ^(KTVWarmerOrder *order) {
+            NSDictionary *params = @{@"actionType" : @"2", @"subOrderId" : @"970178577125343232"};
+            [weakself updateWarmerAcceptStatus:params];
+        };
+        cell.denyCallback = ^(KTVWarmerOrder *order) {
+            NSDictionary *params = @{@"actionType" : @"2", @"subOrderId" : @"970178577125343232"};
+            [weakself updateWarmerAcceptStatus:params];
+        };
         return cell;
     } else {
         KTVInvitationAcceptCell *cell = [tableView dequeueReusableCellWithIdentifier:@"KTVInvitationAcceptCell"];
-        KTVUser *user = self.invitatedList[indexPath.row];
-        cell.user = user;
+        KTVWarmerOrder *warmerOrder = self.invitatedList[indexPath.row];
+        cell.warmerOrder = warmerOrder;
         return cell;
     }
 }

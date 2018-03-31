@@ -160,6 +160,9 @@
 /// 根据距离查询门店
 + (NSString *)getLocalOrderUrl;
 
+/// 创建暖场人订单
++ (NSString *)getCreateWarmerOrderUrl;
+
 #pragma mark - 评论
 
 /// 创建评论
@@ -227,5 +230,17 @@
 
 /// 修改暖场人兼职的时间
 + (NSString *)getUpdateWarmerTimeUrl;
+
+/// 获取兼职暖场人的订单
++ (NSString *)getWarmerUserOrderUrl;
+
+/// 兼职暖场人接受和是拒绝
++ (NSString *)getUpdateRejectRecordOrderUrl;
+
+/// 查询兼职暖场人的拒绝和接受订单
++ (NSString *)getQueryRejectRecordOrderUrl;
+
+#pragma mark - 百度推送，上传channelid
++ (NSString *)getUpdateBPushChannelIdUrl;
 
 @end

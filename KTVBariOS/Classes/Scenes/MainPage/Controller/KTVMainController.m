@@ -23,8 +23,9 @@
 
 #import "KTVPaySuccessController.h"
 #import "KTVSelectedBeautyController.h"
+#import <AMapLocationKit/AMapLocationKit.h>
 
-@interface KTVMainController ()<UITableViewDelegate, UITableViewDataSource, SDCycleScrollViewDelegate>
+@interface KTVMainController ()<UITableViewDelegate, UITableViewDataSource, SDCycleScrollViewDelegate, AMapLocationManagerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIButton *locationBtn;
@@ -36,7 +37,13 @@
 @property (strong, nonatomic) NSMutableArray<KTVActivity *> *activityList;
 @property (strong, nonatomic) NSMutableArray<KTVBanner *> *bannerList;
 
+@property (nonatomic, strong) AMapLocationManager *locationManager;
+@property (nonatomic, copy) AMapLocatingCompletionBlock completionBlock;
+
 @end
+
+#define DefaultLocationTimeout 10
+#define DefaultReGeocodeTimeout 5
 
 @implementation KTVMainController
 
@@ -51,6 +58,8 @@
     self.tableView.backgroundColor = [UIColor ktvBG];
     self.tableView.tableFooterView = [[UIView alloc] init];
     
+    [self.locationBtn setTitle:@"合肥" forState:UIControlStateNormal];
+    
     // 利用订单查询，获取是否为登陆状态
     //[self loadSearchOrderToJudgeLoginStatus];
     // 获取暖场人
@@ -58,8 +67,12 @@
     [self loadNearActivity];
     [self loadMianBanner];
     [self loadAppVersion];
+    [self updateBPushChannelId];
     
     [self testCode];
+    
+    [self initReGecodeLocationCompleteBlock];
+    [self configLocationManager];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -156,6 +169,17 @@
             [KTVToast toast:@"Alert提示框，需要更新"];
         }
     }];
+}
+
+- (void)updateBPushChannelId {
+    NSString *channelId = [KTVCommon channelId];
+    NSString *username = [KTVCommon userInfo].phone;
+    // phonetype 3 安卓手机 4 苹果手机
+    // channelId  需要前端传过来
+    if (username.length && channelId.length) {
+        NSDictionary *params = @{@"username" : username, @"channelId" : channelId, @"phoneType" : @4};
+        [KTVMainService postUpdateBPushChannel:params result:^(NSDictionary *result) {}];
+    }
 }
 
 #pragma mark - 事件
@@ -377,6 +401,81 @@
     
 //    KTVSelectedBeautyController *vc = (KTVSelectedBeautyController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVSelectedBeautyController"];
 //    [self.navigationController pushViewController:vc animated:YES];
+}
+
+#pragma mark - 地理位置相关
+
+- (void)configLocationManager {
+    self.locationManager = [[AMapLocationManager alloc] init];
+    
+    [self.locationManager setDelegate:self];
+    
+    //设置期望定位精度
+    [self.locationManager setDesiredAccuracy:kCLLocationAccuracyHundredMeters];
+    
+    //设置不允许系统暂停定位
+    [self.locationManager setPausesLocationUpdatesAutomatically:NO];
+    
+    //设置允许在后台定位
+    [self.locationManager setAllowsBackgroundLocationUpdates:YES];
+    
+    //设置定位超时时间
+    [self.locationManager setLocationTimeout:DefaultLocationTimeout];
+    
+    //设置逆地理超时时间
+    [self.locationManager setReGeocodeTimeout:DefaultReGeocodeTimeout];
+    
+    [self startReGeocode];
+}
+
+- (void)startReGeocode {
+    //进行单次带逆地理定位请求
+    [self.locationManager requestLocationWithReGeocode:YES completionBlock:self.completionBlock];
+}
+
+- (void)initReGecodeLocationCompleteBlock
+{
+    __weak KTVMainController *weakSelf = self;
+    self.completionBlock = ^(CLLocation *location, AMapLocationReGeocode *regeocode, NSError *error)
+    {
+        if (error != nil && error.code == AMapLocationErrorLocateFailed)
+        {
+            //定位错误：此时location和regeocode没有返回值，不进行annotation的添加
+            NSLog(@"定位错误:{%ld - %@};", (long)error.code, error.localizedDescription);
+            return;
+        }
+        else if (error != nil
+                 && (error.code == AMapLocationErrorReGeocodeFailed
+                     || error.code == AMapLocationErrorTimeOut
+                     || error.code == AMapLocationErrorCannotFindHost
+                     || error.code == AMapLocationErrorBadURL
+                     || error.code == AMapLocationErrorNotConnectedToInternet
+                     || error.code == AMapLocationErrorCannotConnectToHost))
+        {
+            //逆地理错误：在带逆地理的单次定位中，逆地理过程可能发生错误，此时location有返回值，regeocode无返回值，进行annotation的添加
+            NSLog(@"逆地理错误:{%ld - %@};", (long)error.code, error.localizedDescription);
+        }
+        else if (error != nil && error.code == AMapLocationErrorRiskOfFakeLocation)
+        {
+            //存在虚拟定位的风险：此时location和regeocode没有返回值，不进行annotation的添加
+            NSLog(@"存在虚拟定位的风险:{%ld - %@};", (long)error.code, error.localizedDescription);
+            return;
+        }
+        else
+        {
+            //没有错误：location有返回值，regeocode是否有返回值取决于是否进行逆地理操作，进行annotation的添加
+        }
+        
+        //修改label显示内容
+        if (regeocode) {
+            //            [weakSelf.locationBtn setText:[NSString stringWithFormat:@"%@ \n %@-%@-%.2fm", regeocode.formattedAddress,regeocode.citycode, regeocode.adcode, location.horizontalAccuracy]];
+            [weakSelf.locationBtn setTitle:[NSString stringWithFormat:@"%@", regeocode.city] forState:UIControlStateNormal];
+        } else {
+            NSString *latitude = @(location.coordinate.latitude).stringValue;
+            NSString *longitude = @(location.coordinate.longitude).stringValue;
+            //            [weakSelf.displayLabel setText:[NSString stringWithFormat:@"lat:%f;lon:%f \n accuracy:%.2fm", location.coordinate.latitude, location.coordinate.longitude, location.horizontalAccuracy]];
+        }
+    };
 }
 
 @end

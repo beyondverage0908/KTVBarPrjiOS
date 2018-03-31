@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "KTVWarmerOrder.h"
 
 @interface KTVInvitationAcceptCell : UITableViewCell
 
-@property (nonatomic, strong) KTVUser * user;
+@property (nonatomic, strong) KTVWarmerOrder *warmerOrder;
 
 @end

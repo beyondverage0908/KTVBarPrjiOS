@@ -128,7 +128,7 @@
         return;
     }
     NSDictionary *payParams = @{@"channel" : channel,
-                                @"amount" : @"1",
+                                @"amount" : @"2",
                                 @"subject" : @"aaaa",
                                 @"body" : @"bbbb",
                                 @"orderNo" : orderNo};
@@ -143,13 +143,7 @@
         if ([channel isEqualToString:@"alipay"]) {
             [KTVPayManager ktvPay:AlipayType payment:charge contoller:nil completion:^(NSString *result) {
                 if ([result isEqualToString:@"success"]) {
-                    // 支付成功
-                    KTVPaySuccessController *vc = (KTVPaySuccessController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVPaySuccessController"];
-                    vc.payedMoney = [self getOrderAllMoney];
-                    vc.store = self.store;
-                    vc.payType = self.payType;
-                    vc.isHiddenActivity = self.isHiddenActivity;
-                    [self.navigationController pushViewController:vc animated:YES];
+                    [self paySuccessWithPayType:self.payType andParentOrderNo:orderNo];
                 } else {
                     // 支付失败或取消
                     [KTVToast toast:TOAST_PAY_FAIL];
@@ -159,9 +153,7 @@
             [KTVPayManager ktvPay:WeChatType payment:charge contoller:nil completion:^(NSString *result) {
                 if ([result isEqualToString:@"success"]) {
                     // 支付成功
-                    KTVPaySuccessController *vc = (KTVPaySuccessController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVPaySuccessController"];
-                    vc.payedMoney = [self getOrderAllMoney];
-                    [self.navigationController pushViewController:vc animated:YES];
+                    [self paySuccessWithPayType:self.payType andParentOrderNo:orderNo];
                 } else {
                     // 支付失败或取消
                     [KTVToast toast:TOAST_PAY_FAIL];
@@ -171,9 +163,7 @@
             [KTVPayManager ktvPay:UnionPayType payment:charge contoller:nil completion:^(NSString *result) {
                 if ([result isEqualToString:@"success"]) {
                     // 支付成功
-                    KTVPaySuccessController *vc = (KTVPaySuccessController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVPaySuccessController"];
-                    vc.payedMoney = [self getOrderAllMoney];
-                    [self.navigationController pushViewController:vc animated:YES];
+                    [self paySuccessWithPayType:self.payType andParentOrderNo:orderNo];
                 } else {
                     // 支付失败或取消
                     [KTVToast toast:TOAST_PAY_FAIL];
@@ -183,7 +173,18 @@
     }];
 }
 
-// 创建订单
+- (void)paySuccessWithPayType:(NSInteger)paytype andParentOrderNo:(NSString *)parentOrderNo {
+    // 支付成功
+    KTVPaySuccessController *vc = (KTVPaySuccessController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVPaySuccessController"];
+    vc.payedMoney = [self getOrderAllMoney];
+    vc.store = self.store;
+    vc.payType = self.payType;
+    vc.isHiddenActivity = self.isHiddenActivity;
+    vc.parentOrderNum = parentOrderNo;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+// 创建基础订单
 - (void)networkCreateOrder:(void (^)(NSDictionary *success))createSuccessBlock {
     NSString *channel = [self getPayChannel];
     if (!channel) {

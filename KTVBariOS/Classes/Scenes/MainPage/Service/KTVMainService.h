@@ -143,4 +143,19 @@ typedef void(^ResponseSuccess)(NSDictionary *result);
 
 /// 附近的暖场人
 + (void)postNearWarmerUser:(NSDictionary *)params result:(ResponseSuccess)responseResult;
+
+/// 更新用户channelid
++ (void)postUpdateBPushChannel:(NSDictionary *)params result:(ResponseSuccess)responseResult;
+
+/// 获取兼职暖场人的订单
++ (void)postWarmerUserOrder:(NSDictionary *)params result:(ResponseSuccess)responseResult;
+
+/// 设置兼职暖场人接受和拒绝
++ (void)postUpdateRejectRecordOrder:(NSDictionary *)params result:(ResponseSuccess)responseResult;
+
+/// 查询兼职暖场人的拒绝和接受订单
++ (void)postQueryRejectRecordOrderUrl:(NSDictionary *)params result:(ResponseSuccess)responseResult;
+
+/// 创建暖场人订单
++ (void)postCreateWarmerOrder:(NSDictionary *)params result:(ResponseSuccess)responseResult;
 @end

@@ -8,10 +8,14 @@
 
 #import "KTVUrl.h"
 
+// cer: com.weixinzhifu.jiuba
+// cer: com.vhs.gongyuntong
+
 @implementation KTVUrl
 
 + (NSString *)getDomainUrl {
     return @"http://119.23.148.104";
+//    return @"http://humdeef.imwork.net";
 }
 
 #pragma mark - 用户
@@ -138,7 +142,7 @@
     return @"/api/login/user/logout";
 }
 
-#pragma mark --
+#pragma mark -- 支付 订单
 
 + (NSString *)getPingPayUrl {
     return @"/api/pay";
@@ -206,6 +210,10 @@
 
 + (NSString *)getLocalOrderUrl {
     return @"/api/userInvite/store";
+}
+
++ (NSString *)getCreateWarmerOrderUrl {
+    return @"/api/order/createWarmerOrder";
 }
 
 #pragma mark - 评论
@@ -304,6 +312,27 @@
 /// 修改暖场人兼职的时间
 + (NSString *)getUpdateWarmerTimeUrl {
     return @"/api/warmerUser/update";
+}
+
+/// 获取兼职暖场人的订单
++ (NSString *)getWarmerUserOrderUrl {
+    return @"/api/warmerUser/warmerUserOrder";
+}
+
+/// 兼职暖场人接受和是拒绝
++ (NSString *)getUpdateRejectRecordOrderUrl {
+    return @"/api/warmerUser/updateRejectRecordOrder";
+}
+
+/// 查询兼职暖场人的拒绝和接受订单
++ (NSString *)getQueryRejectRecordOrderUrl {
+    return @"/api/warmerUser/queryRejectRecordOrder";
+}
+
+#pragma mark - 百度推送，上传channelid
+
++ (NSString *)getUpdateBPushChannelIdUrl {
+    return @"/api/push/updateChannelId";
 }
 
 @end

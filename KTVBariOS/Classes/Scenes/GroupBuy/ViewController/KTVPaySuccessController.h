@@ -15,5 +15,6 @@
 @property (nonatomic, strong) NSString *payedMoney;
 @property (nonatomic, assign) NSInteger payType; // 支付方式
 @property (nonatomic, assign) BOOL isHiddenActivity; // 是否隐藏本次活动
+@property (nonatomic, strong) NSString *parentOrderNum; // 父订单 - 表示团购，或者套餐的订单
 
 @end

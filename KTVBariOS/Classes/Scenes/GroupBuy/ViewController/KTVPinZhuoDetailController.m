@@ -56,7 +56,6 @@
 
 /// 获取拼桌详情
 - (void)loadShareTableDetail {
-    self.phone = self.phone ? self.phone : @"18516133629";
     [KTVMainService getShareTableDetail:self.phone result:^(NSDictionary *result) {
         if ([result[@"code"] isEqualToString:ktvCode]) {
             for (NSDictionary *dict in result[@"data"]) {
@@ -72,7 +71,6 @@
 
 // 获取用户信息
 - (void)loadPinZhuoUserInfo {
-    self.phone = self.phone ? self.phone : @"18516133629";
     [KTVLoginService getUserInfo:self.phone result:^(NSDictionary *result) {
         if (![result[@"code"] isEqualToString:ktvCode]) {
             return;

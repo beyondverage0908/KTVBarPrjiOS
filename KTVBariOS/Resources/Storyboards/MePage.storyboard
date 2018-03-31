@@ -3482,7 +3482,12 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="acceptBtn" destination="RJh-We-pdA" id="dlx-GV-mFi"/>
+                                            <outlet property="leftTime" destination="1Cg-B5-ULB" id="RdJ-ZR-K1b"/>
+                                            <outlet property="location" destination="ahq-e7-r7h" id="f1j-H1-gEp"/>
+                                            <outlet property="price" destination="whf-96-eDt" id="l0Z-wx-4C5"/>
                                             <outlet property="refuseBtn" destination="Vhc-qn-cXE" id="fX8-oJ-Cj1"/>
+                                            <outlet property="storeName" destination="yPD-p8-Yce" id="lje-mL-hoM"/>
+                                            <outlet property="time" destination="qKi-2P-7lh" id="R3D-qs-xEP"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="KTVInvitationAcceptCell" rowHeight="136" id="0sj-st-qRX" customClass="KTVInvitationAcceptCell">
@@ -3564,6 +3569,12 @@
                                                 <constraint firstItem="vnU-cX-X21" firstAttribute="top" secondItem="y4F-Zk-RfI" secondAttribute="top" id="sfJ-OL-uU2"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="location" destination="IqB-vi-wPu" id="Ylb-lA-Cqc"/>
+                                            <outlet property="price" destination="aX7-BV-hD8" id="SQ6-U4-5AE"/>
+                                            <outlet property="storeName" destination="QEI-Bl-gBc" id="X2T-yC-d9S"/>
+                                            <outlet property="time" destination="4ZG-ax-zTj" id="caZ-ho-LR2"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>

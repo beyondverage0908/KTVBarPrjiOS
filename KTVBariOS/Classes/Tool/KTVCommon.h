@@ -29,5 +29,8 @@
 + (void)saveUserLocation:(NSString *)locationString;
 /// 返回经纬度数组，纬度为第一个元素，经度为第二个元素，获取不到则为nil
 + (KTVAddress *)getUserLocation;
+/// 保存channel id
++ (void)saveChannelId:(NSString *)channelId;
++ (NSString *)channelId;
 
 @end

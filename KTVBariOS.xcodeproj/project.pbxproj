@@ -194,6 +194,9 @@
 		33A352211F7E51E30095B138 /* KTVRongCloudManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 33A352201F7E51E30095B138 /* KTVRongCloudManager.m */; };
 		33A74CAD1F331EC100D32F14 /* KTVShareSDKManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 33A74CAC1F331EC100D32F14 /* KTVShareSDKManager.m */; };
 		33A74CB11F331EEE00D32F14 /* KTVGaodeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 33A74CB01F331EEE00D32F14 /* KTVGaodeManager.m */; };
+		33ADD459204575B700D20687 /* libBPush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33ADD456204575B700D20687 /* libBPush.a */; };
+		33ADD45A204575B700D20687 /* BPushCerResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 33ADD457204575B700D20687 /* BPushCerResource.bundle */; };
+		33ADD45B204575B700D20687 /* test.caf in Resources */ = {isa = PBXBuildFile; fileRef = 33ADD458204575B700D20687 /* test.caf */; };
 		33AEAC3B1F5E7D05000003AE /* KTVUserPhotoCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33AEAC3A1F5E7D05000003AE /* KTVUserPhotoCollectionCell.m */; };
 		33AEAC3E1F5E9E28000003AE /* KTVCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 33AEAC3D1F5E9E28000003AE /* KTVCommon.m */; };
 		33AEAC421F5E9FC1000003AE /* KTVUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 33AEAC411F5E9FC1000003AE /* KTVUser.m */; };
@@ -215,6 +218,7 @@
 		33C483B51F6A860F00004FF6 /* KTVPicture.m in Sources */ = {isa = PBXBuildFile; fileRef = 33C483B41F6A860F00004FF6 /* KTVPicture.m */; };
 		33C483B81F6A86E800004FF6 /* KTVGroupbuy.m in Sources */ = {isa = PBXBuildFile; fileRef = 33C483B71F6A86E800004FF6 /* KTVGroupbuy.m */; };
 		33C4B74E1F3B46190080F54D /* KTVBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33C4B74D1F3B46190080F54D /* KTVBarController.m */; };
+		33C528A92056BA95006A4DD1 /* KTVWarmerOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = 33C528A82056BA95006A4DD1 /* KTVWarmerOrder.m */; };
 		33C850B61F44885F00F947B8 /* KTVIntroduceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33C850B51F44885F00F947B8 /* KTVIntroduceCell.m */; };
 		33C850B91F4488AF00F947B8 /* KTVPackageDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33C850B81F4488AF00F947B8 /* KTVPackageDetailCell.m */; };
 		33C850BC1F4488F500F947B8 /* KTVYuePaoUserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33C850BB1F4488F500F947B8 /* KTVYuePaoUserCell.m */; };
@@ -614,6 +618,10 @@
 		33A74CAF1F331EEE00D32F14 /* KTVGaodeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVGaodeManager.h; sourceTree = "<group>"; };
 		33A74CB01F331EEE00D32F14 /* KTVGaodeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVGaodeManager.m; sourceTree = "<group>"; };
 		33AB46CD1FA21D5800DD2766 /* Remark.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Remark.md; sourceTree = "<group>"; };
+		33ADD455204575B700D20687 /* BPush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPush.h; sourceTree = "<group>"; };
+		33ADD456204575B700D20687 /* libBPush.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBPush.a; sourceTree = "<group>"; };
+		33ADD457204575B700D20687 /* BPushCerResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = BPushCerResource.bundle; sourceTree = "<group>"; };
+		33ADD458204575B700D20687 /* test.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = test.caf; sourceTree = "<group>"; };
 		33AEAC391F5E7D05000003AE /* KTVUserPhotoCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVUserPhotoCollectionCell.h; sourceTree = "<group>"; };
 		33AEAC3A1F5E7D05000003AE /* KTVUserPhotoCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVUserPhotoCollectionCell.m; sourceTree = "<group>"; };
 		33AEAC3C1F5E9E28000003AE /* KTVCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVCommon.h; sourceTree = "<group>"; };
@@ -654,6 +662,8 @@
 		33C483B71F6A86E800004FF6 /* KTVGroupbuy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVGroupbuy.m; sourceTree = "<group>"; };
 		33C4B74C1F3B46190080F54D /* KTVBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVBarController.h; sourceTree = "<group>"; };
 		33C4B74D1F3B46190080F54D /* KTVBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVBarController.m; sourceTree = "<group>"; };
+		33C528A72056BA95006A4DD1 /* KTVWarmerOrder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KTVWarmerOrder.h; sourceTree = "<group>"; };
+		33C528A82056BA95006A4DD1 /* KTVWarmerOrder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KTVWarmerOrder.m; sourceTree = "<group>"; };
 		33C850B41F44885F00F947B8 /* KTVIntroduceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVIntroduceCell.h; sourceTree = "<group>"; };
 		33C850B51F44885F00F947B8 /* KTVIntroduceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVIntroduceCell.m; sourceTree = "<group>"; };
 		33C850B71F4488AF00F947B8 /* KTVPackageDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVPackageDetailCell.h; sourceTree = "<group>"; };
@@ -759,6 +769,7 @@
 				33DC057D1F26E07700AEB5C4 /* libz.tbd in Frameworks */,
 				33A3520F1F7E4FEC0095B138 /* libxml2.tbd in Frameworks */,
 				33DC057F1F26E08400AEB5C4 /* libstdc++.tbd in Frameworks */,
+				33ADD459204575B700D20687 /* libBPush.a in Frameworks */,
 				33DC05851F26E0A500AEB5C4 /* libsqlite3.tbd in Frameworks */,
 				33A3520D1F7E4FC30095B138 /* libc++abi.tbd in Frameworks */,
 				33A3520B1F7E4FB80095B138 /* libc++.tbd in Frameworks */,
@@ -1595,6 +1606,26 @@
 			path = File;
 			sourceTree = "<group>";
 		};
+		33ADD453204575B700D20687 /* BPush */ = {
+			isa = PBXGroup;
+			children = (
+				33ADD454204575B700D20687 /* normalversion */,
+			);
+			name = BPush;
+			path = KTVBariOS/Classes/BPush;
+			sourceTree = SOURCE_ROOT;
+		};
+		33ADD454204575B700D20687 /* normalversion */ = {
+			isa = PBXGroup;
+			children = (
+				33ADD455204575B700D20687 /* BPush.h */,
+				33ADD456204575B700D20687 /* libBPush.a */,
+				33ADD457204575B700D20687 /* BPushCerResource.bundle */,
+				33ADD458204575B700D20687 /* test.caf */,
+			);
+			path = normalversion;
+			sourceTree = "<group>";
+		};
 		33AEAC3F1F5E9FA3000003AE /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -1681,6 +1712,8 @@
 		33C305441F486BCE0064ECF8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				33C528A72056BA95006A4DD1 /* KTVWarmerOrder.h */,
+				33C528A82056BA95006A4DD1 /* KTVWarmerOrder.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1878,6 +1911,7 @@
 		33DC05431F26DFC400AEB5C4 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				33ADD453204575B700D20687 /* BPush */,
 				3393DF9F1FB33F6200E0D059 /* Pgyer */,
 				33D776EA1F301D9600077BE5 /* PageControl */,
 				33D776D31F30109400077BE5 /* SDCycleScrollView */,
@@ -2010,7 +2044,7 @@
 				TargetAttributes = {
 					332A63C41F03B14D007EF65F = {
 						CreatedOnToolsVersion = 8.3.1;
-						DevelopmentTeam = HFH9E69Y5K;
+						DevelopmentTeam = C76485U944;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -2060,6 +2094,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				33ADD45B204575B700D20687 /* test.caf in Resources */,
 				334E53301F15FA9800D83901 /* MainPage.storyboard in Resources */,
 				33C0B0DF201C7086004A18DD /* KTVChooseParttimeView.xib in Resources */,
 				3343E5001F28DAC800752AC5 /* ShareSDKUI.bundle in Resources */,
@@ -2079,6 +2114,7 @@
 				33D776DB1F30109400077BE5 /* placeholder@2x.png in Resources */,
 				330A938F1F03EE47001B320A /* Main.storyboard in Resources */,
 				33F3744B1F5D8189000A5EAC /* KTVAddYaoYueView.xib in Resources */,
+				33ADD45A204575B700D20687 /* BPushCerResource.bundle in Resources */,
 				3343E50B1F28DAC800752AC5 /* ShareSDK.bundle in Resources */,
 				33C0B0E1201CB90B004A18DD /* ApplyWarmerView.xib in Resources */,
 				334E53341F15FACF00D83901 /* DatingFriend.storyboard in Resources */,
@@ -2322,6 +2358,7 @@
 				335E103E1F8F635700EA9692 /* KTVPinZhuoDetail.m in Sources */,
 				338D23761F41E194000608B1 /* KTVPackageController.m in Sources */,
 				33982EC61F32FD6A005FD363 /* KTVGuessLikeCell.m in Sources */,
+				33C528A92056BA95006A4DD1 /* KTVWarmerOrder.m in Sources */,
 				3316848C1F5C2CE2002C2AD2 /* KTVStoreViewController.m in Sources */,
 				331CC3BF1FC1BBB20070B7A0 /* KTVMediaCell.m in Sources */,
 				33E446E51F6157C000D792A3 /* KTVMineFriendController.m in Sources */,
@@ -2490,7 +2527,7 @@
 				CODE_SIGN_ENTITLEMENTS = KTVBariOS/KTVBariOS.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = C76485U944;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/KTVBariOS/Classes/ThirdParty/ShareSDK/Required",
@@ -2509,8 +2546,9 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/KTVBariOS/Classes/ThirdParty/ShareSDK/ShareSDK/Support/PlatformSDK/SinaWeiboSDK",
 					"$(PROJECT_DIR)/KTVBariOS/Classes/ThirdParty/ShareSDK/ShareSDK/Support/PlatformSDK/WeChatSDK",
+					"$(PROJECT_DIR)/KTVBariOS/Classes/BPush/normalversion",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.weixinzhifu.jiuba;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vhs.gongyuntong;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2527,7 +2565,7 @@
 				CODE_SIGN_ENTITLEMENTS = KTVBariOS/KTVBariOS.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = C76485U944;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/KTVBariOS/Classes/ThirdParty/ShareSDK/Required",
@@ -2546,8 +2584,9 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/KTVBariOS/Classes/ThirdParty/ShareSDK/ShareSDK/Support/PlatformSDK/SinaWeiboSDK",
 					"$(PROJECT_DIR)/KTVBariOS/Classes/ThirdParty/ShareSDK/ShareSDK/Support/PlatformSDK/WeChatSDK",
+					"$(PROJECT_DIR)/KTVBariOS/Classes/BPush/normalversion",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.weixinzhifu.jiuba;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vhs.gongyuntong;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";

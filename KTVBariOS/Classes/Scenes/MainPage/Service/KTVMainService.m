@@ -637,4 +637,79 @@
     }];
 }
 
+/// 更新用户channelid
++ (void)postUpdateBPushChannel:(NSDictionary *)params result:(ResponseSuccess)responseResult {
+    KTVRequestMessage *msg = [[KTVRequestMessage alloc] init];
+    msg.path = [KTVUrl getUpdateBPushChannelIdUrl];
+    msg.httpType = KtvPOST;
+    msg.params = params;
+    
+    [[KTVNetworkHelper sharedInstance] send:msg success:^(NSDictionary *result) {
+        // 数据接口解析
+        responseResult(result);
+    } fail:^(NSError *error) {
+        CLog(@"--->>>%@", error);
+    }];
+}
+
+/// 获取兼职暖场人的订单
++ (void)postWarmerUserOrder:(NSDictionary *)params result:(ResponseSuccess)responseResult {
+    KTVRequestMessage *msg = [[KTVRequestMessage alloc] init];
+    msg.path = [KTVUrl getWarmerUserOrderUrl];
+    msg.httpType = KtvPOST;
+    msg.params = params;
+    
+    [[KTVNetworkHelper sharedInstance] send:msg success:^(NSDictionary *result) {
+        // 数据接口解析
+        responseResult(result);
+    } fail:^(NSError *error) {
+        CLog(@"--->>>%@", error);
+    }];
+}
+
+/// 设置兼职暖场人接受和拒绝
++ (void)postUpdateRejectRecordOrder:(NSDictionary *)params result:(ResponseSuccess)responseResult {
+    KTVRequestMessage *msg = [[KTVRequestMessage alloc] init];
+    msg.path = [KTVUrl getUpdateRejectRecordOrderUrl];
+    msg.httpType = KtvPOST;
+    msg.params = params;
+    
+    [[KTVNetworkHelper sharedInstance] send:msg success:^(NSDictionary *result) {
+        // 数据接口解析
+        responseResult(result);
+    } fail:^(NSError *error) {
+        CLog(@"--->>>%@", error);
+    }];
+}
+
+/// 查询兼职暖场人的拒绝和接受订单
++ (void)postQueryRejectRecordOrderUrl:(NSDictionary *)params result:(ResponseSuccess)responseResult {
+    KTVRequestMessage *msg = [[KTVRequestMessage alloc] init];
+    msg.path = [KTVUrl getUpdateRejectRecordOrderUrl];
+    msg.httpType = KtvPOST;
+    msg.params = params;
+    
+    [[KTVNetworkHelper sharedInstance] send:msg success:^(NSDictionary *result) {
+        // 数据接口解析
+        responseResult(result);
+    } fail:^(NSError *error) {
+        CLog(@"--->>>%@", error);
+    }];
+}
+
+/// 创建暖场人订单
++ (void)postCreateWarmerOrder:(NSDictionary *)params result:(ResponseSuccess)responseResult {
+    KTVRequestMessage *msg = [[KTVRequestMessage alloc] init];
+    msg.path = [KTVUrl getCreateWarmerOrderUrl];
+    msg.httpType = KtvPOST;
+    msg.params = params;
+    
+    [[KTVNetworkHelper sharedInstance] send:msg success:^(NSDictionary *result) {
+        // 数据接口解析
+        responseResult(result);
+    } fail:^(NSError *error) {
+        CLog(@"--->>>%@", error);
+    }];
+}
+
 @end

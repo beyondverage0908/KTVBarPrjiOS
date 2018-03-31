@@ -10,6 +10,7 @@
 #import "KTVConversationController.h"
 #import "KTVLoginGuideController.h"
 #import "KTVAlertController.h"
+#import "KTVAddFriendController.h"
 
 @interface KTVChatSessionController ()
 
@@ -32,6 +33,7 @@
         self.conversationListTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
     
+    [self customeNavigationBar];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -46,6 +48,21 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+#pragma mark - 自定义导航栏
+
+- (void)customeNavigationBar {
+    UIBarButtonItem *rightBarItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"add_friend_sign"] style:UIBarButtonItemStylePlain target:self action:@selector(addFriendAction)];
+    [rightBarItem setTintColor:[UIColor ktvRed]];
+    [self.navigationItem setRightBarButtonItem:rightBarItem];
+    
+}
+
+- (void)addFriendAction {
+    // 添加好友
+    KTVAddFriendController *vc = (KTVAddFriendController *)[UIViewController storyboardName:@"MePage" storyboardId:@"KTVAddFriendController"];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - 会话列表选中聊天代理

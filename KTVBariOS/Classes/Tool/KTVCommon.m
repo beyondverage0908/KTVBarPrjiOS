@@ -77,4 +77,18 @@
     return address;
 }
 
++ (void)saveChannelId:(NSString *)channelId {
+    if (channelId) {
+        [KTVUtil setObject:channelId forKey:@"ktv_bpush_channelid"];
+    }
+}
+
++ (NSString *)channelId {
+    NSString *channelId = [KTVUtil objectForKey:@"ktv_bpush_channelid"];
+    if (!channelId) {
+        channelId = @"";
+    }
+    return channelId;
+}
+
 @end

@@ -76,7 +76,8 @@ static NSInteger RowCount = 3;
     [params setObject:self.store.storeId forKey:@"storeId"];
     [params setObject:@"" forKey:@"warmerName"];
     [params setObject:@1000 forKey:@"distance"];
-    [params setObject:@"0" forKey:@"sex"];
+    [params setObject:@"" forKey:@"sex"];
+    [params setObject:@"" forKey:@"warmerUserType"];
     
     NSMutableArray *fixedActivitorList  = [NSMutableArray arrayWithCapacity:30];
     NSMutableArray *longtimeActivitorList  = [NSMutableArray arrayWithCapacity:30];
