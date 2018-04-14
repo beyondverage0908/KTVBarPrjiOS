@@ -50,8 +50,16 @@
     }
     [self.orderUploadDictionary setObject:@(0) forKey:@"userHide"];
     // 订单时间
-    NSString *currentDate = [NSDate dateStringWithDate:[NSDate date] andFormatString:@"yyyy-MM-dd HH:mm:ss"];
+    NSString *currentDate = [NSDate dateStringWithDate:[NSDate date] andFormatString:@"yyyy-MM-dd HH:mm"];
     [self.orderUploadDictionary setObject:currentDate forKey:@"startDate"];
+    
+    // 订单结束时间
+    NSCalendar *calendar = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
+    NSDateComponents *components = [calendar components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute fromDate:[NSDate date]];
+    components.minute = components.minute + 15;
+    NSDate *endDate = [calendar dateFromComponents:components];
+    NSString *endTime = [NSDate dateStringWithDate:endDate andFormatString:@"yyyy-MM-dd HH:mm"];
+    [self.orderUploadDictionary setObject:endTime forKey:@"endDate"];
     
     NSMutableArray *userOrderDetails = [NSMutableArray array];
     for (KTVUser *user in self.selectedActivitorList) {

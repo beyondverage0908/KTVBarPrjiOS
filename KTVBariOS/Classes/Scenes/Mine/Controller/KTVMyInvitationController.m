@@ -98,7 +98,6 @@
 
 - (void)queryWarmerUserOrder {
     NSString *phone = [KTVCommon userInfo].phone;
-    phone = @"18939865771";
     if (phone.length) {
         if (self.invitatingList.count) {
             [self.tableView reloadData];

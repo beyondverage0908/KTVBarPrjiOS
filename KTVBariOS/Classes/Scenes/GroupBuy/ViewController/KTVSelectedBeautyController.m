@@ -83,6 +83,7 @@ static NSInteger RowCount = 3;
     NSMutableArray *longtimeActivitorList  = [NSMutableArray arrayWithCapacity:30];
     NSMutableArray *parttimeActivitorList  = [NSMutableArray arrayWithCapacity:30];
     
+    @WeakObj(self);
     [KTVMainService postPayAfterWarmer:params result:^(NSDictionary *result) {
         if ([result[@"code"] isEqualToString:ktvCode]) {
             for (NSDictionary *warmerDic in result[@"data"]) {
@@ -98,7 +99,7 @@ static NSInteger RowCount = 3;
             
             // 已经选中的重新赋值
             for (KTVUser *fixedUser in fixedActivitorList) {
-                for (KTVUser *selectedUser in self.selectedActivitorList) {
+                for (KTVUser *selectedUser in weakself.selectedActivitorList) {
                     if (selectedUser.userType == fixedUser.userType && [selectedUser.userId isEqualToString:fixedUser.userId] && selectedUser.isSelected ) {
                         fixedUser.isSelected = YES;
                     }
@@ -106,7 +107,7 @@ static NSInteger RowCount = 3;
             }
             
             for (KTVUser *longtimeUser in longtimeActivitorList) {
-                for (KTVUser *selectedUser in self.selectedActivitorList) {
+                for (KTVUser *selectedUser in weakself.selectedActivitorList) {
                     if (selectedUser.userType == longtimeUser.userType && [selectedUser.userId isEqualToString:longtimeUser.userId] && selectedUser.isSelected ) {
                         longtimeUser.isSelected = YES;
                     }
@@ -114,7 +115,7 @@ static NSInteger RowCount = 3;
             }
             
             for (KTVUser *parttimeUser in parttimeActivitorList) {
-                for (KTVUser *selectedUser in self.selectedActivitorList) {
+                for (KTVUser *selectedUser in weakself.selectedActivitorList) {
                     if (selectedUser.userType == parttimeUser.userType && [selectedUser.userId isEqualToString:parttimeUser.userId] && selectedUser.isSelected ) {
                         parttimeUser.isSelected = YES;
                     }

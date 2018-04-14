@@ -7,13 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AMapFoundationKit/AMapFoundationKit.h>
+#import <AMapSearchKit/AMapSearchKit.h>
 #import "KTVWarmerOrder.h"
 
-@interface KTVInvitatingCell : UITableViewCell
+@interface KTVInvitatingCell : UITableViewCell<AMapSearchDelegate>
 
 @property (nonatomic, strong) KTVWarmerOrder *warmerOrder;
 
 @property (nonatomic, copy) void (^agreeCallback)(KTVWarmerOrder *warmerOrder);
 @property (nonatomic, copy) void (^denyCallback)(KTVWarmerOrder *warmerOrder);
+
+@property (nonatomic, strong) AMapSearchAPI *search;
+
+
 
 @end

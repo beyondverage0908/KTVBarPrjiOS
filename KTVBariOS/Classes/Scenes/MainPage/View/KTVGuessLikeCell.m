@@ -46,7 +46,7 @@
 // 下订单 - 订座
 - (IBAction)placeOrderAction:(UIButton *)sender {
     CLog(@"首页-猜你喜欢-下订单-订座");
-    [KTVUtil tellphone:@"18516133629"];
+    [KTVUtil tellphone:_storee.phone];
 }
 
 // 查看详情

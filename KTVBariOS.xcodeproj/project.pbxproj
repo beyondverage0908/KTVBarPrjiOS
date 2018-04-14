@@ -2044,7 +2044,7 @@
 				TargetAttributes = {
 					332A63C41F03B14D007EF65F = {
 						CreatedOnToolsVersion = 8.3.1;
-						DevelopmentTeam = C76485U944;
+						DevelopmentTeam = HFH9E69Y5K;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -2527,7 +2527,7 @@
 				CODE_SIGN_ENTITLEMENTS = KTVBariOS/KTVBariOS.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = C76485U944;
+				DEVELOPMENT_TEAM = HFH9E69Y5K;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/KTVBariOS/Classes/ThirdParty/ShareSDK/Required",
@@ -2548,7 +2548,7 @@
 					"$(PROJECT_DIR)/KTVBariOS/Classes/ThirdParty/ShareSDK/ShareSDK/Support/PlatformSDK/WeChatSDK",
 					"$(PROJECT_DIR)/KTVBariOS/Classes/BPush/normalversion",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.vhs.gongyuntong;
+				PRODUCT_BUNDLE_IDENTIFIER = com.weixinzhifu.jiuba;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2565,7 +2565,7 @@
 				CODE_SIGN_ENTITLEMENTS = KTVBariOS/KTVBariOS.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = C76485U944;
+				DEVELOPMENT_TEAM = HFH9E69Y5K;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/KTVBariOS/Classes/ThirdParty/ShareSDK/Required",
@@ -2586,7 +2586,7 @@
 					"$(PROJECT_DIR)/KTVBariOS/Classes/ThirdParty/ShareSDK/ShareSDK/Support/PlatformSDK/WeChatSDK",
 					"$(PROJECT_DIR)/KTVBariOS/Classes/BPush/normalversion",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.vhs.gongyuntong;
+				PRODUCT_BUNDLE_IDENTIFIER = com.weixinzhifu.jiuba;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
