@@ -47,6 +47,7 @@
 		331F916D1F581FD00065AE8D /* KTVPaySuccessController.m in Sources */ = {isa = PBXBuildFile; fileRef = 331F916C1F581FD00065AE8D /* KTVPaySuccessController.m */; };
 		331F91701F5853380065AE8D /* KTVStartYueController.m in Sources */ = {isa = PBXBuildFile; fileRef = 331F916F1F5853380065AE8D /* KTVStartYueController.m */; };
 		33216CFC1F4EB84500ECA24E /* KTVGroupBuyDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33216CFB1F4EB84500ECA24E /* KTVGroupBuyDetailController.m */; };
+		3322A66520A6CE8700EFF876 /* KTVBindPhoneController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3322A66420A6CE8700EFF876 /* KTVBindPhoneController.m */; };
 		3325D2481F1268EF0022AE9A /* KTVBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3325D2471F1268EF0022AE9A /* KTVBaseViewController.m */; };
 		3325D2501F1273350022AE9A /* UIColor+KTVExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3325D24F1F1273350022AE9A /* UIColor+KTVExtension.m */; };
 		3329B74D1F400C9400729FB6 /* KTVBarKtvReserveCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3329B74C1F400C9400729FB6 /* KTVBarKtvReserveCell.m */; };
@@ -107,6 +108,11 @@
 		335BDEED201DC6D7005E5F53 /* KTVApplyWarmerParttwoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 335BDEEC201DC6D7005E5F53 /* KTVApplyWarmerParttwoView.xib */; };
 		335BDEF0201DC8EF005E5F53 /* KTVWarmerApplyWaittingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 335BDEEF201DC8EF005E5F53 /* KTVWarmerApplyWaittingController.m */; };
 		335BDEF3201DCBC0005E5F53 /* KTVWarmerPayDepositController.m in Sources */ = {isa = PBXBuildFile; fileRef = 335BDEF2201DCBC0005E5F53 /* KTVWarmerPayDepositController.m */; };
+		335DCE3020B943C700E390B1 /* KTVMyMoneyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 335DCE2F20B943C700E390B1 /* KTVMyMoneyController.m */; };
+		335DCE3920B94FBC00E390B1 /* province_data.json in Resources */ = {isa = PBXBuildFile; fileRef = 335DCE3220B94FBC00E390B1 /* province_data.json */; };
+		335DCE3A20B94FBC00E390B1 /* JHPickView.m in Sources */ = {isa = PBXBuildFile; fileRef = 335DCE3320B94FBC00E390B1 /* JHPickView.m */; };
+		335DCE3B20B94FBC00E390B1 /* MySingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 335DCE3520B94FBC00E390B1 /* MySingleton.m */; };
+		335DCE3C20B94FBC00E390B1 /* CityModelData.m in Sources */ = {isa = PBXBuildFile; fileRef = 335DCE3720B94FBC00E390B1 /* CityModelData.m */; };
 		335E103E1F8F635700EA9692 /* KTVPinZhuoDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 335E103D1F8F635700EA9692 /* KTVPinZhuoDetail.m */; };
 		336135331FB6C889002A8A24 /* KTVStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 336135321FB6C889002A8A24 /* KTVStatusView.m */; };
 		336135361FB6C8E0002A8A24 /* KTVStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 336135351FB6C8E0002A8A24 /* KTVStatus.m */; };
@@ -364,6 +370,8 @@
 		331F916F1F5853380065AE8D /* KTVStartYueController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVStartYueController.m; sourceTree = "<group>"; };
 		33216CFA1F4EB84500ECA24E /* KTVGroupBuyDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVGroupBuyDetailController.h; sourceTree = "<group>"; };
 		33216CFB1F4EB84500ECA24E /* KTVGroupBuyDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVGroupBuyDetailController.m; sourceTree = "<group>"; };
+		3322A66320A6CE8700EFF876 /* KTVBindPhoneController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KTVBindPhoneController.h; sourceTree = "<group>"; };
+		3322A66420A6CE8700EFF876 /* KTVBindPhoneController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KTVBindPhoneController.m; sourceTree = "<group>"; };
 		3325D2461F1268EF0022AE9A /* KTVBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVBaseViewController.h; sourceTree = "<group>"; };
 		3325D2471F1268EF0022AE9A /* KTVBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVBaseViewController.m; sourceTree = "<group>"; };
 		3325D2491F1270310022AE9A /* KTVCommonDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVCommonDefine.h; sourceTree = "<group>"; };
@@ -469,6 +477,15 @@
 		335BDEEF201DC8EF005E5F53 /* KTVWarmerApplyWaittingController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KTVWarmerApplyWaittingController.m; sourceTree = "<group>"; };
 		335BDEF1201DCBC0005E5F53 /* KTVWarmerPayDepositController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KTVWarmerPayDepositController.h; sourceTree = "<group>"; };
 		335BDEF2201DCBC0005E5F53 /* KTVWarmerPayDepositController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KTVWarmerPayDepositController.m; sourceTree = "<group>"; };
+		335DCE2E20B943C700E390B1 /* KTVMyMoneyController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KTVMyMoneyController.h; sourceTree = "<group>"; };
+		335DCE2F20B943C700E390B1 /* KTVMyMoneyController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KTVMyMoneyController.m; sourceTree = "<group>"; };
+		335DCE3220B94FBC00E390B1 /* province_data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = province_data.json; sourceTree = "<group>"; };
+		335DCE3320B94FBC00E390B1 /* JHPickView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHPickView.m; sourceTree = "<group>"; };
+		335DCE3420B94FBC00E390B1 /* CityModelData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityModelData.h; sourceTree = "<group>"; };
+		335DCE3520B94FBC00E390B1 /* MySingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySingleton.m; sourceTree = "<group>"; };
+		335DCE3620B94FBC00E390B1 /* JHPickView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHPickView.h; sourceTree = "<group>"; };
+		335DCE3720B94FBC00E390B1 /* CityModelData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityModelData.m; sourceTree = "<group>"; };
+		335DCE3820B94FBC00E390B1 /* MySingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySingleton.h; sourceTree = "<group>"; };
 		335E103C1F8F635700EA9692 /* KTVPinZhuoDetail.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KTVPinZhuoDetail.h; sourceTree = "<group>"; };
 		335E103D1F8F635700EA9692 /* KTVPinZhuoDetail.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KTVPinZhuoDetail.m; sourceTree = "<group>"; };
 		336135311FB6C889002A8A24 /* KTVStatusView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KTVStatusView.h; sourceTree = "<group>"; };
@@ -1196,6 +1213,20 @@
 			path = Launch;
 			sourceTree = "<group>";
 		};
+		335DCE3120B94FBC00E390B1 /* JHPickView */ = {
+			isa = PBXGroup;
+			children = (
+				335DCE3220B94FBC00E390B1 /* province_data.json */,
+				335DCE3320B94FBC00E390B1 /* JHPickView.m */,
+				335DCE3420B94FBC00E390B1 /* CityModelData.h */,
+				335DCE3520B94FBC00E390B1 /* MySingleton.m */,
+				335DCE3620B94FBC00E390B1 /* JHPickView.h */,
+				335DCE3720B94FBC00E390B1 /* CityModelData.m */,
+				335DCE3820B94FBC00E390B1 /* MySingleton.h */,
+			);
+			path = JHPickView;
+			sourceTree = "<group>";
+		};
 		336A1FBB1F7F92360063F562 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
@@ -1533,6 +1564,8 @@
 				339D8AA21F1A048F00D41152 /* KTVRegisterController.m */,
 				33D0E5A21F1F6CE2009A45B3 /* KTVForgetPasswordController.h */,
 				33D0E5A31F1F6CE2009A45B3 /* KTVForgetPasswordController.m */,
+				3322A66320A6CE8700EFF876 /* KTVBindPhoneController.h */,
+				3322A66420A6CE8700EFF876 /* KTVBindPhoneController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1646,6 +1679,7 @@
 		33C0B0DA201C700D004A18DD /* Component */ = {
 			isa = PBXGroup;
 			children = (
+				335DCE3120B94FBC00E390B1 /* JHPickView */,
 				33C0B0DB201C7041004A18DD /* KTVChooseParttimeView.h */,
 				33C0B0DC201C7041004A18DD /* KTVChooseParttimeView.m */,
 				33C0B0DE201C7086004A18DD /* KTVChooseParttimeView.xib */,
@@ -1698,6 +1732,8 @@
 				335BDEEF201DC8EF005E5F53 /* KTVWarmerApplyWaittingController.m */,
 				335BDEF1201DCBC0005E5F53 /* KTVWarmerPayDepositController.h */,
 				335BDEF2201DCBC0005E5F53 /* KTVWarmerPayDepositController.m */,
+				335DCE2E20B943C700E390B1 /* KTVMyMoneyController.h */,
+				335DCE2F20B943C700E390B1 /* KTVMyMoneyController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2117,6 +2153,7 @@
 				33ADD45A204575B700D20687 /* BPushCerResource.bundle in Resources */,
 				3343E50B1F28DAC800752AC5 /* ShareSDK.bundle in Resources */,
 				33C0B0E1201CB90B004A18DD /* ApplyWarmerView.xib in Resources */,
+				335DCE3920B94FBC00E390B1 /* province_data.json in Resources */,
 				334E53341F15FACF00D83901 /* DatingFriend.storyboard in Resources */,
 				339AED501F52A92600473C29 /* KTVBuycarPickerView.xib in Resources */,
 				334E53361F15FADF00D83901 /* MePage.storyboard in Resources */,
@@ -2205,6 +2242,7 @@
 				33C39EFD1F8B980200FB2BCD /* KTVAddFriendController.m in Sources */,
 				331684951F5C3A3A002C2AD2 /* KTVPZUserHeaderCell.m in Sources */,
 				3316848F1F5C2D24002C2AD2 /* KTVStoreCell.m in Sources */,
+				335DCE3A20B94FBC00E390B1 /* JHPickView.m in Sources */,
 				33C0B0DD201C7041004A18DD /* KTVChooseParttimeView.m in Sources */,
 				33CD4B041F935B8500B82C4E /* KTVOrder.m in Sources */,
 				33982EC31F32FC5A005FD363 /* KTVBarEnterMenuCell.m in Sources */,
@@ -2242,6 +2280,7 @@
 				338069BE1F681B9700E4DB90 /* KTVStoreUseOrderController.m in Sources */,
 				3344325A201358FD00A312EC /* KTVPaySuccessShowCell.m in Sources */,
 				3305F74F1FC0675D002E4899 /* KTVVideo.m in Sources */,
+				335DCE3B20B94FBC00E390B1 /* MySingleton.m in Sources */,
 				3398565B1F3EE6560085BD1A /* KTVFilterView.m in Sources */,
 				33170BE51F5F9264003D6FA8 /* KTVBuyService.m in Sources */,
 				3342B2EB1F1862B400E47483 /* UIColor+KTVSkin.m in Sources */,
@@ -2301,6 +2340,8 @@
 				331F91671F580B010065AE8D /* KTVPayController.m in Sources */,
 				337779E91F3CA28400743B90 /* KTVPackageCell.m in Sources */,
 				33CD20C01F4F09F90090DBEE /* KTVPackageDetailCareCell.m in Sources */,
+				3322A66520A6CE8700EFF876 /* KTVBindPhoneController.m in Sources */,
+				335DCE3C20B94FBC00E390B1 /* CityModelData.m in Sources */,
 				33CB83551F3F7319002E6F3B /* KTVPositionFilterCell.m in Sources */,
 				332D9AFF1F6BA9EC00B6B622 /* KTVPackage.m in Sources */,
 				33C0B0EA201CD41E004A18DD /* KTVApplyWarmerPartTwoController.m in Sources */,
@@ -2348,6 +2389,7 @@
 				334A236E200A2FA400CADF2E /* KTVStoreCollectController.m in Sources */,
 				3377B6E61F4C1CF700B76B2C /* NSDate+Processing.m in Sources */,
 				33831F5F1FBB1FD800D00BFD /* KTVStarView.m in Sources */,
+				335DCE3020B943C700E390B1 /* KTVMyMoneyController.m in Sources */,
 				3308B1ED1F63C89E00012F9A /* KTVAddress.m in Sources */,
 				33D776F91F302F8300077BE5 /* KTVRequestMessage.m in Sources */,
 				339AED591F52B9D500473C29 /* KTVBuycarSummaryCell.m in Sources */,

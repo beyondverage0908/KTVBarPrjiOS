@@ -25,7 +25,9 @@
 #import "KTVSelectedBeautyController.h"
 #import <AMapLocationKit/AMapLocationKit.h>
 
-@interface KTVMainController ()<UITableViewDelegate, UITableViewDataSource, SDCycleScrollViewDelegate, AMapLocationManagerDelegate>
+#import "JHPickView.h"
+
+@interface KTVMainController ()<UITableViewDelegate, UITableViewDataSource, SDCycleScrollViewDelegate, AMapLocationManagerDelegate, JHPickerDelegate, UISearchBarDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIButton *locationBtn;
@@ -58,7 +60,7 @@
     self.tableView.backgroundColor = [UIColor ktvBG];
     self.tableView.tableFooterView = [[UIView alloc] init];
     
-    [self.locationBtn setTitle:@"合肥" forState:UIControlStateNormal];
+    self.searchBar.delegate = self;
     
     // 利用订单查询，获取是否为登陆状态
     //[self loadSearchOrderToJudgeLoginStatus];
@@ -73,6 +75,8 @@
     
     [self initReGecodeLocationCompleteBlock];
     [self configLocationManager];
+    
+    [self.locationBtn addTarget:self action:@selector(locationBtnAction:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -190,6 +194,14 @@
     } else if (btn.tag == 3) {
         CLog(@"--->> 附近活动");
     }
+}
+
+- (void)locationBtnAction:(UIButton *)btn {
+    UIView *keyWindow = [UIApplication sharedApplication].keyWindow;
+    JHPickView *areaPickView = [[JHPickView alloc] initWithFrame:keyWindow.bounds];
+    areaPickView.arrayType = AreaArray;
+    areaPickView.delegate = self;
+    [keyWindow addSubview:areaPickView];
 }
 
 #pragma mark - Section Header 封装方法
@@ -471,6 +483,24 @@
             //            [weakSelf.displayLabel setText:[NSString stringWithFormat:@"lat:%f;lon:%f \n accuracy:%.2fm", location.coordinate.latitude, location.coordinate.longitude, location.horizontalAccuracy]];
         }
     };
+}
+
+#pragma mark - J
+
+- (void)PickerSelectorIndixString:(NSString *)str {
+    NSArray *citys = [str componentsSeparatedByString:@" "];
+    NSString *address = citys[citys.count-1];
+    self.locationBtn.titleLabel.text = [NSString stringWithFormat:@"%@", address];
+}
+
+#pragma mark - UISearchBarDelegate
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    printf("%s", __FUNCTION__);
+}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    NSLog(@"%@", searchText);
 }
 
 @end

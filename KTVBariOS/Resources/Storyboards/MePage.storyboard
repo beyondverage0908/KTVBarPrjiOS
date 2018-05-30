@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="u5w-tN-bB4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="u5w-tN-bB4">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -968,7 +968,7 @@
                                             </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="注:隐藏本次活动，意味着别人在这次的酒吧活动中找不到你，也不能发起拼桌活动" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vwT-ze-302">
-                                            <rect key="frame" x="10" y="47" width="355" height="14.5"/>
+                                            <rect key="frame" x="10" y="47" width="355" height="29"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
@@ -3872,6 +3872,47 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ek4-Rw-TxV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="11285.6" y="-2006.4467766116943"/>
+        </scene>
+        <!--我的钱包-->
+        <scene sceneID="6Lh-jh-fcY">
+            <objects>
+                <viewController storyboardIdentifier="KTVMyMoneyController" title="我的钱包" id="KPp-2d-Vyy" customClass="KTVMyMoneyController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="UtE-zw-Mqw"/>
+                        <viewControllerLayoutGuide type="bottom" id="P1c-vX-8pt"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="6dR-yn-hRL">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的余额:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tcQ-vn-Vql">
+                                <rect key="frame" x="20" y="40" width="74" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0元" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xhj-nD-lQF">
+                                <rect key="frame" x="296" y="38.5" width="33" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.10196078431372549" green="0.090196078431372548" blue="0.12156862745098039" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="tcQ-vn-Vql" firstAttribute="top" secondItem="UtE-zw-Mqw" secondAttribute="bottom" constant="20" id="4Bu-oh-Hx8"/>
+                            <constraint firstItem="xhj-nD-lQF" firstAttribute="centerY" secondItem="tcQ-vn-Vql" secondAttribute="centerY" id="6bE-dF-awG"/>
+                            <constraint firstItem="tcQ-vn-Vql" firstAttribute="leading" secondItem="6dR-yn-hRL" secondAttribute="leading" constant="20" id="bkw-m6-2mQ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="xhj-nD-lQF" secondAttribute="trailing" constant="30" id="eR9-19-l2N"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="moneyLabel" destination="xhj-nD-lQF" id="yuI-xv-NyZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4vj-dx-b1s" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="11975" y="-2006"/>
         </scene>
     </scenes>
     <resources>

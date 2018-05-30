@@ -8,6 +8,10 @@
 
 #import "KTVLoginBaseController.h"
 #import "KTVShareSDKManager.h"
+#import "KTVLoginService.h"
+#import "KTVCommon.h"
+#import "KTVBindPhoneController.h"
+#import "MBProgressHUD+KTV.h"
 
 @interface KTVLoginBaseController ()
 
@@ -92,11 +96,63 @@
 - (void)thirdLoginAction:(UIButton *)btn {
     if (btn.tag == 1000) {
         CLog(@"-->>微信 login");
-        [KTVShareSDKManager thirdpartyLogin:KTVShareSDKWeChatLoginType];
+        [KTVShareSDKManager thirdpartyLogin:KTVShareSDKWeChatLoginType completeHandler:^(SSDKUser *user) {
+            if (user.uid) {
+                NSDictionary *param = @{@"wxId" : user.uid};
+                [MBProgressHUD showMessage:@"登录中..."];
+                [KTVLoginService postWechatLoginParams:param result:^(NSDictionary *result) {
+                    [MBProgressHUD hiddenHUD];
+                    if ([result[@"code"] integerValue] == 10009) {
+                        [KTVToast toast:@"请绑定手机信息"];
+                        KTVBindPhoneController *vc = [UIViewController storyboardName:@"Login" storyboardId:@"KTVBindPhoneController"];
+                        vc.gender = @(user.gender).stringValue;
+                        vc.uid = user.uid;
+                        vc.type = 1;
+                        [self.navigationController pushViewController:vc animated:YES];
+                    } else if ([result[@"code"] isEqualToString:ktvCode]) {
+                        [KTVToast toast:TOAST_LOGIN_SUCCESS];
+                        NSString *ktvToken = result[@"data"][@"token"];
+                        // 保存token
+                        [KTVUtil setObject:ktvToken forKey:@"ktvToken"];
+                        [KTVCommon setUserInfoKey:@"phone" infoValue:result[@"data"][@"phone"]];
+                        
+                        [self dismissCurrentController];
+                    }
+                }];
+            } else {
+                [KTVToast toast:@"登录失败，请重试"];
+            }
+        }];
     }
     else if (btn.tag == 1001) {
         CLog(@"-->>qq login");
-        [KTVShareSDKManager thirdpartyLogin:KTVShareSDKQQLoginType];
+        [KTVShareSDKManager thirdpartyLogin:KTVShareSDKQQLoginType completeHandler:^(SSDKUser *user) {
+            if (user.uid) {
+                NSDictionary *param = @{@"openId" : user.uid};
+                [MBProgressHUD showMessage:@"登录中..."];
+                [KTVLoginService postQQLoginParams:param result:^(NSDictionary *result) {
+                    [MBProgressHUD hiddenHUD];
+                    if ([result[@"code"] integerValue] == 10009) {
+                        [KTVToast toast:@"请绑定手机信息"];
+                        KTVBindPhoneController *vc = [UIViewController storyboardName:@"Login" storyboardId:@"KTVBindPhoneController"];
+                        vc.gender = @(user.gender).stringValue;
+                        vc.uid = user.uid;
+                        vc.type = 2;
+                        [self.navigationController pushViewController:vc animated:YES];
+                    } else if ([result[@"code"] isEqualToString:ktvCode]) {
+                        [KTVToast toast:TOAST_LOGIN_SUCCESS];
+                        NSString *ktvToken = result[@"data"][@"token"];
+                        // 保存token
+                        [KTVUtil setObject:ktvToken forKey:@"ktvToken"];
+                        [KTVCommon setUserInfoKey:@"phone" infoValue:result[@"data"][@"phone"]];
+                        
+                        [self dismissCurrentController];
+                    }
+                }];
+            } else {
+                [KTVToast toast:@"登录失败，请重试"];
+            }
+        }];
     }
     else if (btn.tag == 1002) {
         CLog(@"-->>sina login");
@@ -115,6 +171,12 @@
 
 - (void)fulldownKeyboard {
     [self.view endEditing:YES];
+}
+
+- (void)dismissCurrentController {
+    [self dismissViewControllerAnimated:YES completion:^{
+        [KtvNotiCenter postNotificationName:KNotLoginSuccess object:self];
+    }];
 }
 
 @end

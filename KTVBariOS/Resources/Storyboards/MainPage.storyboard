@@ -53,33 +53,24 @@
                                                 <rect key="frame" x="54" y="19" width="11" height="6"/>
                                             </imageView>
                                             <searchBar contentMode="redraw" placeholder="南昌五月花" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Jn-Ud-wKK">
-                                                <rect key="frame" x="75" y="0.0" width="225" height="44"/>
+                                                <rect key="frame" x="75" y="0.0" width="285" height="44"/>
                                                 <color key="barTintColor" red="0.10196078431372549" green="0.090196078431372548" blue="0.12156862745098039" alpha="1" colorSpace="calibratedRGB"/>
-                                                <textInputTraits key="textInputTraits" returnKeyType="search"/>
+                                                <textInputTraits key="textInputTraits" returnKeyType="search" enablesReturnKeyAutomatically="YES"/>
                                                 <scopeButtonTitles>
                                                     <string>Title</string>
                                                     <string>Title</string>
                                                 </scopeButtonTitles>
                                             </searchBar>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cFc-dT-Htf">
-                                                <rect key="frame" x="303" y="12" width="62" height="20"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                <state key="normal" title="  扫码" image="app_scan">
-                                                    <color key="titleColor" red="0.96470588239999999" green="0.2274509804" blue="0.50980392159999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                </state>
-                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.10196078431372549" green="0.090196078431372548" blue="0.12156862745098039" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstItem="cFc-dT-Htf" firstAttribute="centerY" secondItem="3Jt-fw-hJk" secondAttribute="centerY" id="609-IG-x9v"/>
-                                            <constraint firstAttribute="trailing" secondItem="cFc-dT-Htf" secondAttribute="trailing" constant="10" id="BII-2H-6eE"/>
                                             <constraint firstItem="1Jn-Ud-wKK" firstAttribute="centerY" secondItem="3Jt-fw-hJk" secondAttribute="centerY" id="BiL-DI-8re"/>
                                             <constraint firstItem="BJd-Ck-SH9" firstAttribute="leading" secondItem="HOu-qj-rIR" secondAttribute="trailing" constant="10" id="HQV-hi-EyV"/>
                                             <constraint firstItem="HOu-qj-rIR" firstAttribute="centerY" secondItem="3Jt-fw-hJk" secondAttribute="centerY" id="Iv3-lN-8eR"/>
                                             <constraint firstAttribute="bottom" secondItem="1Jn-Ud-wKK" secondAttribute="bottom" id="PPl-G3-x6B"/>
                                             <constraint firstItem="BJd-Ck-SH9" firstAttribute="centerY" secondItem="3Jt-fw-hJk" secondAttribute="centerY" id="Tmi-fF-keU"/>
+                                            <constraint firstAttribute="trailing" secondItem="1Jn-Ud-wKK" secondAttribute="trailing" constant="15" id="WzU-Xq-Ail"/>
                                             <constraint firstItem="HOu-qj-rIR" firstAttribute="leading" secondItem="3Jt-fw-hJk" secondAttribute="leading" constant="13" id="eEf-IU-Dmf"/>
-                                            <constraint firstItem="1Jn-Ud-wKK" firstAttribute="centerX" secondItem="3Jt-fw-hJk" secondAttribute="centerX" id="eRj-9E-1FH"/>
                                             <constraint firstItem="1Jn-Ud-wKK" firstAttribute="top" secondItem="3Jt-fw-hJk" secondAttribute="top" id="ghD-r6-v4M"/>
                                             <constraint firstAttribute="height" constant="44" id="oGk-6F-STL"/>
                                             <constraint firstItem="1Jn-Ud-wKK" firstAttribute="leading" secondItem="BJd-Ck-SH9" secondAttribute="trailing" constant="10" id="pj4-aF-dop"/>
@@ -407,7 +398,6 @@
                     <connections>
                         <outlet property="locationBtn" destination="HOu-qj-rIR" id="SSi-f8-31t"/>
                         <outlet property="locationImageView" destination="BJd-Ck-SH9" id="xd8-ve-5DZ"/>
-                        <outlet property="scanQRbtn" destination="cFc-dT-Htf" id="RsQ-G3-Oga"/>
                         <outlet property="searchBar" destination="1Jn-Ud-wKK" id="ILo-kK-Mp6"/>
                         <outlet property="tableView" destination="ieW-0N-uRv" id="TYI-Uo-dK2"/>
                     </connections>
@@ -5367,7 +5357,6 @@
         <image name="app_pingzhuo_find" width="69" height="45"/>
         <image name="app_radius_unselect" width="25" height="25"/>
         <image name="app_right_arrow_white" width="16" height="16"/>
-        <image name="app_scan" width="20" height="20"/>
         <image name="app_selected_kuang" width="17" height="17"/>
         <image name="app_shuru_input" width="275" height="45"/>
         <image name="app_turn_down" width="11" height="6"/>

@@ -126,7 +126,9 @@
                              @"orderStatus" : [NSNumber numberWithInteger:orderStatus],
                              @"pageSize": @100,
                              @"currentPage": @0};
+    [MBProgressHUD showMessage:@"获取订单中..."];
     [KTVMainService postSearchOrder:params result:^(NSDictionary *result) {
+        [MBProgressHUD hiddenHUD];
         if (![result[@"code"] isEqualToString:ktvCode]) {
             [KTVToast toast:TOAST_GET_ORDER_FAIL];
             return;

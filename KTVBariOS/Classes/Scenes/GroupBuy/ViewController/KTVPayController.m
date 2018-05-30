@@ -40,10 +40,14 @@
     }
     [self.orderUploadDictionary setObject:@(self.store.storeId.integerValue) forKey:@"storeId"];
     [self.orderUploadDictionary setObject:@(self.store.user.userId.integerValue) forKey:@"userId"];
+    if ([KTVCommon userInfo].userId) {
+        [self.orderUploadDictionary setObject:@([KTVCommon userInfo].userId.integerValue) forKey:@"userId"];
+    }
     // 1套餐，2酒吧位置价格 3包厢类型的价格 ,4暖场人，5 单点商品的价格如果是单点商品，会出现数量为2的情况），6普通邀约人（这个单价为0）7 团购 8 活动
     if (self.groupbuy) {
         [self.orderUploadDictionary setObject:@(7) forKey:@"orderType"];
     }
+
     // 套餐类型
     if (self.packageList && [self.packageList count]) {
         [self.orderUploadDictionary setObject:@(1) forKey:@"orderType"];

@@ -24,6 +24,15 @@
     [self setNavigationBarColor:[UIColor ktvBG]];
     [self setNavigationTitleColor:[UIColor whiteColor]];
     [self setNavigationBackButtonItem];
+    
+    UITapGestureRecognizer *endEditingTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(endEditingAction)];
+    [self.view addGestureRecognizer:endEditingTap];
+}
+
+#pragma mark - 事件
+
+- (void)endEditingAction {
+    [self.view endEditing:YES];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {

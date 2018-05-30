@@ -33,7 +33,7 @@ typedef enum : NSUInteger {
 
 + (void)shareSDKInitial;
 
-+ (void)thirdpartyLogin:(KTVShareSDKType)loginType;
++ (void)thirdpartyLogin:(KTVShareSDKType)loginType completeHandler:(void (^)(SSDKUser *))completeHandler;
     
 /**
  *  设置分享参数

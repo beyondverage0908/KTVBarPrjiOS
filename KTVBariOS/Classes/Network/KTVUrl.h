@@ -60,6 +60,9 @@
 /// 附近的人
 + (NSString *)getNearWarmerUserUrl;
 
+/// 获取用户的余额
++ (NSString *)getUserBalanceUrl;
+
 #pragma mark - 用户动态
 
 + (NSString *)getUserDynamicStatementUrl;
@@ -97,6 +100,9 @@
 
 /// 退出
 + (NSString *)getExitUrl;
+
+/// 更新第三方登录的电话
++ (NSString *)getUpdateThirdLoginUserUrl;
 
 #pragma mark - 支付
 

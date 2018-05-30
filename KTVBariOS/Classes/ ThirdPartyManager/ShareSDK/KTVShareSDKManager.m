@@ -9,7 +9,7 @@
 #import "KTVShareSDKManager.h"
 
 NSString * const WeChatAppId        = @"wx4a1101d07f5b4ba6";
-NSString * const WeChatAppSecret    = @"3e7da3ab49699f153ffef0d9e4bf4c9f";
+NSString * const WeChatAppSecret    = @"6ffad55052af669a51415f5fcfab8597";
 
 NSString * const QQAppId            = @"1106185387";
 NSString * const QQAppKey           = @"aeMOppOmRFRBt99U";
@@ -61,33 +61,44 @@ NSString * const QQAppKey           = @"aeMOppOmRFRBt99U";
                              }];
 }
 
-+ (void)thirdpartyLogin:(KTVShareSDKType)loginType {
++ (void)thirdpartyLogin:(KTVShareSDKType)loginType completeHandler:(void (^)(SSDKUser *rawData))completeHandler {
     switch (loginType) {
         case KTVShareSDKQQLoginType:
+        {
             [ShareSDK getUserInfo:SSDKPlatformTypeQQ onStateChanged:^(SSDKResponseState state, SSDKUser *user, NSError *error) {
                 if (state == SSDKResponseStateSuccess) {
                     NSLog(@"uid=%@",user.uid);
                     NSLog(@"%@",user.credential);
                     NSLog(@"token=%@",user.credential.token);
                     NSLog(@"nickname=%@",user.nickname);
+                    completeHandler(user);
                 } else {
                     NSLog(@"%@",error);
+                    completeHandler(user);
                 }
             }];
+        }
             break;
         case KTVShareSDKWeChatLoginType:
-            
+        {
+            __block SSDKUser *sduser = nil;
             [SSEThirdPartyLoginHelper loginByPlatform:SSDKPlatformTypeWechat onUserSync:^(SSDKUser *user, SSEUserAssociateHandler associateHandler) {
                 //在此回调中可以将社交平台用户信息与自身用户系统进行绑定，最后使用一个唯一用户标识来关联此用户信息。
                 //在此示例中没有跟用户系统关联，则使用一个社交用户对应一个系统用户的方式。将社交用户的uid作为关联ID传入associateHandler。
+                sduser = user;
                 associateHandler(user.uid, user, user);
                 NSLog(@"dd%@",user.rawData);
                 NSLog(@"dd%@",user.credential);
             } onLoginResult:^(SSDKResponseState state, SSEBaseUser *user, NSError *error) {
                 if (state == SSDKResponseStateSuccess) {
-                    
+                    if (user) {
+                        completeHandler(sduser);
+                    } else {
+                        completeHandler(nil);
+                    }
                 }
             }];
+        }
             break;
         case KTVShareSDKSinaType:
             

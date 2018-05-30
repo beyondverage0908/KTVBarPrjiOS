@@ -14,6 +14,6 @@
 
 - (void)countDownWithSeconds:(NSInteger)seconds description:(NSString *)des;
 
-- (void)countDownWithSeconds:(NSInteger)seconds description:(NSString *)des countEndBlock:(void (^)())downBlock;
+- (void)countDownWithSeconds:(NSInteger)seconds description:(NSString *)des countEndBlock:(void (^)(void))downBlock;
 
 @end

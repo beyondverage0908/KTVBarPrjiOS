@@ -712,4 +712,20 @@
     }];
 }
 
+/// 获取用户的余额
++ (void)getUserBalance:(NSString *)userId result:(ResponseSuccess)responseResult {
+    KTVRequestMessage *msg = [[KTVRequestMessage alloc] init];
+    msg.path = [KTVUrl getUserBalanceUrl];
+    msg.httpType = KtvGET;
+    msg.params = userId;
+    
+    [[KTVNetworkHelper sharedInstance] send:msg success:^(NSDictionary *result) {
+        // 数据接口解析
+        responseResult(result);
+    } fail:^(NSError *error) {
+        CLog(@"--->>>%@", error);
+    }];
+}
+
 @end
+

@@ -20,6 +20,7 @@
 #import "KTVStoreCollectController.h"
 #import "KTVMyInvitationController.h"
 #import "KTVApplyWarmerPartOneController.h"
+#import "KTVMyMoneyController.h"
 
 #import "KTVUserHeaderCell.h"
 #import "KTVUserInfoCell.h"
@@ -67,7 +68,7 @@
 
 - (void)setupData {
 //    self.userInfoArray = @[@"发起拼桌活动", @"暖场人邀约", @"发布动态", @"我的收藏", @"申请入驻成为商家", @"设置"];
-    self.userInfoArray = @[@"我的拼桌活动", @"暖场人邀约", @"发布动态", @"我的收藏", @"申请入驻成为商家", @"申请成为暖场人", @"设置"];
+    self.userInfoArray = @[@"我的钱包", @"我的拼桌活动", @"暖场人邀约", @"发布动态", @"我的收藏", @"申请入驻成为商家", @"申请成为暖场人", @"设置"];
 }
 
 - (NSMutableArray<KTVStore *> *)storeList {
@@ -128,6 +129,9 @@
             [KTVToast toast:TOAST_USERINFO_FAIL];
         } else {
             NSDictionary *userInfo = result[@"data"];
+            if ([userInfo isKindOfClass:[NSNull class]]) {
+                return;
+            }
             if (userInfo.allKeys.count > 0) {
                 [KTVCommon saveUserInfo:userInfo];
             }
@@ -188,16 +192,11 @@
             [self.navigationController pushViewController:vc animated:YES];
         }
     } else if (indexPath.section == 1) {
-//        if (indexPath.row == 0) {
-//            KTVChatSessionController *vc = [[KTVChatSessionController alloc] init];
-//            vc.hidesBottomBarWhenPushed = YES;
-//            [self.navigationController pushViewController:vc animated:YES];
-//        } else if (indexPath.row == 1) {
-//            KTVOrderStatusListController *vc = (KTVOrderStatusListController *)[UIViewController storyboardName:@"MePage" storyboardId:@"KTVOrderStatusListController"];
-//            [self.navigationController pushViewController:vc animated:YES];
-//        }
-        // @[@"我的拼桌活动", @"暖场人邀约", @"发布动态", @"我的收藏", @"申请入驻成为商家", @"申请成为暖场人", @"设置"]
+        // @[@"我的余额", @"我的拼桌活动", @"暖场人邀约", @"发布动态", @"我的收藏", @"申请入驻成为商家", @"申请成为暖场人", @"设置"]
         if (indexPath.row == 0) {
+            KTVMyMoneyController *vc = (KTVMyMoneyController *)[UIViewController storyboardName:@"MePage" storyboardId:@"KTVMyMoneyController"];
+            [self.navigationController pushViewController:vc animated:YES];
+        } else if (indexPath.row == 1) {
             // 发起拼桌活动
             if (![self.storeList count]) {
                 [KTVToast toast:TOAST_NO_USEING_ORDER];
@@ -205,30 +204,30 @@
             }
             KTVStartYueController *vc = (KTVStartYueController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVStartYueController"];
             [self.navigationController pushViewController:vc animated:YES];
-        } else if (indexPath.row == 1) {
+        } else if (indexPath.row == 2) {
             CLog(@"-- 暖场人邀约");
             KTVMyInvitationController *vc = (KTVMyInvitationController *)[UIViewController storyboardName:@"MePage" storyboardId:@"KTVMyInvitationController"];
             [self.navigationController pushViewController:vc animated:YES];
-        } else if (indexPath.row == 2) {
+        } else if (indexPath.row == 3) {
             // 发布动态
             KTVDynamicController *vc = (KTVDynamicController *)[UIViewController storyboardName:@"MePage" storyboardId:KTVStringClass(KTVDynamicController)];
             [self.navigationController pushViewController:vc animated:YES];
         }
-        else if (indexPath.row == 3) {
+        else if (indexPath.row == 4) {
             // 我的收藏
             CLog(@"-->> 店铺收藏");
             KTVStoreCollectController *vc = (KTVStoreCollectController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVStoreCollectController"];
             [self.navigationController pushViewController:vc animated:YES];
         }
-        else if (indexPath.row == 4) {
+        else if (indexPath.row == 5) {
             KTVApplyStoreController *vc = (KTVApplyStoreController *)[UIViewController storyboardName:@"MePage" storyboardId:KTVStringClass(KTVApplyStoreController)];
             [self.navigationController pushViewController:vc animated:YES];
-        } else if (indexPath.row == 5) {
+        } else if (indexPath.row == 6) {
             // 申请成为暖场人
             KTVApplyWarmerPartOneController *vc = [[KTVApplyWarmerPartOneController alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
-        } else if (indexPath.row == 6) {
+        } else if (indexPath.row == 7) {
             KTVSettingController *vc = (KTVSettingController *)[UIViewController storyboardName:@"MePage" storyboardId:KTVStringClass(KTVSettingController)];
             [self.navigationController pushViewController:vc animated:YES];
         }

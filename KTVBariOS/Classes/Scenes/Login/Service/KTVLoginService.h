@@ -43,4 +43,7 @@ typedef void(^ResponseSuccess)(NSDictionary *result);
 /// 更改密码
 + (void)postChangePassword:(NSDictionary *)params result:(ResponseSuccess)responseResult;
 
+/// 更新第三方登录
++ (void)postUpdateThird:(NSDictionary *)params result:(ResponseSuccess)responseResult;
+
 @end

@@ -18,7 +18,7 @@
     [self countDownWithSeconds:seconds description:des countEndBlock:nil];
 }
 
-- (void)countDownWithSeconds:(NSInteger)seconds description:(NSString *)des countEndBlock:(void (^)())downBlock {
+- (void)countDownWithSeconds:(NSInteger)seconds description:(NSString *)des countEndBlock:(void (^)(void))downBlock {
     
     __block NSInteger timeout = seconds;
     

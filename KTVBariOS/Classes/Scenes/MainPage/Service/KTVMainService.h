@@ -158,4 +158,7 @@ typedef void(^ResponseSuccess)(NSDictionary *result);
 
 /// 创建暖场人订单
 + (void)postCreateWarmerOrder:(NSDictionary *)params result:(ResponseSuccess)responseResult;
+
+/// 获取用户的余额
++ (void)getUserBalance:(NSString *)userId result:(ResponseSuccess)responseResult;
 @end

@@ -90,6 +90,11 @@
     return @"/api/warmerUser/near";
 }
 
+/// 获取用户的余额
++ (NSString *)getUserBalanceUrl {
+    return @"/api/login//user/getMoney/";
+}
+
 #pragma mark - 用户动态
 
 + (NSString *)getUserDynamicStatementUrl {
@@ -123,7 +128,7 @@
 }
 
 + (NSString *)getWeChatLoginUrl {
-    return @"/api/login/user/wx/login";
+    return @"/api/login/user/wx/checkLogin";
 }
 
 + (NSString *)getRegisterUrl {
@@ -140,6 +145,10 @@
 
 + (NSString *)getExitUrl {
     return @"/api/login/user/logout";
+}
+
++ (NSString *)getUpdateThirdLoginUserUrl {
+    return @"/api/login/user/updateThirdLoginUser";
 }
 
 #pragma mark -- 支付 订单
