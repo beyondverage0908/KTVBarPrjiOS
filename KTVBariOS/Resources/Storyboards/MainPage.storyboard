@@ -1085,7 +1085,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZJc-L8-Jtf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="360.80000000000001" y="530.28485757121439"/>
+            <point key="canvasLocation" x="398" y="531"/>
         </scene>
         <!--Pay Controller-->
         <scene sceneID="fpn-hU-quI">
@@ -1102,59 +1102,8 @@
                                     <rect key="frame" x="0.0" y="138" width="375" height="450"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1au-Yx-L7F" userLabel="bank pay view">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
-                                            <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mainpage_all_bg_line" translatesAutoresizingMaskIntoConstraints="NO" id="Gui-xP-Ab8">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
-                                                </imageView>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EwJ-tk-nUE">
-                                                    <rect key="frame" x="15" y="19" width="27" height="22"/>
-                                                    <state key="normal" image="app_bank_icon"/>
-                                                </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="银行卡支付" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7kU-SR-yl0">
-                                                    <rect key="frame" x="57" y="10" width="71.5" height="17"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="信用卡储蓄卡付款，无需开通网银" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P8b-y5-apS">
-                                                    <rect key="frame" x="57" y="37" width="169" height="13.5"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="11"/>
-                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eab-gj-41r">
-                                                    <rect key="frame" x="315" y="10.5" width="40" height="40"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="40" id="8Eb-sw-T3J"/>
-                                                        <constraint firstAttribute="height" constant="40" id="9gT-gZ-WzD"/>
-                                                    </constraints>
-                                                    <state key="normal" image="app_radius_unselect"/>
-                                                    <connections>
-                                                        <action selector="bankPayAction:" destination="fFg-Vq-vWN" eventType="touchUpInside" id="qZQ-ZZ-UHf"/>
-                                                    </connections>
-                                                </button>
-                                            </subviews>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <constraints>
-                                                <constraint firstItem="Gui-xP-Ab8" firstAttribute="top" secondItem="1au-Yx-L7F" secondAttribute="top" id="4W1-pN-vIp"/>
-                                                <constraint firstAttribute="bottom" secondItem="Gui-xP-Ab8" secondAttribute="bottom" id="9Cl-L2-bQ1"/>
-                                                <constraint firstAttribute="trailing" secondItem="Eab-gj-41r" secondAttribute="trailing" constant="20" id="Dfy-Jl-h1H"/>
-                                                <constraint firstItem="Eab-gj-41r" firstAttribute="centerY" secondItem="1au-Yx-L7F" secondAttribute="centerY" id="ENX-20-fCb"/>
-                                                <constraint firstItem="EwJ-tk-nUE" firstAttribute="centerY" secondItem="1au-Yx-L7F" secondAttribute="centerY" id="G2S-1E-25Q"/>
-                                                <constraint firstAttribute="height" constant="60" id="Vei-MJ-hea"/>
-                                                <constraint firstItem="P8b-y5-apS" firstAttribute="top" secondItem="7kU-SR-yl0" secondAttribute="bottom" constant="10" id="Wem-Cp-Tl2"/>
-                                                <constraint firstItem="7kU-SR-yl0" firstAttribute="leading" secondItem="EwJ-tk-nUE" secondAttribute="trailing" constant="15" id="bWr-c5-eeg"/>
-                                                <constraint firstAttribute="trailing" secondItem="Gui-xP-Ab8" secondAttribute="trailing" id="dVq-1v-Tba"/>
-                                                <constraint firstItem="Gui-xP-Ab8" firstAttribute="leading" secondItem="1au-Yx-L7F" secondAttribute="leading" id="gFq-zt-n8e"/>
-                                                <constraint firstItem="7kU-SR-yl0" firstAttribute="top" secondItem="1au-Yx-L7F" secondAttribute="top" constant="10" id="l60-td-Nen"/>
-                                                <constraint firstItem="EwJ-tk-nUE" firstAttribute="leading" secondItem="1au-Yx-L7F" secondAttribute="leading" constant="15" id="lo7-HZ-un2"/>
-                                                <constraint firstItem="P8b-y5-apS" firstAttribute="leading" secondItem="EwJ-tk-nUE" secondAttribute="trailing" constant="15" id="uTm-Ba-QP7"/>
-                                            </constraints>
-                                        </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Xb-t6-rsg" userLabel="ali pay view">
-                                            <rect key="frame" x="0.0" y="60" width="375" height="60"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mainpage_all_bg_line" translatesAutoresizingMaskIntoConstraints="NO" id="N68-o6-Tb8">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
@@ -1197,7 +1146,7 @@
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hCp-1J-3ja">
-                                            <rect key="frame" x="0.0" y="180" width="375" height="120"/>
+                                            <rect key="frame" x="0.0" y="120" width="375" height="120"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mainpage_all_bg_line" translatesAutoresizingMaskIntoConstraints="NO" id="IaH-d0-ysj">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
@@ -1235,10 +1184,10 @@
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="obn-vG-Eal">
-                                            <rect key="frame" x="0.0" y="300" width="375" height="150"/>
+                                            <rect key="frame" x="0.0" y="240" width="375" height="210"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mainpage_all_bg_line" translatesAutoresizingMaskIntoConstraints="NO" id="ruA-FV-EyW">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="210"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="隐藏本次活动" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JRL-Kv-EwG">
                                                     <rect key="frame" x="15" y="40" width="86" height="17"/>
@@ -1280,7 +1229,7 @@
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wpX-eQ-CEF" userLabel="wx pay view">
-                                            <rect key="frame" x="0.0" y="120" width="375" height="60"/>
+                                            <rect key="frame" x="0.0" y="60" width="375" height="60"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mainpage_all_bg_line" translatesAutoresizingMaskIntoConstraints="NO" id="S64-w4-MA1">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
@@ -1326,15 +1275,12 @@
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstItem="wpX-eQ-CEF" firstAttribute="top" secondItem="1Xb-t6-rsg" secondAttribute="bottom" id="FoA-ns-Ezr"/>
-                                        <constraint firstItem="1au-Yx-L7F" firstAttribute="leading" secondItem="F7I-ON-R1m" secondAttribute="leading" id="Ig7-w1-axd"/>
                                         <constraint firstAttribute="trailing" secondItem="hCp-1J-3ja" secondAttribute="trailing" id="MbS-A5-8ZJ"/>
                                         <constraint firstItem="obn-vG-Eal" firstAttribute="top" secondItem="hCp-1J-3ja" secondAttribute="bottom" id="PVQ-D4-cIf"/>
                                         <constraint firstAttribute="trailing" secondItem="obn-vG-Eal" secondAttribute="trailing" id="Wka-jy-px4"/>
-                                        <constraint firstItem="1Xb-t6-rsg" firstAttribute="top" secondItem="1au-Yx-L7F" secondAttribute="bottom" id="ejF-fF-QDE"/>
                                         <constraint firstItem="obn-vG-Eal" firstAttribute="leading" secondItem="F7I-ON-R1m" secondAttribute="leading" id="fFG-Bh-Fhq"/>
-                                        <constraint firstItem="1au-Yx-L7F" firstAttribute="top" secondItem="F7I-ON-R1m" secondAttribute="top" id="l7f-Vu-jWZ"/>
+                                        <constraint firstItem="1Xb-t6-rsg" firstAttribute="top" secondItem="F7I-ON-R1m" secondAttribute="top" id="gSp-7u-3O6"/>
                                         <constraint firstItem="hCp-1J-3ja" firstAttribute="top" secondItem="wpX-eQ-CEF" secondAttribute="bottom" id="mdO-xk-WMb"/>
-                                        <constraint firstAttribute="trailing" secondItem="1au-Yx-L7F" secondAttribute="trailing" id="ojg-8j-0WU"/>
                                         <constraint firstAttribute="trailing" secondItem="wpX-eQ-CEF" secondAttribute="trailing" id="sjJ-bP-cnI"/>
                                         <constraint firstItem="1Xb-t6-rsg" firstAttribute="leading" secondItem="F7I-ON-R1m" secondAttribute="leading" id="txh-4D-cxM"/>
                                         <constraint firstAttribute="trailing" secondItem="1Xb-t6-rsg" secondAttribute="trailing" id="vz3-BK-ABQ"/>
@@ -1464,7 +1410,6 @@
                     </view>
                     <connections>
                         <outlet property="alipayBtn" destination="amV-aB-cvi" id="Mt1-ad-W2X"/>
-                        <outlet property="bankPayBtn" destination="Eab-gj-41r" id="pk9-kY-Sih"/>
                         <outlet property="confirmPayBtn" destination="G1M-mG-vtx" id="hh0-6Z-ckK"/>
                         <outlet property="hideActivityAnsLabel" destination="LNj-BT-paT" id="FwB-Sc-g2d"/>
                         <outlet property="tableView" destination="VfM-oS-N9W" id="gEa-qR-rrM"/>
@@ -1473,7 +1418,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8CS-d4-HUO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1180" y="530"/>
+            <point key="canvasLocation" x="1180" y="529.38530734632684"/>
         </scene>
         <!--Pay Success Controller-->
         <scene sceneID="6gB-QV-rmO">
@@ -5341,7 +5286,6 @@
         <image name="add_sign" width="32" height="32"/>
         <image name="app_anniu_red" width="315" height="40"/>
         <image name="app_arrow_right_hui" width="6" height="11"/>
-        <image name="app_bank_icon" width="27" height="17"/>
         <image name="app_cell_split" width="375" height="6"/>
         <image name="app_confirm" width="51" height="18"/>
         <image name="app_filter_sanjiao" width="8" height="8"/>
