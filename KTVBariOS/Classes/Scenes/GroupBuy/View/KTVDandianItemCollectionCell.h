@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "KTVGood.h"
 
 @interface KTVDandianItemCollectionCell : UICollectionViewCell
+
+@property (nonatomic, copy) void (^buyCarCallBack)(BOOL buyIn, KTVGood *good);
+
+@property (nonatomic, strong) KTVGood *good;
 
 @end

@@ -95,6 +95,11 @@
     return self;
 }
 
+- (void)remove {
+    [self.maskFilterView removeFromSuperview];
+    self.maskFilterView = nil;
+}
+
 
 - (void)filterBtnAction:(UIButton *)filterBtn {
     NSInteger idx = filterBtn.tag - 1000;
@@ -193,5 +198,6 @@
         self.filterDetaiSelectedCallbadk(item);
     }
 }
+
 
 @end

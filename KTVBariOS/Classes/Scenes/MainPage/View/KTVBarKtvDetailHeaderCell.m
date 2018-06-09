@@ -31,6 +31,19 @@
     [self.yuepaoNumber addGestureRecognizer:tap];
     
     [self setupUI];
+    
+    [self.purikuraBtn addTarget:self
+                         action:@selector(purikuraAction:)
+               forControlEvents:UIControlEventTouchUpInside];
+}
+
+#pragma mark - 事件
+
+- (void)purikuraAction:(UIButton *)btn {
+    NSLog(@"--->>>图片浏览");
+    if (self.purikuraCallBack) {
+        self.purikuraCallBack(self.store);
+    }
 }
 
 - (IBAction)yudingNumberAction:(UIButton *)sender {

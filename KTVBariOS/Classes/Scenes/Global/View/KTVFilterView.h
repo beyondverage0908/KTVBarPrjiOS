@@ -14,5 +14,6 @@
 @property (nonatomic, copy) void (^filterDitailCallback)(NSString *filterDetailKey);
 
 - (instancetype)initWithFilter:(NSArray<NSDictionary<NSString *, NSArray *> *> *)filters;
+- (void)remove;
 
 @end

@@ -94,6 +94,7 @@
     vc.store = self.store;
     vc.packageList = self.packageList;
     vc.selectedActivitorList = self.selectedActivitorList; // 已经选中的暖场人
+    vc.shopCartList = self.shopCartList;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -118,7 +119,7 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     if (section == 1) {
         KTVTableHeaderView *headerView = [[KTVTableHeaderView alloc] initWithImageUrl:nil title:@"附近的邀约" headerImgUrl:@"app_change_batch" remarkUrl:@"pay_to_yuepao" remark:nil];
-        headerView.headerActionBlock = ^(KTVHeaderType headerType) {
+        headerView.headerActionBlock = ^(KTVTableHeaderView *myView, KTVHeaderType headerType) {
             if (headerType == HeaderType) {
                 CLog(@"--->>> 换一批泡");
                 [self loadCommonNearUser];
@@ -157,6 +158,7 @@
         KTVOrderConfirmCell *cell = (KTVOrderConfirmCell *)[tableView dequeueReusableCellWithIdentifier:@"KTVOrderConfirmCell"];
         cell.packageList = self.packageList;
         cell.selectedActivitorList = self.selectedActivitorList;
+        cell.shopCartList = self.shopCartList;
         return cell;
     } else if (indexPath.section == 1) {
         KTVYuePaoUserCell *cell = (KTVYuePaoUserCell *)[tableView dequeueReusableCellWithIdentifier:@"KTVYuePaoUserCell"];

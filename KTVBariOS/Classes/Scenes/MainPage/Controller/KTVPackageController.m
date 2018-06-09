@@ -20,10 +20,14 @@
 #import "KTVSelectedBeautyController.h"
 #import "KTVFriendDetailController.h"
 #import "KTVLittleBeeController.h"
+#import "KTVDandianController.h"
+#import "KTVShop.h"
 
 #import "KTVMainService.h"
 
-@interface KTVPackageController ()<UITableViewDelegate, UITableViewDataSource>
+#import "KSPhotoBrowser.h"
+
+@interface KTVPackageController ()<UITableViewDelegate, UITableViewDataSource, KSPhotoBrowserDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) UILabel *moneyLabel;
@@ -32,6 +36,9 @@
 @property (strong, nonatomic) NSMutableArray<KTVUser *> *activitorList; // 暖场人列表
 @property (assign, nonatomic) NSInteger activitorPage;      // 分页获取暖场人
 @property (strong, nonatomic) NSMutableArray<KTVUser *> * invitatorList;
+/// 单点 - 购物车
+@property (strong, nonatomic) NSDictionary *shoppingCart; // 单点商品
+@property (strong, nonatomic) NSMutableArray<KTVShop *> *shopCartList; // 单点商品
 
 @end
 
@@ -186,11 +193,18 @@
 
 - (void)payAction:(UIButton *)btn {
     CLog(@"--->>>套餐-立即支付");
+    if (![[self getSelectedPackageList] count]) {
+        [KTVToast toast:@"您还未选择套餐，请选择套餐"];
+        return;
+    }
     // 跳转到订单确认
     KTVOrderConfirmController *vc = (KTVOrderConfirmController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVOrderConfirmController"];
     vc.store = self.store;
     vc.packageList = [self getSelectedPackageList];
     vc.selectedActivitorList = self.selectedActivitorList;
+    // 创建单点商品列表
+    vc.shopCartList = self.shopCartList;
+    
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -217,6 +231,10 @@
     for (KTVUser *user in self.selectedActivitorList) {
         price += user.userDetail.price;
     }
+    // 单点商品价格
+    for (KTVShop *shop in self.shopCartList) {
+        price += [shop.goodCount floatValue] * [shop.good.goodPrice floatValue];
+    }
     return @(price).stringValue;
 }
 
@@ -229,6 +247,18 @@
         }
     }
     return packageList;
+}
+
+/// 获取单点商品总价
+- (float)getShoppingCartAllPrice {
+    float allPrice = 0;
+    if (self.shoppingCart) {
+        for (NSString *goodId in self.shoppingCart.allKeys) {
+            NSDictionary *shop = self.shoppingCart[goodId];
+            allPrice += [shop[@"goodCount"] integerValue] * [((KTVGood *)shop[@"goodKey"]).goodPrice floatValue];
+        }
+    }
+    return allPrice;
 }
 
 #pragma mark - UITableViewDelegate
@@ -257,6 +287,46 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     if (section == 1 || section == 2) {
+        return 28;
+    }
+    return 0;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    if (section == 2) {
+        KTVTableHeaderView *headerView = [[KTVTableHeaderView alloc] initWithImageUrl:@"app_order_dandian" title:@"进入单点 已点(0)" headerImgUrl:nil remarkUrl:@"app_arrow_right" remark:nil];
+        @WeakObj(self);
+        headerView.bgActionBlock = ^(KTVTableHeaderView *myView, KTVHeaderType headerType) {
+            KTVDandianController *vc = (KTVDandianController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVDandianController"];
+            vc.store = weakself.store;
+            vc.shoppingCartDict = [self.shoppingCart mutableCopy];
+            vc.shoppingCartCallBack = ^(NSMutableDictionary<NSString *,NSMutableDictionary<NSString *,id> *> *shoppingCart) {
+                weakself.shoppingCart = shoppingCart;
+                // 获取购物车中商品数目
+                NSMutableArray<KTVShop *> *shopCartList = [NSMutableArray array];
+                NSInteger count = 0;
+                for (NSString *goodId in shoppingCart.allKeys) {
+                    NSMutableDictionary *goodDic = [shoppingCart objectForKey:goodId];
+                    // 获取商品数量
+                    KTVShop *shop = [KTVShop yy_modelWithDictionary:goodDic];
+                    count += [shop.goodCount integerValue];
+                    [shopCartList addObject:shop];
+                }
+                weakself.shopCartList = [shopCartList copy];
+                
+                myView.title = [NSString stringWithFormat:@"进入单点 已点(%@)", @(count)];
+                // 更新订单价格
+                weakself.moneyLabel.text = [NSString stringWithFormat:@"¥%@", [self getOrderMoney]];
+            };
+            [weakself.navigationController pushViewController:vc animated:YES];
+        };
+        return headerView;
+    }
+    return nil;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    if (section == 2) {
         return 28;
     }
     return 0;
@@ -294,10 +364,28 @@
         KTVBarKtvDetailHeaderCell *cell = (KTVBarKtvDetailHeaderCell *)[tableView dequeueReusableCellWithIdentifier:KTVStringClass(KTVBarKtvDetailHeaderCell)];
         cell.store = self.store;
         cell.invitorList = self.invitatorList;
+        
+        @WeakObj(self);
         cell.callback = ^(KTVStore *store) {
             KTVFriendDetailController *vc = (KTVFriendDetailController *)[UIViewController storyboardName:@"MePage" storyboardId:KTVStringClass(KTVFriendDetailController)];
             vc.store = store;
-            [self.navigationController pushViewController:vc animated:YES];
+            [weakself.navigationController pushViewController:vc animated:YES];
+        };
+        cell.purikuraCallBack = ^(KTVStore *store) {
+            NSString *url = @"http://ww4.sinaimg.cn/large/a15bd3a5jw1f12r9ku6wjj20u00mhn22.jpg";
+            NSMutableArray *urlItems = @[].mutableCopy;
+            for (NSInteger i = 0; i < 10; i++) {
+                KSPhotoItem *item = [KSPhotoItem itemWithSourceView:[UIImageView new] imageUrl:[NSURL URLWithString:url]];
+                [urlItems addObject:item];
+            }
+            KSPhotoBrowser *browser = [KSPhotoBrowser browserWithPhotoItems:urlItems selectedIndex:indexPath.row];
+            browser.delegate = weakself;
+            browser.dismissalStyle = KSPhotoBrowserInteractiveDismissalStyleRotation;
+            browser.backgroundStyle = KSPhotoBrowserBackgroundStyleBlur;
+            browser.loadingStyle = KSPhotoBrowserImageLoadingStyleIndeterminate;
+            browser.pageindicatorStyle = KSPhotoBrowserPageIndicatorStyleText;
+            browser.bounces = NO;
+            [browser showFromViewController:weakself];
         };
         return cell;
     } else if (indexPath.section == 1) {
@@ -307,13 +395,21 @@
         KTVPackageDetailCell *cell = (KTVPackageDetailCell *)[tableView dequeueReusableCellWithIdentifier:KTVStringClass(KTVPackageDetailCell)];
         KTVPackage *package = self.store.packageList[indexPath.row];
         cell.package = package;
+        @WeakObj(self);
         cell.selectCallback = ^(KTVPackage *package, BOOL isSelected) {
-            self.moneyLabel.text = [NSString stringWithFormat:@"¥%@", [self getOrderMoney]];
+            weakself.moneyLabel.text = [NSString stringWithFormat:@"¥%@", [self getOrderMoney]];
         };
         return cell;
     }
     return nil;
 }
+
+// MARK: - KSPhotoBrowserDelegate
+
+- (void)ks_photoBrowser:(KSPhotoBrowser *)browser didSelectItem:(KSPhotoItem *)item atIndex:(NSUInteger)index {
+    NSLog(@"selected index: %ld", index);
+}
+
 
 
 @end

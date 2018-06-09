@@ -10,4 +10,6 @@
 
 @interface KTVBuycarController : KTVBaseViewController
 
+@property (nonatomic, strong) NSMutableDictionary<NSString *, NSMutableDictionary<NSString *, id> *> *shoppingCartDict; // 购物车中的商品
+
 @end

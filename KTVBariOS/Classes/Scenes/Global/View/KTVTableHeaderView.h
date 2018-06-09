@@ -16,8 +16,11 @@ typedef NS_ENUM(NSUInteger, KTVHeaderType) {
 
 @interface KTVTableHeaderView : UIView
 
-@property (nonatomic, copy)void (^headerActionBlock)(KTVHeaderType headerType);
-@property (nonatomic, copy)void (^bgActionBlock)(KTVHeaderType headerType);
+@property (nonatomic, copy)void (^headerActionBlock)(KTVTableHeaderView *myView,  KTVHeaderType headerType);
+@property (nonatomic, copy)void (^bgActionBlock)(KTVTableHeaderView *myView, KTVHeaderType headerType);
+
+@property (nonatomic, copy) NSString * title;
+@property (nonatomic, copy) NSString * remark;
 
 /**
  *  @param leadingImgUrl 头部侧边图片地址

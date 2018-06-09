@@ -14,6 +14,7 @@ target 'KTVBariOS' do
     pod 'SDWebImage', '~> 4.0'
     pod 'MBProgressHUD'
     pod 'IQKeyboardManager'
+    pod 'YYWebImage', '~> 1.0.5'
 
 # Rong Cloud
     pod 'RongCloudIM/IMLib'

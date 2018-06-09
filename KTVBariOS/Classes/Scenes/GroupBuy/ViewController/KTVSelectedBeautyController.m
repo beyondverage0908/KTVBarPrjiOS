@@ -14,6 +14,7 @@
 #import "KTVBeeCollectionFooterView.h"
 #import "KTVMainService.h"
 #import "KTVUser.h"
+#import "KTVUserInfoController.h"
 
 @interface KTVSelectedBeautyController ()<UICollectionViewDelegate, UICollectionViewDataSource>
 
@@ -22,8 +23,10 @@
 @property (weak, nonatomic) IBOutlet UIView *collectionHeaderView;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UIButton *yueTaBtn;
+@property (strong, nonatomic) KTVFilterView *filterView;
 
 @property (strong, nonatomic) NSMutableDictionary *typeActivitorDic;
+
 
 @end
 
@@ -41,22 +44,28 @@ static NSInteger RowCount = 3;
     self.collectionView.collectionViewLayout = [self setupFlowLayout];
     self.view.backgroundColor = [UIColor ktvBG];
     
-    [self layoutCollectionHeader];
-    
-    [self initData];
-    
     // 获取暖场人
     if (self.warmerType == MultipleWarmerType) {
         [self loadPayAfterWarmer];
+        // 过滤
+        NSArray *filterDatas = @[@{@"暖场人类型" : @[@"可爱", @"清纯"]},
+                           @{@"性别": @[@"男", @"女", @"不限"]}];
+        self.filterView = [[KTVFilterView alloc] initWithFilter:filterDatas];
+    } else {
+        [self.collectionView setContentOffset:CGPointZero animated:YES];
     }
-}
-
-- (void)initData {
-    self.typeActivitorDic = [NSMutableDictionary dictionary];
+    
+    [self layoutCollectionHeader];
+    [self initData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    [self.filterView remove];
+}
+
+- (void)initData {
+    self.typeActivitorDic = [NSMutableDictionary dictionary];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -148,24 +157,37 @@ static NSInteger RowCount = 3;
 
 - (void)layoutCollectionHeader {
     if (self.warmerType == MultipleWarmerType) {
-        NSArray *dataS = @[@{@"暖场人类型" : @[@"可爱", @"清纯", @"淑女", @"熟女"]},
-                           @{@"性别": @[@"男", @"女", @"不限"]}];
-        KTVFilterView *filterView = [[KTVFilterView alloc] initWithFilter:dataS];
-        [self.collectionHeaderView addSubview:filterView];
+    
+        [self.collectionHeaderView addSubview:self.filterView];
         
-        [filterView mas_makeConstraints:^(MASConstraintMaker *make) {
+        [self.filterView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.equalTo(self.collectionHeaderView);
         }];
         
-        filterView.filterCallback = ^(NSDictionary *filterMap) {
-            NSInteger idx = [dataS indexOfObject:filterMap];
+        self.filterView.filterCallback = ^(NSDictionary *filterMap) {
             CLog(@"--->>> %@", filterMap);
         };
-        filterView.filterDitailCallback = ^(NSString *filterDetailKey) {
+        self.filterView.filterDitailCallback = ^(NSString *filterDetailKey) {
             CLog(@"--->>> %@", filterDetailKey);
         };
     } else {
         self.collectionHeaderView.hidden = YES;
+        UIView *superView = self.view;
+        [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+            if (@available(iOS 11.0, *)) {
+                make.top.equalTo(superView.mas_safeAreaLayoutGuideTop).offset(64 + 40);
+            } else {
+                // Fallback on earlier versions
+                make.top.equalTo(superView.mas_topMargin);
+            }
+            if (@available(iOS 11.0, *)) {
+                make.top.equalTo(superView.mas_safeAreaLayoutGuideBottom);
+            } else {
+                // Fallback on earlier versions
+                make.top.equalTo(superView.mas_bottomMargin);
+            }
+            make.left.and.right.equalTo(superView);
+        }];
     }
 }
 
@@ -196,7 +218,25 @@ static NSInteger RowCount = 3;
 #pragma mark - UICollectionViewDelegate
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    
+    KTVUser *user = nil;
+    if (self.warmerType == MultipleWarmerType) {
+        if (indexPath.section == 0) {
+            NSArray *fixedActivitorList = [self.typeActivitorDic objectForKey:@"fixed"];
+            user = fixedActivitorList[indexPath.row];
+        } else if (indexPath.section == 1) {
+            NSArray *longtimeActivitorList = [self.typeActivitorDic objectForKey:@"longtime"];
+            user = longtimeActivitorList[indexPath.row];
+        } else if (indexPath.section == 2) {
+            NSArray *parttimeActivitorList = [self.typeActivitorDic objectForKey:@"parttime"];
+            user = parttimeActivitorList[indexPath.row];
+        }
+    } else {
+        user = self.singleWarmerList[indexPath.row];
+    }
+    KTVUserInfoController *vc = (KTVUserInfoController *)[UIViewController storyboardName:@"MePage" storyboardId:@"KTVUserInfoController"];
+    vc.isMySelf = NO;
+    vc.user = user;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - UICollectionViewDataSource

@@ -26,8 +26,9 @@
 #import <AMapLocationKit/AMapLocationKit.h>
 
 #import "JHPickView.h"
+#import "KSPhotoBrowser.h"
 
-@interface KTVMainController ()<UITableViewDelegate, UITableViewDataSource, SDCycleScrollViewDelegate, AMapLocationManagerDelegate, JHPickerDelegate, UISearchBarDelegate>
+@interface KTVMainController ()<UITableViewDelegate, UITableViewDataSource, SDCycleScrollViewDelegate, AMapLocationManagerDelegate, JHPickerDelegate, UISearchBarDelegate, KSPhotoBrowserDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIButton *locationBtn;
@@ -404,7 +405,20 @@
 //    KTVBaseNavigationViewController *nav = [[KTVBaseNavigationViewController alloc] initWithRootViewController:guideVC];
 //    [self presentViewController:nav animated:YES completion:nil];
     
-    [MBProgressHUD showMessage:@"加载中..."];
+
+    NSMutableArray *urlItems = @[].mutableCopy;
+    for (KTVBanner *banner in self.bannerList) {
+        KSPhotoItem *item = [KSPhotoItem itemWithSourceView:[UIImageView new] imageUrl:[NSURL URLWithString:banner.picture.pictureUrl]];
+        [urlItems addObject:item];
+    }
+    KSPhotoBrowser *browser = [KSPhotoBrowser browserWithPhotoItems:urlItems selectedIndex:index];
+    browser.delegate = self;
+    browser.dismissalStyle = KSPhotoBrowserInteractiveDismissalStyleRotation;
+    browser.backgroundStyle = KSPhotoBrowserBackgroundStyleBlur;
+    browser.loadingStyle = KSPhotoBrowserImageLoadingStyleIndeterminate;
+    browser.pageindicatorStyle = KSPhotoBrowserPageIndicatorStyleText;
+    browser.bounces = NO;
+    [browser showFromViewController:self];
 }
 
 - (void)testCode {
@@ -412,6 +426,9 @@
 //    [self.navigationController pushViewController:vc animated:YES];
     
 //    KTVSelectedBeautyController *vc = (KTVSelectedBeautyController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVSelectedBeautyController"];
+//    KTVStore *store = [[KTVStore alloc] init];
+//    store.storeId = @"4";
+//    vc.store = store;
 //    [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -513,6 +530,12 @@
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
     [searchBar resignFirstResponder];
+}
+
+#pragma mark - KSPhotoBrowserDelegate
+
+- (void)ks_photoBrowser:(KSPhotoBrowser *)browser didSelectItem:(KSPhotoItem *)item atIndex:(NSUInteger)index {
+    NSLog(@"-->> %@", @(index));
 }
 
 @end

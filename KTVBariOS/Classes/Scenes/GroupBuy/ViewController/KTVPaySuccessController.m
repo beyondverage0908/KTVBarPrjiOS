@@ -19,6 +19,7 @@
 #import "KTVMainService.h"
 #import "KTVBuyService.h"
 #import "KTVPayManager.h"
+#import "KTVUserInfoController.h"
 
 @interface KTVPaySuccessController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -163,6 +164,7 @@
     }];
 }
 
+// 返回到根结视图
 - (void)backToRootController {
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
@@ -204,7 +206,7 @@
 }
 
 - (IBAction)completedPayAction:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self backToRootController];
 }
 #pragma mark - UITableViewDelegate
 
@@ -224,13 +226,13 @@
     } else if (section == 1) {
         KTVTableHeaderView *headerView = [[KTVTableHeaderView alloc] initWithImageUrl:nil title:@"邀约TA暖场" headerImgUrl:@"app_change_batch" remarkUrl:@"app_arrow_right_hui" remark:nil];
         @WeakObj(self);
-        headerView.headerActionBlock = ^(KTVHeaderType type) {
+        headerView.headerActionBlock = ^(KTVTableHeaderView *myView, KTVHeaderType type) {
             if (type == HeaderType) {
                 CLog(@"--->>> 邀约TA暖床");
                 [weakself loadPageStoreActivitors];
             }
         };
-        headerView.bgActionBlock = ^(KTVHeaderType headerType) {
+        headerView.bgActionBlock = ^(KTVTableHeaderView *myView, KTVHeaderType headerType) {
             if (headerType == BGType) {
                 // 跳转邀约暖场人列表
                 @WeakObj(self);
@@ -273,6 +275,16 @@
     return 0;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 1) {
+        KTVUser *user = self.activitorList[indexPath.row];
+        KTVUserInfoController *vc = (KTVUserInfoController *)[UIViewController storyboardName:@"MePage" storyboardId:@"KTVUserInfoController"];
+        vc.isMySelf = NO;
+        vc.user = user;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+}
+
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -303,16 +315,17 @@
             }
             return cell;
         } else {
+            @WeakObj(self);
             KTVPayEndCell *cell = (KTVPayEndCell *)[tableView dequeueReusableCellWithIdentifier:@"KTVPayEndCell"];
             if (!cell) {
                 cell = [[[NSBundle mainBundle] loadNibNamed:@"KTVPayEndCell" owner:self options:nil] lastObject];
             }
             cell.completedCallback = ^{
-                [self.navigationController popViewControllerAnimated:YES];
+                [weakself backToRootController];
             };
             cell.startPinZhuoCallback = ^{
                 KTVStartYueController *vc = (KTVStartYueController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVStartYueController"];
-                [self.navigationController pushViewController:vc animated:YES];
+                [weakself.navigationController pushViewController:vc animated:YES];
             };
             return cell;
         }

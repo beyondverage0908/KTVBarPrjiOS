@@ -20,13 +20,13 @@
 #import "KTVTableHeaderView.h"
 #import "KTVDoBusinessCell.h"
 #import "KTVOtherDianpuCell.h"
-
 #import "KTVPackageController.h"
 #import "KTVGroupBuyDetailController.h"
-
 #import "KTVMainService.h"
 
-@interface KTVBarKtvDetailController ()<UITableViewDelegate, UITableViewDataSource>
+#import "KSPhotoBrowser.h"
+
+@interface KTVBarKtvDetailController ()<UITableViewDelegate, UITableViewDataSource, KSPhotoBrowserDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
@@ -292,10 +292,27 @@
         KTVBarKtvDetailHeaderCell *cell = (KTVBarKtvDetailHeaderCell *)[tableView dequeueReusableCellWithIdentifier:KTVStringClass(KTVBarKtvDetailHeaderCell)];
         cell.store = self.store;
         cell.invitorList = self.invitatorList;
+        @WeakObj(self);
         cell.callback = ^(KTVStore *store) {
             KTVFriendDetailController *vc = (KTVFriendDetailController *)[UIViewController storyboardName:@"MePage" storyboardId:KTVStringClass(KTVFriendDetailController)];
             vc.store = store;
-            [self.navigationController pushViewController:vc animated:YES];
+            [weakself.navigationController pushViewController:vc animated:YES];
+        };
+        cell.purikuraCallBack = ^(KTVStore *store) {
+            NSString *url = @"http://ww4.sinaimg.cn/large/a15bd3a5jw1f12r9ku6wjj20u00mhn22.jpg";
+            NSMutableArray *urlItems = @[].mutableCopy;
+            for (NSInteger i = 0; i < 10; i++) {
+                KSPhotoItem *item = [KSPhotoItem itemWithSourceView:[UIImageView new] imageUrl:[NSURL URLWithString:url]];
+                [urlItems addObject:item];
+            }
+            KSPhotoBrowser *browser = [KSPhotoBrowser browserWithPhotoItems:urlItems selectedIndex:0];
+            browser.delegate = weakself;
+            browser.dismissalStyle = KSPhotoBrowserInteractiveDismissalStyleRotation;
+            browser.backgroundStyle = KSPhotoBrowserBackgroundStyleBlur;
+            browser.loadingStyle = KSPhotoBrowserImageLoadingStyleIndeterminate;
+            browser.pageindicatorStyle = KSPhotoBrowserPageIndicatorStyleText;
+            browser.bounces = NO;
+            [browser showFromViewController:weakself];
         };
         return cell;
     } else if (indexPath.section == 1) {
@@ -397,6 +414,12 @@
     }];
     
     return bgView;
+}
+
+// MARK: - KSPhotoBrowserDelegate
+
+- (void)ks_photoBrowser:(KSPhotoBrowser *)browser didSelectItem:(KSPhotoItem *)item atIndex:(NSUInteger)index {
+    NSLog(@"selected index: %ld", index);
 }
 
 @end

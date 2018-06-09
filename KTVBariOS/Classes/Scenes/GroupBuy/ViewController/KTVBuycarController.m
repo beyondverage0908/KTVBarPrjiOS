@@ -14,8 +14,6 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
-@property (strong, nonatomic) NSMutableArray *datas;
-
 @end
 
 @implementation KTVBuycarController
@@ -27,10 +25,6 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
-    _datas = [NSMutableArray arrayWithCapacity:10];
-    for (NSInteger i = 0; i < 10; i++) {
-        [_datas addObject:@(i).stringValue];
-    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -54,7 +48,8 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         CLog(@"--->>> 左滑删除操作");
-        [self.datas removeObjectAtIndex:indexPath.row];
+        NSString *key = self.shoppingCartDict.allKeys[indexPath.row];
+        [self.shoppingCartDict removeObjectForKey:key];
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }
 }
@@ -66,11 +61,13 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.datas.count;
+    return [self.shoppingCartDict count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     KTVBuycarSummaryCell *cell = (KTVBuycarSummaryCell *)[tableView dequeueReusableCellWithIdentifier:@"KTVBuycarSummaryCell"];
+    NSMutableDictionary *shopCart = [self.shoppingCartDict objectForKey:self.shoppingCartDict.allKeys[indexPath.row]];
+    cell.shopCart = shopCart;
     return cell;
 }
 

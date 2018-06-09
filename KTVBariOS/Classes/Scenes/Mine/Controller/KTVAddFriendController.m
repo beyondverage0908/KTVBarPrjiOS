@@ -144,10 +144,13 @@
                                                                      headerImgUrl:@"app_change_batch"
                                                                         remarkUrl:nil
                                                                            remark:nil];
-    headerView.headerActionBlock = ^(KTVHeaderType headerType) {
+    @WeakObj(self);
+    headerView.headerActionBlock = ^(KTVTableHeaderView *myView, KTVHeaderType headerType) {
         CLog(@"--->>>> 添加好友，换一批");
-        [self loadCommonNearFriend];
+        [weakself loadCommonNearFriend];
     };
+    
+    
     return headerView;
 }
 

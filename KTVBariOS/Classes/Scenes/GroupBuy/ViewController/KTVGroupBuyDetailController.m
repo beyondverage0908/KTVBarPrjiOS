@@ -162,13 +162,13 @@
         return headerView;
     } else if (section == 3) {
         KTVTableHeaderView *headerView = [[KTVTableHeaderView alloc] initWithImageUrl:nil title:@"邀约TA暖场" headerImgUrl:@"app_change_batch" remarkUrl:@"app_arrow_right_hui" remark:nil];
-        headerView.headerActionBlock = ^(KTVHeaderType type) {
+        headerView.headerActionBlock = ^(KTVTableHeaderView *myView, KTVHeaderType type) {
             if (type == HeaderType) {
                 CLog(@"--->>> 邀约TA暖床");
                 [self loadPageStoreActivitors];
             }
         };
-        headerView.bgActionBlock = ^(KTVHeaderType headerType) {
+        headerView.bgActionBlock = ^(KTVTableHeaderView *myView, KTVHeaderType headerType) {
             if (headerType == BGType) {
                 // 跳转邀约暖场人列表
                 KTVSelectedBeautyController *vc = (KTVSelectedBeautyController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVSelectedBeautyController"];

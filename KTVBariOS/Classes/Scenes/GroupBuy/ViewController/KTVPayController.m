@@ -33,6 +33,7 @@
 
 @implementation KTVPayController
 
+/// 构造支付订单
 - (void)mergeUploadParam {
     // 套餐价格
     if (self.groupbuy.totalPrice) {
@@ -47,7 +48,6 @@
     if (self.groupbuy) {
         [self.orderUploadDictionary setObject:@(7) forKey:@"orderType"];
     }
-
     // 套餐类型
     if (self.packageList && [self.packageList count]) {
         [self.orderUploadDictionary setObject:@(1) forKey:@"orderType"];
@@ -69,7 +69,23 @@
     for (KTVUser *user in self.selectedActivitorList) {
         NSDictionary *dict = @{@"sourceId" : @(user.userId.integerValue),
                                @"price" : @(user.userDetail.price),
-                               @"orderType" : @(user.userDetail.type),
+                               @"orderType" : @(4),
+                               @"count" : @(1),
+                               @"discount" : @(100)};
+        [userOrderDetails addObject:dict];
+    }
+    for (KTVShop *shop in self.shopCartList) {
+        NSDictionary *dict = @{@"sourceId" : @(shop.good.goodId.integerValue),
+                               @"price" : shop.good.goodPrice,
+                               @"orderType" : @(5),
+                               @"count" : shop.goodCount,
+                               @"discount" : @(100)};
+        [userOrderDetails addObject:dict];
+    }
+    for (KTVPackage *package in self.packageList) {
+        NSDictionary *dict = @{@"sourceId" : package.packageId,
+                               @"price" : package.price,
+                               @"orderType" : @(1),
                                @"count" : @(1),
                                @"discount" : @(100)};
         [userOrderDetails addObject:dict];
@@ -118,11 +134,16 @@
             totalPrice += pk.price.floatValue;
         }
     }
-    NSInteger money = 0;
+    float money = 0;
     for (KTVUser *user in self.selectedActivitorList) {
         money += user.userDetail.price;
     }
     money += totalPrice;
+
+    // 单点商品价格
+    for (KTVShop *shop in self.shopCartList) {
+        money += [shop.goodCount floatValue] * [shop.good.goodPrice floatValue];
+    }
     
     return @(money).stringValue;
 }

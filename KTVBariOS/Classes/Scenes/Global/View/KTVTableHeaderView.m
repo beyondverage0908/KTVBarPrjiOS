@@ -8,6 +8,14 @@
 
 #import "KTVTableHeaderView.h"
 
+@interface KTVTableHeaderView()
+
+@property (nonatomic, strong) UILabel *titleLabel;
+@property (nonatomic, strong) UILabel *remarkLabel;
+
+@end
+
+
 @implementation KTVTableHeaderView
 
 - (instancetype)initWithImageUrl:(NSString *)leadingImgUrl title:(NSString *)headerTitle headerImgUrl:(NSString *)headerUrl remarkUrl:(NSString *)remarkUrl remark:(NSString *)headerRemark {
@@ -49,16 +57,16 @@
         
         
         if (headerTitle) {
-            UILabel *titleLabel = [[UILabel alloc] init];
-            [self addSubview:titleLabel];
-            titleLabel.text = headerTitle;
-            titleLabel.font = [UIFont boldSystemFontOfSize:14];
-            titleLabel.textColor = [UIColor whiteColor];
-            [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            self.titleLabel = [[UILabel alloc] init];
+            [self addSubview:self.titleLabel];
+            self.titleLabel.text = headerTitle;
+            self.titleLabel.font = [UIFont boldSystemFontOfSize:14];
+            self.titleLabel.textColor = [UIColor whiteColor];
+            [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.centerY.equalTo(self);
                 make.left.equalTo(lastView.mas_right).offset(10);
             }];
-            lastView = titleLabel;
+            lastView = self.titleLabel;
         }
         
         if (headerUrl) {
@@ -76,17 +84,17 @@
         
         UIView *rightLastView = nil;
         if (headerRemark) {
-            UILabel *remarkLabel = [[UILabel alloc] init];
-            [self addSubview:remarkLabel];
-            remarkLabel.text = headerRemark;
-            remarkLabel.font = [UIFont boldSystemFontOfSize:12.5];
-            remarkLabel.textColor = [UIColor ktvGray];
-            [remarkLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            self.remarkLabel = [[UILabel alloc] init];
+            [self addSubview:self.remarkLabel];
+            self.remarkLabel.text = headerRemark;
+            self.remarkLabel.font = [UIFont boldSystemFontOfSize:12.5];
+            self.remarkLabel.textColor = [UIColor ktvGray];
+            [self.remarkLabel mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.centerY.equalTo(self);
                 make.right.equalTo(self).offset(-10);
             }];
             
-            rightLastView = remarkLabel;
+            rightLastView = self.remarkLabel;
         }
     
         if (remarkUrl) {
@@ -116,22 +124,40 @@
     return [self initWithImageUrl:leadingImgUrl title:headerTitle headerImgUrl:nil remark:headerRemark];
 }
 
+#pragma mark - override setter
+
+- (void)setTitle:(NSString *)title {
+    if (_title != title) {
+        _title = title;
+        
+        self.titleLabel.text = [NSString stringWithFormat:@"%@", title];
+    }
+}
+
+- (void)setRemark:(NSString *)remark {
+    if (_remark != remark) {
+        _remark = remark;
+        
+        self.remarkLabel.text = [NSString stringWithFormat:@"%@", remark];
+    }
+}
+
 
 #pragma mark - 事件
 
 - (void)headerBtnAction:(UIButton *)btn {
     if (_headerActionBlock) {
         if (btn.tag == 10001) {
-            self.headerActionBlock(HeaderType);
+            self.headerActionBlock(self, HeaderType);
         } else if (btn.tag == 10002) {
-            self.headerActionBlock(RemarkType);
+            self.headerActionBlock(self, RemarkType);
         }
     }
 }
 
 - (void)bgBtnAction:(UIButton *)btn {
     if (self.bgActionBlock) {
-        self.bgActionBlock(BGType);
+        self.bgActionBlock(self, BGType);
     }
 }
 

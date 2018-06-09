@@ -15,5 +15,6 @@
 @property (nonatomic, strong) NSArray<KTVUser *> *invitorList;
 
 @property (nonatomic, copy) void (^callback)(KTVStore *store);
+@property (nonatomic, copy) void (^purikuraCallBack)(KTVStore *store);
 
 @end

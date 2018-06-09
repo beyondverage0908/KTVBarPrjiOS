@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "KTVGood.h"
 
 @interface KTVBuycarSummaryCell : UITableViewCell
+
+@property (nonatomic, strong) NSMutableDictionary<NSString *, id> *shopCart;
 
 @end

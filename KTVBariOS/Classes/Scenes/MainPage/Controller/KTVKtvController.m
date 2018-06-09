@@ -17,8 +17,11 @@
 #import "KTVGroupBuyDetailController.h"
 
 #import "KTVMainService.h"
+#import "KTVBanner.h"
 
-@interface KTVKtvController ()<UITableViewDelegate, UITableViewDataSource, SDCycleScrollViewDelegate>{
+#import "KSPhotoBrowser.h"
+
+@interface KTVKtvController ()<UITableViewDelegate, UITableViewDataSource, SDCycleScrollViewDelegate, KSPhotoBrowserDelegate>{
     NSInteger _tapSectionIndex;
 }
 
@@ -27,6 +30,7 @@
 
 @property (strong, nonatomic) NSMutableDictionary *mainParams;
 @property (strong, nonatomic) NSMutableArray *storeContainerList;
+@property (nonatomic, strong) NSMutableArray<KTVBanner *> *bannerList;
 
 @end
 
@@ -42,6 +46,7 @@
     [self initData];
     // 获取酒吧/ktv主页数据
     [self loadMainData];
+    [self loadMianBanner];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -118,6 +123,17 @@
 - (void)initData {
     self.mainParams = [NSMutableDictionary dictionary];
     self.storeContainerList = [NSMutableArray array];
+    self.bannerList = [NSMutableArray array];
+}
+
+#pragma mark - 方法
+
+- (NSArray<NSString *> *)getBannerImageUrlList {
+    NSMutableArray *list = [NSMutableArray arrayWithCapacity:[self.bannerList count]];
+    for (KTVBanner *banner in self.bannerList) {
+        [list addObject:banner.picture.pictureUrl];
+    }
+    return [list copy];
 }
 
 #pragma mark - 网络
@@ -144,6 +160,19 @@
         } else {
             [KTVToast toast:@"附近暂无商家入驻"];
             CLog(@"-- >> filure");
+        }
+    }];
+}
+
+- (void)loadMianBanner {
+    [KTVMainService getMainBanner:nil result:^(NSDictionary *result) {
+        if ([result[@"code"] isEqualToString:ktvCode]) {
+            for (NSDictionary *dic in result[@"data"]) {
+                KTVBanner *banner = [KTVBanner yy_modelWithDictionary:dic];
+                [self.bannerList addObject:banner];
+            }
+//            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
+            [self.tableView reloadData];
         }
     }];
 }
@@ -258,7 +287,12 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     switch (section) {
         case 0:
-            return 1;
+        {
+            if ([self.bannerList count]) {
+                return 1;
+            }
+            return 0;
+        }
             break;
         default:
         {
@@ -277,9 +311,7 @@
     switch (indexPath.section) {
         case 0:
         {
-            NSArray *imgUrls = @[@"https://4.bp.blogspot.com/-cSkCJRk_MXM/U5yaVSt2JJI/AAAAAAAA-S0/KSLqYLNoiyw/s0/Girl+fashion+beauty.jpg",
-                                 @"https://s10.favim.com/orig/160322/beauty-girl-hair-makeup-Favim.com-4104900.jpg",
-                                 @"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1501749823122&di=b250a8c94d39c217440391f9e6696af2&imgtype=0&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F15%2F24%2F50%2F43Q58PICkj4_1024.jpg"];
+            NSArray *imgUrls = [self getBannerImageUrlList];
             KTVBannerCell *cell = (KTVBannerCell *)[tableView dequeueReusableCellWithIdentifier:KTVStringClass(KTVBannerCell)];
             cell.sdBannerView.delegate = self;
             cell.sdBannerView.imageURLStringsGroup = imgUrls;
@@ -315,7 +347,27 @@
 #pragma mark - SDCycleScrollViewDelegate
 
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index {
-    CLog(@"--%@--酒吧首页--", @(index));
+    NSArray *imgUrls = [self getBannerImageUrlList];
+    NSMutableArray *urlItems = @[].mutableCopy;
+    for (NSString *url in imgUrls) {
+        KSPhotoItem *item = [KSPhotoItem itemWithSourceView:[UIImageView new] imageUrl:[NSURL URLWithString:url]];
+        [urlItems addObject:item];
+    }
+    
+    KSPhotoBrowser *browser = [KSPhotoBrowser browserWithPhotoItems:urlItems selectedIndex:index];
+    browser.delegate = self;
+    browser.dismissalStyle = KSPhotoBrowserInteractiveDismissalStyleRotation;
+    browser.backgroundStyle = KSPhotoBrowserBackgroundStyleBlur;
+    browser.loadingStyle = KSPhotoBrowserImageLoadingStyleIndeterminate;
+    browser.pageindicatorStyle = KSPhotoBrowserPageIndicatorStyleText;
+    browser.bounces = NO;
+    [browser showFromViewController:self];
+}
+
+// MARK: - KSPhotoBrowserDelegate
+
+- (void)ks_photoBrowser:(KSPhotoBrowser *)browser didSelectItem:(KSPhotoItem *)item atIndex:(NSUInteger)index {
+    NSLog(@"selected index: %ld", index);
 }
 
 @end

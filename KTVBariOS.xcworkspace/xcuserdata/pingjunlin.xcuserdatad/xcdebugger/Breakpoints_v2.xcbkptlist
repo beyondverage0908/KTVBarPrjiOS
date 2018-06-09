@@ -20,13 +20,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KTVBariOS/Classes/Scenes/Mine/Controller/KTVAddFriendController.m"
-            timestampString = "533907454.55763"
+            timestampString = "549718253.713696"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "161"
-            endingLineNumber = "161"
-            landmarkName = "-dealloc"
-            landmarkType = "7">
+            startingLineNumber = "164"
+            endingLineNumber = "164"
+            landmarkName = "KTVAddFriendController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -52,60 +52,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KTVBariOS/Classes/Scenes/GroupBuy/ViewController/KTVGroupBuyDetailController.m"
-            timestampString = "542730777.127187"
+            timestampString = "549718253.713819"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "174"
             endingLineNumber = "174"
             landmarkName = "-tableView:viewForHeaderInSection:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "KTVBariOS/Classes/Scenes/GroupBuy/ViewController/KTVPayController.m"
-            timestampString = "545387742.4488389"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "205"
-            endingLineNumber = "205"
-            landmarkName = "-networkCreateOrder:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "KTVBariOS/Classes/Scenes/GroupBuy/ViewController/KTVPayController.m"
-            timestampString = "545387742.449725"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "144"
-            endingLineNumber = "144"
-            landmarkName = "-networkConfirmPay:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "KTVBariOS/Classes/Scenes/GroupBuy/ViewController/KTVSelectedBeautyController.m"
-            timestampString = "544200623.5759521"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "88"
-            endingLineNumber = "88"
-            landmarkName = "-loadPayAfterWarmer"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -122,22 +74,6 @@
             startingLineNumber = "198"
             endingLineNumber = "198"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "KTVBariOS/Classes/Scenes/GroupBuy/ViewController/KTVPayController.m"
-            timestampString = "545387742.4502259"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "202"
-            endingLineNumber = "202"
-            landmarkName = "-networkCreateOrder:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -53,11 +53,16 @@
             totalPrice += package.price.floatValue;
         }
     }
-    NSInteger money = 0;
+    float money = 0;
     for (KTVUser *user in self.selectedActivitorList) {
         money += user.userDetail.price;
     }
     money += totalPrice;
+    
+    // 单点商品价格
+    for (KTVShop *shop in self.shopCartList) {
+        money += [shop.goodCount floatValue] * [shop.good.goodPrice floatValue];
+    }
     
     return @(money).stringValue;
 }
@@ -71,6 +76,7 @@
     vc.packageList = self.packageList;
     vc.store = self.store;
     vc.selectedActivitorList = self.selectedActivitorList;
+    vc.shopCartList = self.shopCartList;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

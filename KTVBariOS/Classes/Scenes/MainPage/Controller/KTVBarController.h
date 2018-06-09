@@ -7,6 +7,7 @@
 //
 
 #import "KTVBaseViewController.h"
+#import "KTVBanner.h"
 
 @interface KTVBarController : KTVBaseViewController
 

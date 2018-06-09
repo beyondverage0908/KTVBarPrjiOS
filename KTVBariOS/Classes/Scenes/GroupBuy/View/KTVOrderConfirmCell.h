@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "KTVPackage.h"
-
+#import "KTVShop.h"
 
 @interface KTVOrderConfirmCell : UITableViewCell
 
 @property (nonatomic, strong) NSArray<KTVUser *> *selectedActivitorList;
 @property (nonatomic, strong) NSArray<KTVPackage *> *packageList;
+@property (nonatomic, copy) NSArray<KTVShop *> *shopCartList;
 
 @end

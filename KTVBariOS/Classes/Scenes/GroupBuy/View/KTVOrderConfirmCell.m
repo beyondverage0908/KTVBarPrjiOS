@@ -42,6 +42,14 @@
     self.moneyLabel.text = [NSString stringWithFormat:@"¥%@", [self getOrderMoney]];
 }
 
+- (void)setShopCartList:(NSArray<KTVShop *> *)shopCartList {
+    if (_shopCartList != shopCartList) {
+        _shopCartList = shopCartList;
+        
+        self.moneyLabel.text = [NSString stringWithFormat:@"¥%@", [self getOrderMoney]];
+    }
+}
+
 /// 获取当前选择套餐和暖场人的总价
 - (NSString *)getOrderMoney {
     float price = 0;
@@ -52,6 +60,10 @@
     // 暖场人价格
     for (KTVUser *user in self.selectedActivitorList) {
         price += user.userDetail.price;
+    }
+    // 单点商品价格
+    for (KTVShop *shop in self.shopCartList) {
+        price += [shop.goodCount floatValue] * [shop.good.goodPrice floatValue];
     }
     return @(price).stringValue;
 }
