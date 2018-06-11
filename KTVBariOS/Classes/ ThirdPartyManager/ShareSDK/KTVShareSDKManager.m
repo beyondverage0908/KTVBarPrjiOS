@@ -129,22 +129,12 @@ NSString * const QQAppKey           = @"aeMOppOmRFRBt99U";
                        switch (state) {
                            case SSDKResponseStateSuccess:
                            {
-                               UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"分享成功"
-                                                                                   message:nil
-                                                                                  delegate:nil
-                                                                         cancelButtonTitle:@"确定"
-                                                                         otherButtonTitles:nil];
-                               [alertView show];
+                               [KTVToast toast:@"分享成功"];
                                break;
                            }
                            case SSDKResponseStateFail:
                            {
-                               UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"分享失败"
-                                                                               message:[NSString stringWithFormat:@"%@",error]
-                                                                              delegate:nil
-                                                                     cancelButtonTitle:@"OK"
-                                                                     otherButtonTitles:nil, nil];
-                               [alert show];
+                               [KTVToast toast:@"分享失败"];
                                break;
                            }
                            default:

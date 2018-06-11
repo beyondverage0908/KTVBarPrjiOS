@@ -23,6 +23,8 @@
 #import "KTVPackageController.h"
 #import "KTVGroupBuyDetailController.h"
 #import "KTVMainService.h"
+#import "KTVShareSDKManager.h"
+#import "KTVComment.h"
 
 #import "KSPhotoBrowser.h"
 
@@ -33,6 +35,7 @@
 @property (strong, nonatomic) NSMutableArray<KTVUser *> *invitatorList;
 @property (strong, nonatomic) UIBarButtonItem *userCollectionBtnItem;
 @property (assign, nonatomic) BOOL isCollection; // 店铺是否被收藏 yes or no
+@property (strong, nonatomic) NSMutableArray<KTVComment *> *commentList;
 
 @end
 
@@ -55,6 +58,7 @@
     
     [self loadStoreInvitators];
     [self getAlreadyUserCollection];
+    [self getStoreComment];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -65,6 +69,25 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [self clearNavigationbar:NO];
+}
+
+#pragma mark - 重写
+
+- (void)setIsCollection:(BOOL)isCollection {
+    _isCollection = isCollection;
+    
+    if (_isCollection) {
+        [self.userCollectionBtnItem setImage:[UIImage imageNamed:@"store_collection"]];
+    } else {
+        [self.userCollectionBtnItem setImage:[UIImage imageNamed:@"app_order_shouchang"]];
+    }
+}
+
+- (NSMutableArray<KTVComment *> *)commentList {
+    if (!_commentList) {
+        _commentList = [NSMutableArray array];
+    }
+    return _commentList;
 }
 
 #pragma mark - 事件
@@ -90,6 +113,7 @@
 // 分享
 - (void)firstRightBarItemAction:(id)sender {
     CLog(@"-->> 订单分享");
+    [KTVShareSDKManager thirdpartyShareTitle:self.store.storeName text:self.store.storeName images:@[[UIImage imageNamed:@"share_app"]] targetUrl:[NSURL URLWithString:@"https://www.pgyer.com/IGf8"]];
 }
 
 // 收藏
@@ -140,7 +164,6 @@
         if ([result[@"code"] isEqualToString:ktvCode]) {
             [KTVToast toast:TOAST_COLLECT_SUCCESS];
             weakself.isCollection = YES;
-            [weakself.userCollectionBtnItem setImage:[UIImage imageNamed:@"store_collection"]];
         } else {
             [KTVToast toast:result[@"detail"]];
         }
@@ -157,7 +180,6 @@
             for (NSDictionary *dic in result[@"data"]) {
                 if ([dic[@"storeModel"][@"id"] integerValue] == weakself.store.storeId.integerValue) {
                     weakself.isCollection = YES;
-                    [weakself.userCollectionBtnItem setImage:[UIImage imageNamed:@"store_collection"]];
                     return;
                 }
             }
@@ -172,9 +194,22 @@
     @WeakObj(self);
     [KTVMainService postUserCollectCancel:params result:^(NSDictionary *result) {
         if ([result[@"code"] isEqualToString:ktvCode]) {
-            [weakself.userCollectionBtnItem setImage:[UIImage imageNamed:@"app_order_shouchang"]];
             weakself.isCollection = NO;
             [KTVToast toast:@"已经取消收藏"];
+        }
+    }];
+}
+
+/// 获取评论
+- (void)getStoreComment {
+    NSString *storeId = self.store.storeId;
+    [KTVMainService postStoreComment:@{@"storeId" : storeId} result:^(NSDictionary *result) {
+        if ([result[@"code"] isEqualToString:ktvCode]) {
+            for (NSDictionary *dict in result[@"data"]) {
+                KTVComment *comment = [KTVComment yy_modelWithDictionary:dict];
+                [self.commentList addObject:comment];
+            }
+            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:4] withRowAnimation:UITableViewRowAnimationNone];
         }
     }];
 }
@@ -191,7 +226,12 @@
     } else if (indexPath.section == 3) {
         return 145;
     } else if (indexPath.section == 4) {
-        return 185;
+        KTVComment *comment = self.commentList[indexPath.row];
+        if ([comment.pictureList count]) {
+            return 185;
+        } else {
+            return 92;
+        }
     } else if (indexPath.section == 5) {
         return 40;
     }else {
@@ -279,7 +319,7 @@
     } else if (section == 3) {
         return 1;
     } else if (section == 4) {
-        return 3;
+        return [self.commentList count];
     } else if (section == 5) {
         return 2;
     } else {
@@ -302,17 +342,9 @@
             NSString *url = @"http://ww4.sinaimg.cn/large/a15bd3a5jw1f12r9ku6wjj20u00mhn22.jpg";
             NSMutableArray *urlItems = @[].mutableCopy;
             for (NSInteger i = 0; i < 10; i++) {
-                KSPhotoItem *item = [KSPhotoItem itemWithSourceView:[UIImageView new] imageUrl:[NSURL URLWithString:url]];
-                [urlItems addObject:item];
+                [urlItems addObject:url];
             }
-            KSPhotoBrowser *browser = [KSPhotoBrowser browserWithPhotoItems:urlItems selectedIndex:0];
-            browser.delegate = weakself;
-            browser.dismissalStyle = KSPhotoBrowserInteractiveDismissalStyleRotation;
-            browser.backgroundStyle = KSPhotoBrowserBackgroundStyleBlur;
-            browser.loadingStyle = KSPhotoBrowserImageLoadingStyleIndeterminate;
-            browser.pageindicatorStyle = KSPhotoBrowserPageIndicatorStyleText;
-            browser.bounces = NO;
-            [browser showFromViewController:weakself];
+            [weakself browserImageWithPictureUrl:[urlItems copy] currentIndex:0];
         };
         return cell;
     } else if (indexPath.section == 1) {
@@ -355,10 +387,22 @@
         cell.groupbuy = groupbuy;
         return cell;
     } else if (indexPath.section == 3) {
+        // 活动
         KTVBarKtvBeautyCell *cell = [tableView dequeueReusableCellWithIdentifier:@"KTVBarKtvBeautyCell"];
         return cell;
     } else if (indexPath.section == 4) {
+        // 评论
+        KTVComment *comment = self.commentList[indexPath.row];
         KTVCommentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"KTVCommentCell"];
+        cell.comment = comment;
+        @WeakObj(self);
+        cell.commentImageBrowsingCallBack = ^(NSInteger idx, KTVComment *comment) {
+            NSMutableArray *urlList = @[].mutableCopy;
+            for (KTVPicture *pic in comment.pictureList) {
+                [urlList addObject:pic.pictureUrl];
+            }
+            [weakself browserImageWithPictureUrl:[urlList copy] currentIndex:idx];
+        };
         return cell;
     } else if (indexPath.section == 5) {
         if (indexPath.row == 0) {
@@ -414,6 +458,22 @@
     }];
     
     return bgView;
+}
+
+- (void)browserImageWithPictureUrl:(NSArray<NSString *> *)picUrlList currentIndex:(NSInteger)currentIndex {
+    NSMutableArray *urlItems = @[].mutableCopy;
+    for (NSString *url in picUrlList) {
+        KSPhotoItem *item = [KSPhotoItem itemWithSourceView:[UIImageView new] imageUrl:[NSURL URLWithString:url]];
+        [urlItems addObject:item];
+    }
+    KSPhotoBrowser *browser = [KSPhotoBrowser browserWithPhotoItems:urlItems selectedIndex:currentIndex];
+    browser.delegate = self;
+    browser.dismissalStyle = KSPhotoBrowserInteractiveDismissalStyleRotation;
+    browser.backgroundStyle = KSPhotoBrowserBackgroundStyleBlur;
+    browser.loadingStyle = KSPhotoBrowserImageLoadingStyleIndeterminate;
+    browser.pageindicatorStyle = KSPhotoBrowserPageIndicatorStyleText;
+    browser.bounces = NO;
+    [browser showFromViewController:self];
 }
 
 // MARK: - KSPhotoBrowserDelegate

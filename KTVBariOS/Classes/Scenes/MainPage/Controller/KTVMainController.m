@@ -12,8 +12,8 @@
 #import "KTVBarEnterMenuCell.h"
 #import "KTVGuessLikeCell.h"
 #import "KTVRecommendCell.h"
-
 #import "KTVBarKtvDetailController.h"
+#import "KTVActivityDetailController.h"
 
 #import "KTVMainService.h"
 #import "KTVLoginService.h"
@@ -24,11 +24,12 @@
 #import "KTVPaySuccessController.h"
 #import "KTVSelectedBeautyController.h"
 #import <AMapLocationKit/AMapLocationKit.h>
+#import "KTVStore.h"
 
 #import "JHPickView.h"
 #import "KSPhotoBrowser.h"
 
-@interface KTVMainController ()<UITableViewDelegate, UITableViewDataSource, SDCycleScrollViewDelegate, AMapLocationManagerDelegate, JHPickerDelegate, UISearchBarDelegate, KSPhotoBrowserDelegate>
+@interface KTVMainController ()<UITableViewDelegate, UITableViewDataSource, SDCycleScrollViewDelegate, AMapLocationManagerDelegate, JHPickerDelegate, UISearchBarDelegate, KSPhotoBrowserDelegate, UIScrollViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIButton *locationBtn;
@@ -87,6 +88,10 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    
+    if ([self.searchBar isFirstResponder]) {
+        [self.searchBar resignFirstResponder];
+    }
 }
 
 // 初始化试图
@@ -131,14 +136,17 @@
     }];
 }
 
+// 附近的活动
 - (void)loadNearActivity {
     KTVAddress *address = [KTVCommon getUserLocation];
-    NSDictionary *params = @{@"storeType" : @0,
-                             @"latitude" : @(address.latitude),
-                             @"longitude" : @(address.longitude)};
+    // 动态获取数据
 //    NSDictionary *params = @{@"storeType" : @0,
-//                             @"latitude" : @(121.48789949),
-//                             @"longitude" : @(31.24916171)};
+//                             @"latitude" : @(address.latitude),
+//                             @"longitude" : @(address.longitude)};
+    // 写死数据
+    NSDictionary *params = @{@"storeType" : @0,
+                             @"latitude" : @(121.48789949),
+                             @"longitude" : @(31.24916171)};
     [KTVMainService postStoreNearActivity:params result:^(NSDictionary *result) {
         if ([result[@"code"] isEqualToString:ktvCode]) {
             for (NSDictionary *dic in result[@"data"]) {
@@ -306,6 +314,13 @@
         KTVStore *store = self.storeLikeList[indexPath.row];
         vc.store = store;;
         [self.navigationController pushViewController:vc animated:YES];
+    } else if (indexPath.section == 3) {
+        // 附近活动
+        KTVActivity *activity = self.activityList[indexPath.row];
+        KTVActivityDetailController *vc = (KTVActivityDetailController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVActivityDetailController"];
+        vc.activity = activity;
+        [self.navigationController pushViewController:vc animated:YES];
+        
     }
 }
 
@@ -353,10 +368,6 @@
     switch (indexPath.section) {
         case 0:
         {
-            NSArray *imgUrls = @[@"https://4.bp.blogspot.com/-cSkCJRk_MXM/U5yaVSt2JJI/AAAAAAAA-S0/KSLqYLNoiyw/s0/Girl+fashion+beauty.jpg",
-                                 @"https://s10.favim.com/orig/160322/beauty-girl-hair-makeup-Favim.com-4104900.jpg",
-                                 @"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1501749823122&di=b250a8c94d39c217440391f9e6696af2&imgtype=0&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F15%2F24%2F50%2F43Q58PICkj4_1024.jpg"];
-            
             NSMutableArray *imgurlList = [NSMutableArray array];
             for (KTVBanner *banner in self.bannerList) {
                 [imgurlList addObject:banner.picture.pictureUrl];
@@ -536,6 +547,14 @@
 
 - (void)ks_photoBrowser:(KSPhotoBrowser *)browser didSelectItem:(KSPhotoItem *)item atIndex:(NSUInteger)index {
     NSLog(@"-->> %@", @(index));
+}
+
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    if ([self.searchBar isFirstResponder]) {
+        [self.searchBar resignFirstResponder];
+    }
 }
 
 @end

@@ -161,4 +161,10 @@ typedef void(^ResponseSuccess)(NSDictionary *result);
 
 /// 获取用户的余额
 + (void)getUserBalance:(NSString *)userId result:(ResponseSuccess)responseResult;
+
+/// 获取门店的评论
++ (void)postStoreComment:(NSDictionary *)params result:(ResponseSuccess)responseResult;
+
+/// 添加门店评论
++ (void)postCreatStoreComment:(NSDictionary *)params result:(ResponseSuccess)responseResult;
 @end

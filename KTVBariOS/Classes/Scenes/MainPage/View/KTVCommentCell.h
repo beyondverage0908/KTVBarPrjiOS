@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "KTVComment.h"
 
 @interface KTVCommentCell : UITableViewCell
+
+@property (nonatomic, strong) KTVComment *comment;
+
+@property (nonatomic, copy) void (^commentImageBrowsingCallBack)(NSInteger idx, KTVComment *comment);
 
 @end
