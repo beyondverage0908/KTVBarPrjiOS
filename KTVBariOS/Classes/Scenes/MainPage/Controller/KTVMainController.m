@@ -14,6 +14,7 @@
 #import "KTVRecommendCell.h"
 #import "KTVBarKtvDetailController.h"
 #import "KTVActivityDetailController.h"
+#import "KTVAddCommentController.h"
 
 #import "KTVMainService.h"
 #import "KTVLoginService.h"
@@ -441,6 +442,9 @@
 //    store.storeId = @"4";
 //    vc.store = store;
 //    [self.navigationController pushViewController:vc animated:YES];
+    
+    KTVAddCommentController *vc = (KTVAddCommentController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVAddCommentController"];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - 地理位置相关

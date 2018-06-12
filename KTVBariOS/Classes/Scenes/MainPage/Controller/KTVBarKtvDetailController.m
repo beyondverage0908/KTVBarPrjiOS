@@ -113,7 +113,7 @@
 // 分享
 - (void)firstRightBarItemAction:(id)sender {
     CLog(@"-->> 订单分享");
-    [KTVShareSDKManager thirdpartyShareTitle:self.store.storeName text:self.store.storeName images:@[[UIImage imageNamed:@"share_app"]] targetUrl:[NSURL URLWithString:@"https://www.pgyer.com/IGf8"]];
+    [KTVShareSDKManager thirdpartyShareTitle:self.store.storeName text:self.store.storeName images:@[[UIImage imageNamed:@"AppIcon"]] targetUrl:[NSURL URLWithString:@"https://www.pgyer.com/IGf8"]];
 }
 
 // 收藏
