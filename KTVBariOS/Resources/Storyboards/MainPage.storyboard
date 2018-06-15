@@ -995,7 +995,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dWH-AE-w0X" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-378" y="532"/>
+            <point key="canvasLocation" x="-378" y="600"/>
         </scene>
         <!--活动详情-->
         <scene sceneID="fLU-bj-XeI">
@@ -1143,7 +1143,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZJc-L8-Jtf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="398" y="531"/>
+            <point key="canvasLocation" x="398" y="600"/>
         </scene>
         <!--Pay Controller-->
         <scene sceneID="fpn-hU-quI">
@@ -1476,7 +1476,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8CS-d4-HUO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1180" y="529.38530734632684"/>
+            <point key="canvasLocation" x="1180" y="600"/>
         </scene>
         <!--Pay Success Controller-->
         <scene sceneID="6gB-QV-rmO">
@@ -1596,6 +1596,27 @@
                                             <outlet property="styleLabel" destination="IqC-TU-Brg" id="oOA-iz-4a4"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="KTVFunctionalWaitCell" rowHeight="82" id="uBA-jC-vgK" customClass="KTVFunctionalWaitCell">
+                                        <rect key="frame" x="0.0" y="138" width="375" height="82"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="uBA-jC-vgK" id="3M7-MR-bXZ">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="82"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="暖场人功能即将上线，敬请期待" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vLV-tg-dRU">
+                                                    <rect key="frame" x="59" y="31" width="257" height="21"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                                    <color key="textColor" red="0.94901960780000005" green="0.094117647060000004" blue="0.52941176469999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" red="0.1019607843" green="0.090196078430000007" blue="0.1215686275" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstItem="vLV-tg-dRU" firstAttribute="centerY" secondItem="3M7-MR-bXZ" secondAttribute="centerY" id="eex-kA-Tl2"/>
+                                                <constraint firstItem="vLV-tg-dRU" firstAttribute="centerX" secondItem="3M7-MR-bXZ" secondAttribute="centerX" id="fME-8h-kbQ"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </prototypes>
                             </tableView>
                         </subviews>
@@ -1614,7 +1635,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j4a-93-xcg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1900" y="528.48575712143929"/>
+            <point key="canvasLocation" x="1909.5999999999999" y="599.55022488755628"/>
         </scene>
         <!--Start Yue Controller-->
         <scene sceneID="xvJ-s8-jbe">
@@ -1928,7 +1949,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Abk-92-rzV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2680.8000000000002" y="528.48575712143929"/>
+            <point key="canvasLocation" x="2682" y="601"/>
         </scene>
         <!--Store View Controller-->
         <scene sceneID="ZFb-Nt-lMB">
@@ -2100,7 +2121,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zPB-pq-aVa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3404" y="530.28485757121439"/>
+            <point key="canvasLocation" x="3410" y="601"/>
         </scene>
         <!--Pin Zhuo Detail Controller-->
         <scene sceneID="c3v-NI-lB8">
@@ -2414,7 +2435,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RDK-gC-xQ8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4120.8000000000002" y="528.48575712143929"/>
+            <point key="canvasLocation" x="4083" y="602"/>
         </scene>
         <!--收藏的店铺-->
         <scene sceneID="boQ-6u-Y0z">
@@ -2586,7 +2607,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WDK-oM-bfd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4796" y="529"/>
+            <point key="canvasLocation" x="4796" y="600"/>
         </scene>
         <!--Add Comment Controller-->
         <scene sceneID="BJS-13-fPu">
@@ -2760,7 +2781,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textView>
-                                                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mine_apply_store" translatesAutoresizingMaskIntoConstraints="NO" id="PRg-zs-wu5">
+                                                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="app_add_img_icon" translatesAutoresizingMaskIntoConstraints="NO" id="PRg-zs-wu5">
                                                     <rect key="frame" x="143" y="193" width="90" height="90"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="90" id="GPL-lR-7sg"/>
@@ -2775,7 +2796,7 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
-                                                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mine_apply_store" translatesAutoresizingMaskIntoConstraints="NO" id="z3F-kx-N1N">
+                                                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="app_add_img_icon" translatesAutoresizingMaskIntoConstraints="NO" id="z3F-kx-N1N">
                                                     <rect key="frame" x="270" y="193" width="90" height="90"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="90" id="LTC-7j-5QU"/>
@@ -2797,7 +2818,7 @@
                                                         <constraint firstAttribute="height" constant="36" id="pab-nH-ZWB"/>
                                                     </constraints>
                                                 </view>
-                                                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mine_apply_store" translatesAutoresizingMaskIntoConstraints="NO" id="Rwm-iS-4uH">
+                                                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="app_add_img_icon" translatesAutoresizingMaskIntoConstraints="NO" id="Rwm-iS-4uH">
                                                     <rect key="frame" x="15" y="193" width="90" height="90"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="90" id="5pP-uE-PH7"/>
@@ -2894,7 +2915,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pp2-QH-chn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5536.8000000000002" y="530.28485757121439"/>
+            <point key="canvasLocation" x="5537" y="600"/>
         </scene>
         <!--Bar Ktv Detail Controller-->
         <scene sceneID="GVS-CI-C9B">
@@ -5672,6 +5693,7 @@
     </scenes>
     <resources>
         <image name="add_sign" width="32" height="32"/>
+        <image name="app_add_img_icon" width="90" height="90"/>
         <image name="app_anniu_red" width="315" height="40"/>
         <image name="app_arrow_right_hui" width="6" height="11"/>
         <image name="app_cell_split" width="375" height="6"/>
@@ -5709,7 +5731,6 @@
         <image name="mainpage_list_location" width="12" height="15"/>
         <image name="mainpage_list_start" width="11" height="11"/>
         <image name="mainpage_menu_split" width="375" height="72"/>
-        <image name="mine_apply_store" width="53" height="53"/>
         <image name="package_detail_placeholder" width="368" height="144"/>
         <image name="reduce_sign" width="32" height="32"/>
     </resources>

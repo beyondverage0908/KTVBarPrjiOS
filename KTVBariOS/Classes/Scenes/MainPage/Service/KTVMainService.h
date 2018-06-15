@@ -167,4 +167,13 @@ typedef void(^ResponseSuccess)(NSDictionary *result);
 
 /// 添加门店评论
 + (void)postCreatStoreComment:(NSDictionary *)params result:(ResponseSuccess)responseResult;
+
+/// 获取门店活动
++ (void)getStoreActivity:(NSString *)storeId result:(ResponseSuccess)responseResult;
+
+/// 取消订单
++ (void)postOrderCancel:(NSDictionary *)params result:(ResponseSuccess)responseResult;
+
+/// 查询指定订单
++ (void)getOrder:(NSString *)orderId result:(ResponseSuccess)responseResult;
 @end

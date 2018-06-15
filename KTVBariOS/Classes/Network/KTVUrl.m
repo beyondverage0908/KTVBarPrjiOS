@@ -225,6 +225,14 @@
     return @"/api/order/createWarmerOrder";
 }
 
++ (NSString *)getStoreActivityUrl {
+    return @"/api/store/storeActivity/";
+}
+
++ (NSString *)getOrderCancelUrl {
+    return @"/api/order/orderCancel";
+}
+
 #pragma mark - 评论
 
 + (NSString *)getRecentStatusUrl {

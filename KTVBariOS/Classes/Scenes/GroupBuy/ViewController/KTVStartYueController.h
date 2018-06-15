@@ -13,6 +13,6 @@
 /// 查询条件-拼桌者电话号码
 @property (nonatomic, strong) NSString *phone;
 
-@property (nonatomic, strong) NSArray * storeList;
+@property (nonatomic, strong) NSArray<KTVStore *> * storeList;
 
 @end

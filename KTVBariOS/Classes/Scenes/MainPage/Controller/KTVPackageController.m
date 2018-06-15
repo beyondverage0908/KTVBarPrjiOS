@@ -54,6 +54,12 @@
     
     self.tableView.tableFooterView = [self tableViewFooter];
     
+    // 默认选中第一个套餐
+    if ([self.store.packageList count]) {
+        KTVPackage *package = [self.store.packageList firstObject];
+        package.isSelected = YES;
+    }
+    
     [self initData];
     [self initUI];
     

@@ -20,6 +20,8 @@
 #import "KTVBuyService.h"
 #import "KTVPayManager.h"
 #import "KTVUserInfoController.h"
+#import "KTVFunctionalWaitController.h"
+#import "KTVFunctionalWaitCell.h"
 
 @interface KTVPaySuccessController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -45,8 +47,8 @@
     
     self.activitorList = [NSMutableArray array];
     self.selectedActivitorList = [NSMutableArray array];
-    
-    [self loadPageStoreActivitors];
+// 先注释
+//    [self loadPageStoreActivitors];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -77,7 +79,7 @@
     for (KTVUser *user in self.selectedActivitorList) {
         NSDictionary *dict = @{@"sourceId" : @(user.userId.integerValue),
                                @"price" : @(user.userDetail.price),
-                               @"orderType" : @(user.userDetail.type),
+                               @"orderType" : @(4), // 暖场人订单为4
                                @"count" : @(1),
                                @"discount" : @(100)};
         [userOrderDetails addObject:dict];
@@ -214,7 +216,8 @@
     if (section == 0) {
         return 29.0f;
     } else if (section == 1) {
-        return 30.0f;
+//        return 30.0f;
+        return 0;
     }
     return 0;
 }
@@ -271,6 +274,8 @@
         return 99.0f;
     } else if (indexPath.section == 2) {
         return 80.0f;
+    } else if (indexPath.section == 3) {
+        return 80.0f;
     }
     return 0;
 }
@@ -288,15 +293,18 @@
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
         return 3;
     } else if (section == 1) {
-        return [self.activitorList count];
+//        return [self.activitorList count];
+        return 0;
     } else if (section == 2) {
+        return 0;
+    } else if (section == 3) {
         return 1;
     }
     return 0;
@@ -324,7 +332,9 @@
                 [weakself backToRootController];
             };
             cell.startPinZhuoCallback = ^{
-                KTVStartYueController *vc = (KTVStartYueController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVStartYueController"];
+//                KTVStartYueController *vc = (KTVStartYueController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVStartYueController"];
+//                [weakself.navigationController pushViewController:vc animated:YES];
+                KTVFunctionalWaitController *vc = (KTVFunctionalWaitController *)[UIViewController storyboardName:@"Main" storyboardId:@"KTVFunctionalWaitController"];
                 [weakself.navigationController pushViewController:vc animated:YES];
             };
             return cell;
@@ -357,6 +367,9 @@
             CLog(@"-- >> 付款");
             [weakself createWarmerOrder];
         };
+        return cell;
+    } else if (indexPath.section == 3) {
+        KTVFunctionalWaitCell *cell = [tableView dequeueReusableCellWithIdentifier:@"KTVFunctionalWaitCell"];
         return cell;
     }
     return [UITableViewCell new];

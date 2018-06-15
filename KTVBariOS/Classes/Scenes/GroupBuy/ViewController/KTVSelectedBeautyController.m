@@ -175,7 +175,7 @@ static NSInteger RowCount = 3;
         UIView *superView = self.view;
         [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
             if (@available(iOS 11.0, *)) {
-                make.top.equalTo(superView.mas_safeAreaLayoutGuideTop).offset(64 + 40);
+                make.top.equalTo(superView.mas_safeAreaLayoutGuideTop);
             } else {
                 // Fallback on earlier versions
                 make.top.equalTo(superView.mas_topMargin);
@@ -318,7 +318,11 @@ static NSInteger RowCount = 3;
     if (kind == UICollectionElementKindSectionHeader) {
         KTVBeeCollectionHeaderView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"KTVBeeCollectionHeaderView" forIndexPath:indexPath];
         reusableView = headerView;
-        headerView.type = indexPath.section;
+        if (self.warmerType == MultipleWarmerType) {
+            headerView.type = indexPath.section;
+        } else {
+            headerView.type = self.singleType;
+        }
         return reusableView;
     }
     
@@ -333,10 +337,13 @@ static NSInteger RowCount = 3;
                 NSArray *singleWarmerList = nil;
                 if (indexPath.section == 0) {
                     singleWarmerList = [weakself.typeActivitorDic objectForKey:@"fixed"];
+                    vc.singleType = 0;
                 } else if (indexPath.section == 1) {
                     singleWarmerList = [weakself.typeActivitorDic objectForKey:@"longtime"];
+                    vc.singleType = 1;
                 } else if (indexPath.section == 2) {
                     singleWarmerList = [weakself.typeActivitorDic objectForKey:@"parttime"];
+                    vc.singleType = 2;
                 }
                 vc.singleWarmerList = singleWarmerList;
                 [weakself.navigationController pushViewController:vc animated:YES];

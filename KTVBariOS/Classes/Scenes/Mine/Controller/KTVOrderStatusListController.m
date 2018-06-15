@@ -86,6 +86,7 @@
 #pragma mark - 网络
 
 - (void)loadOrderByOrderStatus:(NSInteger)orderStatus {
+    // @"全部", @"待付款", @"待使用", @"待评价"
     switch (self.currentOrderStatus) {
         case 99:
         {
@@ -185,6 +186,16 @@
     }];
 }
 
+- (void)cancelOrder:(NSDictionary *)orderParams {
+    [KTVMainService postOrderCancel:orderParams result:^(NSDictionary *result) {
+        if ([result[@"code"] isEqualToString:ktvCode]) {
+            [KTVToast toast:@"取消订单成功"];
+        } else {
+            [KTVToast toast:result[@"detail"]];
+        }
+    }];
+}
+
 #pragma mark - UITableViewDelegate
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -242,6 +253,34 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     KTVStoreUseOrderController *vc = (KTVStoreUseOrderController *)[UIViewController storyboardName:@"MePage" storyboardId:@"KTVStoreUseOrderController"];
+    switch (self.currentOrderStatus) {
+        case 99:
+        {
+            KTVOrder *order = self.allOrderList[indexPath.row];
+            vc.order = order;
+        }
+            break;
+        case -1:
+        {
+            KTVOrder *order = self.allWaitPayList[indexPath.row];
+            vc.order = order;
+        }
+            break;
+        case 2:
+        {
+            KTVOrder *order = self.allWaitUseList[indexPath.row];
+            vc.order = order;
+        }
+            break;
+        case 5:
+        {
+            KTVOrder *order = self.allWaitCommentList[indexPath.row];
+            vc.order = order;
+        }
+            break;
+        default:
+            break;
+    }
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -311,6 +350,13 @@
         default:
             break;
     }
+    
+    @WeakObj(self);
+    cell.orderCancelCallBack = ^(NSString *orderId, NSInteger orderType, BOOL isRefunded) {
+        NSDictionary *params = @{@"subStoreId" : orderId, @"type" : @(orderType), @"isRefunded" : @(isRefunded)};
+        [weakself cancelOrder:params];
+    };
+    
     return cell;
 }
 

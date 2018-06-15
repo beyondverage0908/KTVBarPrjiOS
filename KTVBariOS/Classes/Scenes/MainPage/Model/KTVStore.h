@@ -24,7 +24,7 @@
 @property (nonatomic, strong) NSString * provice;
 @property (nonatomic, strong) NSString * city;
 @property (nonatomic, assign) NSInteger  storeType;
-@property (nonatomic, strong) NSArray  * packageList;
+@property (nonatomic, strong) NSArray<KTVPackage *>  * packageList;
 @property (nonatomic, strong) NSArray * seatList;
 @property (nonatomic, strong) NSArray * boxRoomList;
 @property (nonatomic, strong) NSArray * activitorList;

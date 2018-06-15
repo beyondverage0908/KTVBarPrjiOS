@@ -21,6 +21,7 @@
 #import "KTVMyInvitationController.h"
 #import "KTVApplyWarmerPartOneController.h"
 #import "KTVMyMoneyController.h"
+#import "KTVFunctionalWaitController.h"
 
 #import "KTVUserHeaderCell.h"
 #import "KTVUserInfoCell.h"
@@ -198,16 +199,17 @@
             [self.navigationController pushViewController:vc animated:YES];
         } else if (indexPath.row == 1) {
             // 发起拼桌活动
-            if (![self.storeList count]) {
-                [KTVToast toast:TOAST_NO_USEING_ORDER];
-                return;
-            }
-            KTVStartYueController *vc = (KTVStartYueController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVStartYueController"];
+            KTVFunctionalWaitController *vc = (KTVFunctionalWaitController *)[UIViewController storyboardName:@"Main" storyboardId:@"KTVFunctionalWaitController"];
             [self.navigationController pushViewController:vc animated:YES];
+//            KTVStartYueController *vc = (KTVStartYueController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVStartYueController"];
+//            vc.storeList = self.storeList;
+//            [self.navigationController pushViewController:vc animated:YES];
         } else if (indexPath.row == 2) {
             CLog(@"-- 暖场人邀约");
-            KTVMyInvitationController *vc = (KTVMyInvitationController *)[UIViewController storyboardName:@"MePage" storyboardId:@"KTVMyInvitationController"];
+            KTVFunctionalWaitController *vc = (KTVFunctionalWaitController *)[UIViewController storyboardName:@"Main" storyboardId:@"KTVFunctionalWaitController"];
             [self.navigationController pushViewController:vc animated:YES];
+//            KTVMyInvitationController *vc = (KTVMyInvitationController *)[UIViewController storyboardName:@"MePage" storyboardId:@"KTVMyInvitationController"];
+//            [self.navigationController pushViewController:vc animated:YES];
         } else if (indexPath.row == 3) {
             // 发布动态
             KTVDynamicController *vc = (KTVDynamicController *)[UIViewController storyboardName:@"MePage" storyboardId:KTVStringClass(KTVDynamicController)];
@@ -224,9 +226,11 @@
             [self.navigationController pushViewController:vc animated:YES];
         } else if (indexPath.row == 6) {
             // 申请成为暖场人
-            KTVApplyWarmerPartOneController *vc = [[KTVApplyWarmerPartOneController alloc] init];
-            vc.hidesBottomBarWhenPushed = YES;
+            KTVFunctionalWaitController *vc = (KTVFunctionalWaitController *)[UIViewController storyboardName:@"Main" storyboardId:@"KTVFunctionalWaitController"];
             [self.navigationController pushViewController:vc animated:YES];
+//            KTVApplyWarmerPartOneController *vc = [[KTVApplyWarmerPartOneController alloc] init];
+//            vc.hidesBottomBarWhenPushed = YES;
+//            [self.navigationController pushViewController:vc animated:YES];
         } else if (indexPath.row == 7) {
             KTVSettingController *vc = (KTVSettingController *)[UIViewController storyboardName:@"MePage" storyboardId:KTVStringClass(KTVSettingController)];
             [self.navigationController pushViewController:vc animated:YES];
@@ -285,9 +289,11 @@
                         KTVOrderStatusListController *vc = (KTVOrderStatusListController *)[UIViewController storyboardName:@"MePage" storyboardId:@"KTVOrderStatusListController"];
                         [weakself.navigationController pushViewController:vc animated:YES];
                     } else {
-                        KTVChatSessionController *vc = [[KTVChatSessionController alloc] init];
-                        vc.hidesBottomBarWhenPushed = YES;
-                        [weakself.navigationController pushViewController:vc animated:YES];
+                        KTVFunctionalWaitController *vc = (KTVFunctionalWaitController *)[UIViewController storyboardName:@"Main" storyboardId:@"KTVFunctionalWaitController"];
+                        [self.navigationController pushViewController:vc animated:YES];
+//                        KTVChatSessionController *vc = [[KTVChatSessionController alloc] init];
+//                        vc.hidesBottomBarWhenPushed = YES;
+//                        [weakself.navigationController pushViewController:vc animated:YES];
                     }
                 } else {
                     [weakself requestToLogin];

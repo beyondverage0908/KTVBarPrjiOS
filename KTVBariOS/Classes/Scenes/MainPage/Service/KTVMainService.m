@@ -757,5 +757,50 @@
     }];
 }
 
+/// 获取门店活动
++ (void)getStoreActivity:(NSString *)storeId result:(ResponseSuccess)responseResult {
+    KTVRequestMessage *msg = [[KTVRequestMessage alloc] init];
+    msg.path = [KTVUrl getStoreActivityUrl];
+    msg.httpType = KtvGET;
+    msg.params = storeId;
+    
+    [[KTVNetworkHelper sharedInstance] send:msg success:^(NSDictionary *result) {
+        // 数据接口解析
+        responseResult(result);
+    } fail:^(NSError *error) {
+        CLog(@"--->>>%@", error);
+    }];
+}
+
+/// 取消订单
++ (void)postOrderCancel:(NSDictionary *)params result:(ResponseSuccess)responseResult {
+    KTVRequestMessage *msg = [[KTVRequestMessage alloc] init];
+    msg.path = [KTVUrl getOrderCancelUrl];
+    msg.httpType = KtvPOST;
+    msg.params = params;
+    
+    [[KTVNetworkHelper sharedInstance] send:msg success:^(NSDictionary *result) {
+        // 数据接口解析
+        responseResult(result);
+    } fail:^(NSError *error) {
+        CLog(@"--->>>%@", error);
+    }];
+}
+
+/// 查询指定订单
++ (void)getOrder:(NSString *)orderId result:(ResponseSuccess)responseResult {
+    KTVRequestMessage *msg = [[KTVRequestMessage alloc] init];
+    msg.path = [KTVUrl getOrderUrl];
+    msg.httpType = KtvGET;
+    msg.params = orderId;
+    
+    [[KTVNetworkHelper sharedInstance] send:msg success:^(NSDictionary *result) {
+        // 数据接口解析
+        responseResult(result);
+    } fail:^(NSError *error) {
+        CLog(@"--->>>%@", error);
+    }];
+}
+
 @end
 

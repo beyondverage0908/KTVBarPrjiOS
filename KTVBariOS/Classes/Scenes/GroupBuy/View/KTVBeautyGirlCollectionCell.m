@@ -60,6 +60,8 @@
     } else {
         [self.yuetaBtn setImage:[UIImage imageNamed:@"app_selected_kuang"] forState:UIControlStateNormal];
     }
+    
+    [self.beautyHeaderImageView sd_setImageWithURL:[NSURL URLWithString:_user.pictureList.firstObject.pictureUrl] placeholderImage:[UIImage imageNamed:@"dianpu_dandian_single"]];
 }
 
 

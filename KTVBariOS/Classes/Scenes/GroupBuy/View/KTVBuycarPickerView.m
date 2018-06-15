@@ -41,7 +41,7 @@
         _shopCart = shopCart;
         
         self.numberLabel.text = [NSString stringWithFormat:@"%@", _shopCart[@"goodCount"]];
-        self.moneyLabel.text = [NSString stringWithFormat:@"%@", @([_shopCart[@"goodCount"] integerValue] * self.tempGood.goodPrice.floatValue)];
+        self.moneyLabel.text = [NSString stringWithFormat:@"%@ 元", @([_shopCart[@"goodCount"] integerValue] * self.tempGood.goodPrice.floatValue)];
     }
 }
 
@@ -85,7 +85,7 @@
     CLog(@"--->>> 数量减少");
     KTVGood *good = self.shopCart[@"goodKey"];
     [self removeGoodFromCart];
-    self.moneyLabel.text = [NSString stringWithFormat:@"%@", @([self getCartAllPrice])];
+    self.moneyLabel.text = [NSString stringWithFormat:@"%@ 元", @([self getCartAllPrice])];
     self.numberLabel.text = [NSString stringWithFormat:@"%@", @([self getCartCount])];
     
     if (self.operateShoppingCartCallBack) {
@@ -96,7 +96,7 @@
 - (IBAction)incrementNumberAction:(UIButton *)sender {
 
     [self addGoodToCart];
-    self.moneyLabel.text = [NSString stringWithFormat:@"%@", @([self getCartAllPrice])];
+    self.moneyLabel.text = [NSString stringWithFormat:@"%@ 元", @([self getCartAllPrice])];
     self.numberLabel.text = [NSString stringWithFormat:@"%@", @([self getCartCount])];
     
     if (self.operateShoppingCartCallBack) {
@@ -109,7 +109,7 @@
     CLog(@"--->>> 单点取消");
     
     [self clearCart];
-    self.moneyLabel.text = [NSString stringWithFormat:@"%@", @([self getCartAllPrice])];
+    self.moneyLabel.text = [NSString stringWithFormat:@"%@ 元", @([self getCartAllPrice])];
     self.numberLabel.text = [NSString stringWithFormat:@"%@", @([self getCartCount])];
 }
 

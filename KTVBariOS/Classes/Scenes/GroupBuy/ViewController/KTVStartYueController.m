@@ -31,6 +31,11 @@
 
 @end
 
+//if (![self.storeList count]) {
+//    [KTVToast toast:TOAST_NO_USEING_ORDER];
+//    return;
+//}
+
 @implementation KTVStartYueController
 
 - (void)viewDidLoad {

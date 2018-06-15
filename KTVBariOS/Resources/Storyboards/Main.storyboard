@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="b6w-Ho-lTb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="b6w-Ho-lTb">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -22,8 +23,38 @@
             </objects>
             <point key="canvasLocation" x="-1900" y="-951"/>
         </scene>
+        <!--敬请期待-->
+        <scene sceneID="pw8-OJ-OTQ">
+            <objects>
+                <viewController storyboardIdentifier="KTVFunctionalWaitController" title="敬请期待" hidesBottomBarWhenPushed="YES" id="hCw-Vn-3iL" customClass="KTVFunctionalWaitController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="K3T-Vk-tgj"/>
+                        <viewControllerLayoutGuide type="bottom" id="LTi-5M-Ykf"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="mfp-6J-YYg">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="敬请期待" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Ko-MZ-OzI">
+                                <rect key="frame" x="141.5" y="320" width="93.5" height="27.5"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
+                                <color key="textColor" red="0.94901960780000005" green="0.094117647060000004" blue="0.52941176469999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.1019607843" green="0.090196078430000007" blue="0.1215686275" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="0Ko-MZ-OzI" firstAttribute="centerY" secondItem="mfp-6J-YYg" secondAttribute="centerY" id="DjD-77-7lV"/>
+                            <constraint firstItem="0Ko-MZ-OzI" firstAttribute="centerX" secondItem="mfp-6J-YYg" secondAttribute="centerX" id="N4H-Se-bxP"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xkd-9O-usk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1146" y="-951"/>
+        </scene>
     </scenes>
     <resources>
-        <image name="app_tab_bar" width="375" height="45"/>
+        <image name="app_tab_bar" width="375" height="49"/>
     </resources>
 </document>

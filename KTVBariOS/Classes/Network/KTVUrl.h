@@ -149,6 +149,9 @@
 /// 获取单个团购信息
 + (NSString *)getGroupBuyUrl;
 
+/// 获取门店活动
++ (NSString *)getStoreActivityUrl;
+
 #pragma mark - 订单
 
 /// 创建订单
@@ -190,6 +193,9 @@
 
 /// 加入拼桌
 + (NSString *)getShareTableEnrollUrl;
+
+/// 取消订单
++ (NSString *)getOrderCancelUrl;
 
 #pragma mark - 邀约
 

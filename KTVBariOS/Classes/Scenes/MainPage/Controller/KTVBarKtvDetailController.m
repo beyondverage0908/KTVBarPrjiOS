@@ -22,9 +22,11 @@
 #import "KTVOtherDianpuCell.h"
 #import "KTVPackageController.h"
 #import "KTVGroupBuyDetailController.h"
+#import "KTVActivityDetailController.h"
 #import "KTVMainService.h"
 #import "KTVShareSDKManager.h"
 #import "KTVComment.h"
+#import "KTVActivity.h"
 
 #import "KSPhotoBrowser.h"
 
@@ -36,6 +38,7 @@
 @property (strong, nonatomic) UIBarButtonItem *userCollectionBtnItem;
 @property (assign, nonatomic) BOOL isCollection; // 店铺是否被收藏 yes or no
 @property (strong, nonatomic) NSMutableArray<KTVComment *> *commentList;
+@property (strong, nonatomic) NSMutableArray<KTVActivity *> *activityList;
 
 @end
 
@@ -59,6 +62,7 @@
     [self loadStoreInvitators];
     [self getAlreadyUserCollection];
     [self getStoreComment];
+    [self getStoreActivity];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -88,6 +92,13 @@
         _commentList = [NSMutableArray array];
     }
     return _commentList;
+}
+
+- (NSMutableArray<KTVActivity *> *)activityList {
+    if (!_activityList) {
+        _activityList = [NSMutableArray array];
+    }
+    return _activityList;
 }
 
 #pragma mark - 事件
@@ -214,6 +225,20 @@
     }];
 }
 
+/// 获取门店活动
+- (void)getStoreActivity {
+    NSString *storeId = self.store.storeId;
+    [KTVMainService getStoreActivity:storeId result:^(NSDictionary *result) {
+        if ([result[@"code"] isEqualToString:ktvCode]) {
+            for (NSDictionary *dict in result[@"data"]) {
+                KTVActivity *activity = [KTVActivity yy_modelWithDictionary:dict];
+                [self.activityList addObject:activity];
+            }
+            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:3] withRowAnimation:UITableViewRowAnimationNone];
+        }
+    }];
+}
+
 #pragma mark - UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -251,7 +276,7 @@
         KTVTableHeaderView *headerView = [[KTVTableHeaderView alloc] initWithImageUrl:nil title:@"活动详情" remark:nil];
         return headerView;
     } else if (section == 4) {
-        KTVTableHeaderView *headerView = [[KTVTableHeaderView alloc] initWithImageUrl:nil title:@"点评" remark:@"2445条评论"];
+        KTVTableHeaderView *headerView = [[KTVTableHeaderView alloc] initWithImageUrl:nil title:@"点评" remark:[NSString stringWithFormat:@"%@条评论", @(self.commentList.count)]];
         return headerView;
     } else if (section == 5) {
         KTVTableHeaderView *headerView = [[KTVTableHeaderView alloc] initWithImageUrl:nil title:@"商家详情" remark:nil];
@@ -262,10 +287,14 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if (section == 1 || section == 3 || section == 4 || section == 5) {
+    if (section == 1 || section == 5) {
         return 28;
     } else if (section == 2) {
         return self.store.groupBuyList.count ? 28 : 0;
+    } else if (section == 3) {
+        return self.activityList.count ? 28 : 0;
+    } else if (section == 4) {
+        return self.commentList.count ? 28 : 0;
     } else {
         return 0;
     }
@@ -300,6 +329,11 @@
         vc.store = self.store;
         vc.groupbuy = groupbuy;
         [self.navigationController pushViewController:vc animated:YES];
+    } else if (indexPath.section == 3) {
+        KTVActivity *activity = self.activityList[indexPath.row];
+        KTVActivityDetailController *vc = (KTVActivityDetailController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVActivityDetailController"];
+        vc.activity = activity;
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 
@@ -317,7 +351,7 @@
     } else if (section == 2) {
         return self.store.groupBuyList.count;
     } else if (section == 3) {
-        return 1;
+        return [self.activityList count];
     } else if (section == 4) {
         return [self.commentList count];
     } else if (section == 5) {
@@ -389,6 +423,8 @@
     } else if (indexPath.section == 3) {
         // 活动
         KTVBarKtvBeautyCell *cell = [tableView dequeueReusableCellWithIdentifier:@"KTVBarKtvBeautyCell"];
+        KTVActivity *activity = [self.activityList objectAtIndex:indexPath.row];
+        cell.activity = activity;
         return cell;
     } else if (indexPath.section == 4) {
         // 评论

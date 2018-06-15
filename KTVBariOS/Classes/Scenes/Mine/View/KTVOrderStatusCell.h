@@ -13,4 +13,6 @@
 
 @property (nonatomic, strong) KTVOrder *order;
 
+@property (nonatomic, copy) void (^orderCancelCallBack)(NSString *orderId, NSInteger orderType, BOOL isRefunded);
+
 @end

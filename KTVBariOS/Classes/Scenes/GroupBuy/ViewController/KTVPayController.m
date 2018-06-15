@@ -55,7 +55,7 @@
     [self.orderUploadDictionary setObject:@(0) forKey:@"userHide"];
     // 订单时间
     NSString *currentDate = [NSDate dateStringWithDate:[NSDate date] andFormatString:@"yyyy-MM-dd HH:mm"];
-    [self.orderUploadDictionary setObject:currentDate forKey:@"startDate"];
+    [self.orderUploadDictionary setObject:currentDate forKey:@"startTime"];
     
     // 订单结束时间
     NSCalendar *calendar = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
@@ -63,13 +63,13 @@
     components.minute = components.minute + 15;
     NSDate *endDate = [calendar dateFromComponents:components];
     NSString *endTime = [NSDate dateStringWithDate:endDate andFormatString:@"yyyy-MM-dd HH:mm"];
-    [self.orderUploadDictionary setObject:endTime forKey:@"endDate"];
+    [self.orderUploadDictionary setObject:endTime forKey:@"endTime"];
     
     NSMutableArray *userOrderDetails = [NSMutableArray array];
     for (KTVUser *user in self.selectedActivitorList) {
         NSDictionary *dict = @{@"sourceId" : @(user.userId.integerValue),
                                @"price" : @(user.userDetail.price),
-                               @"orderType" : @(4),
+                               @"orderType" : @(4), // 暖场人
                                @"count" : @(1),
                                @"discount" : @(100)};
         [userOrderDetails addObject:dict];
@@ -77,7 +77,7 @@
     for (KTVShop *shop in self.shopCartList) {
         NSDictionary *dict = @{@"sourceId" : @(shop.good.goodId.integerValue),
                                @"price" : shop.good.goodPrice,
-                               @"orderType" : @(5),
+                               @"orderType" : @(5), // 单点商品
                                @"count" : shop.goodCount,
                                @"discount" : @(100)};
         [userOrderDetails addObject:dict];
@@ -103,6 +103,7 @@
     self.tableView.backgroundColor = [UIColor ktvBG];
     
     [self initData];
+    [self initUI];
     
     [self.confirmPayBtn setTitle:[NSString stringWithFormat:@"确认支付 ¥%@", [self getOrderAllMoney]] forState:UIControlStateNormal];
 }
@@ -116,10 +117,22 @@
 - (void)initData {
     self.payChannelDict = [NSMutableDictionary dictionaryWithCapacity:3];
     [self.payChannelDict setObject:[NSNumber numberWithBool:NO] forKey:@"unionpay"];
-    [self.payChannelDict setObject:[NSNumber numberWithBool:NO] forKey:@"alipay"];
+    [self.payChannelDict setObject:[NSNumber numberWithBool:YES] forKey:@"alipay"];
     [self.payChannelDict setObject:[NSNumber numberWithBool:NO] forKey:@"wx"];
     
     self.orderUploadDictionary = [NSMutableDictionary dictionary];
+}
+
+- (void)initUI {
+    for (NSString *channel in self.payChannelDict.allKeys) {
+        if ([self.payChannelDict[channel] boolValue]) {
+            if ([channel isEqualToString:@"alipay"]) {
+                [self.alipayBtn setImage:[UIImage imageNamed:@"app_radius_gou"] forState:UIControlStateNormal];
+            } else if ([channel isEqualToString:@"wx"]) {
+                [self.wechatPayBtn setImage:[UIImage imageNamed:@"app_radius_gou"] forState:UIControlStateNormal];
+            }
+        }
+    }
 }
 
 #pragma mark - 封装

@@ -19,6 +19,7 @@ typedef NS_ENUM(NSInteger, WarmerType) {
 
 @property (nonatomic, assign) WarmerType warmerType; // 表示暖场人的类型
 @property (nonatomic, strong) NSArray *singleWarmerList;
+@property (nonatomic, assign) NSInteger singleType;
 @property (strong, nonatomic) KTVStore *store;
 @property (strong, nonatomic) KTVGroupbuy *groupbuy;
 @property (strong, nonatomic) NSMutableArray *selectedActivitorList; //已经选中的暖场人

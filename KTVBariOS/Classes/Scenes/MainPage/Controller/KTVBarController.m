@@ -136,11 +136,12 @@
 
 #pragma mark - 网络
 
+/// 
 - (void)loadMainData {
     KTVAddress *address = [KTVCommon getUserLocation];
     // storeType: 0 酒吧   storeType: 1 KTV
     [self.mainParams setObject:@"0" forKey:@"storeType"];
-    [self.mainParams setObject:@"1500.0" forKey:@"distance"];
+    [self.mainParams setObject:@"150000000.0" forKey:@"distance"];
     [self.mainParams setObject:@(address.latitude) forKey:@"latitude"];
     [self.mainParams setObject:@(address.longitude) forKey:@"longitude"];
     [self.mainParams setObject:@(121.48789949) forKey:@"latitude"];
@@ -159,7 +160,7 @@
 
             [self.tableView reloadData];
         } else {
-            [KTVToast toast:@"附近暂无商家入驻"];
+            [KTVToast toast:@"暂无商家入驻"];
             CLog(@"-- >> filure");
         }
     }];
