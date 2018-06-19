@@ -205,9 +205,17 @@
                            @{@"性别": @[@"男", @"女", @"不限"]},
                            @{@"智能排序": @[@"男", @"女", @"不限"]}];
         KTVFilterView *filterView = [[KTVFilterView alloc] initWithFilter:dataS];
-        filterView.filterCallback = ^(NSDictionary *filterMap) {
-            NSInteger idx = [dataS indexOfObject:filterMap];
-            CLog(@"--->>> %@", @(idx));
+        @WeakObj(self);
+        filterView.filterCallback = ^(NSInteger index, NSDictionary *filterMap) {
+            CLog(@"--->>> %@", @(index));
+            if (@available(iOS 11.0, *)) {
+                [weakself.tableView setContentOffset:CGPointMake(0, -tableView.adjustedContentInset.top + 145.0f) animated:YES];
+            } else {
+                [weakself.tableView setContentOffset:CGPointMake(0, -tableView.contentInset.top + 145.0f) animated:YES];
+            }
+        };
+        filterView.filterDitailCallback = ^(NSString *filterDetailKey) {
+            CLog(@"%@", filterDetailKey);
         };
         return filterView;
     }

@@ -12,7 +12,7 @@
 
 @property (strong, nonatomic) NSArray<NSDictionary<NSString *, NSArray *> *> *filters;
 
-@property (strong, nonatomic) UIView *maskFilterView;
+@property (strong, nonatomic) UIView *bkMaskView;
 
 @property (strong, nonatomic) NSDictionary<NSString *, NSArray *> *filterSectionDic;
 
@@ -26,9 +26,9 @@
     self = [super init];
     if (self) {
         
-        self.filters = filters;
+        self.filters = [filters copy];
         
-        if ([filters count]) {
+        if ([self.filters count]) {
             UIImageView *bgImageView = [[UIImageView alloc] init];
             bgImageView.image = [UIImage imageNamed:@"mainpage_all_bg_line"];
             bgImageView.userInteractionEnabled = YES;
@@ -37,9 +37,9 @@
                 make.edges.equalTo(self);
             }];
             
-            CGFloat wp = 1.0f / [filters count];
+            CGFloat wp = 1.0f / [self.filters count];
             UIButton *lastBtn = nil;
-            for (NSInteger i = 0; i < [filters count]; i++) {
+            for (NSInteger i = 0; i < [self.filters count]; i++) {
                 
                 UIButton *btn = [[UIButton alloc] init];
                 [bgImageView addSubview:btn];
@@ -61,7 +61,7 @@
                 UILabel *titleLabel = [[UILabel alloc] init];
                 [btn addSubview:titleLabel];
                 titleLabel.tag = 2000 + i;
-                titleLabel.text = [filters[i].allKeys firstObject];
+                titleLabel.text = [self.filters[i].allKeys firstObject];
                 titleLabel.textColor = [UIColor whiteColor];
                 titleLabel.font = [UIFont boldSystemFontOfSize:13];
                 [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -96,18 +96,23 @@
 }
 
 - (void)remove {
-    [self.maskFilterView removeFromSuperview];
-    self.maskFilterView = nil;
+    [self.bkMaskView removeFromSuperview];
+    self.bkMaskView = nil;
 }
 
 
 - (void)filterBtnAction:(UIButton *)filterBtn {
     NSInteger idx = filterBtn.tag - 1000;
+    
+    NSDictionary *filterDict = nil;
+    if ([self.filters count] > idx) {
+        filterDict = self.filters[idx];
+    }
     if (self.filterCallback) {
-        self.filterCallback(self.filters[idx]);
+        self.filterCallback(idx, filterDict);
     }
 
-    self.filterSectionDic = self.filters[idx];
+    self.filterSectionDic = filterDict;
     [self showFilterDetailView];
     
     self.filterDetaiSelectedCallbadk = ^(NSString *filterDetail) {
@@ -116,32 +121,47 @@
     };
 }
 
+- (void)maskFilterTapAction:(UITapGestureRecognizer *)tap {
+    [self remove];
+}
+
 - (void)showFilterDetailView {
     // 生成筛选列表
-    if (self.maskFilterView) {
-        [self.maskFilterView removeFromSuperview];
-        self.maskFilterView = nil;
+    if (self.bkMaskView) {
+        [self.bkMaskView removeFromSuperview];
+        self.bkMaskView = nil;
     }
-    self.maskFilterView = [[UIView alloc] init];
     UIView *superView = [UIApplication sharedApplication].keyWindow;
-    [superView addSubview:self.maskFilterView];
-    self.maskFilterView.backgroundColor = [UIColor colorWithWhite:0.5 alpha:0.3];
-    [self.maskFilterView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.and.bottom.equalTo(superView);
+    self.bkMaskView = [[UIView alloc] init];
+    self.bkMaskView.backgroundColor = [UIColor clearColor];
+    [superView addSubview:self.bkMaskView];
+    [self.bkMaskView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(superView);
+    }];
+    
+    UIView *maskFilterView = [[UIView alloc] init];
+    [self.bkMaskView addSubview:maskFilterView];
+    maskFilterView.backgroundColor = [UIColor colorWithWhite:0.5 alpha:0.3];
+    [maskFilterView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.and.bottom.equalTo(self.bkMaskView);
         if (@available(iOS 11.0, *)) {
-            make.top.equalTo(superView.mas_safeAreaLayoutGuideTop).offset(64 + 40);
+            if (iPhoneX) {
+                make.top.equalTo(self.bkMaskView.mas_safeAreaLayoutGuideTop).offset(44 + 40);
+            } else {
+                make.top.equalTo(self.bkMaskView.mas_safeAreaLayoutGuideTop).offset(64 + 40);
+            }
         } else {
             // Fallback on earlier versions
-            make.top.equalTo(superView.mas_topMargin).offset(64 + 40);
+            make.top.equalTo(self.bkMaskView.mas_top).offset(64 + 40);
         }
     }];
     
     UIView *filterBgView = [[UIView alloc] init];
-    [self.maskFilterView addSubview:filterBgView];
-    filterBgView.backgroundColor = [UIColor whiteColor];
+    [maskFilterView addSubview:filterBgView];
+    filterBgView.backgroundColor = [UIColor yellowColor];
     [filterBgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.right.and.left.equalTo(self.maskFilterView);
-        make.height.equalTo(self.maskFilterView.mas_height).multipliedBy(0.5);
+        make.top.right.and.left.equalTo(maskFilterView);
+        make.height.equalTo(maskFilterView.mas_height).multipliedBy(0.5);
     }];
     
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
@@ -151,6 +171,15 @@
     [tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(filterBgView);
     }];
+    
+    UIView *blackView = [[UIView alloc] init];
+    [maskFilterView addSubview:blackView];
+    [blackView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(filterBgView.mas_bottom);
+        make.left.right.and.bottom.equalTo(maskFilterView);
+    }];
+    UITapGestureRecognizer *maskFilterTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(maskFilterTapAction:)];
+    [blackView addGestureRecognizer:maskFilterTap];
 }
 
 #pragma mark - UITableViewDataSource
@@ -184,8 +213,7 @@
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self.maskFilterView removeFromSuperview];
-    self.maskFilterView = nil;
+    [self remove];
     
     NSString *key = self.filterSectionDic.allKeys.firstObject;
     NSArray *filterList = [self.filterSectionDic objectForKey:key];

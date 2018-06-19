@@ -10,6 +10,8 @@
 
 @interface KTVPositionFilterCell : UITableViewCell
 
+@property (nonatomic, copy) void (^positionCallback)(NSInteger index, NSString *text);
+
 - (instancetype)initWithPositionFilterItems:(NSArray *)items reuseIdentifier:(NSString *)reuseIdentifier;
 
 @end

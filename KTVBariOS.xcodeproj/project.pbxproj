@@ -284,6 +284,7 @@
 		33F0E2131F1C51EC009AA2DC /* KTVUnderlineButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 33F0E2121F1C51EC009AA2DC /* KTVUnderlineButton.m */; };
 		33F3744B1F5D8189000A5EAC /* KTVAddYaoYueView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33F3744A1F5D8189000A5EAC /* KTVAddYaoYueView.xib */; };
 		33F3744E1F5D84E7000A5EAC /* KTVAddYaoYueView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33F3744D1F5D84E7000A5EAC /* KTVAddYaoYueView.m */; };
+		33F7856E20D421BD009CF6F5 /* KTVOrderInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 33F7856D20D421BD009CF6F5 /* KTVOrderInfo.m */; };
 		5AF3C095AA9B925E58BECDE4 /* libPods-KTVBariOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D62951016CC4DAC9857479E1 /* libPods-KTVBariOS.a */; };
 /* End PBXBuildFile section */
 
@@ -806,6 +807,8 @@
 		33F3744A1F5D8189000A5EAC /* KTVAddYaoYueView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KTVAddYaoYueView.xib; sourceTree = "<group>"; };
 		33F3744C1F5D84E7000A5EAC /* KTVAddYaoYueView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTVAddYaoYueView.h; sourceTree = "<group>"; };
 		33F3744D1F5D84E7000A5EAC /* KTVAddYaoYueView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTVAddYaoYueView.m; sourceTree = "<group>"; };
+		33F7856C20D421BD009CF6F5 /* KTVOrderInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KTVOrderInfo.h; sourceTree = "<group>"; };
+		33F7856D20D421BD009CF6F5 /* KTVOrderInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KTVOrderInfo.m; sourceTree = "<group>"; };
 		D62951016CC4DAC9857479E1 /* libPods-KTVBariOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-KTVBariOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D87AF57E102945EE24953FF1 /* Pods-KTVBariOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KTVBariOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KTVBariOS/Pods-KTVBariOS.debug.xcconfig"; sourceTree = "<group>"; };
 		E315085E6F16DA9EAEEB71DE /* Pods-KTVBariOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KTVBariOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-KTVBariOS/Pods-KTVBariOS.release.xcconfig"; sourceTree = "<group>"; };
@@ -1943,6 +1946,8 @@
 				33C89D871FAF575700D0C079 /* KTVBanner.m */,
 				333FB85A20CC12BB00757D57 /* KTVShop.h */,
 				333FB85B20CC12BB00757D57 /* KTVShop.m */,
+				33F7856C20D421BD009CF6F5 /* KTVOrderInfo.h */,
+				33F7856D20D421BD009CF6F5 /* KTVOrderInfo.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2418,6 +2423,7 @@
 				33DF0F901F9DE7C1003E5FFF /* KTVSettingController.m in Sources */,
 				338CCFED2014D5080056A723 /* KTVBeeCollectionHeaderView.m in Sources */,
 				334432692013617600A312EC /* KTVPayMoneyCell.m in Sources */,
+				33F7856E20D421BD009CF6F5 /* KTVOrderInfo.m in Sources */,
 				33C305471F486BCE0064ECF8 /* KTVMineController.m in Sources */,
 				3308B1EA1F63C70000012F9A /* KTVStore.m in Sources */,
 				336FE84D1FA811360074719F /* KTVLittleBeeController.m in Sources */,

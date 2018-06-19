@@ -53,16 +53,22 @@
         [self.orderUploadDictionary setObject:@(1) forKey:@"orderType"];
     }
     [self.orderUploadDictionary setObject:@(0) forKey:@"userHide"];
-    // 订单时间
-    NSString *currentDate = [NSDate dateStringWithDate:[NSDate date] andFormatString:@"yyyy-MM-dd HH:mm"];
-    [self.orderUploadDictionary setObject:currentDate forKey:@"startTime"];
     
-    // 订单结束时间
+    // 订单时间
     NSCalendar *calendar = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
     NSDateComponents *components = [calendar components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute fromDate:[NSDate date]];
-    components.minute = components.minute + 15;
+
+    // 订单开始时间
+    components.day = components.day + self.orderInfo.timeSplit; // 套餐选定的时间
+    NSDate *startTimeDate = [calendar dateFromComponents:components];
+    NSString *startTimeStr = [NSDate dateStringWithDate:startTimeDate andFormatString:@"yyyy-MM-dd HH:mm"];
+    [self.orderUploadDictionary setObject:startTimeStr forKey:@"startTime"];
+    
+    // 订单结束时间 - 在开始时间延后一天
+    components.day += 1;
     NSDate *endDate = [calendar dateFromComponents:components];
     NSString *endTime = [NSDate dateStringWithDate:endDate andFormatString:@"yyyy-MM-dd HH:mm"];
+    // self.store.toTime
     [self.orderUploadDictionary setObject:endTime forKey:@"endTime"];
     
     NSMutableArray *userOrderDetails = [NSMutableArray array];

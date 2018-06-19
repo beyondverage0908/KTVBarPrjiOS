@@ -9,10 +9,12 @@
 #import "KTVBaseViewController.h"
 #import "KTVStore.h"
 #import "KTVPackage.h"
+#import "KTVOrderInfo.h"
 
 @interface KTVPackageController : KTVBaseViewController
 
 @property (nonatomic, strong) KTVStore *store;
 @property (nonatomic, strong) KTVPackage *package;
+@property (nonatomic, strong) KTVOrderInfo *orderInfo;
 
 @end

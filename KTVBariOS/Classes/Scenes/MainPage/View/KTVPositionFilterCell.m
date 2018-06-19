@@ -96,6 +96,10 @@
 
     NSInteger idx = timeBtn.tag - 1000;
     CLog(@"---->> 位置过滤%@", self.filterItems[idx]);
+    
+    if (self.positionCallback) {
+        self.positionCallback(idx, self.filterItems[idx]);
+    }
 }
 
 @end

@@ -27,6 +27,7 @@
 #import "KTVShareSDKManager.h"
 #import "KTVComment.h"
 #import "KTVActivity.h"
+#import "KTVOrderInfo.h"
 
 #import "KSPhotoBrowser.h"
 
@@ -39,6 +40,8 @@
 @property (assign, nonatomic) BOOL isCollection; // 店铺是否被收藏 yes or no
 @property (strong, nonatomic) NSMutableArray<KTVComment *> *commentList;
 @property (strong, nonatomic) NSMutableArray<KTVActivity *> *activityList;
+
+@property (strong, nonatomic) KTVOrderInfo *orderInfo;
 
 @end
 
@@ -76,6 +79,13 @@
 }
 
 #pragma mark - 重写
+
+- (KTVOrderInfo *)orderInfo {
+    if (!_orderInfo) {
+        _orderInfo = [[KTVOrderInfo alloc] init];
+    }
+    return _orderInfo;
+}
 
 - (void)setIsCollection:(BOOL)isCollection {
     _isCollection = isCollection;
@@ -317,10 +327,19 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 1) {
         if (indexPath.row > 1) {
+            if (!self.orderInfo.orderStartTime) {
+                [KTVToast toast:@"请选择预定时间"];
+                return;
+            }
+            if (!self.orderInfo.siteInfo) {
+                [KTVToast toast:@"请选择预定的位置信息"];
+                return;
+            }
             // 选座->选择套餐页面
             KTVPackageController *vc = (KTVPackageController *)[UIViewController storyboardName:@"MainPage" storyboardId:@"KTVPackageController"];
             vc.store = self.store;
             vc.package = self.package;
+            vc.orderInfo = self.orderInfo;
             [self.navigationController pushViewController:vc animated:YES];
         }
     } else if (indexPath.section == 2) {
@@ -389,8 +408,12 @@
                 NSArray *timefilterItems = [KTVUtil getFiltertimeByDay:7];
                 cell = [[KTTimeFilterCell alloc] initWithItems:timefilterItems
                                                reuseIdentifier:KTTimeFilterCellIdentifer];
+                @WeakObj(self);
                 cell.filterCallback = ^(NSInteger idx) {
                     CLog(@"-->> %@", timefilterItems[idx]);
+                    NSArray *splitTimes = [timefilterItems[idx] componentsSeparatedByString:@";"];
+                    weakself.orderInfo.orderStartTime = [splitTimes lastObject];
+                    weakself.orderInfo.timeSplit = idx;
                 };
             }
             return cell;
@@ -407,6 +430,10 @@
                                                                                     @"床上(2人)",]
                                                                   reuseIdentifier:KTVPositionFilterCellIdentifier];
             }
+            @WeakObj(self);
+            cell.positionCallback = ^(NSInteger index, NSString *text) {
+                weakself.orderInfo.siteInfo = text;
+            };
             return cell;
         } else {
             KTVPackage *package = self.store.packageList[indexPath.row - 2];

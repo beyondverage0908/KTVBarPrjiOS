@@ -11,6 +11,7 @@
 #import "KTVGroupbuy.h"
 #import "KTVPackage.h"
 #import "KTVShop.h"
+#import "KTVOrderInfo.h"
 
 @interface KTVPayController : KTVBaseViewController
 
@@ -19,6 +20,7 @@
 @property (nonatomic, strong) NSArray<KTVPackage *> *packageList;
 @property (nonatomic, strong) NSArray *selectedActivitorList;
 @property (nonatomic, copy) NSArray<KTVShop *> *shopCartList;
+@property (nonatomic, strong) KTVOrderInfo *orderInfo;
 
 
 @end

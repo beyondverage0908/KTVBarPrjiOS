@@ -210,6 +210,8 @@
     vc.selectedActivitorList = self.selectedActivitorList;
     // 创建单点商品列表
     vc.shopCartList = self.shopCartList;
+    // 创建订单的其他而外信息
+    vc.orderInfo = self.orderInfo;
     
     [self.navigationController pushViewController:vc animated:YES];
 }

@@ -164,7 +164,7 @@ static NSInteger RowCount = 3;
             make.edges.equalTo(self.collectionHeaderView);
         }];
         
-        self.filterView.filterCallback = ^(NSDictionary *filterMap) {
+        self.filterView.filterCallback = ^(NSInteger index, NSDictionary *filterMap) {
             CLog(@"--->>> %@", filterMap);
         };
         self.filterView.filterDitailCallback = ^(NSString *filterDetailKey) {

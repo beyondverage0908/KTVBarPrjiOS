@@ -143,10 +143,9 @@
                        @{@"筛选" : @[]}];
     KTVFilterView *filterView = [[KTVFilterView alloc] initWithFilter:dataS];
 
-    filterView.filterCallback = ^(NSDictionary *filterMap) {
-        NSInteger idx = [dataS indexOfObject:filterMap];
+    filterView.filterCallback = ^(NSInteger index, NSDictionary *filterMap) {
+        CLog(@"--->>>%@", @(index));
     };
-
     filterView.filterDitailCallback = ^(NSString *filterDetailKey) {
         CLog(@"--->>> %@", filterDetailKey);
     };

@@ -33,11 +33,12 @@
                                          image:@"app_nearby_icon_unselect"
                                 andSelectImage:@"app_nearby_icon_select"];
     
-    KTVChatSessionController *chatSessionVC = [[KTVChatSessionController alloc] init];
-    [self addChildViewController:chatSessionVC
-                           title:@"聊天"
-                           image:@"app_tab_yuepao_unselect"
-                     selectImage:@"app_tab_yuepao_select"];
+//    KTVChatSessionController *chatSessionVC = [[KTVChatSessionController alloc] init];
+//    [self addChildViewController:chatSessionVC
+//                           title:@"聊天"
+//                           image:@"app_tab_yuepao_unselect"
+//                     selectImage:@"app_tab_yuepao_select"];
+    
 //    [self addChildViewControllerWithStoryboard:@"DatingFriend"
 //                          storyboardIdentifier:@"KTVDateViewController"
 //                               tabBarItemTitle:@"邀约"

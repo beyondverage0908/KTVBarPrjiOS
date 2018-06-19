@@ -77,6 +77,7 @@
     vc.store = self.store;
     vc.selectedActivitorList = self.selectedActivitorList;
     vc.shopCartList = self.shopCartList;
+    vc.orderInfo = self.orderInfo;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

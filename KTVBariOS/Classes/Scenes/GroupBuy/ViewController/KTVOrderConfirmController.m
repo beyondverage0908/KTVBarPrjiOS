@@ -95,6 +95,7 @@
     vc.packageList = self.packageList;
     vc.selectedActivitorList = self.selectedActivitorList; // 已经选中的暖场人
     vc.shopCartList = self.shopCartList;
+    vc.orderInfo = self.orderInfo;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
