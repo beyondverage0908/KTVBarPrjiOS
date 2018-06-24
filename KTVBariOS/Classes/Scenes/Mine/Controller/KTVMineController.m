@@ -22,6 +22,7 @@
 #import "KTVApplyWarmerPartOneController.h"
 #import "KTVMyMoneyController.h"
 #import "KTVFunctionalWaitController.h"
+#import "KTVLittleBeeController.h"
 
 #import "KTVUserHeaderCell.h"
 #import "KTVUserInfoCell.h"
@@ -191,6 +192,10 @@
             KTVUserInfoController *vc = (KTVUserInfoController *)[UIViewController storyboardName:@"MePage" storyboardId:@"KTVUserInfoController"];
             vc.isMySelf = YES;
             [self.navigationController pushViewController:vc animated:YES];
+            
+//            KTVLittleBeeController *vc = (KTVLittleBeeController *)[UIViewController storyboardName:@"MePage" storyboardId:@"KTVLittleBeeController"];
+//            vc.user = self.user;
+//            [self.navigationController pushViewController:vc animated:YES];
         }
     } else if (indexPath.section == 1) {
         // @[@"我的余额", @"我的拼桌活动", @"暖场人邀约", @"发布动态", @"我的收藏", @"申请入驻成为商家", @"申请成为暖场人", @"设置"]

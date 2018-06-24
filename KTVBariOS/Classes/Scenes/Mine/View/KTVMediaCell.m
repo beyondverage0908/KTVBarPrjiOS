@@ -46,7 +46,9 @@
         for (NSInteger i = 0; i < mediaList.count; i++) {
             UIView *itemView = [[UIView alloc] init];
             [horiContentView addSubview:itemView];
-            itemView.layer.cornerRadius = 3;
+            itemView.layer.cornerRadius = 5;
+            itemView.layer.borderWidth = 1;
+            itemView.layer.borderColor = [UIColor whiteColor].CGColor;
             
             [itemView mas_makeConstraints:^(MASConstraintMaker *make) {
                 if (!lastView) {
@@ -88,6 +90,15 @@
                 make.width.and.height.equalTo(itemView);
                 make.center.equalTo(itemView);
             }];
+            
+            UIButton *payBtn = [[UIButton alloc] init];
+            [itemView addSubview:payBtn];
+            [payBtn setBackgroundImage:[UIImage imageNamed:@"ktv_vedio_play"] forState:UIControlStateNormal];
+            [payBtn addTarget:self action:@selector(payVedioAction:) forControlEvents:UIControlEventTouchUpInside];
+            payBtn.tag = 10000 + i;
+            [payBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.center.equalTo(itemView);
+            }];
         }
     }
     return self;
@@ -102,8 +113,16 @@
         id media = self.mediaList[tag];
         self.showMediaCallback(media);
     }
-    
     CLog(@"--->> 点击图片 %@", @(tag));
+}
+
+- (void)payVedioAction:(UIButton *)btn {
+    NSInteger tag = btn.tag - 10000;
+    
+    if (self.showMediaCallback) {
+        id media = self.mediaList[tag];
+        self.showMediaCallback(media);
+    }
 }
 
 - (void)awakeFromNib {

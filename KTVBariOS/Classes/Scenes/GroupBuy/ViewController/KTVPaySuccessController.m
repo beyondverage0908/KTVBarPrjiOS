@@ -20,6 +20,7 @@
 #import "KTVBuyService.h"
 #import "KTVPayManager.h"
 #import "KTVUserInfoController.h"
+#import "KTVLittleBeeController.h"
 #import "KTVFunctionalWaitController.h"
 #import "KTVFunctionalWaitCell.h"
 
@@ -283,8 +284,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 1) {
         KTVUser *user = self.activitorList[indexPath.row];
-        KTVUserInfoController *vc = (KTVUserInfoController *)[UIViewController storyboardName:@"MePage" storyboardId:@"KTVUserInfoController"];
-        vc.isMySelf = NO;
+        KTVLittleBeeController *vc = (KTVLittleBeeController *)[UIViewController storyboardName:@"MePage" storyboardId:@"KTVLittleBeeController"];
         vc.user = user;
         [self.navigationController pushViewController:vc animated:YES];
     }

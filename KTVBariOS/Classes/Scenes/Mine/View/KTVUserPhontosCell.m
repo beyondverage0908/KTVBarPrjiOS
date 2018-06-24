@@ -64,9 +64,13 @@ static NSInteger RowCount = 4;
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     CLog(@"-- 点击用户了图片");
     
-    KTVPhotoBrowerView *brower = [[KTVPhotoBrowerView alloc] init];
-    brower.opType = KTVEditType;
-    [brower showPhotoBrowerConfig:self.pictureList andDefaultIndex:indexPath.row];
+//    KTVPhotoBrowerView *brower = [[KTVPhotoBrowerView alloc] init];
+//    brower.opType = KTVEditType;
+//    [brower showPhotoBrowerConfig:self.pictureList andDefaultIndex:indexPath.row];
+    
+    if (self.userImageTapCallback) {
+        self.userImageTapCallback(indexPath.row, self.pictureList);
+    }
 }
 
 #pragma mark - UICollectionViewDataSource

@@ -16,6 +16,7 @@
 #import "KTVMainService.h"
 #import "KTVTableHeaderView.h"
 #import <AVKit/AVKit.h>
+#import "KSPhotoBrowser.h"
 
 @interface KTVUserInfoController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -158,13 +159,29 @@
     } else if (indexPath.section == 1) {
         KTVUserPhontosCell *cell = (KTVUserPhontosCell *)[tableView dequeueReusableCellWithIdentifier:KTVStringClass(KTVUserPhontosCell)];
         cell.pictureList = self.user.pictureList;
+        @WeakObj(self);
+        cell.userImageTapCallback = ^(NSInteger index, NSArray<KTVPicture *> *pictureList) {
+            NSMutableArray *urlItems = @[].mutableCopy;
+            for (KTVPicture *pic in pictureList) {
+                KSPhotoItem *item = [KSPhotoItem itemWithSourceView:[UIImageView new] imageUrl:[NSURL URLWithString:pic.pictureUrl]];
+                [urlItems addObject:item];
+            }
+            KSPhotoBrowser *browser = [KSPhotoBrowser browserWithPhotoItems:urlItems selectedIndex:index];
+            browser.dismissalStyle = KSPhotoBrowserInteractiveDismissalStyleRotation;
+            browser.backgroundStyle = KSPhotoBrowserBackgroundStyleBlur;
+            browser.loadingStyle = KSPhotoBrowserImageLoadingStyleIndeterminate;
+            browser.pageindicatorStyle = KSPhotoBrowserPageIndicatorStyleText;
+            browser.bounces = NO;
+            [browser showFromViewController:weakself];
+        };
         return cell;
     } else if (indexPath.section == 2) {
         KTVMediaCell *cell = [[KTVMediaCell alloc] initWithMediaList:self.user.videoList style:UITableViewCellStyleDefault reuseIdentifier:@"KTVMediaCell"];
+        @WeakObj(self);
         cell.showMediaCallback = ^(id media) {
             if ([media isKindOfClass:[KTVVideo class]]) {
                 KTVVideo *video = (KTVVideo *)media;
-                [self playVideaUrl:video.url];
+                [weakself playVideaUrl:video.url];
             }
         };
         return cell;

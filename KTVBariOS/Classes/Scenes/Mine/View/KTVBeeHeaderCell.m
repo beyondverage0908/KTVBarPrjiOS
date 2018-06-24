@@ -46,9 +46,7 @@
         _user = user;
         
         NSString *picUrl = nil;
-        if (_user.pictureList.count >= 2) {
-            picUrl = _user.pictureList[1].pictureUrl;
-        } else if (_user.pictureList.count >= 1) {
+        if (_user.pictureList.count) {
             picUrl = _user.pictureList[0].pictureUrl;
         }
         [self.bigBgImageView sd_setImageWithURL:[NSURL URLWithString:picUrl] placeholderImage:[UIImage imageNamed:@"mine_header_placeholder"]];
@@ -86,10 +84,17 @@
     UIView *lastView = nil;
     for (NSInteger i = 0; i < photoList.count; i++) {
         UIView *itemView = [[UIView alloc] init];
+        itemView.userInteractionEnabled = YES;
+        
+        UITapGestureRecognizer *itemTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(userImageAction:)];
+        [itemView addGestureRecognizer:itemTap];
+        itemView.tag = 100 + i;
+        
         [horiContentView addSubview:itemView];
-        itemView.layer.cornerRadius = 3;
+        itemView.layer.cornerRadius = 5;
         
         NSString *pictureUrl = photoList[i].pictureUrl;
+        
         
         [itemView mas_makeConstraints:^(MASConstraintMaker *make) {
             if (!lastView) {
@@ -99,8 +104,9 @@
             }
             make.width.height.equalTo(horiContentView.mas_height).multipliedBy(0.9);
             make.centerY.equalTo(horiContentView.mas_centerY);
-            if (i == photoList.count) {
+            if (i == photoList.count - 1) {
                 make.right.lessThanOrEqualTo(horiContentView.mas_right).offset(-3);
+                
             }
         }];
         lastView = itemView;
@@ -113,6 +119,18 @@
             make.width.and.height.equalTo(itemView);
             make.center.equalTo(itemView);
         }];
+    }
+}
+
+#pragma mark - 事件
+
+- (void)userImageAction:(UITapGestureRecognizer *)tap {
+    UIView *tapView = tap.view;
+    
+    NSInteger currentIndex = tapView.tag - 100;
+    
+    if (self.userImageTapCallback) {
+        self.userImageTapCallback(currentIndex, self.user.pictureList);
     }
 }
 

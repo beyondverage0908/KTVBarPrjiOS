@@ -13,4 +13,6 @@
 
 @property (nonatomic, strong) KTVUser * user;
 
+@property (nonatomic, copy) void (^userImageTapCallback)(NSInteger index, NSArray<KTVPicture *> *pictureList);
+
 @end

@@ -12,4 +12,6 @@
 
 @property (nonatomic, strong) NSArray<KTVPicture *> * pictureList;
 
+@property (nonatomic, copy) void (^userImageTapCallback)(NSInteger index, NSArray<KTVPicture *> *pictureList);
+
 @end

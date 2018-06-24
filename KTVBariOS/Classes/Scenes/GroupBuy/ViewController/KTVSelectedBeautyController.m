@@ -14,7 +14,7 @@
 #import "KTVBeeCollectionFooterView.h"
 #import "KTVMainService.h"
 #import "KTVUser.h"
-#import "KTVUserInfoController.h"
+#import "KTVLittleBeeController.h"
 
 @interface KTVSelectedBeautyController ()<UICollectionViewDelegate, UICollectionViewDataSource>
 
@@ -233,8 +233,7 @@ static NSInteger RowCount = 3;
     } else {
         user = self.singleWarmerList[indexPath.row];
     }
-    KTVUserInfoController *vc = (KTVUserInfoController *)[UIViewController storyboardName:@"MePage" storyboardId:@"KTVUserInfoController"];
-    vc.isMySelf = NO;
+    KTVLittleBeeController *vc = (KTVLittleBeeController *)[UIViewController storyboardName:@"MePage" storyboardId:@"KTVLittleBeeController"];
     vc.user = user;
     [self.navigationController pushViewController:vc animated:YES];
 }
