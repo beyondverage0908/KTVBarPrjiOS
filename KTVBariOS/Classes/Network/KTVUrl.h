@@ -180,6 +180,12 @@
 /// 获取门店评论
 + (NSString *)getCommentUrl;
 
+/// 创建暖场人评论
++ (NSString *)getActorUserCreatUrl;
+
+/// 获取暖场人评论
++ (NSString *)getActorUserQueryAllUrl;
+
 #pragma mark - 拼桌
 
 /// 创建拼桌

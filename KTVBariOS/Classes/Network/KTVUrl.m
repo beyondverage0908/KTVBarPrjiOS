@@ -243,6 +243,14 @@
     return @"/api/store/comment";
 }
 
++ (NSString *)getActorUserCreatUrl {
+    return @"/api/actoruser/create";
+}
+
++ (NSString *)getActorUserQueryAllUrl {
+    return @"/api/actoruser/queryAll";
+}
+
 #pragma mark - 拼桌
 
 + (NSString *)getCreatShareTableUrl {

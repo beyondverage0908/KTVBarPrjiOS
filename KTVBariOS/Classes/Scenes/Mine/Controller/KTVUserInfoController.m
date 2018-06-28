@@ -17,6 +17,7 @@
 #import "KTVTableHeaderView.h"
 #import <AVKit/AVKit.h>
 #import "KSPhotoBrowser.h"
+#import "KTVInvitingTACell.h"
 
 @interface KTVUserInfoController ()<UITableViewDelegate, UITableViewDataSource>
 

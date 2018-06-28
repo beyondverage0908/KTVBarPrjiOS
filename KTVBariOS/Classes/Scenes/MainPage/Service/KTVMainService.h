@@ -176,4 +176,10 @@ typedef void(^ResponseSuccess)(NSDictionary *result);
 
 /// 查询指定订单
 + (void)getOrder:(NSString *)orderId result:(ResponseSuccess)responseResult;
+
+/// 创建暖场人评论
++ (void)postCreateActorComment:(NSDictionary *)commentDict result:(ResponseSuccess)responseResult;
+
+/// 获取暖场人评论
++ (void)postQueryActorComment:(NSDictionary *)queryDict result:(ResponseSuccess)responseResult;
 @end

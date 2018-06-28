@@ -802,5 +802,35 @@
     }];
 }
 
+/// 创建暖场人评论
++ (void)postCreateActorComment:(NSDictionary *)commentDict result:(ResponseSuccess)responseResult {
+    KTVRequestMessage *msg = [[KTVRequestMessage alloc] init];
+    msg.path = [KTVUrl getActorUserCreatUrl];
+    msg.httpType = KtvPOST;
+    msg.params = commentDict;
+    
+    [[KTVNetworkHelper sharedInstance] send:msg success:^(NSDictionary *result) {
+        // 数据接口解析
+        responseResult(result);
+    } fail:^(NSError *error) {
+        CLog(@"--->>>%@", error);
+    }];
+}
+
+/// 获取暖场人评论
++ (void)postQueryActorComment:(NSDictionary *)queryDict result:(ResponseSuccess)responseResult {
+    KTVRequestMessage *msg = [[KTVRequestMessage alloc] init];
+    msg.path = [KTVUrl getActorUserQueryAllUrl];
+    msg.httpType = KtvPOST;
+    msg.params = queryDict;
+    
+    [[KTVNetworkHelper sharedInstance] send:msg success:^(NSDictionary *result) {
+        // 数据接口解析
+        responseResult(result);
+    } fail:^(NSError *error) {
+        CLog(@"--->>>%@", error);
+    }];
+}
+
 @end
 

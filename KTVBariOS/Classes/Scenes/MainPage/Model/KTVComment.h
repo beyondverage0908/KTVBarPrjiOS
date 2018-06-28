@@ -22,7 +22,8 @@
 @property (nonatomic, strong) NSString *star;
 @property (nonatomic, strong) NSString *desc;
 @property (nonatomic, strong) NSString *createTime;
-@property (nonatomic, strong) NSString *storeId;
+@property (nonatomic, strong) NSString *storeId; // 门店的评论才会有
+@property (nonatomic, strong) NSString *userId; // 暖场人的评论会有
 @property (nonatomic, strong) NSArray<KTVPicture *>* pictureList;
 
 @end

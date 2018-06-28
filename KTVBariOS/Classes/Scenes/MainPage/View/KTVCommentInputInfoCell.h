@@ -9,4 +9,8 @@
 
 @interface KTVCommentInputInfoCell : UITableViewCell
 
+@property (nonatomic, copy) void (^starNumberCallback)(NSInteger number);
+@property (nonatomic, copy) void (^imageTapCallback)(NSInteger imageTag);
+@property (nonatomic, copy) void (^contentCallback)(NSString *content);
+
 @end

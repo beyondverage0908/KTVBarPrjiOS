@@ -40,8 +40,14 @@
     if (_comment != comment) {
         _comment = comment;
         
+        if (_comment.star.integerValue == 0) {
+            _comment.star = @"5";
+        }
         self.starView.stars = _comment.star.integerValue;
         self.commentTime.text = _comment.createTime;
+        if (!_comment.desc) {
+            _comment.desc = @"默认好评";
+        }
         self.commentDescLabel.text = _comment.desc;
         
         if (_comment.pictureList.count == 0) {

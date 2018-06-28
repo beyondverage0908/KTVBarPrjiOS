@@ -15,11 +15,16 @@
 #import "KSPhotoBrowser.h"
 #import "KTVTableHeaderView.h"
 #import "KTVMediaCell.h"
+#import "KTVInvitingTACell.h"
 #import <AVKit/AVKit.h>
+#import "KTVCommentCell.h"
+#import "KTVMainService.h"
 
-@interface KTVLittleBeeController ()<UITableViewDelegate, UITableViewDataSource>
+@interface KTVLittleBeeController ()<UITableViewDelegate, UITableViewDataSource, KSPhotoBrowserDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+
+@property (strong, nonatomic) NSMutableArray<KTVComment *> *commentList;
 
 @end
 
@@ -32,10 +37,36 @@
     self.tableView.backgroundColor = [UIColor ktvBG];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    
+    [self getActivityComment];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+#pragma mark - override
+
+- (NSMutableArray<KTVComment *> *)commentList {
+    if (!_commentList) {
+        _commentList = [NSMutableArray array];
+    }
+    return _commentList;
+}
+
+#pragma mark - 网络
+
+- (void)getActivityComment {
+    NSDictionary *param = @{@"userId": @"9", @"currentIndex" : @0, @"pageSize" : @5};
+    [KTVMainService postQueryActorComment:param result:^(NSDictionary *result) {
+        if ([result[@"code"] isEqualToString:ktvCode]) {
+            for (NSDictionary *dic in result[@"data"]) {
+                KTVComment *comment = [KTVComment yy_modelWithDictionary:dic];
+                [self.commentList addObject:comment];
+            }
+            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:4] withRowAnimation:UITableViewRowAnimationNone];
+        }
+    }];
 }
 
 #pragma mark - UITableViewDelegate
@@ -51,6 +82,15 @@
         }
     } else if (indexPath.section == 2) {
         return 112.0f;
+    } else if (indexPath.section == 4) {
+        KTVComment *comment = self.commentList[indexPath.row];
+        if ([comment.pictureList count]) {
+            return 185;
+        } else {
+            return 92;
+        }
+    } else if (indexPath.section == 5) {
+        return 87;
     }
     return 0;
 }
@@ -82,7 +122,7 @@
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 5;
+    return 6;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -95,7 +135,9 @@
     } else if (section == 3) {
         return 0;
     } else if (section == 4) {
-        return 0;
+        return [self.commentList count];
+    } else if (section == 5) {
+        return 1;
     }
     return 0;
 }
@@ -140,11 +182,46 @@
         KTVBeeDescriptionCell *cell = [tableView dequeueReusableCellWithIdentifier:KTVStringClass(KTVBeeDescriptionCell)];
         cell.user = self.user;
         return cell;
+    } else if (indexPath.section == 4) {
+        KTVCommentCell *cell = [tableView dequeueReusableCellWithIdentifier:KTVStringClass(KTVCommentCell)];
+        KTVComment *comment = self.commentList[indexPath.row];
+        cell.comment = comment;
+        @WeakObj(self);
+        cell.commentImageBrowsingCallBack = ^(NSInteger idx, KTVComment *comment) {
+            NSMutableArray *urlList = @[].mutableCopy;
+            for (KTVPicture *pic in comment.pictureList) {
+                [urlList addObject:pic.pictureUrl];
+            }
+            [weakself browserImageWithPictureUrl:[urlList copy] currentIndex:idx];
+        };
+        return cell;
+    } else if (indexPath.section == 5) {
+        KTVInvitingTACell *cell = [tableView dequeueReusableCellWithIdentifier:KTVStringClass(KTVInvitingTACell)];
+        cell.invitedCallback = ^{
+            [KTVToast toast:@"邀约成功"];
+        };
+        return cell;
     }
     return [UITableViewCell new];
 }
 
 #pragma mark - KSPhotoBrowser
+
+- (void)browserImageWithPictureUrl:(NSArray<NSString *> *)picUrlList currentIndex:(NSInteger)currentIndex {
+    NSMutableArray *urlItems = @[].mutableCopy;
+    for (NSString *url in picUrlList) {
+        KSPhotoItem *item = [KSPhotoItem itemWithSourceView:[UIImageView new] imageUrl:[NSURL URLWithString:url]];
+        [urlItems addObject:item];
+    }
+    KSPhotoBrowser *browser = [KSPhotoBrowser browserWithPhotoItems:urlItems selectedIndex:currentIndex];
+    browser.delegate = self;
+    browser.dismissalStyle = KSPhotoBrowserInteractiveDismissalStyleRotation;
+    browser.backgroundStyle = KSPhotoBrowserBackgroundStyleBlur;
+    browser.loadingStyle = KSPhotoBrowserImageLoadingStyleIndeterminate;
+    browser.pageindicatorStyle = KSPhotoBrowserPageIndicatorStyleText;
+    browser.bounces = NO;
+    [browser showFromViewController:self];
+}
 
 
 #pragma mark - 播放视频
@@ -164,6 +241,12 @@
     } else {
         [KTVToast toast:TOAST_VIDEO_CANT_PLAY];
     }
+}
+
+// MARK: - KSPhotoBrowserDelegate
+
+- (void)ks_photoBrowser:(KSPhotoBrowser *)browser didSelectItem:(KSPhotoItem *)item atIndex:(NSUInteger)index {
+    NSLog(@"selected index: %ld", index);
 }
 
 @end
